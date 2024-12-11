@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: First Level
   <Waves>k__BackingField:
-  - <WaveLength>k__BackingField: 0
+  - <WaveLength>k__BackingField: 5
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemiesToSpawn>k__BackingField:
+      - {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17, type: 2}
+  - <WaveLength>k__BackingField: 6
+    <EnemySpawnInfos>k__BackingField: []
+  - <WaveLength>k__BackingField: 8
+    <EnemySpawnInfos>k__BackingField: []
+  - <WaveLength>k__BackingField: 12
     <EnemySpawnInfos>k__BackingField: []

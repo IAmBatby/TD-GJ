@@ -5,15 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ScriptableEnemy", menuName = "TD-GJ/ScriptableEnemy", order = 1)]
 public class ScriptableEnemy : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [field: SerializeField] public EnemyAI EnemyPrefab { get; private set; }
+    [field: SerializeField] public int Damage { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+
+    public EnemyAI SpawnEnemy(EnemySpawnTarget newSpawn, EnemyPathTarget newPath)
     {
-        
+        EnemyAI spawnedEnemy = GameObject.Instantiate(EnemyPrefab);
+        spawnedEnemy.transform.position = newSpawn.transform.position;
+        spawnedEnemy.InitializeEnemy(this, newPath);
+
+        return (spawnedEnemy);
     }
 }
