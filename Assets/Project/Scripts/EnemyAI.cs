@@ -24,6 +24,8 @@ public class EnemyAI : MonoBehaviour, IHittable
         Data = newData;
         target = newTarget;
         currentHealth = Data.Health;
+        if (newData.Speed != 0)
+            Agent.speed = newData.Speed;
         enabled = true;
     }
 
