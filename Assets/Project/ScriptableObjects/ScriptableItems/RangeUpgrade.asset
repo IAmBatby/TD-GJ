@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93358c88e6a7ffc44a113f73fb5aebfb, type: 3}
+  m_Name: RangeUpgrade
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 985584291496466747, guid: 5c3175bc94799064997e44ee09acaddc,
+    type: 3}
+  <Attribute>k__BackingField: {fileID: 11400000, guid: 10d2e5a9d16fdbf4f92f33d799fd40cd,
+    type: 2}
+  <ModifierValue>k__BackingField: 2

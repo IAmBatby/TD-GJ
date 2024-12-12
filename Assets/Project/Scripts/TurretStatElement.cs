@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TurretStatElement : MonoBehaviour
+{
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private Image iconImage;
+    [SerializeField] private TextMeshProUGUI valueText;
+    [SerializeField] private ScriptableAttribute trackingAttribute;
+
+    private void Awake()
+    {
+        OnMouseoverToggle(false);
+    }
+
+    public void SetAttribute(ScriptableAttribute newTracking)
+    {
+        trackingAttribute = newTracking;
+    }
+
+    private void Update()
+    {
+        transform.LookAt(GameManager.Player.ActiveCamera.transform.position);
+
+        if (trackingAttribute != null)
+        {
+            iconImage.sprite = trackingAttribute.DisplayIcon;
+            if (trackingAttribute is ScriptableFloatAttribute floatAttribute)
+            {
+                float attributeValue = floatAttribute.GetAttributeValue();
+                float defaultValue = floatAttribute.GetDefaultValue();
+                valueText.SetText(attributeValue.ToString());
+                if (attributeValue > defaultValue)
+                    backgroundImage.color = Color.yellow;
+
+            }
+            else if (trackingAttribute is ScriptableIntAttribute intAttribute)
+            {
+                valueText.SetText(intAttribute.GetAttributeValue().ToString());
+                int attributeValue = intAttribute.GetAttributeValue();
+                int defaultValue = intAttribute.GetDefaultValue();
+                valueText.SetText(attributeValue.ToString());
+                if (attributeValue > defaultValue)
+                    backgroundImage.color = Color.yellow;
+            }
+        }
+    }
+
+    public void OnMouseoverToggle(bool value)
+    {
+        iconImage.enabled = value;
+        backgroundImage.enabled = value;
+        valueText.enabled = value;
+    }
+}
