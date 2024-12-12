@@ -72,6 +72,10 @@ public class GameManager : GlobalManager
     public ExtendedEvent OnGameStart = new ExtendedEvent();
     public ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
 
+    public ExtendedEvent<EnemyAI> OnEnemySpawned = new ExtendedEvent<EnemyAI>();
+    public ExtendedEvent OnNewWave = new ExtendedEvent<EnemyAI>();
+    public ExtendedEvent<EnemyAI> OnEnemyKilled = new ExtendedEvent<EnemyAI>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -133,6 +137,8 @@ public class GameManager : GlobalManager
         ActiveWaveTimer.StartTimer(this, ActiveWaves.ActiveSelection.WaveLength);
 
         currentWaveSpawnDict = ActiveWaves.ActiveSelection.GetEnemyDict();
+
+        OnNewWave.Invoke();
     }
 
     private void Update()
@@ -204,6 +210,8 @@ public class GameManager : GlobalManager
             AllSpawnedHittables.Add(hittable);
         AllSpawnedEnemies.Add(spawnedEnemy);
 
+        OnEnemySpawned.Invoke(spawnedEnemy);
+
     }
 
     private void OnEnemySpawnCooldownFinished()
@@ -218,7 +226,9 @@ public class GameManager : GlobalManager
     public static void RemoveEnemy(EnemyAI enemy)
     {
         enemy.gameObject.SetActive(false);
+        Instance.OnEnemyKilled.Invoke(enemy);
         Instance.AllSpawnedEnemies.Remove(enemy);
         GameObject.Destroy(enemy.gameObject);
+
     }
 }

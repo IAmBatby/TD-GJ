@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private ItemBehaviour mostRecentItemInRange;
     [field: SerializeField] public ItemBehaviour ActiveItem { get; private set; }
+
+    public ExtendedEvent<ItemBehaviour> OnItemPickup = new ExtendedEvent<ItemBehaviour>();
+    public ExtendedEvent<ItemBehaviour> OnItemDropped = new ExtendedEvent<ItemBehaviour>();
 
     private void Awake()
     {
@@ -76,6 +80,8 @@ public class PlayerController : MonoBehaviour
         item.IsBeingHeld = true;
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
+
+        OnItemPickup.Invoke(item);
     }
 
     public void DropItem(Vector3 position)
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour
         ActiveItem.transform.position = position;
         ActiveItem.transform.rotation = Quaternion.identity;
         ActiveItem.IsBeingHeld = false;
+        OnItemDropped.Invoke(ActiveItem);
         ActiveItem = null;
     }
 
