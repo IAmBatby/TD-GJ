@@ -15,6 +15,7 @@ MonoBehaviour:
   <DisplayIcon>k__BackingField: {fileID: 21300000, guid: da1383bf68c704a4abc2db027ac32283,
     type: 3}
   <DisplayName>k__BackingField: Fire Rate
+  <DisplayColor>k__BackingField: {r: 0.3490566, g: 0.3013083, b: 0.3013083, a: 1}
   <Data>k__BackingField: {fileID: 0}
   <DefaultValue>k__BackingField: 0
   modifierValues: []

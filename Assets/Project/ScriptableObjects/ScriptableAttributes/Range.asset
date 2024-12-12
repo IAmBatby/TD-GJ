@@ -15,6 +15,7 @@ MonoBehaviour:
   <DisplayIcon>k__BackingField: {fileID: 21300000, guid: b2b2444285c479d439599637f1865a1f,
     type: 3}
   <DisplayName>k__BackingField: Range
+  <DisplayColor>k__BackingField: {r: 0.8301887, g: 0.73159665, b: 0.40334642, a: 1}
   <Data>k__BackingField: {fileID: 0}
   <DefaultValue>k__BackingField: 0
   modifierValues: []

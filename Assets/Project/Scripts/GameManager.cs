@@ -49,6 +49,7 @@ public class GameManager : GlobalManager
     }
 
     public List<EnemyAI> AllSpawnedEnemies = new List<EnemyAI>();
+    public List<IHittable> AllSpawnedHittables = new List<IHittable>();
 
     private List<EnemySpawnTarget> AllSpawnTargets;
     private List<EnemyPathTarget> AllPathTargets;
@@ -96,6 +97,7 @@ public class GameManager : GlobalManager
         CurrentLevel = null;
         RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
         AllSpawnedEnemies = new List<EnemyAI>();
+        AllSpawnedHittables = new List<IHittable>();
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
     }
@@ -198,6 +200,8 @@ public class GameManager : GlobalManager
         enemySpawnTimer.onTimerEnd.AddListener(OnEnemySpawnCooldownFinished);
         enemySpawnTimer.StartTimer(this, globalSpawnEnemyCooldown);
 
+        if (spawnedEnemy.TryGetComponent(out IHittable hittable))
+            AllSpawnedHittables.Add(hittable);
         AllSpawnedEnemies.Add(spawnedEnemy);
 
     }

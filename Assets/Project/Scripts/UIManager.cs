@@ -14,6 +14,8 @@ public class UIManager : GlobalManager
     [SerializeField] private TextMeshProUGUI currentHealthText;
     [SerializeField] private TextMeshProUGUI currentGoldText;
 
+    [SerializeField] private Image waveProgressFillImage;
+
     [SerializeField] private TextMeshProUGUI gameEndText;
     [SerializeField] private Image gameEndBackgroundImage;
 
@@ -28,8 +30,10 @@ public class UIManager : GlobalManager
     private void Update()
     {
         currentWaveText.SetText((GameManager.Instance.CurrentWaveCount + 1) + " / " + GameManager.Instance.TotalWaveCount);
-        waveProgressTimeText.SetText(GameManager.Instance.CurrentWaveTime + " / " + GameManager.Instance.TotalWaveTime);
+        waveProgressTimeText.SetText(GameManager.Instance.CurrentWaveTime.ToString("F2") + " / " + GameManager.Instance.TotalWaveTime.ToString("F2"));
         currentHealthText.SetText(GameManager.Instance.Health.ToString());
+
+        waveProgressFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.Instance.TotalWaveTime, GameManager.Instance.CurrentWaveTime);
     }
 
     private void ResetText()

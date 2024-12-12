@@ -49,6 +49,8 @@ public class EnemyAI : MonoBehaviour, IHittable
 
     }
 
+    public Transform GetTransform() => transform;
+
     public void Die()
     {
         Agent.enabled = false;

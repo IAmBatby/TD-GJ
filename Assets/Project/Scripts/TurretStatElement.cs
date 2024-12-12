@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,13 +29,18 @@ public class TurretStatElement : MonoBehaviour
         if (trackingAttribute != null)
         {
             iconImage.sprite = trackingAttribute.DisplayIcon;
+            backgroundImage.color = trackingAttribute.DisplayColor;
             if (trackingAttribute is ScriptableFloatAttribute floatAttribute)
             {
                 float attributeValue = floatAttribute.GetAttributeValue();
                 float defaultValue = floatAttribute.GetDefaultValue();
                 valueText.SetText(attributeValue.ToString());
                 if (attributeValue > defaultValue)
-                    backgroundImage.color = Color.yellow;
+                {
+                    iconImage.color = Color.yellow;
+                    valueText.color = Color.yellow;
+                }
+
 
             }
             else if (trackingAttribute is ScriptableIntAttribute intAttribute)
@@ -44,7 +50,10 @@ public class TurretStatElement : MonoBehaviour
                 int defaultValue = intAttribute.GetDefaultValue();
                 valueText.SetText(attributeValue.ToString());
                 if (attributeValue > defaultValue)
-                    backgroundImage.color = Color.yellow;
+                {
+                    iconImage.color = Color.yellow;
+                    valueText.color = Color.yellow;
+                }
             }
         }
     }

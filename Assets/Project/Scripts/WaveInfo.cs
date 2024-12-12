@@ -16,9 +16,16 @@ public class WaveInfo
         foreach (EnemySpawnInfo enemyInfo in EnemySpawnInfos)
         {
             if (enemyDict.TryGetValue(enemyInfo.TimeToStart, out List<ScriptableEnemy> list))
-                list.AddRange(enemyInfo.EnemiesToSpawn);
+                for (int i = 0; i < enemyInfo.AmountToSpawn; i++)
+                    list.Add(enemyInfo.EnemyToSpawn);
             else
-                enemyDict.Add(enemyInfo.TimeToStart, new List<ScriptableEnemy>(enemyInfo.EnemiesToSpawn));
+            {
+                List<ScriptableEnemy> newList = new List<ScriptableEnemy>();
+                for (int i = 0; i < enemyInfo.AmountToSpawn; i++)
+                    newList.Add(enemyInfo.EnemyToSpawn);
+                enemyDict.Add(enemyInfo.TimeToStart, newList);
+            }
+
         }
 
         return (enemyDict);

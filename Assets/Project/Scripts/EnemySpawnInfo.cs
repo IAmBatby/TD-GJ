@@ -7,5 +7,6 @@ using UnityEngine;
 public class EnemySpawnInfo
 {
     [field: SerializeField] public float TimeToStart { get; private set; }
-    [field: SerializeField] public List<ScriptableEnemy> EnemiesToSpawn { get; private set; }
+    [field: SerializeField] public ScriptableEnemy EnemyToSpawn { get; private set; }
+    [field: SerializeField] public int AmountToSpawn { get; private set; }
 }

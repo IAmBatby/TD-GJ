@@ -18,8 +18,8 @@ public class TurretBehaviour : ItemBehaviour
     [SerializeField] private LayerMask shootMask;
     [SerializeField] private List<ShootPosition> shootPositions;
 
-    private EnemyAI Target;
-    private List<EnemyAI> AllEnemiesInRange = new List<EnemyAI>();
+    private IHittable Target;
+    private List<IHittable> AllEnemiesInRange = new List<IHittable>();
 
     private Timer shootCooldownTimer;
     private bool canShoot;
@@ -52,7 +52,7 @@ public class TurretBehaviour : ItemBehaviour
             shootPosition.UpdateShootRenderer(Target);
 
         if (Target != null)
-            transform.LookAt(Target.transform.position);
+            transform.LookAt(Target.GetTransform().position);
 
         Shoot();
     }
@@ -62,8 +62,8 @@ public class TurretBehaviour : ItemBehaviour
         if (Target == null || canShoot == false) return;
 
         foreach (ShootPosition shootPosition in shootPositions)
-            if (Physics.Raycast(shootPosition.transform.position, Target.transform.position, Mathf.Infinity, shootMask))
-                Projectile.SpawnProjectile(shootPosition.transform.position, Target.transform.position, ShotSpeedAttribute.Value, DamageAttribute.Value);
+            if (Physics.Raycast(shootPosition.transform.position, Target.GetTransform().position, Mathf.Infinity, shootMask))
+                Projectile.SpawnProjectile(shootPosition.transform.position, Target.GetTransform().position, ShotSpeedAttribute.Value, DamageAttribute.Value);
 
         canShoot = false;
         shootCooldownTimer = new Timer();

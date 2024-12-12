@@ -7,6 +7,7 @@ public abstract class ScriptableAttribute : ScriptableObject
 {
     [field: SerializeField] public Sprite DisplayIcon { get; private set; }
     [field: SerializeField] public string DisplayName { get; private set; }
+    [field: SerializeField] public Color DisplayColor { get; private set; }
 
     public abstract bool Compare(ScriptableAttribute attribute);
 }

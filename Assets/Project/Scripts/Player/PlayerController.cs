@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private LayerMask lookMask;
     [SerializeField] private LayerMask dropMask;
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private Vector3 translationAtRestCameraPos;
+    [SerializeField] private Vector3 translationOffsetCameraPos;
+
+    private PositionConstraint positionConstraint;
 
     private Vector2 moveInput;
 
@@ -29,11 +35,9 @@ public class PlayerController : MonoBehaviour
         ConstraintSource source = new ConstraintSource();
         source.weight = 1;
         source.sourceTransform = transform;
-        PositionConstraint positionConstraint = ActiveCamera.GetComponent<PositionConstraint>();
-        positionConstraint.translationAtRest = new Vector3(0, 6.76f, 0);
-        positionConstraint.translationOffset = new Vector3(-0.08f, 0, -3.48f);
+        positionConstraint = ActiveCamera.GetComponent<PositionConstraint>();
         positionConstraint.SetSource(0, source);
-        ActiveCamera.transform.position = new Vector3(1.1f, 6.76f, -16.4f);
+        ActiveCamera.transform.position = new Vector3(1.1f, translationAtRestCameraPos.y, -16.4f);
         ActiveCamera.transform.parent = null;
     }
 
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(interactKey))
+        if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
         {
             if (ActiveItem == null && mostRecentItemInRange != null)
                 PickupItem(mostRecentItemInRange);
@@ -89,9 +93,17 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void LateUpdate() => SetRotation();
+    private void LateUpdate()
+    {
+        SetRotation();
+
+        animator.SetBool("isWalking", rigidBody.velocity.magnitude > 1f);
+    }
     private void FixedUpdate()
     {
+        positionConstraint.translationAtRest = translationAtRestCameraPos;
+        positionConstraint.translationOffset = translationOffsetCameraPos;
+
         SetPosition();
 
         if (ActiveItem != null)

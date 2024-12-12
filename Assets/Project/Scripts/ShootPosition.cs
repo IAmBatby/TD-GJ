@@ -7,7 +7,7 @@ public class ShootPosition : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
 
-    public void UpdateShootRenderer(EnemyAI target)
+    public void UpdateShootRenderer(IHittable target)
     {
         if (target != null)
         {
@@ -15,7 +15,7 @@ public class ShootPosition : MonoBehaviour
             lineRenderer.positionCount = 2;
 
             lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, target.transform.position);
+            lineRenderer.SetPosition(1, target.GetTransform().position);
         }
         else
             lineRenderer.enabled = false;
