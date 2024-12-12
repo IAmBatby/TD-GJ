@@ -34115,7 +34115,7 @@ PrefabInstance:
     - target: {fileID: 6245682093847040502, guid: d848d6c313858f24b9be8e3f2504372c,
         type: 3}
       propertyPath: globalSpawnEnemyCooldown
-      value: 0.6
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
