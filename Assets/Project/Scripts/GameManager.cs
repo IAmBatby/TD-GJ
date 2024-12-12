@@ -5,10 +5,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : GlobalManager
 {
     public static new GameManager Instance => SingletonManager.GetSingleton<GameManager>(typeof(GameManager));
+
+    public static PlayerController Player { get; private set; }
+
 
     [SerializeField] private float globalSpawnEnemyCooldown;
 
@@ -44,7 +48,7 @@ public class GameManager : GlobalManager
         }
     }
 
-    private List<EnemyAI> AllSpawnedEnemies = new List<EnemyAI>();
+    public List<EnemyAI> AllSpawnedEnemies = new List<EnemyAI>();
 
     private List<EnemySpawnTarget> AllSpawnTargets;
     private List<EnemyPathTarget> AllPathTargets;
@@ -66,6 +70,12 @@ public class GameManager : GlobalManager
 
     public ExtendedEvent OnGameStart = new ExtendedEvent();
     public ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Player = GameObject.FindObjectOfType<PlayerController>();
+    }
 
     private void Start()
     {
@@ -139,6 +149,7 @@ public class GameManager : GlobalManager
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             ResetGame();
             StartNewLevel(DefaultLevel);
         }
@@ -165,8 +176,7 @@ public class GameManager : GlobalManager
     {
         Debug.Log("Enemy Reached Target!");
         Instance.ModifyHealth(-enemy.Data.Damage);
-        enemy.gameObject.SetActive(false);
-        GameObject.Destroy(enemy.gameObject);
+        RemoveEnemy(enemy);
     }
 
     private void RequestNewEnemySpawn(ScriptableEnemy enemy)
@@ -199,5 +209,12 @@ public class GameManager : GlobalManager
             RequestedEnemiesToSpawn.Remove(RequestedEnemiesToSpawn.First());
         if (RequestedEnemiesToSpawn.Count > 0)
             SpawnNewEnemy(RequestedEnemiesToSpawn.First());
+    }
+
+    public static void RemoveEnemy(EnemyAI enemy)
+    {
+        enemy.gameObject.SetActive(false);
+        Instance.AllSpawnedEnemies.Remove(enemy);
+        GameObject.Destroy(enemy.gameObject);
     }
 }

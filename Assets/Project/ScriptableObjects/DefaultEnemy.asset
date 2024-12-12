@@ -15,3 +15,4 @@ MonoBehaviour:
   <EnemyPrefab>k__BackingField: {fileID: 3306550451389735796, guid: 8c6ed3a3b4814e94a96d47a6e63ec2bd,
     type: 3}
   <Damage>k__BackingField: 5
+  <Health>k__BackingField: 15

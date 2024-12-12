@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90027df194679b345a5730d4c4888071, type: 3}
+  m_Name: DefaultTurret
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: 1f0590d540636724b940a2a49346cd26,
+    type: 3}
+  <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
+    type: 2}
+  <FireRateAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: 8971dd7dfe3f818418b709df389ce5bd,
+      type: 2}
+    <Value>k__BackingField: 0.3
+  <ShootSpeedAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: 8da2a6e3dd97cd54284cc672498f6e54,
+      type: 2}
+    <Value>k__BackingField: 7
+  <RangeAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: 10d2e5a9d16fdbf4f92f33d799fd40cd,
+      type: 2}
+    <Value>k__BackingField: 5
+  <DamageAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: be6c01e6ff6212347bca020afa866051,
+      type: 2}
+    <Value>k__BackingField: 30

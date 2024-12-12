@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public abstract class ScriptableAttribute : ScriptableObject
+{
+    [field: SerializeField] public Sprite DisplayIcon { get; private set; }
+    [field: SerializeField] public string DisplayName { get; private set; }
+
+    public abstract bool Compare(ScriptableAttribute attribute);
+}
+
+public abstract class ScriptableAttribute<T> : ScriptableAttribute
+{
+    [field: SerializeField] public ScriptableAttribute<T> Data { get; private set; }
+    [field: SerializeField] public T DefaultValue { get; private set; }
+
+    [SerializeField] private List<T> modifierValues = new List<T>();
+
+    public static ScriptableAttribute<T> Create(ScriptableAttribute<T> referenceData, T newDefaultValue)
+    {
+        Debug.Log("Instansiating Live: " + referenceData.name);
+        ScriptableAttribute<T> instansiatedAttribute = ScriptableObject.Instantiate(referenceData);
+        instansiatedAttribute.DefaultValue = newDefaultValue;
+        instansiatedAttribute.Data = referenceData;
+        instansiatedAttribute.name = "Instansiated " + instansiatedAttribute.name;
+        return (instansiatedAttribute);
+    }
+
+    public void AddModifier(T newModifier)
+    {
+        modifierValues.Add(newModifier);
+    }
+
+    public T GetAttributeValue()
+    {
+        T returnValue = DefaultValue;
+
+        foreach (T modifier in modifierValues)
+            returnValue = AddValue(ref returnValue, modifier);
+
+        return (returnValue);
+    }
+
+    public T GetDefaultValue()
+    {
+        return (DefaultValue);
+    }
+
+    protected abstract T AddValue(ref T returnValue, T modifier);
+
+    public override bool Compare(ScriptableAttribute attribute)
+    {
+        return (Data == attribute);
+    }
+}
+
+[CreateAssetMenu(fileName = "ScriptableAttribute", menuName = "TD-GJ/ScriptableFloatAttribute", order = 1)]
+public class ScriptableFloatAttribute : ScriptableAttribute<float>
+{
+    protected override float AddValue(ref float returnValue, float modifier) => returnValue + modifier;
+}
+
+[CreateAssetMenu(fileName = "ScriptableAttribute", menuName = "TD-GJ/ScriptableIntAttribute", order = 1)]
+public class ScriptableIntAttribute : ScriptableAttribute<int>
+{
+    protected override int AddValue(ref int returnValue, int modifier) => returnValue + modifier;
+}
