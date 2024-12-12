@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 3306550451389735796}
   - component: {fileID: 3195664423847197034}
   - component: {fileID: 6509959309648285597}
+  - component: {fileID: 2943195349753754707}
   m_Layer: 6
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -261,6 +262,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 6509959309648285597}
   <Rigidbody>k__BackingField: {fileID: 3195664423847197034}
   <AllColliders>k__BackingField: []
+  <Data>k__BackingField: {fileID: 0}
 --- !u!54 &3195664423847197034
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310,3 +312,26 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &2943195349753754707
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8802968333448426876}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}

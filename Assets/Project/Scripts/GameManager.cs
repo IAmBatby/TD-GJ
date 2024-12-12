@@ -2,14 +2,21 @@ using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class GameManager : GlobalManager
 {
     public static new GameManager Instance => SingletonManager.GetSingleton<GameManager>(typeof(GameManager));
 
+    [SerializeField] private float globalSpawnEnemyCooldown;
+
+
+
     [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
 
+    [SerializeField] private NavMeshSurface navMeshSurface;
     [SerializeField] private ScriptableLevel CurrentLevel;
 
     [SerializeField] private SelectableCollection<WaveInfo> ActiveWaves;
@@ -17,15 +24,35 @@ public class GameManager : GlobalManager
     public int CurrentWaveCount => ActiveWaves.ActiveIndex;
     public int TotalWaveCount => ActiveWaves.Collection.Count;
 
-    public float CurrentWaveTime => ActiveWaveTimer.Progress;
-    public float TotalWaveTime => ActiveWaves.ActiveSelection.WaveLength;
+    public float CurrentWaveTime
+    {
+        get
+        {
+            if (ActiveWaveTimer != null)
+                return (ActiveWaveTimer.Progress);
+            return (0);                 
+        }
+    }
 
-    private List<EnemyAI> AllSpawnedEnemies;
+    public float TotalWaveTime
+    {
+        get
+        {
+            if (ActiveWaves != null && ActiveWaves.ActiveSelection != null)
+                return (ActiveWaves.ActiveSelection.WaveLength);
+            return (0);
+        }
+    }
+
+    private List<EnemyAI> AllSpawnedEnemies = new List<EnemyAI>();
 
     private List<EnemySpawnTarget> AllSpawnTargets;
     private List<EnemyPathTarget> AllPathTargets;
 
     private Timer ActiveWaveTimer;
+
+    [SerializeField] private List<ScriptableEnemy> RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
+    private Timer enemySpawnTimer;
 
 
     [SerializeField] private int maxHealth;
@@ -34,27 +61,50 @@ public class GameManager : GlobalManager
 
     public int Health { get => currentHealth; set => currentHealth = value; }
 
+    private Dictionary<float, List<ScriptableEnemy>> currentWaveSpawnDict;
+
+
+    public ExtendedEvent OnGameStart = new ExtendedEvent();
+    public ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
+
     private void Start()
     {
+        ResetGame();
         StartNewLevel(DefaultLevel);
+    }
+
+    private void ResetGame()
+    {
+        foreach (EnemyAI enemy in AllSpawnedEnemies)
+            if (enemy != null)
+                GameObject.Destroy(enemy.gameObject);
+        Time.timeScale = 1.0f;
+        ChangeGameState(GameState.Playing);
+        currentWaveSpawnDict = null;
+        enemySpawnTimer = null;
+        ActiveWaveTimer = null;
+        CurrentLevel = null;
+        RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
+        AllSpawnedEnemies = new List<EnemyAI>();
+        AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
+        AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
     }
 
     private void StartNewLevel(ScriptableLevel level)
     {
+        navMeshSurface.BuildNavMesh();
         currentHealth = maxHealth;
         CurrentLevel = ScriptableObject.Instantiate(level);
         ActiveWaves = new SelectableCollection<WaveInfo>(level.Waves);
-        AllSpawnedEnemies = new List<EnemyAI>();
-        AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
-        AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
-        TryProgressToNextWave();
+        OnGameStart.Invoke();
+        StartNextWave();
     }
 
     private void TryProgressToNextWave()
     {
         if (ActiveWaves.ActiveIndex == ActiveWaves.Collection.Count - 1)
         {
-            Debug.Log("YOU WINNIE");
+            EndGame(didWin: true);
         }
         else
         {
@@ -70,23 +120,60 @@ public class GameManager : GlobalManager
         ActiveWaveTimer.onTimerEnd.AddListener(TryProgressToNextWave);
         ActiveWaveTimer.StartTimer(this, ActiveWaves.ActiveSelection.WaveLength);
 
+        currentWaveSpawnDict = ActiveWaves.ActiveSelection.GetEnemyDict();
+    }
 
-        //For now
-        List<ScriptableEnemy> allEnemies = new List<ScriptableEnemy>();
-        foreach (EnemySpawnInfo spawnInfo in ActiveWaves.ActiveSelection.EnemySpawnInfos)
-            foreach (ScriptableEnemy enemy in spawnInfo.EnemiesToSpawn)
-                allEnemies.Add(enemy);
+    private void Update()
+    {
+        if (currentWaveSpawnDict != null && currentWaveSpawnDict.Count > 0)
+        {
+            float time = currentWaveSpawnDict.First().Key;
+            List<ScriptableEnemy> enemy = currentWaveSpawnDict.First().Value;
+            if (time < CurrentWaveTime)
+            {
+                foreach (ScriptableEnemy enemyToSpawn in enemy)
+                    RequestNewEnemySpawn(enemyToSpawn);
+                currentWaveSpawnDict.Remove(currentWaveSpawnDict.First().Key);
+            }
+        }
 
-        for (int i = 0; i < allEnemies.Count; i++)
-            SpawnNewEnemy(allEnemies[i]);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetGame();
+            StartNewLevel(DefaultLevel);
+        }
+    }
 
+    public void ModifyHealth(int newValue)
+    {
+        currentHealth += newValue;
+        if (currentHealth <= 0)
+            EndGame(didWin: false);
+
+        if (currentHealth < 0)
+            currentHealth = 0;
+    }
+
+    private void EndGame(bool didWin)
+    {
+        ChangeGameState(GameState.Paused);
+        Time.timeScale = 0.3f;
+        OnGameEnd.Invoke(didWin);
     }
 
     public static void EnemyReachedTarget(EnemyAI enemy)
     {
-        Instance.currentHealth -= enemy.Data.Damage;
+        Debug.Log("Enemy Reached Target!");
+        Instance.ModifyHealth(-enemy.Data.Damage);
         enemy.gameObject.SetActive(false);
-        GameObject.Instantiate(enemy.gameObject);
+        GameObject.Destroy(enemy.gameObject);
+    }
+
+    private void RequestNewEnemySpawn(ScriptableEnemy enemy)
+    {
+        RequestedEnemiesToSpawn.Add(enemy);
+        if (RequestedEnemiesToSpawn.Count == 1)
+            SpawnNewEnemy(enemy);
     }
 
     private void SpawnNewEnemy(ScriptableEnemy enemy)
@@ -96,5 +183,20 @@ public class GameManager : GlobalManager
         EnemyPathTarget randomTarget = AllPathTargets[Random.Range(0, AllPathTargets.Count)];
 
         EnemyAI spawnedEnemy = enemy.SpawnEnemy(randomSpawn, randomTarget);
+
+        enemySpawnTimer = new Timer();
+        enemySpawnTimer.onTimerEnd.AddListener(OnEnemySpawnCooldownFinished);
+        enemySpawnTimer.StartTimer(this, globalSpawnEnemyCooldown);
+
+        AllSpawnedEnemies.Add(spawnedEnemy);
+
+    }
+
+    private void OnEnemySpawnCooldownFinished()
+    {
+        //This shit is cooked
+        RequestedEnemiesToSpawn.Remove(RequestedEnemiesToSpawn.First());
+        if (RequestedEnemiesToSpawn.Count > 0)
+            SpawnNewEnemy(RequestedEnemiesToSpawn.First());
     }
 }
