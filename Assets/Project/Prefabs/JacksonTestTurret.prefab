@@ -51,12 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782065dd4781d3c42a73c1b2b322ff28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ItemData>k__BackingField: {fileID: 0}
   IsBeingHeld: 0
-  <Range>k__BackingField: 3
-  <ShotSpeed>k__BackingField: 0
-  <FireRate>k__BackingField: 0
-  <Damage>k__BackingField: 0
   <Projectile>k__BackingField: {fileID: 0}
+  AllAttributes: []
   <FireRateAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 8971dd7dfe3f818418b709df389ce5bd,
       type: 2}
@@ -753,17 +751,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}

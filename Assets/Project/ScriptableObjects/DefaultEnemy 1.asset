@@ -16,3 +16,4 @@ MonoBehaviour:
     type: 3}
   <Damage>k__BackingField: 5
   <Health>k__BackingField: 15
+  <Speed>k__BackingField: 2

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0e123000ac7cd438a84e4f86d6b113, type: 3}
-  m_Name: DefaultEnemy
+  m_Script: {fileID: 11500000, guid: 1bafd80c5a82e23439983b29d9048e7f, type: 3}
+  m_Name: CoinPickupItem
   m_EditorClassIdentifier: 
-  <EnemyPrefab>k__BackingField: {fileID: 3306550451389735796, guid: 2294eb57aa6d0054d8b0d24c1a85e2d4,
+  <Prefab>k__BackingField: {fileID: 1864939232664657511, guid: 60b0490520a0a404996892870dc00356,
     type: 3}
-  <Damage>k__BackingField: 5
-  <Health>k__BackingField: 15
-  <Speed>k__BackingField: 1

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "ScriptableItem", menuName = "TD-GJ/ScriptableItem", order = 1)]
 public class ScriptableItem : ScriptableObject
 {
     [field: SerializeField] public ItemBehaviour Prefab { get; private set; }
