@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a8aa4f82de31e4c9b29dda86889808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ItemData>k__BackingField: {fileID: 0}
   IsBeingHeld: 0
-  Attribute: {fileID: 0}
-  DefaultValue: 0
+  <Attribute>k__BackingField: {fileID: 0}
+  <DefaultValue>k__BackingField: 0
   upgradeSpriteFront: {fileID: 8957945598934796407}
   upgradeSpriteBack: {fileID: 4112293773517475360}
 --- !u!54 &6780245874618462165
@@ -230,6 +231,7 @@ GameObject:
   - component: {fileID: 2344324899945243695}
   - component: {fileID: 7713046251826880973}
   - component: {fileID: 4438778986272279032}
+  - component: {fileID: 9149137539695598211}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
@@ -304,6 +306,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &9149137539695598211
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3550844714465503224}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93ac160eb46a7c7419d9fbbe85d6b545, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3951378221565892089
 GameObject:
   m_ObjectHideFlags: 0

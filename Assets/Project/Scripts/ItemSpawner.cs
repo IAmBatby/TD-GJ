@@ -11,12 +11,12 @@ public class ItemSpawner : MonoBehaviour
     private void Awake()
     {
         if (SpawnOnAwake)
-            Spawn();
+            Spawn(Item);
     }
 
-    public void Spawn()
+    public void Spawn(ScriptableItem item)
     {
-        ItemBehaviour newItem = Item.SpawnPrefab(transform);
+        ItemBehaviour newItem = item.SpawnPrefab(transform);
         if (Physics.Raycast(transform.position, new Vector3(transform.position.x, -5000, transform.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
             newItem.transform.position = hit.point;
         if (newItem.TryGetComponent(out IHittable hittable))
