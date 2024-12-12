@@ -34,7 +34,7 @@ public class ShopScript : MonoBehaviour
                 anim.SetTrigger("CoinDeposited");
                 other.enabled = false;
                 GameObject.Destroy(other.gameObject);
-                spawner.Spawn(spawner.Item);
+                spawner.Spawn();
             }
     }
 
@@ -45,5 +45,5 @@ public class ShopScript : MonoBehaviour
             anim.SetBool("PlayerisNear", false);
         }
     }
-    
+
 }

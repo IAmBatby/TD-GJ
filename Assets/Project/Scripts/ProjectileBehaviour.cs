@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,12 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [field: SerializeField] public ScriptableProjectile Data { get; private set; }
 
+    [SerializeField] private bool doesPierce;
     private Vector3 targetPosition;
     private int damage;
+
+    [SerializeField] private float lifeTimer;
+    private Timer killTimer;
 
     public void Initialize(ScriptableProjectile newData, Vector3 newTargetPosition, float newForce, int newDamage)
     {
@@ -17,6 +22,11 @@ public class ProjectileBehaviour : MonoBehaviour
         damage = newDamage;
 
         rigidBody.AddForce((targetPosition - transform.position).normalized * newForce, ForceMode.Impulse);
+        transform.LookAt(newTargetPosition);
+
+        killTimer = new Timer();
+        killTimer.onTimerEnd.AddListener(DestroyBullet);
+        killTimer.StartTimer(this, lifeTimer);
     }
 
     public void ForwardedTriggerEnter(Collider other)
@@ -24,8 +34,16 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.TryGetComponent(out IHittable hittable))
         {
             hittable.RecieveHit(-damage);
-            gameObject.SetActive(false);
-            GameObject.Destroy(gameObject);
+            if (!doesPierce)
+            {
+                DestroyBullet();
+            }
         }
+    }
+
+    public void DestroyBullet()
+    {
+        gameObject.SetActive(false);
+        GameObject.Destroy(gameObject);
     }
 }

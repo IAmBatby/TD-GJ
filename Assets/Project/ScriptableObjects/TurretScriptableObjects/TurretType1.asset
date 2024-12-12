@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90027df194679b345a5730d4c4888071, type: 3}
-  m_Name: DefaultTurret
+  m_Name: TurretType1
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: 1f0590d540636724b940a2a49346cd26,
+  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: aab9bb5b3769c7546bc6e928b305e30b,
     type: 3}
-  <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
+  <Projectile>k__BackingField: {fileID: 11400000, guid: ef8038335f663764ca5e655ed42d419f,
     type: 2}
   <FireRateAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 8971dd7dfe3f818418b709df389ce5bd,
       type: 2}
-    <Value>k__BackingField: 0.1
+    <Value>k__BackingField: 5
   <ShootSpeedAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 8da2a6e3dd97cd54284cc672498f6e54,
       type: 2}
