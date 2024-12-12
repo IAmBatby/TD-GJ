@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UpgradeBehaviour : ItemBehaviour
 {
-    [field: SerializeField] public ScriptableAttribute Attribute;
-    [field: SerializeField] public float DefaultValue;
+    [field: SerializeField] public ScriptableAttribute Attribute { get; private set; }
+    [field: SerializeField] public float DefaultValue { get; private set; }
 
     [SerializeField] private SpriteRenderer upgradeSpriteFront;
     [SerializeField] private SpriteRenderer upgradeSpriteBack;
