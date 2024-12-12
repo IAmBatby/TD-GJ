@@ -195,7 +195,8 @@ public class GameManager : GlobalManager
     private void OnEnemySpawnCooldownFinished()
     {
         //This shit is cooked
-        RequestedEnemiesToSpawn.Remove(RequestedEnemiesToSpawn.First());
+        if (RequestedEnemiesToSpawn.Count > 0)
+            RequestedEnemiesToSpawn.Remove(RequestedEnemiesToSpawn.First());
         if (RequestedEnemiesToSpawn.Count > 0)
             SpawnNewEnemy(RequestedEnemiesToSpawn.First());
     }
