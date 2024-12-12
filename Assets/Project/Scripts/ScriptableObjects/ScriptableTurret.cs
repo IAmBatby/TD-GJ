@@ -10,7 +10,7 @@ public class ScriptableTurret : ScriptableItem
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShootSpeedAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
     [field: SerializeField] public ScriptableIntAttributeWithDefaultValue DamageAttribute { get; private set; }
-
+    [field: SerializeField] public TargetType TargetType { get; private set; }
     protected override ItemBehaviour SpawnPrefabSetup(ItemBehaviour newBehaviour)
     {
         return base.SpawnPrefabSetup(newBehaviour);
