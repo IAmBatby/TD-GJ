@@ -8,6 +8,7 @@ public class ScriptableEnemy : ScriptableObject
     [field: SerializeField] public EnemyAI EnemyPrefab { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Health { get; private set; }
+    [field: SerializeField] public float Speed { get; private set; }
 
 
     public EnemyAI SpawnEnemy(EnemySpawnTarget newSpawn, EnemyPathTarget newPath)
