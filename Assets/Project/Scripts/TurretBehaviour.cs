@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetType { Closest, Furthest, First, Last }
 public class TurretBehaviour : ItemBehaviour
 {
     [field: SerializeField] public ScriptableProjectile Projectile { get; private set; }
@@ -14,6 +15,7 @@ public class TurretBehaviour : ItemBehaviour
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
     [field: SerializeField] public ScriptableIntAttributeWithDefaultValue DamageAttribute { get; private set; }
 
+    public TargetType SelectedTargetType { get; private set; }
     //[SerializeField] private Transform shootPosition;
     [SerializeField] private LayerMask shootMask;
     [SerializeField] private List<ShootPosition> shootPositions;
@@ -37,6 +39,7 @@ public class TurretBehaviour : ItemBehaviour
         RangeAttribute.ApplyWithReference(turret.RangeAttribute);
         DamageAttribute.ApplyWithReference(turret.DamageAttribute);
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
+        SelectedTargetType = turret.TargetType;
     }
 
     private void OnMouseEnter() => OnMouseoverToggle.Invoke(true);
@@ -46,13 +49,23 @@ public class TurretBehaviour : ItemBehaviour
     {
         if (IsBeingHeld) return;
 
+        IHittable previousTarget = Target;
+
         UpdateTargets();
+
+        if (Target != null && previousTarget == null)
+        {
+            shootCooldownTimer = null;
+            canShoot = true;
+        }
 
         foreach (ShootPosition shootPosition in shootPositions)
             shootPosition.UpdateShootRenderer(Target);
 
         if (Target != null)
+        {
             transform.LookAt(Target.GetTransform().position);
+        }
 
         Shoot();
     }
@@ -80,8 +93,16 @@ public class TurretBehaviour : ItemBehaviour
     {
         AllEnemiesInRange.Clear();
 
+        EnemyAI furthestEnemy = null;
         EnemyAI closestEnemy = null;
+        EnemyAI firstEnemy = null;
+        EnemyAI lastEnemy = null;
+
+        float furthestDistance = Mathf.NegativeInfinity;
         float closestDistance = Mathf.Infinity;
+        float closestDestinationRemaining = Mathf.Infinity;
+        float furthestDestinationRemaining = Mathf.Infinity;
+
         foreach (EnemyAI enemy in GameManager.Instance.AllSpawnedEnemies)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
@@ -93,10 +114,35 @@ public class TurretBehaviour : ItemBehaviour
                     closestDistance = distance;
                     closestEnemy = enemy;
                 }
+
+                if (furthestEnemy == null || distance < furthestDistance)
+                {
+                    furthestDistance = distance;
+                    closestEnemy = enemy;
+                }
+
+                if (firstEnemy == null || enemy.Agent.remainingDistance < closestDestinationRemaining)
+                {
+                    firstEnemy = enemy;
+                    closestDestinationRemaining = enemy.Agent.remainingDistance;
+                }
+
+                if (lastEnemy == null || enemy.Agent.remainingDistance > furthestDestinationRemaining)
+                {
+                    lastEnemy = enemy;
+                    furthestDestinationRemaining = enemy.Agent.remainingDistance;
+                }
             }
         }
 
-        Target = closestEnemy;
+        Target = SelectedTargetType switch
+        {
+            TargetType.First => firstEnemy,
+            TargetType.Last => lastEnemy,
+            TargetType.Closest => closestEnemy,
+            TargetType.Furthest => furthestEnemy,
+            _ => null
+        };
     }
 
 

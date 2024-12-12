@@ -20,6 +20,7 @@ public class ScriptableFloatAttributeWithDefaultValue
     public void ApplyWithReference(ScriptableFloatAttributeWithDefaultValue reference)
     {
         ScriptableFloatAttribute newAttribute = (ScriptableFloatAttribute)ScriptableFloatAttribute.Create(reference.Attribute, reference.Value);
+        Value = reference.Value;
         Attribute = newAttribute;
     }
 }
@@ -40,6 +41,7 @@ public class ScriptableIntAttributeWithDefaultValue
     public void ApplyWithReference(ScriptableIntAttributeWithDefaultValue reference)
     {
         ScriptableIntAttribute newAttribute = (ScriptableIntAttribute)ScriptableIntAttribute.Create(reference.Attribute, reference.Value);
+        Value = reference.Value;
         Attribute = newAttribute;
     }
 }
