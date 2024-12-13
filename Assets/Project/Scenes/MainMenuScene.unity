@@ -41952,6 +41952,7 @@ MonoBehaviour:
   levelSelectMenu: {fileID: 1230450841}
   mainOptionsMenu: {fileID: 1350199239}
   levelSceneParent: {fileID: 1779648014}
+  mainMenuLight: {fileID: 264318895}
   levelToLoad: {fileID: 11400000, guid: 46b2598feb7ecbc46b89f5e7453461c8, type: 2}
   allLevelsList:
   - {fileID: 11400000, guid: 46b2598feb7ecbc46b89f5e7453461c8, type: 2}

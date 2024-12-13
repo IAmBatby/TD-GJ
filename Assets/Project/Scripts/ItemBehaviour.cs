@@ -14,7 +14,7 @@ public class ItemBehaviour : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (ItemData.Cursor != null)
+        if (ItemData != null && ItemData.Cursor != null)
             GameManager.Player.RequestNewCursor(ItemData.Cursor);
         OnMouseoverToggle.Invoke(true);
     }
@@ -23,6 +23,7 @@ public class ItemBehaviour : MonoBehaviour
     public void Initialize(ScriptableItem item)
     {
         ItemData = item;
+        if (ItemData == null) return;
         if (ItemData.OnSpawnAudioPreset != null)
             AudioManager.PlayAudio(ItemData.OnSpawnAudioPreset, primaryAudioSource);
         OnSpawn();
@@ -30,6 +31,7 @@ public class ItemBehaviour : MonoBehaviour
 
     public void Pickup()
     {
+        if (ItemData == null) return;
         if (ItemData.OnPickupAudioPreset != null)
             AudioManager.PlayAudio(ItemData.OnPickupAudioPreset, primaryAudioSource);
         OnPickup();
@@ -37,6 +39,7 @@ public class ItemBehaviour : MonoBehaviour
 
     public void Drop()
     {
+        if (ItemData == null) return;
         if (ItemData.OnDropAudioPreset != null)
             AudioManager.PlayAudio(ItemData.OnDropAudioPreset, primaryAudioSource);
         OnDrop();

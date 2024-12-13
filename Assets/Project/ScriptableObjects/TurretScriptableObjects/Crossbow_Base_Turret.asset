@@ -38,7 +38,7 @@ MonoBehaviour:
     <Attribute>k__BackingField: {fileID: 11400000, guid: dcaa910e90ba3c54a8bf18632107766e,
       type: 2}
     <Value>k__BackingField: 10
-  <TargetType>k__BackingField: 2
+  <TargetType>k__BackingField: 0
   <OnShootAudioPreset>k__BackingField: {fileID: 11400000, guid: fd2df891c41ec6d46b7262b4a0d973aa,
     type: 2}
   <OnNewTargetAudioPreset>k__BackingField: {fileID: 11400000, guid: fec0044161fef0f428fb304ccc162415,

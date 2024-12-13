@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Forwarded Enter: " + other);
         if (ActiveItem == null && other.TryGetComponent(out ItemBehaviour item))
         {
-            if (item.ItemData.CanBePickedUp)
+            if (item.ItemData != null && item.ItemData.CanBePickedUp)
                 mostRecentItemInRange = item;
         }
 

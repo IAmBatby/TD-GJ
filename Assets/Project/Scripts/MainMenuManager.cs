@@ -15,6 +15,7 @@ public class MainMenuManager : GlobalManager
     [SerializeField] private GameObject levelSelectMenu;
     [SerializeField] private GameObject mainOptionsMenu;
     [SerializeField] private GameObject levelSceneParent;
+    [SerializeField] private Light mainMenuLight;
 
     [SerializeField] private ScriptableLevel levelToLoad;
 
@@ -43,6 +44,7 @@ public class MainMenuManager : GlobalManager
         mainMenuParent.gameObject.SetActive(true);
         mainMenuCamera.gameObject.SetActive(true);
         levelSceneParent.gameObject.SetActive(true);
+        mainMenuLight.gameObject.SetActive(true);
     }
 
     public void LoadGame(ScriptableLevel level)
@@ -50,6 +52,7 @@ public class MainMenuManager : GlobalManager
         mainMenuParent.gameObject.SetActive(false);
         mainMenuCamera.gameObject.SetActive(false);
         levelSceneParent.gameObject.SetActive(false);
+        mainMenuLight.gameObject.SetActive(false);
         SceneManager.LoadScene(level.SceneName, LoadSceneMode.Additive);
     }
 
