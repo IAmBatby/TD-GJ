@@ -98,10 +98,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7766726789441843283, guid: bbc641bdf59ed1e4b9f0a4784b21a046, type: 3}
+    - {fileID: 193967905794340651, guid: bbc641bdf59ed1e4b9f0a4784b21a046, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 123330056158729607, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7291628116846813287}
   m_SourcePrefab: {fileID: 100100000, guid: bbc641bdf59ed1e4b9f0a4784b21a046, type: 3}
 --- !u!4 &415633222519464873 stripped
 Transform:
@@ -115,6 +121,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1097005370357296276}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7291628116846813287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049181045526624531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b4013960a9cf845bcf3901e47705f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemData>k__BackingField: {fileID: 0}
+  primaryAudioSource: {fileID: 0}
+  IsBeingHeld: 0
 --- !u!1001 &1570377321715471466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +204,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc641bdf59ed1e4b9f0a4784b21a046, type: 3}
+--- !u!1 &1476391034137493997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 123330056158729607, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
+    type: 3}
+  m_PrefabInstance: {fileID: 1570377321715471466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2249232996708522839 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 792062495996514109, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
@@ -318,8 +345,8 @@ MonoBehaviour:
   spawner: {fileID: 0}
   listOfCrystals:
   - {fileID: 1049181045526624531}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1476391034137493997}
+  - {fileID: 6638334701173523352}
   drop: 0
 --- !u!1001 &6743632695665923615
 PrefabInstance:
@@ -392,6 +419,12 @@ PrefabInstance:
 --- !u!4 &6299351231570155810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 792062495996514109, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
+    type: 3}
+  m_PrefabInstance: {fileID: 6743632695665923615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6638334701173523352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 123330056158729607, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
     type: 3}
   m_PrefabInstance: {fileID: 6743632695665923615}
   m_PrefabAsset: {fileID: 0}
