@@ -32,10 +32,11 @@ public class ProjectileBehaviour : MonoBehaviour
 
     public void ForwardedTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IHittable hittable))
+        HealthController health = other.transform.root.GetComponentInChildren<HealthController>();
+        if (health != null)
         {
             AudioManager.PlayAudio(Data.OnCollisionAudioPreset, primarySource);
-            hittable.RecieveHit(-damage);
+            health.ModifyHealth(-damage);
             if (!doesPierce)
             {
                 DestroyBullet();

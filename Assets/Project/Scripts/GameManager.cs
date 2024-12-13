@@ -250,7 +250,7 @@ public class GameManager : GlobalManager
             currentHealth = 0;
     }
 
-    private void EndGame(bool didWin)
+    public void EndGame(bool didWin)
     {
         if (HasGameEnded) return;
         HasGameEnded = true;

@@ -141,7 +141,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-
+        animator.SetTrigger("Die");
+        GameManager.Instance.EndGame(false);
     }
 
 
