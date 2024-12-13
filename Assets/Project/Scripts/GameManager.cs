@@ -92,7 +92,7 @@ public class GameManager : GlobalManager
 
 
     private Timer intermissionTimer;
-    public float IntermissionLength => DefaultLevel.IntermissionStandardTime + (ActiveWaves.ActiveSelection.WaveLength / DefaultLevel.IntermissionWaveMultiplier);
+    public float IntermissionLength => DefaultLevel.IntermissionStandardTime + (DefaultLevel.IntermissionWaveMultiplier * ActiveWaves.ActiveSelection.WaveLength);
     public float IntermissionProgress
     {
         get
