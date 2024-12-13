@@ -25,14 +25,24 @@ public class HealthController : MonoBehaviour
 
     public MonoBehaviour LinkedBehaviour { get; private set; }
 
-    private void OnEnable() => GameManager.Instance.AllHealthControllers.Add(this);
+    private void OnEnable()
+    {
+        GameManager.Instance.AllHealthControllers.Add(this);
+        OnHealthModified.AddListener(RefreshUI);
+    }
+
     private void OnDisable() => GameManager.Instance.AllHealthControllers.Remove(this);
+
 
 
     private void Awake()
     {
+
+    }
+
+    private void Start()
+    {
         currentHealth = maxHealth;
-        OnHealthModified.AddListener(RefreshUI);
         RefreshUI();
     }
 

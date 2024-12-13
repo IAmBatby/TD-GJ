@@ -14,10 +14,18 @@ public class ShopSpawner : MonoBehaviour, IInteractable
     [SerializeField] private ScriptableItem itemToSpawn;
     [SerializeField] private int cost;
     [SerializeField, Range(0f,1f)] private float itemModelScaleMultiplier;
+    [SerializeField] private int turnsUntilRespawn;
 
     private GameObject fakeItemObject;
 
     private bool hasBeenPurchased;
+
+    private int respawnTurnCount;
+
+    private void Awake()
+    {
+        GameManager.Instance.OnWaveFinished.AddListener(OnWaveFinished);
+    }
 
     private void Start()
     {
@@ -62,6 +70,21 @@ public class ShopSpawner : MonoBehaviour, IInteractable
             return (true);
         }
         return (false);
+    }
+
+    private void OnWaveFinished()
+    {
+        if (hasBeenPurchased)
+        {
+            respawnTurnCount++;
+            if (respawnTurnCount == turnsUntilRespawn)
+            {
+                hasBeenPurchased = false;
+                fakeItemObject.SetActive(true);
+                priceText.enabled = true;
+                respawnTurnCount = 0;
+            }
+        }
     }
 
     private void Update()
