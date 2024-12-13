@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
+    [SerializeField] public int maxHealth;
     private int currentHealth;
 
     public int Health { get => currentHealth; set => ModifyHealth(value); }
