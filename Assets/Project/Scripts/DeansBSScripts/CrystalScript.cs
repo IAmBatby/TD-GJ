@@ -18,6 +18,8 @@ public class CrystalScript : MonoBehaviour
 
     public void DropCrystal()
     {
+        if (healthControl.Health == 0) return;
+
         if(listOfCrystals.Count > 0 && (healthControl.Health/healthControl.maxHealth * 100) <= DropThresholdPercent)
         {
             var crystal = listOfCrystals[0];
