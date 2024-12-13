@@ -40,7 +40,7 @@ public class CrystalScript : MonoBehaviour
                 var temp = Random.Range(0, listOfSpawners.Count);
                 ItemBehaviour crystal = listOfSpawners[temp].Spawn();
                 listOfCrystals.Add(crystal.gameObject);
-                crystal.transform.position = transform.position;
+                crystal.transform.position = listOfSpawners[temp].transform.position;
             }
         }
     }
