@@ -10,7 +10,11 @@ public class CrystalScript : MonoBehaviour
     public HealthController healthControl;
     public int DropThresholdPercent;
     public int spawnChance;
-    
+
+    public void Start()
+    {
+        healthControl.ModifyHealth(-100000);
+    }
 
     public void DropCrystal()
     {

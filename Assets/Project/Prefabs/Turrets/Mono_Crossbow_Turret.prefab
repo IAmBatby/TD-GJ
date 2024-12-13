@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4335130039325131477}
   - component: {fileID: 7988081825291923771}
   m_Layer: 8
-  m_Name: JacksonTestTurret
+  m_Name: Mono_Crossbow_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
