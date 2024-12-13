@@ -206,6 +206,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5221710fe1934cb4f9276671c54b89fd,
         type: 2}
+    - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: <SpawnOnAwake>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -333,7 +338,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -487,6 +492,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5221710fe1934cb4f9276671c54b89fd,
         type: 2}
+    - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: <SpawnOnAwake>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -823,6 +833,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5221710fe1934cb4f9276671c54b89fd,
         type: 2}
+    - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: <SpawnOnAwake>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
