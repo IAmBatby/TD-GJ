@@ -138,6 +138,7 @@ public class GameManager : GlobalManager
         currentWaveSpawnDict = null;
         enemySpawnTimer = null;
         ActiveWaveTimer = null;
+        intermissionTimer = null;
         CurrentLevel = null;
         HasGameEnded = false;
         isFirstWave = true;
@@ -146,14 +147,14 @@ public class GameManager : GlobalManager
         AllSpawnedHittables = new List<IHittable>();
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
+        CurrentLevel = ScriptableObject.Instantiate(DefaultLevel);
+        ActiveWaves = new SelectableCollection<WaveInfo>(DefaultLevel.Waves);
+        UIManager.Instance.InitializeUI();
     }
 
     private void StartNewLevel(ScriptableLevel level)
     {
         navMeshSurface.BuildNavMesh();
-        currentHealth = maxHealth;
-        CurrentLevel = ScriptableObject.Instantiate(level);
-        ActiveWaves = new SelectableCollection<WaveInfo>(level.Waves);
         OnGameStart.Invoke();
         AudioManager.PlayAudio(ambiencePreset, ambienceSource);
         AudioManager.PlayAudio(onGameStartPreset, primarySource);
@@ -236,9 +237,9 @@ public class GameManager : GlobalManager
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(DefaultLevel.SceneName);
-            ResetGame();
-            StartNewLevel(DefaultLevel);
+            SceneManager.UnloadSceneAsync(DefaultLevel.SceneName);
+            //ResetGame();
+            //StartNewLevel(DefaultLevel);
         }
     }
 

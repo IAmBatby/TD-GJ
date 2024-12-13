@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8f0a94fbeba5d4fbfa8ea248628568, type: 3}
   m_Name: Level02
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Dean's Level
+  <DisplayName>k__BackingField: Crystal Caverns
   <SceneName>k__BackingField: DeanScene
   <IntermissionStandardTime>k__BackingField: 10
   <IntermissionWaveMultiplier>k__BackingField: 0.5
+  <StartingCurrency>k__BackingField: 0
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 20
     <EnemySpawnInfos>k__BackingField:
