@@ -14,16 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: aab9bb5b3769c7546bc6e928b305e30b,
     type: 3}
+  <OnPickupAudioPreset>k__BackingField: {fileID: 0}
+  <OnDropAudioPreset>k__BackingField: {fileID: 0}
+  <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 11400000, guid: ef8038335f663764ca5e655ed42d419f,
     type: 2}
   <FireRateAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 8971dd7dfe3f818418b709df389ce5bd,
       type: 2}
     <Value>k__BackingField: 5
-  <ShootSpeedAttribute>k__BackingField:
-    <Attribute>k__BackingField: {fileID: 11400000, guid: 8da2a6e3dd97cd54284cc672498f6e54,
-      type: 2}
-    <Value>k__BackingField: 2
+  <ShotSpeedAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 0}
+    <Value>k__BackingField: 0
   <RangeAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 10d2e5a9d16fdbf4f92f33d799fd40cd,
       type: 2}
@@ -33,3 +36,7 @@ MonoBehaviour:
       type: 2}
     <Value>k__BackingField: 30
   <TargetType>k__BackingField: 2
+  <OnShootAudioPreset>k__BackingField: {fileID: 0}
+  <OnNewTargetAudioPreset>k__BackingField: {fileID: 0}
+  <OnCooldownEndedAudioPreset>k__BackingField: {fileID: 0}
+  <OnUpgradeAudioPreset>k__BackingField: {fileID: 0}

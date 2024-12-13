@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bafd80c5a82e23439983b29d9048e7f, type: 3}
   m_Name: CrystalPickupItem
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 2575548863788656994, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
+  <Prefab>k__BackingField: {fileID: 1950762312102575686, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
     type: 3}
   <OnPickupAudioPreset>k__BackingField: {fileID: 0}
   <OnDropAudioPreset>k__BackingField: {fileID: 0}
   <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
-  <ShouldBeAnchoredToGround>k__BackingField: 0
-  <CanBePickedUp>k__BackingField: 1
+  <ShouldBeAnchoredToGround>k__BackingField: 1
