@@ -73,7 +73,10 @@ public class TurretBehaviour : ItemBehaviour
             shootPosition.UpdateShootRenderer(Target);
 
         if (Target != null)
+        {
             transform.LookAt(Target.transform.position);
+            transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+        }
         else
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -85,6 +88,7 @@ public class TurretBehaviour : ItemBehaviour
         if (Target == null || canShoot == false) return;
 
         bool didShoot = false;
+        /*
         foreach (ShootPosition shootPosition in shootPositions)
             if (Physics.Raycast(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, out RaycastHit hit, Mathf.Infinity, shootMask))
             {
@@ -94,6 +98,12 @@ public class TurretBehaviour : ItemBehaviour
                     didShoot = true;
                 }
             }
+        */
+
+        foreach (ShootPosition shootPosition in shootPositions)
+            Projectile.SpawnProjectile(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+
+        didShoot = true;
 
         if (didShoot == true)
         {
