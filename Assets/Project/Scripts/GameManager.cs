@@ -32,6 +32,7 @@ public class GameManager : GlobalManager
     [SerializeField] private AudioPreset onGameLostPreset;
     [SerializeField] private AudioPreset onDamageTakenPreset;
     [SerializeField] private AudioPreset ambiencePreset;
+    [SerializeField] private AudioPreset onCurrencyGainedPreset;
 
     [SerializeField] private SelectableCollection<WaveInfo> ActiveWaves;
 
@@ -75,6 +76,10 @@ public class GameManager : GlobalManager
     private int currentHealth;
 
     public int Health { get => currentHealth; set => currentHealth = value; }
+
+    private int currentCurrency;
+
+    public int Currency { get => currentCurrency; set => ModifyCurrency(value); }
 
     private Dictionary<float, List<ScriptableEnemy>> currentWaveSpawnDict;
 
@@ -128,6 +133,8 @@ public class GameManager : GlobalManager
             RemoveEnemy(AllSpawnedEnemies[i]);
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
+        currentHealth = maxHealth;
+        currentCurrency = DefaultLevel.StartingCurrency;
         currentWaveSpawnDict = null;
         enemySpawnTimer = null;
         ActiveWaveTimer = null;
@@ -248,6 +255,13 @@ public class GameManager : GlobalManager
 
         if (currentHealth < 0)
             currentHealth = 0;
+    }
+
+    public static void ModifyCurrency(int value)
+    {
+        Instance.currentCurrency += value;
+        if (value > 0)
+            AudioManager.PlayAudio(Instance.onCurrencyGainedPreset, Instance.primarySource);
     }
 
     public void EndGame(bool didWin)

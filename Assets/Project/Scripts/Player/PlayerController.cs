@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private Texture2D newCursor;
 
     [SerializeField] private ItemBehaviour mostRecentItemInRange;
+    private IInteractable mostRecentInteractableInRange;
     [field: SerializeField] public ItemBehaviour ActiveItem { get; private set; }
 
     public ExtendedEvent<ItemBehaviour> OnItemPickup = new ExtendedEvent<ItemBehaviour>();
@@ -77,7 +78,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Forwarded Enter: " + other);
         if (ActiveItem == null && other.TryGetComponent(out ItemBehaviour item))
         {
-            mostRecentItemInRange = item;
+            if (item.ItemData.CanBePickedUp)
+                mostRecentItemInRange = item;
+        }
+
+        if (other.TryGetComponent(out IInteractable interactable))
+        {
+            mostRecentInteractableInRange = interactable;
         }
     }
 
@@ -86,6 +93,10 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out ItemBehaviour item))
             if (item == mostRecentItemInRange)
                 mostRecentItemInRange = null;
+
+        if (other.TryGetComponent(out IInteractable interactable))
+            if (interactable == mostRecentInteractableInRange)
+                mostRecentInteractableInRange = null;
     }
 
     private void Update()
@@ -93,6 +104,9 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.HasGameEnded) return;
         if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
         {
+            if (mostRecentInteractableInRange != null)
+                if (mostRecentInteractableInRange.TryInteract())
+                    return;
             if (ActiveItem == null && mostRecentItemInRange != null)
                 PickupItem(mostRecentItemInRange);
             else if (ActiveItem != null)
@@ -190,7 +204,9 @@ public class PlayerController : MonoBehaviour
 
     public void RequestNewCursor(Texture2D newNewCursor)
     {
+
         newCursor = newNewCursor;
+        Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
     }
 
     private void RefreshCursor()

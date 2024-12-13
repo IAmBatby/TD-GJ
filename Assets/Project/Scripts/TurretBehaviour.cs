@@ -31,9 +31,6 @@ public class TurretBehaviour : ItemBehaviour
     private Timer shootCooldownTimer;
     private bool canShoot;
 
-
-    public ExtendedEvent<bool> OnMouseoverToggle = new ExtendedEvent<bool>();
-
     protected override void OnSpawn()
     {
         canShoot = true;
@@ -49,9 +46,6 @@ public class TurretBehaviour : ItemBehaviour
         BlacklistTarget(GameManager.Player.HealthController);
 
     }
-
-    private void OnMouseEnter() => OnMouseoverToggle.Invoke(true);
-    private void OnMouseExit() => OnMouseoverToggle.Invoke(false);
 
     private void BlacklistTarget(HealthController hittable)
     {

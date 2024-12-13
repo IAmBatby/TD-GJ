@@ -50,6 +50,7 @@ public class UIManager : GlobalManager
 
         
         currentHealthText.SetText(GameManager.Instance.Health.ToString());
+        currentGoldText.SetText(GameManager.Instance.Currency.ToString());
 
 
     }

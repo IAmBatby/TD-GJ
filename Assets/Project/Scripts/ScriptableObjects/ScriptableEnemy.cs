@@ -11,6 +11,7 @@ public class ScriptableEnemy : ScriptableObject
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
+    [field: SerializeField] public Vector2 GoldDropRateMinMax { get; private set; }
 
 
     public EnemyAI SpawnEnemy(EnemySpawnTarget newSpawn, EnemyPathTarget newPath)
