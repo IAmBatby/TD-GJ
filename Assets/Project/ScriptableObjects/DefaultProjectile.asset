@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: 7ce79a3a2612f594e9bb52302837b744,
     type: 3}
+  <OnCollisionAudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+    type: 2}

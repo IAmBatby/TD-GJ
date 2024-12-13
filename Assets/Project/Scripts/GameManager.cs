@@ -21,7 +21,17 @@ public class GameManager : GlobalManager
     [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
 
     [SerializeField] private NavMeshSurface navMeshSurface;
+    [SerializeField] private Light directionalLight;
     [SerializeField] private ScriptableLevel CurrentLevel;
+    [SerializeField] private AudioSource primarySource;
+    [SerializeField] private AudioSource ambienceSource;
+    [SerializeField] private AudioPreset onGameStartPreset;
+    [SerializeField] private AudioPreset onWaveStartPreset;
+    [SerializeField] private AudioPreset onWaveEndPreset;
+    [SerializeField] private AudioPreset onGameWonPreset;
+    [SerializeField] private AudioPreset onGameLostPreset;
+    [SerializeField] private AudioPreset onDamageTakenPreset;
+    [SerializeField] private AudioPreset ambiencePreset;
 
     [SerializeField] private SelectableCollection<WaveInfo> ActiveWaves;
 
@@ -68,13 +78,36 @@ public class GameManager : GlobalManager
 
     private Dictionary<float, List<ScriptableEnemy>> currentWaveSpawnDict;
 
+    public List<HealthController> AllHealthControllers = new List<HealthController>();
+
 
     public ExtendedEvent OnGameStart = new ExtendedEvent();
     public ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
 
     public ExtendedEvent<EnemyAI> OnEnemySpawned = new ExtendedEvent<EnemyAI>();
     public ExtendedEvent OnNewWave = new ExtendedEvent<EnemyAI>();
+    public ExtendedEvent OnWaveFinished = new ExtendedEvent();
+    public ExtendedEvent OnIntermissionStart = new ExtendedEvent();
     public ExtendedEvent<EnemyAI> OnEnemyKilled = new ExtendedEvent<EnemyAI>();
+
+
+    private Timer intermissionTimer;
+    public float IntermissionLength => 10f + (ActiveWaves.ActiveSelection.WaveLength / 2);
+    public float IntermissionProgress
+    {
+        get
+        {
+            if (intermissionTimer == null)
+                return (0f);
+            return (intermissionTimer.TimeElapsed);
+        }
+    }
+    [field: SerializeField] public bool IsInIntermission { get; private set; }
+
+    [field: SerializeField] public bool HasWaveTimeFinished { get; private set; }
+    [field: SerializeField] public bool HaveWaveEnemiesBeenRemoved { get; private set; }
+
+    [field: SerializeField] public bool HasGameEnded { get; private set; }
 
     protected override void Awake()
     {
@@ -90,15 +123,15 @@ public class GameManager : GlobalManager
 
     private void ResetGame()
     {
-        foreach (EnemyAI enemy in AllSpawnedEnemies)
-            if (enemy != null)
-                GameObject.Destroy(enemy.gameObject);
+        for (int i = 0; i < AllSpawnedEnemies.Count; i++)
+            RemoveEnemy(AllSpawnedEnemies[i]);
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
         currentWaveSpawnDict = null;
         enemySpawnTimer = null;
         ActiveWaveTimer = null;
         CurrentLevel = null;
+        HasGameEnded = false;
         RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
         AllSpawnedEnemies = new List<EnemyAI>();
         AllSpawnedHittables = new List<IHittable>();
@@ -113,6 +146,8 @@ public class GameManager : GlobalManager
         CurrentLevel = ScriptableObject.Instantiate(level);
         ActiveWaves = new SelectableCollection<WaveInfo>(level.Waves);
         OnGameStart.Invoke();
+        AudioManager.PlayAudio(ambiencePreset, ambienceSource);
+        AudioManager.PlayAudio(onGameStartPreset, primarySource);
         StartNextWave();
     }
 
@@ -132,13 +167,39 @@ public class GameManager : GlobalManager
     private void StartNextWave()
     {
         Debug.Log("Starting Wave #" + ActiveWaves.ActiveIndex);
+        HasWaveTimeFinished = false;
+        IsInIntermission = false;
+
+
         ActiveWaveTimer = new Timer();
-        ActiveWaveTimer.onTimerEnd.AddListener(TryProgressToNextWave);
+        ActiveWaveTimer.onTimerEnd.AddListener(OnWaveTimeFinished);
         ActiveWaveTimer.StartTimer(this, ActiveWaves.ActiveSelection.WaveLength);
 
         currentWaveSpawnDict = ActiveWaves.ActiveSelection.GetEnemyDict();
 
+        AudioManager.PlayAudio(onWaveStartPreset, primarySource);
         OnNewWave.Invoke();
+    }
+
+    private void OnWaveTimeFinished()
+    {
+        HasWaveTimeFinished = true;
+        CheckWaveStatus();
+    }
+
+    private void CheckWaveStatus()
+    {
+        if (HasGameEnded) return;
+        if (HasWaveTimeFinished && HaveWaveEnemiesBeenRemoved)
+        {
+            IsInIntermission = true;
+            intermissionTimer = new Timer();
+            intermissionTimer.onTimerEnd.AddListener(TryProgressToNextWave);
+            intermissionTimer.StartTimer(this, IntermissionLength);
+            AudioManager.PlayAudio(onWaveEndPreset, primarySource);
+            OnWaveFinished.Invoke();
+            OnIntermissionStart.Invoke();
+        }
     }
 
     private void Update()
@@ -157,10 +218,15 @@ public class GameManager : GlobalManager
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(DefaultLevel.SceneName);
             ResetGame();
             StartNewLevel(DefaultLevel);
         }
+    }
+
+    private void LateUpdate()
+    {
+        RefreshEnemyPriorities();
     }
 
     public void ModifyHealth(int newValue)
@@ -175,14 +241,23 @@ public class GameManager : GlobalManager
 
     private void EndGame(bool didWin)
     {
+        if (HasGameEnded) return;
+        HasGameEnded = true;
+        directionalLight.intensity = 0.1f;
         ChangeGameState(GameState.Paused);
         Time.timeScale = 0.3f;
+
+        if (didWin)
+            AudioManager.PlayAudio(onGameWonPreset, primarySource);
+        else
+            AudioManager.PlayAudio(onGameLostPreset, primarySource);
         OnGameEnd.Invoke(didWin);
     }
 
     public static void EnemyReachedTarget(EnemyAI enemy)
     {
         Debug.Log("Enemy Reached Target!");
+        AudioManager.PlayAudio(Instance.onDamageTakenPreset, Instance.primarySource);
         Instance.ModifyHealth(-enemy.Data.Damage);
         RemoveEnemy(enemy);
     }
@@ -200,6 +275,8 @@ public class GameManager : GlobalManager
         EnemySpawnTarget randomSpawn = AllSpawnTargets[Random.Range(0, AllSpawnTargets.Count)];
         EnemyPathTarget randomTarget = AllPathTargets[Random.Range(0, AllPathTargets.Count)];
 
+        HaveWaveEnemiesBeenRemoved = false;
+
         EnemyAI spawnedEnemy = enemy.SpawnEnemy(randomSpawn, randomTarget);
 
         enemySpawnTimer = new Timer();
@@ -214,6 +291,14 @@ public class GameManager : GlobalManager
 
     }
 
+    private void RefreshEnemyPriorities()
+    {
+        List<EnemyAI> sortedEnemies = AllSpawnedEnemies.OrderBy(e => e.Agent.remainingDistance).Reverse().ToList();
+
+        foreach (EnemyAI enemy in sortedEnemies)
+            enemy.Agent.avoidancePriority = sortedEnemies.IndexOf(enemy);
+    }
+
     private void OnEnemySpawnCooldownFinished()
     {
         //This shit is cooked
@@ -225,10 +310,20 @@ public class GameManager : GlobalManager
 
     public static void RemoveEnemy(EnemyAI enemy)
     {
+        if (enemy == null)
+        {
+            Debug.LogError("Null Enemy Passed Into Remove Enemy");
+            return;
+        }
         enemy.gameObject.SetActive(false);
         Instance.OnEnemyKilled.Invoke(enemy);
         Instance.AllSpawnedEnemies.Remove(enemy);
         GameObject.Destroy(enemy.gameObject);
 
+        if (Instance.AllSpawnedEnemies.Count == 0)
+        {
+            Instance.HaveWaveEnemiesBeenRemoved = true;
+            Instance.CheckWaveStatus();
+        }
     }
 }

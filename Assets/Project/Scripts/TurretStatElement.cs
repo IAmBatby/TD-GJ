@@ -43,18 +43,6 @@ public class TurretStatElement : MonoBehaviour
 
 
             }
-            else if (trackingAttribute is ScriptableIntAttribute intAttribute)
-            {
-                valueText.SetText(intAttribute.GetAttributeValue().ToString());
-                int attributeValue = intAttribute.GetAttributeValue();
-                int defaultValue = intAttribute.GetDefaultValue();
-                valueText.SetText(attributeValue.ToString());
-                if (attributeValue > defaultValue)
-                {
-                    iconImage.color = Color.yellow;
-                    valueText.color = Color.yellow;
-                }
-            }
         }
     }
 

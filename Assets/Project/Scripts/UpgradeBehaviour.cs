@@ -25,19 +25,13 @@ public class UpgradeBehaviour : ItemBehaviour
     {
         if (other.TryGetComponent(out TurretBehaviour turret))
         {
-            foreach (ScriptableAttribute turretAttribute in turret.AllAttributes)
-                if (turretAttribute.Compare(Attribute))
-                {
-                    if (turretAttribute is ScriptableAttribute<float> floatAtr)
-                        floatAtr.AddModifier(DefaultValue);
-                    else if (turretAttribute is ScriptableAttribute<int> intAtr)
-                        intAtr.AddModifier((int)DefaultValue);
-
-                    if (GameManager.Player.ActiveItem == this)
-                        GameManager.Player.DropItem(transform.position);
-                    gameObject.SetActive(false);
-                    GameObject.Destroy(gameObject);
-                }
+            if (turret.TryModifyAttribute(Attribute, DefaultValue))
+            {
+                if (GameManager.Player.ActiveItem == this)
+                    GameManager.Player.DropItem(transform.position);
+                gameObject.SetActive(false);
+                GameObject.Destroy(gameObject);
+            }
         }
     }
 }

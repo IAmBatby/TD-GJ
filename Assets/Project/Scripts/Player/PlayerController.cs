@@ -15,8 +15,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask dropMask;
     [SerializeField] private Animator animator;
 
+    [Space(20), Header("Camera")]
     [SerializeField] private Vector3 translationAtRestCameraPos;
     [SerializeField] private Vector3 translationOffsetCameraPos;
+
+    [Space(20), Header("Health")]
+    [SerializeField] private int maxHealth;
+    [field: SerializeField] public HealthController HealthController { get; private set; }
+
+    [Space(20), Header("Audio")]
+    [SerializeField] private AudioSource movementAudioSource;
+    [SerializeField] private AudioSource interactAudioSource;
+    [SerializeField] private AudioPreset movementPreset;
+    [SerializeField] private AudioPreset damagePreset;
+    [SerializeField] private AudioPreset pickupItemPreset;
+    [SerializeField] private AudioPreset validDropItemPreset;
+    [SerializeField] private AudioPreset invalidDropItemPreset;
+    [SerializeField] private AudioPreset failedInteractionPreset;
+
 
     private PositionConstraint positionConstraint;
 
@@ -31,6 +47,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         InitializeCamera();
+
+        HealthController.LinkBehaviour(this, damagePreset);
+        HealthController.SetMaxHealth(maxHealth);
+        HealthController.ResetHealth();
+        HealthController.OnDeath.AddListener(Die);
     }
 
     private void InitializeCamera()
@@ -63,13 +84,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.HasGameEnded) return;
         if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
         {
             if (ActiveItem == null && mostRecentItemInRange != null)
                 PickupItem(mostRecentItemInRange);
             else if (ActiveItem != null)
-                if (Physics.Raycast(heldItemPosition.transform.position, new Vector3(heldItemPosition.position.x,-5000, heldItemPosition.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
+            {
+                if (Physics.Raycast(heldItemPosition.transform.position, new Vector3(heldItemPosition.position.x, -5000, heldItemPosition.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
                     DropItem(hit.point);
+                else
+                    AudioManager.PlayAudio(invalidDropItemPreset, interactAudioSource);
+            }
+            else
+                AudioManager.PlayAudio(failedInteractionPreset, interactAudioSource);
+
         }
     }
 
@@ -81,6 +110,9 @@ public class PlayerController : MonoBehaviour
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
 
+        AudioManager.PlayAudio(pickupItemPreset, interactAudioSource);
+
+        item.Pickup();
         OnItemPickup.Invoke(item);
     }
 
@@ -93,8 +125,17 @@ public class PlayerController : MonoBehaviour
         ActiveItem.transform.position = position;
         ActiveItem.transform.rotation = Quaternion.identity;
         ActiveItem.IsBeingHeld = false;
+
+        AudioManager.PlayAudio(validDropItemPreset, interactAudioSource);
+
+        ActiveItem.Drop();
         OnItemDropped.Invoke(ActiveItem);
         ActiveItem = null;
+    }
+
+    private void Die()
+    {
+
     }
 
 
@@ -102,12 +143,18 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.Instance.HasGameEnded) return;
         SetRotation();
 
         animator.SetBool("isWalking", rigidBody.velocity.magnitude > 1f);
     }
     private void FixedUpdate()
     {
+        if (GameManager.Instance.HasGameEnded)
+        {
+            rigidBody.velocity = Vector3.zero;
+            return;
+        }
         positionConstraint.translationAtRest = translationAtRestCameraPos;
         positionConstraint.translationOffset = translationOffsetCameraPos;
 

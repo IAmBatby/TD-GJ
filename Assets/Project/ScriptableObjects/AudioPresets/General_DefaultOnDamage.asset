@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723a6ae34b55e9f42b3d2f097ba38efd, type: 3}
+  m_Name: General_DefaultOnDamage
+  m_EditorClassIdentifier: 
+  audioRandomPitchMinMax: {x: 0.95, y: 1.09}
+  audioVolume: 0.7
+  onlyPlayOnInactiveSource: 0
+  shouldLoop: 0
+  audioRandomClipList:
+  - {fileID: 8300000, guid: f2258fdf5737ffc45bfae4847b2950af, type: 3}
+  - {fileID: 8300000, guid: 799bd353f6125e1469f8b05d4e5f6064, type: 3}
+  - {fileID: 8300000, guid: 8f1dd66137eebad4c87f0361d939eabe, type: 3}
+  - {fileID: 8300000, guid: d474857e9cff9a048a03be380f443e03, type: 3}
+  - {fileID: 8300000, guid: 66387518cf8533e48bc49f538f92bced, type: 3}
+  - {fileID: 8300000, guid: 5818a234be4013d4e9319b0cfc46bfb6, type: 3}
+  - {fileID: 8300000, guid: a36ca89f42fdf734282519e35d04dc0d, type: 3}
+  audioMixer: {fileID: 24100000, guid: be7275128616d3f4790e9014ef71882b, type: 2}

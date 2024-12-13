@@ -9,6 +9,7 @@ public class UIManager : GlobalManager
 {
     public static new UIManager Instance => SingletonManager.GetSingleton<UIManager>(typeof(UIManager));
 
+    [SerializeField] private TextMeshProUGUI currentWaveHeaderText;
     [SerializeField] private TextMeshProUGUI currentWaveText;
     [SerializeField] private TextMeshProUGUI waveProgressTimeText;
     [SerializeField] private TextMeshProUGUI currentHealthText;
@@ -29,11 +30,28 @@ public class UIManager : GlobalManager
 
     private void Update()
     {
-        currentWaveText.SetText((GameManager.Instance.CurrentWaveCount + 1) + " / " + GameManager.Instance.TotalWaveCount);
-        waveProgressTimeText.SetText(GameManager.Instance.CurrentWaveTime.ToString("F2") + " / " + GameManager.Instance.TotalWaveTime.ToString("F2"));
+        if (GameManager.Instance.IsInIntermission == false)
+        {
+            waveProgressFillImage.color = Color.yellow;
+            currentWaveText.SetText("Wave: " + (GameManager.Instance.CurrentWaveCount + 1) + " / " + GameManager.Instance.TotalWaveCount);
+            waveProgressTimeText.SetText(GameManager.Instance.CurrentWaveTime.ToString("F2") + " / " + GameManager.Instance.TotalWaveTime.ToString("F2"));
+            if (GameManager.Instance.HasWaveTimeFinished == false)
+                waveProgressFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.Instance.TotalWaveTime, GameManager.Instance.CurrentWaveTime);
+            else
+                waveProgressFillImage.fillAmount = 1f;
+        }
+        else
+        {
+            waveProgressFillImage.color = Color.grey;
+            waveProgressTimeText.SetText(GameManager.Instance.IntermissionProgress.ToString("F2") + " / " + GameManager.Instance.IntermissionLength.ToString("F2"));
+            waveProgressFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.Instance.IntermissionLength, GameManager.Instance.IntermissionProgress);
+            currentWaveText.SetText("Intermission");
+        }
+
+        
         currentHealthText.SetText(GameManager.Instance.Health.ToString());
 
-        waveProgressFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.Instance.TotalWaveTime, GameManager.Instance.CurrentWaveTime);
+
     }
 
     private void ResetText()
@@ -55,13 +73,13 @@ public class UIManager : GlobalManager
         {
             gameEndText.SetText("YOU WIN");
             gameEndText.color = Color.green;
-            gameEndBackgroundImage.color = new Color(Color.green.r, Color.green.g, Color.green.b, 0.3f);
+            gameEndBackgroundImage.color = new Color(Color.green.r, Color.green.g, Color.green.b, 0.05f);
         }
         else
         {
             gameEndText.SetText("YOU LOST");
             gameEndText.color = Color.red;
-            gameEndBackgroundImage.color = new Color(Color.red.r, Color.red.g, Color.red.b, 0.3f);
+            gameEndBackgroundImage.color = new Color(Color.red.r, Color.red.g, Color.red.b, 0.05f);
         }
 
         gameEndText.enabled = true;

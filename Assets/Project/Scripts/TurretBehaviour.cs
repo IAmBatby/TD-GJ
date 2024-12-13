@@ -1,11 +1,14 @@
 using IterationToolkit;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum TargetType { Closest, Furthest, First, Last }
 public class TurretBehaviour : ItemBehaviour
 {
+    private ScriptableTurret turretData;
     [field: SerializeField] public ScriptableProjectile Projectile { get; private set; }
 
     public List<ScriptableAttribute> AllAttributes = new List<ScriptableAttribute>();
@@ -13,15 +16,17 @@ public class TurretBehaviour : ItemBehaviour
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue FireRateAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShotSpeedAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
-    [field: SerializeField] public ScriptableIntAttributeWithDefaultValue DamageAttribute { get; private set; }
+    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue DamageAttribute { get; private set; }
 
     public TargetType SelectedTargetType { get; private set; }
     //[SerializeField] private Transform shootPosition;
     [SerializeField] private LayerMask shootMask;
     [SerializeField] private List<ShootPosition> shootPositions;
 
-    private IHittable Target;
-    private List<IHittable> AllEnemiesInRange = new List<IHittable>();
+    private HealthController Target;
+    [SerializeField] private List<HealthController> AllEnemiesInRange = new List<HealthController>();
+
+    [SerializeField] private List<HealthController> BlacklistedTargets = new List<HealthController>();
 
     private Timer shootCooldownTimer;
     private bool canShoot;
@@ -32,24 +37,32 @@ public class TurretBehaviour : ItemBehaviour
     protected override void OnSpawn()
     {
         canShoot = true;
-        ScriptableTurret turret = ItemData as ScriptableTurret;
-        Projectile = turret.Projectile;
-        FireRateAttribute.ApplyWithReference(turret.FireRateAttribute);
-        ShotSpeedAttribute.ApplyWithReference(turret.ShootSpeedAttribute);
-        RangeAttribute.ApplyWithReference(turret.RangeAttribute);
-        DamageAttribute.ApplyWithReference(turret.DamageAttribute);
+        turretData = ItemData as ScriptableTurret;
+        Projectile = turretData.Projectile;
+        FireRateAttribute.ApplyWithReference(turretData.FireRateAttribute);
+        ShotSpeedAttribute.ApplyWithReference(turretData.ShotSpeedAttribute);
+        RangeAttribute.ApplyWithReference(turretData.RangeAttribute);
+        DamageAttribute.ApplyWithReference(turretData.DamageAttribute);
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
-        SelectedTargetType = turret.TargetType;
+        SelectedTargetType = turretData.TargetType;
+
+        BlacklistTarget(GameManager.Player.HealthController);
+
     }
 
     private void OnMouseEnter() => OnMouseoverToggle.Invoke(true);
     private void OnMouseExit() => OnMouseoverToggle.Invoke(false);
 
+    private void BlacklistTarget(HealthController hittable)
+    {
+        BlacklistedTargets.Add(hittable);
+    }
+
     private void Update()
     {
         if (IsBeingHeld) return;
 
-        IHittable previousTarget = Target;
+        HealthController previousTarget = Target;
 
         UpdateTargets();
 
@@ -59,13 +72,16 @@ public class TurretBehaviour : ItemBehaviour
             canShoot = true;
         }
 
+        if (Target != null && Target != previousTarget)
+            AudioManager.PlayAudio(turretData.OnNewTargetAudioPreset, primaryAudioSource);
+
         foreach (ShootPosition shootPosition in shootPositions)
             shootPosition.UpdateShootRenderer(Target);
 
         if (Target != null)
-        {
-            transform.LookAt(Target.GetTransform().position);
-        }
+            transform.LookAt(Target.transform.position);
+        else
+            transform.rotation = Quaternion.Euler(0, 0, 0);
 
         Shoot();
     }
@@ -74,18 +90,32 @@ public class TurretBehaviour : ItemBehaviour
     {
         if (Target == null || canShoot == false) return;
 
+        bool didShoot = false;
         foreach (ShootPosition shootPosition in shootPositions)
-            if (Physics.Raycast(shootPosition.transform.position, Target.GetTransform().position, Mathf.Infinity, shootMask))
-                Projectile.SpawnProjectile(shootPosition.transform.position, Target.GetTransform().position, ShotSpeedAttribute.Value, DamageAttribute.Value);
+            if (Physics.Raycast(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, Mathf.Infinity, shootMask))
+            {
+                Projectile.SpawnProjectile(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+                didShoot = true;
+            }
 
-        canShoot = false;
-        shootCooldownTimer = new Timer();
-        shootCooldownTimer.onTimerEnd.AddListener(DisableCooldown);
-        shootCooldownTimer.StartTimer(this, FireRateAttribute.Value);
-
+        if (didShoot == true)
+        {
+            AudioManager.PlayAudio(turretData.OnShootAudioPreset, primaryAudioSource);
+            if (FireRateAttribute.Value > 0f)
+            {
+                canShoot = false;
+                shootCooldownTimer = new Timer();
+                shootCooldownTimer.onTimerEnd.AddListener(DisableCooldown);
+                shootCooldownTimer.StartTimer(this, FireRateAttribute.Value);
+            }
+        }
     }
 
-    private void DisableCooldown() => canShoot = true;
+    private void DisableCooldown()
+    {
+        AudioManager.PlayAudio(turretData.OnCooldownEndedAudioPreset, primaryAudioSource);
+        canShoot = true;
+    }
 
 
 
@@ -93,44 +123,48 @@ public class TurretBehaviour : ItemBehaviour
     {
         AllEnemiesInRange.Clear();
 
-        EnemyAI furthestEnemy = null;
-        EnemyAI closestEnemy = null;
-        EnemyAI firstEnemy = null;
-        EnemyAI lastEnemy = null;
+        HealthController furthestEnemy = null;
+        HealthController closestEnemy = null;
+        HealthController firstEnemy = null;
+        HealthController lastEnemy = null;
 
         float furthestDistance = Mathf.NegativeInfinity;
         float closestDistance = Mathf.Infinity;
         float closestDestinationRemaining = Mathf.Infinity;
         float furthestDestinationRemaining = Mathf.Infinity;
 
-        foreach (EnemyAI enemy in GameManager.Instance.AllSpawnedEnemies)
+        foreach (HealthController hittable in GameManager.Instance.AllHealthControllers)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < RangeAttribute.Value)
+            if (BlacklistedTargets.Contains(hittable)) continue;
+            float distance = Vector3.Distance(transform.position, hittable.transform.position);
+            if (distance <= RangeAttribute.Value)
             {
-                AllEnemiesInRange.Add(enemy);
+                AllEnemiesInRange.Add(hittable);
                 if (closestEnemy == null || distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestEnemy = enemy;
+                    closestEnemy = hittable;
                 }
 
                 if (furthestEnemy == null || distance < furthestDistance)
                 {
                     furthestDistance = distance;
-                    closestEnemy = enemy;
+                    closestEnemy = hittable;
                 }
 
-                if (firstEnemy == null || enemy.Agent.remainingDistance < closestDestinationRemaining)
+                if (hittable.LinkedBehaviour is EnemyAI enemy)
                 {
-                    firstEnemy = enemy;
-                    closestDestinationRemaining = enemy.Agent.remainingDistance;
-                }
+                    if (firstEnemy == null || enemy.Agent.remainingDistance < closestDestinationRemaining)
+                    {
+                        firstEnemy = hittable;
+                        closestDestinationRemaining = enemy.Agent.remainingDistance;
+                    }
 
-                if (lastEnemy == null || enemy.Agent.remainingDistance > furthestDestinationRemaining)
-                {
-                    lastEnemy = enemy;
-                    furthestDestinationRemaining = enemy.Agent.remainingDistance;
+                    if (lastEnemy == null || enemy.Agent.remainingDistance > furthestDestinationRemaining)
+                    {
+                        lastEnemy = hittable;
+                        furthestDestinationRemaining = enemy.Agent.remainingDistance;
+                    }
                 }
             }
         }
@@ -143,11 +177,55 @@ public class TurretBehaviour : ItemBehaviour
             TargetType.Furthest => furthestEnemy,
             _ => null
         };
+
+        if (Target == null && AllEnemiesInRange.Count > 0)
+            Target = AllEnemiesInRange.First();
     }
 
 
     private void OnDrawGizmosSelected()
     {
         IterationToolkit.Utilities.DrawCircle(transform.position, RangeAttribute.Value, Color.yellow);
+
+        foreach (HealthController health in GameManager.Instance.AllHealthControllers)
+        {
+            float distance = Vector3.Distance(transform.position, health.transform.position);
+            if (health == Target)
+                Gizmos.color = Color.green;
+            else if (distance < RangeAttribute.Value)
+                Gizmos.color = Color.yellow;
+            else
+                Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, health.transform.position);
+        }
+
+        if (shootCooldownTimer != null)
+            IterationToolkit.Utilities.DrawLabel(transform.position + new Vector3(0, 1.5f, 0), shootCooldownTimer.TimeElapsed.ToString("F2"), Color.white);
+    }
+
+    public bool TryModifyAttribute(ScriptableAttribute attributeToAdd, float valueToAdd)
+    {
+        if (attributeToAdd is ScriptableFloatAttribute floatAtr)
+            return (TryModifyAttribute(floatAtr, valueToAdd));
+        else
+            return (false);
+    }
+
+    public bool TryModifyAttribute(ScriptableFloatAttribute attributeToAdd, float valueToAdd)
+    {
+        foreach (ScriptableAttribute turretAttribute in AllAttributes)
+            if (turretAttribute.Compare(attributeToAdd) && turretAttribute is ScriptableFloatAttribute floatAtr)
+            {
+                floatAtr.AddModifier(valueToAdd);
+                OnAttributeModified(turretAttribute, valueToAdd);
+                return (true);
+            }
+
+        return (false);
+    }
+
+    private void OnAttributeModified(ScriptableAttribute attributeModified, float modifierAdded)
+    {
+        AudioManager.PlayAudio(turretData.OnUpgradeAudioPreset, primaryAudioSource);
     }
 }

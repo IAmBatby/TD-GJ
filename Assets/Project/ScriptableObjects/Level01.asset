@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Level01
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: First Level
+  <SceneName>k__BackingField: JacksonDecorScene
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 5
     <EnemySpawnInfos>k__BackingField:
     - <TimeToStart>k__BackingField: 0
       <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
         type: 2}
-      <AmountToSpawn>k__BackingField: 1000000
+      <AmountToSpawn>k__BackingField: 5
   - <WaveLength>k__BackingField: 12
     <EnemySpawnInfos>k__BackingField:
     - <TimeToStart>k__BackingField: 0

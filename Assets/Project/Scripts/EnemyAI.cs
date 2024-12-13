@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,14 @@ public class EnemyAI : MonoBehaviour, IHittable
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public List<Collider> AllColliders { get; private set; } = new List<Collider>();
     [field: SerializeField] public ScriptableEnemy Data { get; private set; }
+    [field: SerializeField] public HealthController HealthController { get; private set; }
+
+
+
     private EnemyPathTarget target;
 
     private int currentHealth;
-    public int Health { get => currentHealth; set => ModifyHealth(value); }
+    public int Health { get => currentHealth; set => HealthController.ModifyHealth(value); }
 
     private void Awake()
     {
@@ -27,6 +32,11 @@ public class EnemyAI : MonoBehaviour, IHittable
         if (newData.Speed != 0)
             Agent.speed = newData.Speed;
         enabled = true;
+        Agent.Warp(transform.position);
+        HealthController.LinkBehaviour(this, Data.DamageAudioPreset);
+        HealthController.SetMaxHealth(Data.Health);
+        HealthController.ResetHealth();
+        HealthController.OnDeath.AddListener(Die);
     }
 
     private void Update()
@@ -36,9 +46,10 @@ public class EnemyAI : MonoBehaviour, IHittable
 
     public void RecieveHit(int value)
     {
-        ModifyHealth(value);
+        HealthController.ModifyHealth(value);
     }
 
+    //Unused
     public void ModifyHealth(int value)
     {
         currentHealth += value;
@@ -57,5 +68,14 @@ public class EnemyAI : MonoBehaviour, IHittable
     {
         Agent.enabled = false;
         GameManager.RemoveEnemy(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!GameManager.Instance.AllSpawnedEnemies.Contains(this))
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, Vector3.one);
+        }
     }
 }

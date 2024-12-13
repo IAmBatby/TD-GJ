@@ -14,20 +14,10 @@ public abstract class ScriptableAttribute : ScriptableObject
 
 public abstract class ScriptableAttribute<T> : ScriptableAttribute
 {
-    [field: SerializeField] public ScriptableAttribute<T> Data { get; private set; }
-    [field: SerializeField] public T DefaultValue { get; private set; }
+    [field: SerializeField] public ScriptableAttribute<T> Data { get; protected set; }
+    [field: SerializeField] public T DefaultValue { get; protected set; }
 
     [SerializeField] private List<T> modifierValues = new List<T>();
-
-    public static ScriptableAttribute<T> Create(ScriptableAttribute<T> referenceData, T newDefaultValue)
-    {
-        Debug.Log("Instansiating Live: " + referenceData.name);
-        ScriptableAttribute<T> instansiatedAttribute = ScriptableObject.Instantiate(referenceData);
-        instansiatedAttribute.DefaultValue = newDefaultValue;
-        instansiatedAttribute.Data = referenceData;
-        instansiatedAttribute.name = "Instansiated " + instansiatedAttribute.name;
-        return (instansiatedAttribute);
-    }
 
     public void AddModifier(T newModifier)
     {
@@ -55,16 +45,4 @@ public abstract class ScriptableAttribute<T> : ScriptableAttribute
     {
         return (Data == attribute);
     }
-}
-
-[CreateAssetMenu(fileName = "ScriptableAttribute", menuName = "TD-GJ/ScriptableFloatAttribute", order = 1)]
-public class ScriptableFloatAttribute : ScriptableAttribute<float>
-{
-    protected override float AddValue(ref float returnValue, float modifier) => returnValue + modifier;
-}
-
-[CreateAssetMenu(fileName = "ScriptableAttribute", menuName = "TD-GJ/ScriptableIntAttribute", order = 1)]
-public class ScriptableIntAttribute : ScriptableAttribute<int>
-{
-    protected override int AddValue(ref int returnValue, int modifier) => returnValue + modifier;
 }

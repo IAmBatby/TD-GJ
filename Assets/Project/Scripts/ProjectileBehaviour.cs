@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private AudioSource primarySource;
     [field: SerializeField] public ScriptableProjectile Data { get; private set; }
 
     [SerializeField] private bool doesPierce;
@@ -33,6 +34,7 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (other.TryGetComponent(out IHittable hittable))
         {
+            AudioManager.PlayAudio(Data.OnCollisionAudioPreset, primarySource);
             hittable.RecieveHit(-damage);
             if (!doesPierce)
             {

@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class ScriptableEnemy : ScriptableObject
 {
     [field: SerializeField] public EnemyAI EnemyPrefab { get; private set; }
+    [field: SerializeField] public AudioPreset DamageAudioPreset { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }

@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine;
 public class ScriptableItem : ScriptableObject
 {
     [field: SerializeField] public ItemBehaviour Prefab { get; private set; }
+    [field: SerializeField] public AudioPreset OnPickupAudioPreset { get; private set; }
+    [field: SerializeField] public AudioPreset OnDropAudioPreset { get; private set; }
+    [field: SerializeField] public AudioPreset OnSpawnAudioPreset { get; private set; }
+    [field: SerializeField] public bool ShouldBeAnchoredToGround { get; private set; }
 
     public virtual ItemBehaviour SpawnPrefab(Transform parent = null)
     {

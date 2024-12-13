@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723a6ae34b55e9f42b3d2f097ba38efd, type: 3}
+  m_Name: Game_AmbienceMusic_01
+  m_EditorClassIdentifier: 
+  audioRandomPitchMinMax: {x: 0.95, y: 1.09}
+  audioVolume: 0.7
+  onlyPlayOnInactiveSource: 0
+  shouldLoop: 1
+  audioRandomClipList:
+  - {fileID: 8300000, guid: a07032cf52e82a64682cc567067d9aec, type: 3}
+  audioMixer: {fileID: 24100000, guid: be7275128616d3f4790e9014ef71882b, type: 2}

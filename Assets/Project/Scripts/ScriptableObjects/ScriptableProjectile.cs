@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class ScriptableProjectile : ScriptableObject
 {
     [field: SerializeField] public ProjectileBehaviour Prefab { get; private set; }
+    [field: SerializeField] public AudioPreset OnCollisionAudioPreset { get; private set; }
 
 
     public ProjectileBehaviour SpawnProjectile(Vector3 spawnPosition, Vector3 targetPosition, float force, int newDamage)

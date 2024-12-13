@@ -7,6 +7,7 @@ using UnityEngine;
 public class ScriptableLevel : ScriptableObject
 {
     [field: SerializeField] public string DisplayName { get; private set; }
+    [field: SerializeField] public string SceneName { get; private set; }
 
     [field: SerializeField] public List<WaveInfo> Waves { get; private set; } = new List<WaveInfo>();
 }
