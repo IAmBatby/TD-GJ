@@ -18,9 +18,9 @@ public class CrystalScript : MonoBehaviour
 
     public void DropCrystal()
     {
-        if (healthControl.Health == 0) return;
-
-        if(listOfCrystals.Count > 0 && (healthControl.Health/healthControl.maxHealth * 100) <= DropThresholdPercent)
+        Debug.Log("damageTaken");
+        if (healthControl.Health == 0 || healthControl.Health == healthControl.maxHealth) return;
+        if(listOfCrystals.Count != 0 && (healthControl.Health/healthControl.maxHealth * 100) <= DropThresholdPercent)
         {
             var crystal = listOfCrystals[0];
 
@@ -41,7 +41,7 @@ public class CrystalScript : MonoBehaviour
 
     public void SpawnCrystal()
     {
-        if(listOfCrystals.Count != 3)
+        if(listOfCrystals.Count != listOfSpawners.Count)
         {
             if (spawnChance >= Random.Range(1,100))
             {

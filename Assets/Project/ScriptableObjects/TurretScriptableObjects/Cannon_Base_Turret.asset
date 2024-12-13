@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90027df194679b345a5730d4c4888071, type: 3}
+  m_Name: Cannon_Base_Turret
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: aab9bb5b3769c7546bc6e928b305e30b,
+    type: 3}
+  <OnPickupAudioPreset>k__BackingField: {fileID: 0}
+  <OnDropAudioPreset>k__BackingField: {fileID: 0}
+  <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <Cursor>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 1
+  <CanBePickedUp>k__BackingField: 1
+  <Projectile>k__BackingField: {fileID: 11400000, guid: 600b89a098ffab846af690294ffe20b7,
+    type: 2}
+  <FireRateAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: db71f904ea68728488ef6f6e6b202743,
+      type: 2}
+    <Value>k__BackingField: 5
+  <ShotSpeedAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
+      type: 2}
+    <Value>k__BackingField: 5
+  <RangeAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: 3b4ab2b8237af3741b41f7f67a777cf0,
+      type: 2}
+    <Value>k__BackingField: 5
+  <DamageAttribute>k__BackingField:
+    <Attribute>k__BackingField: {fileID: 11400000, guid: dcaa910e90ba3c54a8bf18632107766e,
+      type: 2}
+    <Value>k__BackingField: 30
+  <TargetType>k__BackingField: 2
+  <OnShootAudioPreset>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
+    type: 2}
+  <OnNewTargetAudioPreset>k__BackingField: {fileID: 11400000, guid: fec0044161fef0f428fb304ccc162415,
+    type: 2}
+  <OnCooldownEndedAudioPreset>k__BackingField: {fileID: 11400000, guid: a7be39c7b6b499840b50eb49c3171c41,
+    type: 2}
+  <OnUpgradeAudioPreset>k__BackingField: {fileID: 11400000, guid: a522841518167fa41947d64aadb42afe,
+    type: 2}

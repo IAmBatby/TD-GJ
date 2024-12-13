@@ -159,6 +159,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 11400000, guid: aa1013a6a32809244b8666f83c61626b, type: 2}
   cost: 50
   itemModelScaleMultiplier: 0.5
+  turnsUntilRespawn: 0
 --- !u!54 &7343061711761174204
 Rigidbody:
   m_ObjectHideFlags: 0
