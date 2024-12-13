@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
             Cursor.SetCursor(newCursor.texture, Vector2.zero, CursorMode.Auto);
             newCursor = null;
         }
-        else
+        else if (defaultCursorSprite != null)
             Cursor.SetCursor(defaultCursorSprite.texture, Vector2.zero, CursorMode.Auto);
     }
 
