@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8f0a94fbeba5d4fbfa8ea248628568, type: 3}
   m_Name: Level02
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Second Level
+  <DisplayName>k__BackingField: Dean's Level
+  <SceneName>k__BackingField: DeanScene
+  <IntermissionStandardTime>k__BackingField: 15
+  <IntermissionWaveMultiplier>k__BackingField: 0.7
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 15
     <EnemySpawnInfos>k__BackingField:

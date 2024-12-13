@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask lookMask;
     [SerializeField] private LayerMask dropMask;
     [SerializeField] private Animator animator;
+    [SerializeField] private Sprite defaultCursorSprite;
 
     [Space(20), Header("Camera")]
     [SerializeField] private Vector3 translationAtRestCameraPos;
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private PositionConstraint positionConstraint;
 
     private Vector2 moveInput;
+
+    private Sprite newCursor;
 
     [SerializeField] private ItemBehaviour mostRecentItemInRange;
     [field: SerializeField] public ItemBehaviour ActiveItem { get; private set; }
@@ -167,6 +170,8 @@ public class PlayerController : MonoBehaviour
         {
             ActiveItem.transform.localPosition = Vector3.zero;
         }
+
+        RefreshCursor();
     }
 
     private void SetRotation()
@@ -180,6 +185,22 @@ public class PlayerController : MonoBehaviour
         fixedRotation.x = 0;
         fixedRotation.z = 0;
         transform.eulerAngles = fixedRotation;
+    }
+
+    public void RequestNewCursor(Sprite newNewCursor)
+    {
+        newCursor = newNewCursor;
+    }
+
+    private void RefreshCursor()
+    {
+        if (newCursor != null)
+        {
+            Cursor.SetCursor(newCursor.texture, Vector2.zero, CursorMode.Auto);
+            newCursor = null;
+        }
+        else
+            Cursor.SetCursor(defaultCursorSprite.texture, Vector2.zero, CursorMode.Auto);
     }
 
     private void SetPosition()

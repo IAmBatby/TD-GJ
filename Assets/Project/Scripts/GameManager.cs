@@ -92,7 +92,7 @@ public class GameManager : GlobalManager
 
 
     private Timer intermissionTimer;
-    public float IntermissionLength => 10f + (ActiveWaves.ActiveSelection.WaveLength / 2);
+    public float IntermissionLength => DefaultLevel.IntermissionStandardTime + (ActiveWaves.ActiveSelection.WaveLength / DefaultLevel.IntermissionWaveMultiplier);
     public float IntermissionProgress
     {
         get
@@ -109,6 +109,7 @@ public class GameManager : GlobalManager
 
     [field: SerializeField] public bool HasGameEnded { get; private set; }
 
+    private bool isFirstWave;
     protected override void Awake()
     {
         base.Awake();
@@ -132,6 +133,7 @@ public class GameManager : GlobalManager
         ActiveWaveTimer = null;
         CurrentLevel = null;
         HasGameEnded = false;
+        isFirstWave = true;
         RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
         AllSpawnedEnemies = new List<EnemyAI>();
         AllSpawnedHittables = new List<IHittable>();
@@ -148,7 +150,8 @@ public class GameManager : GlobalManager
         OnGameStart.Invoke();
         AudioManager.PlayAudio(ambiencePreset, ambienceSource);
         AudioManager.PlayAudio(onGameStartPreset, primarySource);
-        StartNextWave();
+        //StartNextWave();
+        StartIntermission();
     }
 
     private void TryProgressToNextWave()
@@ -159,7 +162,10 @@ public class GameManager : GlobalManager
         }
         else
         {
-            ActiveWaves.SelectForward();
+            if (isFirstWave == true)
+                isFirstWave = false;
+            else
+                ActiveWaves.SelectForward();
             StartNextWave();
         }
     }
@@ -192,14 +198,19 @@ public class GameManager : GlobalManager
         if (HasGameEnded) return;
         if (HasWaveTimeFinished && HaveWaveEnemiesBeenRemoved)
         {
-            IsInIntermission = true;
-            intermissionTimer = new Timer();
-            intermissionTimer.onTimerEnd.AddListener(TryProgressToNextWave);
-            intermissionTimer.StartTimer(this, IntermissionLength);
             AudioManager.PlayAudio(onWaveEndPreset, primarySource);
             OnWaveFinished.Invoke();
-            OnIntermissionStart.Invoke();
+            StartIntermission();
         }
+    }
+
+    private void StartIntermission()
+    {
+        IsInIntermission = true;
+        intermissionTimer = new Timer();
+        intermissionTimer.onTimerEnd.AddListener(TryProgressToNextWave);
+        intermissionTimer.StartTimer(this, IntermissionLength);
+        OnIntermissionStart.Invoke();
     }
 
     private void Update()
