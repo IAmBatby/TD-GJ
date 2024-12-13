@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 2}
   <Damage>k__BackingField: 5
   <Health>k__BackingField: 15
-  <Speed>k__BackingField: 5
+  <Speed>k__BackingField: 1
   <GoldDropRateMinMax>k__BackingField: {x: 5, y: 10}

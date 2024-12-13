@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,9 @@ public class ShopSpawner : MonoBehaviour, IInteractable
     [SerializeField] private ItemSpawner realItemSpawner;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Material previewMaterial;
+    [SerializeField] private AudioSource primarySource;
+
+    [SerializeField] private AudioPreset purchasePreset;
 
     [Header("Values To Care About")]
     [SerializeField] private ScriptableItem itemToSpawn;
@@ -64,6 +68,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable
             fakeItemObject.SetActive(false);
             ItemBehaviour realItem = itemSpawner.Spawn(itemToSpawn);
             //realItem.transform.position = itemSpawner.transform.position;
+            AudioManager.PlayAudio(purchasePreset, primarySource);
             priceText.enabled = false;
             hasBeenPurchased = true;
 

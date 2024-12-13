@@ -86,10 +86,13 @@ public class TurretBehaviour : ItemBehaviour
 
         bool didShoot = false;
         foreach (ShootPosition shootPosition in shootPositions)
-            if (Physics.Raycast(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, Mathf.Infinity, shootMask))
+            if (Physics.Raycast(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, out RaycastHit hit, Mathf.Infinity, shootMask))
             {
-                Projectile.SpawnProjectile(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
-                didShoot = true;
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    Projectile.SpawnProjectile(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+                    didShoot = true;
+                }
             }
 
         if (didShoot == true)

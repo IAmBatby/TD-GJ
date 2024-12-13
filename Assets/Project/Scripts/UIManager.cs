@@ -20,9 +20,10 @@ public class UIManager : GlobalManager
     [SerializeField] private TextMeshProUGUI gameEndText;
     [SerializeField] private Image gameEndBackgroundImage;
 
-    protected override void Awake()
+    public void InitializeUI()
     {
-        base.Awake();
+        GameManager.Instance.OnGameStart.RemoveListener(ResetText);
+        GameManager.Instance.OnGameEnd.RemoveListener(OnGameEnd);
         ResetText();
         GameManager.Instance.OnGameStart.AddListener(ResetText);
         GameManager.Instance.OnGameEnd.AddListener(OnGameEnd);

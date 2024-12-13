@@ -31,7 +31,7 @@ public class HealthController : MonoBehaviour
         OnHealthModified.AddListener(RefreshUI);
     }
 
-    private void OnDisable() => GameManager.Instance.AllHealthControllers.Remove(this);
+    private void OnDisable() => GameManager.Instance?.AllHealthControllers.Remove(this);
 
 
 
@@ -53,7 +53,9 @@ public class HealthController : MonoBehaviour
 
     private void LateUpdate()
     {
-        mainParent.transform.LookAt(GameManager.Player.ActiveCamera.transform.position);
+        //mainParent.transform.LookAt(GameManager.Player.ActiveCamera.transform.position);
+        mainParent.transform.forward = -GameManager.Player.ActiveCamera.transform.forward;
+        mainParent.transform.up = GameManager.Player.ActiveCamera.transform.up;
     }
 
     public void ModifyHealth(int value)

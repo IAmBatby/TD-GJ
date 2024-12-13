@@ -19,3 +19,4 @@ MonoBehaviour:
   audioRandomClipList:
   - {fileID: 8300000, guid: 9632360407b26bc4fa7be2e60ad3c28f, type: 3}
   audioMixer: {fileID: 24100000, guid: be7275128616d3f4790e9014ef71882b, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: be7275128616d3f4790e9014ef71882b, type: 2}
