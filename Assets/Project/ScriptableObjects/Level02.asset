@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Dean's Level
   <SceneName>k__BackingField: DeanScene
-  <IntermissionStandardTime>k__BackingField: 15
-  <IntermissionWaveMultiplier>k__BackingField: 0.7
+  <IntermissionStandardTime>k__BackingField: 10
+  <IntermissionWaveMultiplier>k__BackingField: 0.5
   <Waves>k__BackingField:
-  - <WaveLength>k__BackingField: 15
+  - <WaveLength>k__BackingField: 20
     <EnemySpawnInfos>k__BackingField:
     - <TimeToStart>k__BackingField: 4
       <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
         type: 2}
       <AmountToSpawn>k__BackingField: 3
     - <TimeToStart>k__BackingField: 6
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: b9672c48f4de5d240a1b668f01678867,
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: ee6ea940c40cb5f47973f2d2c834ee6b,
         type: 2}
-      <AmountToSpawn>k__BackingField: 3
+      <AmountToSpawn>k__BackingField: 2
+    - <TimeToStart>k__BackingField: 10
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: a8cd7c1f226e4754682412528a7a3216,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 1
   - <WaveLength>k__BackingField: 12
     <EnemySpawnInfos>k__BackingField:
     - <TimeToStart>k__BackingField: 0
