@@ -26,7 +26,11 @@ public class CrystalScript : MonoBehaviour
             listOfCrystals.Remove(crystal);
             crystal.transform.parent = null;
 
-            healthControl.ResetHealth();
+            if (listOfCrystals.Count == 0)
+                healthControl.ModifyHealth(-100000);
+
+
+            //healthControl.ResetHealth();
         }
     }
 

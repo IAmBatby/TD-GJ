@@ -130,6 +130,7 @@ public class TurretBehaviour : ItemBehaviour
         foreach (HealthController hittable in GameManager.Instance.AllHealthControllers)
         {
             if (BlacklistedTargets.Contains(hittable)) continue;
+            if (hittable.Health == 0) continue;
             float distance = Vector3.Distance(transform.position, hittable.transform.position);
             if (distance <= RangeAttribute.Value)
             {
