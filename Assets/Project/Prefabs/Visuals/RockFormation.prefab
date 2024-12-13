@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1985201739210735876}
   - component: {fileID: 602311862312628731}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: AudioSource2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 8560449977220728588}
   - component: {fileID: 8831274992521974181}
   - component: {fileID: 3078203784932513372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RockFormation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,6 +351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8442904243289699131, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
         type: 3}
       propertyPath: <Item>k__BackingField
@@ -453,6 +458,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: detail-rocks-large
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 164814187560f024c814eb49b5b990ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 164814187560f024c814eb49b5b990ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -472,6 +487,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2902232270032356060}
     m_Modifications:
+    - target: {fileID: 177700557410245781, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1664152652308179898, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,10 +542,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5684277766711955684, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_Name
       value: CrystalBehaviour
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
@@ -606,6 +636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8442904243289699131, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
         type: 3}
       propertyPath: <Item>k__BackingField
@@ -648,6 +683,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2902232270032356060}
     m_Modifications:
+    - target: {fileID: 177700557410245781, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1664152652308179898, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -698,10 +738,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5684277766711955684, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_Name
       value: CrystalBehaviour (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
@@ -727,6 +777,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2902232270032356060}
     m_Modifications:
+    - target: {fileID: 512267935587328219, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303540693861897080, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428561306346481010, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829337918852008832, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123086888106733084, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309361071499035784, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177541741564387641, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827140676608618000, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6064533181015258284, guid: 196b99b9f54462e47a5c91641ad1b467,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -782,6 +872,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthController
       objectReference: {fileID: 0}
+    - target: {fileID: 6557344549375020837, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665977750542086387, guid: 196b99b9f54462e47a5c91641ad1b467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -813,6 +913,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2902232270032356060}
     m_Modifications:
+    - target: {fileID: 177700557410245781, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1664152652308179898, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,10 +968,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 5684277766711955684, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
       propertyPath: m_Name
       value: CrystalBehaviour (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7019365507824964223, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
         type: 3}
@@ -946,6 +1061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442904243289699131, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
         type: 3}
