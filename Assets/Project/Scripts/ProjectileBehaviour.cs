@@ -16,6 +16,8 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField] private float lifeTimer;
     private Timer killTimer;
 
+    private List<GameObject> piercedObjects = new List<GameObject>();
+
     public void Initialize(ScriptableProjectile newData, Vector3 newTargetPosition, float newForce, int newDamage)
     {
         Data = newData;
@@ -32,6 +34,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     public void ForwardedTriggerEnter(Collider other)
     {
+        if (piercedObjects.Contains(other.gameObject)) return;
         HealthController health = other.transform.root.GetComponentInChildren<HealthController>();
         if (health != null)
         {
@@ -41,6 +44,18 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 DestroyBullet();
             }
+            else
+                piercedObjects.Add(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        {
+            enabled = false;
+            gameObject.SetActive(false);
+            GameObject.Destroy(gameObject);
         }
     }
 

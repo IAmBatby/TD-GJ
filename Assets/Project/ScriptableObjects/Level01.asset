@@ -34,7 +34,53 @@ MonoBehaviour:
       <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
         type: 2}
       <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 8
-    <EnemySpawnInfos>k__BackingField: []
-  - <WaveLength>k__BackingField: 600
-    <EnemySpawnInfos>k__BackingField: []
+  - <WaveLength>k__BackingField: 12
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 5
+    - <TimeToStart>k__BackingField: 7
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 20
+  - <WaveLength>k__BackingField: 12
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 5
+    - <TimeToStart>k__BackingField: 7
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 20
+  - <WaveLength>k__BackingField: 12
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 5
+    - <TimeToStart>k__BackingField: 7
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 20
+  - <WaveLength>k__BackingField: 12
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 5
+    - <TimeToStart>k__BackingField: 7
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 20
+  - <WaveLength>k__BackingField: 12
+    <EnemySpawnInfos>k__BackingField:
+    - <TimeToStart>k__BackingField: 0
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 5
+    - <TimeToStart>k__BackingField: 7
+      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+        type: 2}
+      <AmountToSpawn>k__BackingField: 20
