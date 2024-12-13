@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bafd80c5a82e23439983b29d9048e7f, type: 3}
+  m_Name: CrystalPickupItem
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 7766726789441843283, guid: bbc641bdf59ed1e4b9f0a4784b21a046,
+    type: 3}
