@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask lookMask;
     [SerializeField] private LayerMask dropMask;
     [SerializeField] private Animator animator;
-    [SerializeField] private Sprite defaultCursorSprite;
+    [SerializeField] private Texture2D defaultCursorSprite;
 
     [Space(20), Header("Camera")]
     [SerializeField] private Vector3 translationAtRestCameraPos;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
 
-    private Sprite newCursor;
+    private Texture2D newCursor;
 
     [SerializeField] private ItemBehaviour mostRecentItemInRange;
     [field: SerializeField] public ItemBehaviour ActiveItem { get; private set; }
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = fixedRotation;
     }
 
-    public void RequestNewCursor(Sprite newNewCursor)
+    public void RequestNewCursor(Texture2D newNewCursor)
     {
         newCursor = newNewCursor;
     }
@@ -196,11 +196,11 @@ public class PlayerController : MonoBehaviour
     {
         if (newCursor != null)
         {
-            Cursor.SetCursor(newCursor.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
             newCursor = null;
         }
         else if (defaultCursorSprite != null)
-            Cursor.SetCursor(defaultCursorSprite.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(defaultCursorSprite, Vector2.zero, CursorMode.Auto);
     }
 
     private void SetPosition()
