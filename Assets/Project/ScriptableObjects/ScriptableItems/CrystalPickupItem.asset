@@ -17,4 +17,6 @@ MonoBehaviour:
   <OnPickupAudioPreset>k__BackingField: {fileID: 0}
   <OnDropAudioPreset>k__BackingField: {fileID: 0}
   <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <Cursor>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
+  <CanBePickedUp>k__BackingField: 1

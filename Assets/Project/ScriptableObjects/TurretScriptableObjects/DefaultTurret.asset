@@ -27,7 +27,7 @@ MonoBehaviour:
   <FireRateAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: db71f904ea68728488ef6f6e6b202743,
       type: 2}
-    <Value>k__BackingField: 0.1
+    <Value>k__BackingField: 1
   <ShotSpeedAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
       type: 2}
@@ -35,7 +35,7 @@ MonoBehaviour:
   <RangeAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 3b4ab2b8237af3741b41f7f67a777cf0,
       type: 2}
-    <Value>k__BackingField: 5
+    <Value>k__BackingField: 4
   <DamageAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: dcaa910e90ba3c54a8bf18632107766e,
       type: 2}

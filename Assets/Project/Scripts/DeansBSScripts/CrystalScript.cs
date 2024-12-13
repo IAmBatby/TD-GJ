@@ -26,25 +26,24 @@ public class CrystalScript : MonoBehaviour
             listOfCrystals.Remove(crystal);
             crystal.transform.parent = null;
 
-            if (listOfCrystals.Count == 0)
-                healthControl.ModifyHealth(-100000);
-
 
             //healthControl.ResetHealth();
         }
+        if (listOfCrystals.Count == 0)
+            healthControl.ModifyHealth(-100000);
     }
 
     public void SpawnCrystal()
     {
         if(listOfCrystals.Count != 3)
         {
-            healthControl.ResetHealth();
             if (spawnChance >= Random.Range(1,100))
             {
                 var temp = Random.Range(0, listOfSpawners.Count);
                 ItemBehaviour crystal = listOfSpawners[temp].Spawn();
                 listOfCrystals.Add(crystal.gameObject);
                 crystal.transform.position = listOfSpawners[temp].transform.position;
+                healthControl.ResetHealth();
             }
         }
     }
