@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemyPrefab>k__BackingField: {fileID: 3306550451389735796, guid: 8c6ed3a3b4814e94a96d47a6e63ec2bd,
     type: 3}
-  <DamageAudioPreset>k__BackingField: {fileID: 0}
+  <DamageAudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+    type: 2}
   <Damage>k__BackingField: 5
   <Health>k__BackingField: 40
   <Speed>k__BackingField: 2

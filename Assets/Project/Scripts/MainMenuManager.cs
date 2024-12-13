@@ -28,6 +28,12 @@ public class MainMenuManager : GlobalManager
         creditsMenu.gameObject.SetActive(false);
         InitializeLevelSelect();
         levelSelectMenu.gameObject.SetActive(false);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        SceneManager.SetActiveScene(scene);
     }
 
     public void LoadGame(ScriptableLevel level)

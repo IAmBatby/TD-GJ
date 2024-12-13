@@ -268,7 +268,8 @@ public class GameManager : GlobalManager
     {
         if (HasGameEnded) return;
         HasGameEnded = true;
-        directionalLight.intensity = 0.1f;
+        if (directionalLight != null)
+            directionalLight.intensity = 0.1f;
         ChangeGameState(GameState.Paused);
         Time.timeScale = 0.3f;
 
