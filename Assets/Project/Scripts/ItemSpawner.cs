@@ -19,7 +19,7 @@ public class ItemSpawner : MonoBehaviour
         if (item == null)
             item = Item;
 
-        ItemBehaviour newItem = item.SpawnPrefab(transform);
+        ItemBehaviour newItem = item.SpawnPrefab(null);
         if (item.ShouldBeAnchoredToGround)
             if (Physics.Raycast(transform.position, new Vector3(transform.position.x, -5000, transform.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
                 newItem.transform.position = hit.point;
