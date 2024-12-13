@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90027df194679b345a5730d4c4888071, type: 3}
-  m_Name: TurretType1
+  m_Name: Crossbow_Base_Turret
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: aab9bb5b3769c7546bc6e928b305e30b,
+  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: 083f3aee92732384d8bea5603e89aca0,
     type: 3}
   <OnPickupAudioPreset>k__BackingField: {fileID: 0}
   <OnDropAudioPreset>k__BackingField: {fileID: 0}
@@ -20,12 +20,12 @@ MonoBehaviour:
   <Cursor>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <CanBePickedUp>k__BackingField: 1
-  <Projectile>k__BackingField: {fileID: 11400000, guid: ef8038335f663764ca5e655ed42d419f,
+  <Projectile>k__BackingField: {fileID: 11400000, guid: cd406f24ac54a424eb43809b9ec43dec,
     type: 2}
   <FireRateAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: db71f904ea68728488ef6f6e6b202743,
       type: 2}
-    <Value>k__BackingField: 5
+    <Value>k__BackingField: 1
   <ShotSpeedAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
       type: 2}
@@ -33,13 +33,13 @@ MonoBehaviour:
   <RangeAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: 3b4ab2b8237af3741b41f7f67a777cf0,
       type: 2}
-    <Value>k__BackingField: 2
+    <Value>k__BackingField: 5
   <DamageAttribute>k__BackingField:
     <Attribute>k__BackingField: {fileID: 11400000, guid: dcaa910e90ba3c54a8bf18632107766e,
       type: 2}
-    <Value>k__BackingField: 30
+    <Value>k__BackingField: 10
   <TargetType>k__BackingField: 2
-  <OnShootAudioPreset>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
+  <OnShootAudioPreset>k__BackingField: {fileID: 11400000, guid: fd2df891c41ec6d46b7262b4a0d973aa,
     type: 2}
   <OnNewTargetAudioPreset>k__BackingField: {fileID: 11400000, guid: fec0044161fef0f428fb304ccc162415,
     type: 2}
