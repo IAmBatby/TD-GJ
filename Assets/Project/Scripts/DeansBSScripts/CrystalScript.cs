@@ -18,8 +18,11 @@ public class CrystalScript : MonoBehaviour
         {
             var crystal = listOfCrystals[0];
 
-            crystal.GetComponent<Animator>().SetTrigger("DropCrystal");
-            crystal.GetComponent<Animator>().StopPlayback();
+            if (crystal.TryGetComponent(out Animator crystalAnimator))
+            {
+                crystal.GetComponent<Animator>().SetTrigger("DropCrystal");
+                crystal.GetComponent<Animator>().StopPlayback();
+            }
             listOfCrystals.Remove(crystal);
             crystal.transform.parent = null;
 
@@ -35,7 +38,9 @@ public class CrystalScript : MonoBehaviour
             if (spawnChance >= Random.Range(1,100))
             {
                 var temp = Random.Range(0, listOfSpawners.Count);
-                listOfCrystals.Add(listOfSpawners[temp].Spawn().gameObject);
+                ItemBehaviour crystal = listOfSpawners[temp].Spawn();
+                listOfCrystals.Add(crystal.gameObject);
+                crystal.transform.position = transform.position;
             }
         }
     }

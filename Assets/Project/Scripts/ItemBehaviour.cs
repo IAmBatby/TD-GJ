@@ -9,6 +9,17 @@ public class ItemBehaviour : MonoBehaviour
     [SerializeField] protected AudioSource primaryAudioSource;
     [field: SerializeField] public bool IsBeingHeld;
 
+    public ExtendedEvent<bool> OnMouseoverToggle = new ExtendedEvent<bool>();
+
+
+    private void OnMouseEnter()
+    {
+        if (ItemData.Cursor != null)
+            GameManager.Player.RequestNewCursor(ItemData.Cursor);
+        OnMouseoverToggle.Invoke(true);
+    }
+    private void OnMouseExit() => OnMouseoverToggle.Invoke(false);
+
     public void Initialize(ScriptableItem item)
     {
         ItemData = item;

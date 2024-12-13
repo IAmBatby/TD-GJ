@@ -18,7 +18,10 @@ MonoBehaviour:
   <OnDropAudioPreset>k__BackingField: {fileID: 11400000, guid: 9887d4254ad05664abbc434abac29a5e,
     type: 2}
   <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <Cursor>k__BackingField: {fileID: 2800000, guid: 26ceaacba488dc64c90f6d95df65a162,
+    type: 3}
   <ShouldBeAnchoredToGround>k__BackingField: 1
+  <CanBePickedUp>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
     type: 2}
   <FireRateAttribute>k__BackingField:

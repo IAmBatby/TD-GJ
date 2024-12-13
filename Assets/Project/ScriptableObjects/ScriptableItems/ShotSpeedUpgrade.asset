@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 985584291496466747, guid: 5c3175bc94799064997e44ee09acaddc,
     type: 3}
+  <OnPickupAudioPreset>k__BackingField: {fileID: 0}
+  <OnDropAudioPreset>k__BackingField: {fileID: 0}
+  <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 0
+  <CanBePickedUp>k__BackingField: 1
   <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
     type: 2}
   <ModifierValue>k__BackingField: 4

@@ -71,6 +71,7 @@ public class EnemyAI : MonoBehaviour, IHittable
 
     public void Die()
     {
+        GameManager.ModifyCurrency(Mathf.RoundToInt(Random.Range(Data.GoldDropRateMinMax.x, Data.GoldDropRateMinMax.y)));
         Agent.enabled = false;
         GameManager.RemoveEnemy(this);
     }

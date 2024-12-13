@@ -2129,6 +2129,8 @@ MonoBehaviour:
   onDamageTakenPreset: {fileID: 11400000, guid: a619e3b5f111c90489cee82ee1a14eca,
     type: 2}
   ambiencePreset: {fileID: 11400000, guid: d89248d2837fffc49b2530f065333f0a, type: 2}
+  onCurrencyGainedPreset: {fileID: 11400000, guid: 227242146edec8541bcda9703853d4c8,
+    type: 2}
   ActiveWaves:
     allObjects: []
   AllSpawnedEnemies: []
@@ -2138,6 +2140,7 @@ MonoBehaviour:
   <IsInIntermission>k__BackingField: 0
   <HasWaveTimeFinished>k__BackingField: 0
   <HaveWaveEnemiesBeenRemoved>k__BackingField: 0
+  <HasGameEnded>k__BackingField: 0
 --- !u!1 &8119389534069068239
 GameObject:
   m_ObjectHideFlags: 0

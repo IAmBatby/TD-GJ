@@ -58,16 +58,30 @@ public class HealthController : MonoBehaviour
         if (currentHealth == 0)
             OnDeath.Invoke();
 
-        if (currentHealth < previousHealth)
+        if (currentHealth < previousHealth && onHealthLostPreset != null)
             AudioManager.PlayAudio(onHealthLostPreset, onHealthLostAudioSource);
 
         OnHealthModified.Invoke((previousHealth, currentHealth));
     }
 
+    public void SetUIActive(bool value)
+    {
+        mainParent.gameObject.SetActive(value);
+    }
+
+    private void DisableUI() => SetUIActive(false);
+    private void EnableUI() => SetUIActive(true);
+
     public void LinkBehaviour(MonoBehaviour behaviour, AudioPreset healthLostPreset)
     {
         LinkedBehaviour = behaviour;
         onHealthLostPreset = healthLostPreset;
+
+        if (behaviour is ItemBehaviour itemBehaviour)
+        {
+            itemBehaviour.OnMouseoverToggle.AddListener(EnableUI);
+            itemBehaviour.OnMouseoverToggle.AddListener(DisableUI);
+        }
     }
 
     public void SetMaxHealth(int newMaxHealth)

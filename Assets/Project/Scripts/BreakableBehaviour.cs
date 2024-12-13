@@ -21,4 +21,9 @@ public class BreakableBehaviour : ItemBehaviour
         healthController.OnHealthModified.AddListener(onDamageTaken.Invoke);
         healthController.OnDeath.AddListener(onDeath.Invoke);
     }
+
+    private void LateUpdate()
+    {
+        
+    }
 }
