@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Space(20), Header("Camera")]
     [SerializeField] private Vector3 translationAtRestCameraPos;
     [SerializeField] private Vector3 translationOffsetCameraPos;
+    [SerializeField] private Vector3 cameraRotation;
 
     [Space(20), Header("Health")]
     [SerializeField] private int maxHealth;
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
         positionConstraint.SetSource(0, source);
         ActiveCamera.transform.position = new Vector3(1.1f, translationAtRestCameraPos.y, -16.4f);
         ActiveCamera.transform.parent = null;
+        ActiveCamera.transform.rotation = Quaternion.Euler(cameraRotation);
+
     }
 
     public void ForwardedTriggerEnter(Collider other)
