@@ -41,6 +41,11 @@ public class HealthController : MonoBehaviour
         mainParent.gameObject.SetActive(!GameManager.Instance.HasGameEnded);
     }
 
+    private void LateUpdate()
+    {
+        mainParent.transform.LookAt(GameManager.Player.ActiveCamera.transform.position);
+    }
+
     public void ModifyHealth(int value)
     {
         int previousHealth = currentHealth;
