@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8f0a94fbeba5d4fbfa8ea248628568, type: 3}
   m_Name: Level01
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: First Level
+  <DisplayName>k__BackingField: Jackson's Level
   <SceneName>k__BackingField: JacksonDecorScene
+  <IntermissionStandardTime>k__BackingField: 10
+  <IntermissionWaveMultiplier>k__BackingField: 0.8
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 5
     <EnemySpawnInfos>k__BackingField:

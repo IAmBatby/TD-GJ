@@ -12,20 +12,39 @@ public class MainMenuManager : GlobalManager
     [SerializeField] private Transform mainMenuParent;
     [SerializeField] private Camera mainMenuCamera;
     [SerializeField] private GameObject creditsMenu;
+    [SerializeField] private GameObject levelSelectMenu;
+    [SerializeField] private GameObject mainOptionsMenu;
 
     [SerializeField] private ScriptableLevel levelToLoad;
+
+    [SerializeField] private List<ScriptableLevel> allLevelsList = new List<ScriptableLevel>();
+    [SerializeField] private LevelSelectElement levelSelectPrefab;
+    [SerializeField] private Transform levelSelectStartingPosition;
+    [SerializeField] private Vector3 levelSelectSpawnOffset;
 
     protected override void Awake()
     {
         base.Awake();
         creditsMenu.gameObject.SetActive(false);
+        InitializeLevelSelect();
+        levelSelectMenu.gameObject.SetActive(false);
     }
 
-    public void LoadGame()
+    public void LoadGame(ScriptableLevel level)
     {
         mainMenuParent.gameObject.SetActive(false);
         mainMenuCamera.gameObject.SetActive(false);
-        SceneManager.LoadScene(levelToLoad.SceneName, LoadSceneMode.Additive);
+        SceneManager.LoadScene(level.SceneName, LoadSceneMode.Additive);
+    }
+
+    public void ToggleLevelSelect()
+    {
+        levelSelectMenu.gameObject.SetActive(!levelSelectMenu.gameObject.activeSelf);
+    }
+
+    public void ToggleMainOptionsMenu()
+    {
+        mainOptionsMenu.gameObject.SetActive(!mainOptionsMenu.gameObject.activeSelf);
     }
 
     public void ToggleCredits()
@@ -36,5 +55,22 @@ public class MainMenuManager : GlobalManager
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void InitializeLevelSelect()
+    {
+        foreach (ScriptableLevel level in allLevelsList)
+        {
+            LevelSelectElement spawnedElement = GameObject.Instantiate(levelSelectPrefab, levelSelectStartingPosition);
+            spawnedElement.transform.position = levelSelectStartingPosition.position;
+            spawnedElement.transform.position += (levelSelectSpawnOffset * allLevelsList.IndexOf(level));
+            spawnedElement.Initialize(level);
+        }
+
+        //The back button because I'm awful
+        LevelSelectElement backElement = GameObject.Instantiate(levelSelectPrefab, levelSelectStartingPosition);
+        backElement.transform.position = levelSelectStartingPosition.position;
+        backElement.transform.position += (levelSelectSpawnOffset * allLevelsList.Count);
+        backElement.Initialize(null);
     }
 }
