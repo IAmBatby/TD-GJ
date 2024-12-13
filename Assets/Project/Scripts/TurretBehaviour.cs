@@ -182,6 +182,11 @@ public class TurretBehaviour : ItemBehaviour
             Target = AllEnemiesInRange.First();
     }
 
+    protected override void OnPickup()
+    {
+        Debug.Log("Turret Being Picked UP!");
+    }
+
 
     private void OnDrawGizmosSelected()
     {

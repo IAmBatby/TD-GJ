@@ -33,6 +33,11 @@ public class EnemyAI : MonoBehaviour, IHittable
             Agent.speed = newData.Speed;
         enabled = true;
         Agent.Warp(transform.position);
+        InitializeHealthBehaviour();
+    }
+
+    private void InitializeHealthBehaviour()
+    {
         HealthController.LinkBehaviour(this, Data.DamageAudioPreset);
         HealthController.SetMaxHealth(Data.Health);
         HealthController.ResetHealth();
