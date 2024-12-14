@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 5378851380656647385, guid: d974ff1bc44989448b0ec2b2a42095b4,
     type: 3}
+  <DisplayName>k__BackingField: Glinda The Bad Bitch
   <Cursor>k__BackingField: {fileID: 0}
+  <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <Health>k__BackingField: 100

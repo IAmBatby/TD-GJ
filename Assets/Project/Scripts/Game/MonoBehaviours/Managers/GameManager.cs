@@ -22,7 +22,7 @@ public class GameManager : GlobalManager
     private Texture2D activeCursor;
     private Texture2D lastSetCursor;
 
-    private ContentBehaviour highlightedBehaviour;
+    public ContentBehaviour HighlightedBehaviour { get; private set; }
 
     [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
 
@@ -258,8 +258,8 @@ public class GameManager : GlobalManager
     private void RefreshCursor()
     {
         Texture2D newCursor = null;
-        if (highlightedBehaviour != null && highlightedBehaviour.ContentData.Cursor != null)
-            newCursor = highlightedBehaviour.ContentData.Cursor;
+        if (HighlightedBehaviour != null && HighlightedBehaviour.ContentData.Cursor != null)
+            newCursor = HighlightedBehaviour.ContentData.Cursor;
         else
             newCursor = defaultCursor;
 
@@ -268,12 +268,12 @@ public class GameManager : GlobalManager
 
     public void OnContentBehaviourMousedEnter(ContentBehaviour behaviour)
     {
-        highlightedBehaviour = behaviour;
+        HighlightedBehaviour = behaviour;
     }
 
     public void OnContentBehaviourMousedExit(ContentBehaviour behaviour)
     {
-        highlightedBehaviour = null;
+        HighlightedBehaviour = null;
     }
 
     public void ModifyHealth(int newValue)

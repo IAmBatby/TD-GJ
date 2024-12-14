@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: cbd70b2ba16274440806c32016d34750,
     type: 3}
+  <DisplayName>k__BackingField: Skeleton
   <Cursor>k__BackingField: {fileID: 2800000, guid: 69ecf29d535d14f46b994df777938b63,
     type: 3}
   <OnSpawnAudio>k__BackingField: {fileID: 0}
