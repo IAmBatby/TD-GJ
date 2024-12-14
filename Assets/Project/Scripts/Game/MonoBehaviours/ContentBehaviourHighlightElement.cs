@@ -19,16 +19,18 @@ public class ContentBehaviourHighlightElement : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance.HighlightedBehaviour == null)
-            parentTransform.gameObject.SetActive(false);
-        else if (GameManager.Instance.HighlightedBehaviour.ContentData.Highlightable)
         {
-            parentTransform.gameObject.SetActive(true);
-            if (Physics.Raycast(GameManager.Player.ActiveCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity))
-                transform.position = GameManager.Player.ActiveCamera.WorldToScreenPoint(hit.point);
-
-            contentBehaviourName.SetText(GameManager.Instance.HighlightedBehaviour.ContentData.DisplayName);
-            iconGame.sprite = GameManager.Instance.HighlightedBehaviour.ContentData.DisplayIcon;
-            backgroundImage.color = GameManager.Instance.HighlightedBehaviour.ContentData.DisplayColor;
+            parentTransform.gameObject.SetActive(false);
+            return;
         }
+        ScriptableContent highlightedContent = GameManager.Instance.HighlightedBehaviour.ContentData;
+        if (highlightedContent.Highlightable == false) return;
+        parentTransform.gameObject.SetActive(true);
+        if (Physics.Raycast(GameManager.Player.ActiveCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity))
+            transform.position = GameManager.Player.ActiveCamera.WorldToScreenPoint(hit.point);
+
+        contentBehaviourName.SetText(highlightedContent.GetDisplayName());
+        iconGame.sprite = highlightedContent.GetDisplayIcon();
+        backgroundImage.color = highlightedContent.GetDisplayColor();
     }
 }

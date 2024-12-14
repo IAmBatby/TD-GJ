@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 5378851380656647385, guid: d974ff1bc44989448b0ec2b2a42095b4,
     type: 3}
-  <DisplayName>k__BackingField: Glinda The Bad Bitch
-  <DisplayIcon>k__BackingField: {fileID: 0}
-  <DisplayColor>k__BackingField: {r: 0.43094692, g: 0.6981132, b: 0.2272161, a: 0.83137256}
+  <ContentName>k__BackingField: Glinda The Bad Bitch
+  <ContentIcon>k__BackingField: {fileID: 0}
+  <ContentColor>k__BackingField: {r: 0.087575644, g: 0.4528302, b: 0.16084062, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
-  <Highlightable>k__BackingField: 1
+  <Highlightable>k__BackingField: 0
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <Health>k__BackingField: 100
