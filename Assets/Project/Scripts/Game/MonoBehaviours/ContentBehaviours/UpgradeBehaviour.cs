@@ -27,7 +27,7 @@ public class UpgradeBehaviour : ItemBehaviour
 
     public void ForwardedTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out TurretBehaviour turret))
+        if (other.TryGetComponent(out TurretBaseBehaviour turret))
         {
             if (turret.TryModifyAttribute(Attribute, DefaultValue))
             {

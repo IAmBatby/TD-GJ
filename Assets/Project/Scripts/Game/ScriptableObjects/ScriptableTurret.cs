@@ -8,6 +8,7 @@ public class ScriptableTurret : ScriptableItem
 {
     [field: Header("Turret Values"), Space(15)]
     [field: SerializeField] public ScriptableProjectile Projectile { get; private set; }
+    [field: SerializeField] public List<ScriptableTurretModule> Modules { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue FireRateAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShotSpeedAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
