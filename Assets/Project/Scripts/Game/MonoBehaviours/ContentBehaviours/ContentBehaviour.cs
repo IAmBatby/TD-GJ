@@ -11,6 +11,10 @@ public class ContentBehaviour : MonoBehaviour
 
     public ExtendedEvent<bool> OnMouseoverToggle = new ExtendedEvent<bool>();
 
+    private List<ContentDisplayInfo> contentDisplayInfos = new List<ContentDisplayInfo>();
+
+    public ContentDisplayInfo GeneralDisplayInfo { get; private set; }
+
     private void OnMouseEnter()
     {
         GameManager.Instance.OnContentBehaviourMousedEnter(this);
@@ -33,8 +37,25 @@ public class ContentBehaviour : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         if (Rigidbody == null)
             Debug.LogError("Failed To Find Rigidbody!", transform);
+
+        GeneralDisplayInfo = new ContentDisplayInfo(ContentData.ContentName, ContentData.ContentIcon, ContentData.ContentColor);
+        contentDisplayInfos.Add(GeneralDisplayInfo);
         OnSpawn();
     }
 
     protected virtual void OnSpawn() { }
+
+    public void AddContentDisplayInfo(ContentDisplayInfo contentDisplayInfo)
+    {
+        if (!contentDisplayInfos.Contains(contentDisplayInfo))
+            contentDisplayInfos.Add(contentDisplayInfo);
+    }
+
+    public void RemoveContentDisplayInfo(ContentDisplayInfo contentDisplayInfo)
+    {
+        if (contentDisplayInfos.Contains(contentDisplayInfo))
+            contentDisplayInfos.Remove(contentDisplayInfo);
+    }
+
+    public List<ContentDisplayInfo> GetContentDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
 }

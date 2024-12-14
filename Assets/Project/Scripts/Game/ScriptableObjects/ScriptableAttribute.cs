@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,17 @@ public abstract class ScriptableAttribute : ScriptableObject
     [field: SerializeField] public Color DisplayColor { get; private set; }
 
     public abstract bool Compare(ScriptableAttribute attribute);
+
+    public string GetDisplayString()
+    {
+        if (this is ScriptableAttribute<float> floatAtr)
+        {
+            char thing = floatAtr.DefaultValue > 0 ? '+' : '-';
+            return (DisplayName + " (" + thing + floatAtr.DefaultValue + ")");
+        }
+        else
+            return (DisplayName);
+    }
 }
 
 public abstract class ScriptableAttribute<T> : ScriptableAttribute

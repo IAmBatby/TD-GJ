@@ -20,6 +20,8 @@ public class UpgradeBehaviour : ItemBehaviour
         }    
         upgradeSpriteFront.sprite = Attribute.DisplayIcon;
         upgradeSpriteBack.sprite = Attribute.DisplayIcon;
+
+        GeneralDisplayInfo.DisplayText = Attribute.GetDisplayString();
     }
 
     public void ForwardedTriggerEnter(Collider other)

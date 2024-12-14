@@ -9,7 +9,6 @@ public class ItemBehaviour : ContentBehaviour
 
     public ScriptableItem ItemData { get; private set; }
 
-
     protected override void OnSpawn()
     {
         if (ContentData is ScriptableItem item)

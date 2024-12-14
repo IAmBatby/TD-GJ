@@ -18,7 +18,7 @@ MonoBehaviour:
   <ContentIcon>k__BackingField: {fileID: 0}
   <ContentColor>k__BackingField: {r: 0.087575644, g: 0.4528302, b: 0.16084062, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
-  <Highlightable>k__BackingField: 0
+  <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <Health>k__BackingField: 100

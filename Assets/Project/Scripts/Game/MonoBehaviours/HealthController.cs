@@ -12,10 +12,6 @@ public class HealthController : MonoBehaviour
 
     public int Health { get => currentHealth; set => ModifyHealth(value); }
 
-    [SerializeField] private Transform mainParent;
-    [SerializeField] private Image healthFillAmountImage;
-    [SerializeField] private TextMeshProUGUI healthText;
-
     private AudioPreset onHealthLostPreset;
 
     private AudioPlayer audioPlayer;
@@ -27,20 +23,20 @@ public class HealthController : MonoBehaviour
 
     private ScriptableHurtable HurtableData => LinkedBehaviour?.HurtableData;
 
+    private ContentDisplayInfo healthDisplayInfo;
+
     private void OnEnable()
     {
         GameManager.Instance.AllHealthControllers.Add(this);
+        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), null, Color.red);
         OnHealthModified.AddListener(RefreshUI);
     }
 
     private void OnDisable() => GameManager.Instance?.AllHealthControllers.Remove(this);
 
-
-
     private void Awake()
     {
         audioPlayer = AudioPlayer.Create(this);
-        SetUIActive(false);
     }
 
     public void LinkBehaviour(HurtableBehaviour behaviour, AudioPreset healthLostPreset)
@@ -48,13 +44,8 @@ public class HealthController : MonoBehaviour
         LinkedBehaviour = behaviour;
         SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        behaviour.OnMouseoverToggle.AddListener(SetUIActive);
+        LinkedBehaviour.AddContentDisplayInfo(healthDisplayInfo);
         RefreshUI();
-    }
-
-    private void Update()
-    {
-        //mainParent.gameObject.SetActive(!GameManager.Instance.HasGameEnded);
     }
 
     public void ModifyHealth(int value)
@@ -78,11 +69,7 @@ public class HealthController : MonoBehaviour
 
     private void RefreshUI()
     {
-        healthText.SetText(currentHealth.ToString());
-        healthFillAmountImage.fillAmount = Mathf.InverseLerp(0, maxHealth, currentHealth);
+        healthDisplayInfo.DisplayText = "HP: " + currentHealth.ToString();
+        healthDisplayInfo.FillAmount = Mathf.InverseLerp(0, maxHealth, currentHealth);
     }
-
-    public void SetUIActive(bool value) => mainParent.gameObject.SetActive(value);
-    private void DisableUI() => SetUIActive(false);
-    private void EnableUI() => SetUIActive(true);
 }

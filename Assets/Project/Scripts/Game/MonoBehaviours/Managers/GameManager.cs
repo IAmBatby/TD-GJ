@@ -102,6 +102,8 @@ public class GameManager : GlobalManager
     public ExtendedEvent OnIntermissionStart = new ExtendedEvent();
     public ExtendedEvent<EnemyBehaviour> OnEnemyKilled = new ExtendedEvent<EnemyBehaviour>();
 
+    public ExtendedEvent<ContentBehaviour> OnHighlightChanged = new ExtendedEvent<ContentBehaviour>();
+
 
     private Timer intermissionTimer;
     public float IntermissionLength => DefaultLevel.IntermissionStandardTime + (DefaultLevel.IntermissionWaveMultiplier * ActiveWaves.ActiveSelection.WaveLength);
@@ -268,12 +270,18 @@ public class GameManager : GlobalManager
 
     public void OnContentBehaviourMousedEnter(ContentBehaviour behaviour)
     {
+        ContentBehaviour previousBehaviour = HighlightedBehaviour;
         HighlightedBehaviour = behaviour;
+        if (previousBehaviour != HighlightedBehaviour)
+            OnHighlightChanged.Invoke(HighlightedBehaviour);
     }
 
     public void OnContentBehaviourMousedExit(ContentBehaviour behaviour)
     {
+        ContentBehaviour previousBehaviour = HighlightedBehaviour;
         HighlightedBehaviour = null;
+        if (previousBehaviour != HighlightedBehaviour)
+            OnHighlightChanged.Invoke(HighlightedBehaviour);
     }
 
     public void ModifyHealth(int newValue)

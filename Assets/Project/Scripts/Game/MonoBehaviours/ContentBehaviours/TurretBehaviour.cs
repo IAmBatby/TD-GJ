@@ -28,6 +28,8 @@ public class TurretBehaviour : ItemBehaviour
 
     [HideInInspector] public List<ScriptableAttribute> AllAttributes = new List<ScriptableAttribute>();
 
+    private Dictionary<ScriptableAttribute, ContentDisplayInfo> attributeDisplayInfoDict = new Dictionary<ScriptableAttribute, ContentDisplayInfo>();
+
     private HealthController Target;
     private Timer shootCooldownTimer;
     private bool canShoot;
@@ -44,6 +46,13 @@ public class TurretBehaviour : ItemBehaviour
         DamageAttribute.ApplyWithReference(TurretData.DamageAttribute);
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
         SelectedTargetType = TurretData.TargetType;
+
+        foreach (ScriptableAttribute attribute in AllAttributes)
+        {
+            ContentDisplayInfo newInfo = new ContentDisplayInfo(attribute.GetDisplayString(), attribute.DisplayIcon, attribute.DisplayColor);
+            attributeDisplayInfoDict.Add(attribute, newInfo);
+            AddContentDisplayInfo(newInfo);
+        }
 
         BlacklistTarget(GameManager.Player.HealthController);
 
@@ -251,6 +260,8 @@ public class TurretBehaviour : ItemBehaviour
 
     private void OnAttributeModified(ScriptableAttribute attributeModified, float modifierAdded)
     {
+        if (attributeDisplayInfoDict.TryGetValue(attributeModified, out ContentDisplayInfo displayInfo))
+            displayInfo.DisplayText = attributeModified.GetDisplayString();
         AudioPlayer.PlayAudio(TurretData.OnUpgradeAudio);
     }
 }
