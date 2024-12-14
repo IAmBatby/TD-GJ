@@ -13,12 +13,12 @@ public class LevelSelectElement : MonoBehaviour
         //levelName.enabled = false;
     }
 
-    public void Initialize(ScriptableLevel newLevel)
+    public void Initialize(ScriptableLevel newLevel, int index)
     {
         level = newLevel;
         levelName.enabled = true;
         if (level != null)
-            levelName.SetText(level.DisplayName.ToUpper());
+            levelName.SetText("#0" + (index + 1) + ": " + level.DisplayName.ToUpper());
         else
             levelName.SetText("Back".ToUpper());
     }

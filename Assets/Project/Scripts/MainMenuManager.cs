@@ -41,18 +41,22 @@ public class MainMenuManager : GlobalManager
 
     private void OnSceneUnloaded(Scene scene)
     {
-        mainMenuParent.gameObject.SetActive(true);
-        mainMenuCamera.gameObject.SetActive(true);
-        levelSceneParent.gameObject.SetActive(true);
-        mainMenuLight.gameObject.SetActive(true);
+        Timer newTimer = new Timer();
+        newTimer.onTimerEnd.AddListener(ToggleMenuObjects);
+        newTimer.StartTimer(this, 0.01f);
+    }
+
+    private void ToggleMenuObjects()
+    {
+        mainMenuParent.gameObject.SetActive(!mainMenuParent.gameObject.activeSelf);
+        mainMenuCamera.gameObject.SetActive(!mainMenuCamera.gameObject.activeSelf);
+        levelSceneParent.gameObject.SetActive(!levelSceneParent.gameObject.activeSelf);
+        mainMenuLight.gameObject.SetActive(!mainMenuLight.gameObject.activeSelf);
     }
 
     public void LoadGame(ScriptableLevel level)
     {
-        mainMenuParent.gameObject.SetActive(false);
-        mainMenuCamera.gameObject.SetActive(false);
-        levelSceneParent.gameObject.SetActive(false);
-        mainMenuLight.gameObject.SetActive(false);
+        ToggleMenuObjects();
         SceneManager.LoadScene(level.SceneName, LoadSceneMode.Additive);
     }
 
@@ -83,13 +87,13 @@ public class MainMenuManager : GlobalManager
             LevelSelectElement spawnedElement = GameObject.Instantiate(levelSelectPrefab, levelSelectStartingPosition);
             spawnedElement.transform.position = levelSelectStartingPosition.position;
             spawnedElement.transform.position += (levelSelectSpawnOffset * allLevelsList.IndexOf(level));
-            spawnedElement.Initialize(level);
+            spawnedElement.Initialize(level, allLevelsList.IndexOf(level));
         }
 
         //The back button because I'm awful
         LevelSelectElement backElement = GameObject.Instantiate(levelSelectPrefab, levelSelectStartingPosition);
         backElement.transform.position = levelSelectStartingPosition.position;
         backElement.transform.position += (levelSelectSpawnOffset * allLevelsList.Count);
-        backElement.Initialize(null);
+        backElement.Initialize(null, -1);
     }
 }
