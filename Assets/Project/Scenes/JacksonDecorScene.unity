@@ -49049,6 +49049,11 @@ PrefabInstance:
       propertyPath: turnsUntilRespawn
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: itemModelScaleMultiplier
+      value: 0.672
+      objectReference: {fileID: 0}
     - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
       propertyPath: m_LocalPosition.x

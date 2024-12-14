@@ -48,10 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a8aa4f82de31e4c9b29dda86889808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemData>k__BackingField: {fileID: 0}
-  IsBeingHeld: 0
-  <Attribute>k__BackingField: {fileID: 0}
-  <DefaultValue>k__BackingField: 0
+  <IsBeingHeld>k__BackingField: 0
   upgradeSpriteFront: {fileID: 8957945598934796407}
   upgradeSpriteBack: {fileID: 4112293773517475360}
 --- !u!54 &6780245874618462165
@@ -409,5 +406,5 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0

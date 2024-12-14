@@ -56,6 +56,9 @@ public class ShopSpawner : MonoBehaviour, IInteractable
             renderer.SetMaterials(newMaterials);
         }
 
+        foreach (SpriteRenderer spriteRenderer in fakeItem.GetComponentsInChildren<SpriteRenderer>())
+            spriteRenderer.color = new Color(previewMaterial.color.r, previewMaterial.color.g, previewMaterial.color.b, 0.05f);
+
         priceText.SetText("$" + cost);
 
         //Awful
