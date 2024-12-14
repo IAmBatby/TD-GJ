@@ -71,6 +71,9 @@ public class TurretBaseBehaviour : ItemBehaviour
             GameManager.UnregisterContentBehaviour(ActiveModule, true);
 
         ActiveModule = newModule;
+
+        GeneralDisplayInfo.DisplayText = ActiveModule.ModuleData.GetDisplayName();
+        GeneralDisplayInfo.FillAmount = Mathf.InverseLerp(0f, TurretData.Modules.Count, TurretData.Modules.IndexOf(turretModule) + 1);
     }
 
     private void Update()

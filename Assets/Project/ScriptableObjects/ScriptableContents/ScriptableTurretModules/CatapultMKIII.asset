@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   <ContentName>k__BackingField: Crossbow MK1
   <ContentIcon>k__BackingField: {fileID: 0}
-  <ContentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+  <ContentColor>k__BackingField: {r: 0.9716981, g: 0.8291659, b: 0.2979263, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 0
   <OnSpawnAudio>k__BackingField: {fileID: 0}
