@@ -40,6 +40,7 @@ public class HealthController : MonoBehaviour
     private void Awake()
     {
         audioPlayer = AudioPlayer.Create(this);
+        SetUIActive(false);
     }
 
     public void LinkBehaviour(HurtableBehaviour behaviour, AudioPreset healthLostPreset)
@@ -47,14 +48,13 @@ public class HealthController : MonoBehaviour
         LinkedBehaviour = behaviour;
         SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        behaviour.OnMouseoverToggle.AddListener(EnableUI);
-        behaviour.OnMouseoverToggle.AddListener(DisableUI);
+        behaviour.OnMouseoverToggle.AddListener(SetUIActive);
         RefreshUI();
     }
 
     private void Update()
     {
-        mainParent.gameObject.SetActive(!GameManager.Instance.HasGameEnded);
+        //mainParent.gameObject.SetActive(!GameManager.Instance.HasGameEnded);
     }
 
     public void ModifyHealth(int value)

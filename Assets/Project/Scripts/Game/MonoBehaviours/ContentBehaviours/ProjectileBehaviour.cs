@@ -14,6 +14,7 @@ public class ProjectileBehaviour : ContentBehaviour
     private float force;
     private int damage;
 
+    private bool hasDespawned;
     protected override void OnSpawn()
     {
         base.OnSpawn();
@@ -56,6 +57,8 @@ public class ProjectileBehaviour : ContentBehaviour
 
     public void Despawn()
     {
+        if (hasDespawned) return;
         GameManager.UnregisterContentBehaviour(this, true);
+        hasDespawned = true;
     }
 }

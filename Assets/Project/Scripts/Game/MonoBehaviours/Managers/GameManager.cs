@@ -1,4 +1,5 @@
 using IterationToolkit;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : GlobalManager
 {
@@ -415,12 +417,13 @@ public class GameManager : GlobalManager
             return (new List<T>());         
     }
 
-    public static List<T> GetContentBehaviours<T>() where T: ContentBehaviour
+    public static List<T> GetContentBehaviours<T>() where T : ContentBehaviour
     {
         List<T> returnList = new List<T>();
         foreach (KeyValuePair<ScriptableContent, List<ContentBehaviour>> registeredLists in Instance.allRegisteredBehavioursDict)
-            if (registeredLists.Value is List<T> listT)
-                returnList.AddRange(listT);
+            if (registeredLists.Value.First() is T)
+                foreach (ContentBehaviour behaviour in registeredLists.Value)
+                    returnList.Add(behaviour as T);
 
         return (returnList);
     }
