@@ -9,7 +9,7 @@ public class HighlightInfoController : MonoBehaviour
     [SerializeField] private HighlightInfoElement highlightInfoElementPrefab;
     [SerializeField] private Transform movementParent;
     [SerializeField] private List<HighlightInfoElement> highlightInfoElements = new List<HighlightInfoElement>();
-    private ContentBehaviour trackingBehaviour;
+    private IHighlightable trackingBehaviour;
 
     [SerializeField] private float yOffset = 35;
 
@@ -19,10 +19,10 @@ public class HighlightInfoController : MonoBehaviour
         GameManager.Instance.OnHighlightChanged.AddListener(OnHighlightChanged);
     }
 
-    private void OnHighlightChanged(ContentBehaviour contentBehaviour)
+    private void OnHighlightChanged(IHighlightable contentBehaviour)
     {
         trackingBehaviour = contentBehaviour;
-        if (trackingBehaviour != null && trackingBehaviour.ContentData.Highlightable == false)
+        if (trackingBehaviour != null && trackingBehaviour.IsHighlightable() == false)
             trackingBehaviour = null;
 
         if (trackingBehaviour == null)
@@ -48,7 +48,7 @@ public class HighlightInfoController : MonoBehaviour
         foreach (HighlightInfoElement element in highlightInfoElements)
             element.DisableHighlightInfo();
 
-        List<ContentDisplayInfo> infos = trackingBehaviour.GetContentDisplayInfos();
+        List<ContentDisplayInfo> infos = trackingBehaviour.GetDisplayInfos();
         for (int i = 0; i < infos.Count; i++)
             if (i < highlightInfoElements.Count)
                 highlightInfoElements[i].EnableHighlightInfo(infos[i]);

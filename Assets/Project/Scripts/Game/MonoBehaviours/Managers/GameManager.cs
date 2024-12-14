@@ -22,7 +22,7 @@ public class GameManager : GlobalManager
     private Texture2D activeCursor;
     private Texture2D lastSetCursor;
 
-    public ContentBehaviour HighlightedBehaviour { get; private set; }
+    public IHighlightable HighlightedObject { get; private set; }
 
     [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
 
@@ -102,7 +102,7 @@ public class GameManager : GlobalManager
     public ExtendedEvent OnIntermissionStart = new ExtendedEvent();
     public ExtendedEvent<EnemyBehaviour> OnEnemyKilled = new ExtendedEvent<EnemyBehaviour>();
 
-    public ExtendedEvent<ContentBehaviour> OnHighlightChanged = new ExtendedEvent<ContentBehaviour>();
+    public ExtendedEvent<IHighlightable> OnHighlightChanged = new ExtendedEvent<IHighlightable>();
 
 
     private Timer intermissionTimer;
@@ -260,28 +260,28 @@ public class GameManager : GlobalManager
     private void RefreshCursor()
     {
         Texture2D newCursor = null;
-        if (HighlightedBehaviour != null && HighlightedBehaviour.ContentData.Cursor != null)
-            newCursor = HighlightedBehaviour.ContentData.Cursor;
+        if (HighlightedObject != null && HighlightedObject.GetCursor() != null)
+            newCursor = HighlightedObject.GetCursor();
         else
             newCursor = defaultCursor;
 
         Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
     }
 
-    public void OnContentBehaviourMousedEnter(ContentBehaviour behaviour)
+    public void OnContentBehaviourMousedEnter(IHighlightable behaviour)
     {
-        ContentBehaviour previousBehaviour = HighlightedBehaviour;
-        HighlightedBehaviour = behaviour;
-        if (previousBehaviour != HighlightedBehaviour)
-            OnHighlightChanged.Invoke(HighlightedBehaviour);
+        IHighlightable previousBehaviour = HighlightedObject;
+        HighlightedObject = behaviour;
+        if (previousBehaviour != HighlightedObject)
+            OnHighlightChanged.Invoke(HighlightedObject);
     }
 
-    public void OnContentBehaviourMousedExit(ContentBehaviour behaviour)
+    public void OnContentBehaviourMousedExit(IHighlightable behaviour)
     {
-        ContentBehaviour previousBehaviour = HighlightedBehaviour;
-        HighlightedBehaviour = null;
-        if (previousBehaviour != HighlightedBehaviour)
-            OnHighlightChanged.Invoke(HighlightedBehaviour);
+        IHighlightable previousBehaviour = HighlightedObject;
+        HighlightedObject = null;
+        if (previousBehaviour != HighlightedObject)
+            OnHighlightChanged.Invoke(HighlightedObject);
     }
 
     public void ModifyHealth(int newValue)

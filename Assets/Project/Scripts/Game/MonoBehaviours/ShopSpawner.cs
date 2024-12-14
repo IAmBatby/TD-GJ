@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ShopSpawner : MonoBehaviour, IInteractable
+public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
 {
     [Header("Required References")]
     [SerializeField] private ContentSpawner contentSpawner;
@@ -27,10 +27,19 @@ public class ShopSpawner : MonoBehaviour, IInteractable
     private bool hasBeenPurchased;
     private int respawnTurnCount;
 
+    private ContentDisplayInfo shopDisplayInfo;
+    private List<ContentDisplayInfo> displayInfos;
+
+    private void OnMouseEnter() => GameManager.Instance.OnContentBehaviourMousedEnter(this);
+    private void OnMouseExit() => GameManager.Instance.OnContentBehaviourMousedExit(this);
+
+
     private void Awake()
     {
         GameManager.Instance.OnWaveFinished.AddListener(OnWaveFinished);
         audioPlayer = AudioPlayer.Create(this);
+        shopDisplayInfo = new ContentDisplayInfo("$" + cost.ToString(), null, Color.yellow);
+        displayInfos = new List<ContentDisplayInfo>() { shopDisplayInfo };
     }
 
     private void Start()
@@ -68,6 +77,9 @@ public class ShopSpawner : MonoBehaviour, IInteractable
         fakeItemObject.transform.localScale *= itemModelScaleMultiplier;
 
         GameManager.UnregisterContentBehaviour(fakeItem, false);
+
+        foreach (ContentDisplayInfo displayInfo in fakeItem.GetDisplayInfos())
+            displayInfos.Add(new ContentDisplayInfo(displayInfo.DisplayText, displayInfo.DisplayIcon, Color.yellow));
     }
 
     public bool TryInteract()
@@ -101,4 +113,8 @@ public class ShopSpawner : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public bool IsHighlightable() => true;
+    public Texture2D GetCursor() => null;
+    public List<ContentDisplayInfo> GetDisplayInfos() => displayInfos;
 }

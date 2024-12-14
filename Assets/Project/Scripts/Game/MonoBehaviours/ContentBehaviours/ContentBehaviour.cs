@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContentBehaviour : MonoBehaviour
+public class ContentBehaviour : MonoBehaviour, IHighlightable
 {
     public ScriptableContent ContentData { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
@@ -57,5 +57,7 @@ public class ContentBehaviour : MonoBehaviour
             contentDisplayInfos.Remove(contentDisplayInfo);
     }
 
-    public List<ContentDisplayInfo> GetContentDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
+    public List<ContentDisplayInfo> GetDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
+    public Texture2D GetCursor() => ContentData.Cursor;
+    public bool IsHighlightable() => ContentData.Highlightable;
 }
