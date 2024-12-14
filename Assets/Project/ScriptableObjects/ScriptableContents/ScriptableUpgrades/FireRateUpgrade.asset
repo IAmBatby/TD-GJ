@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 985584291496466747, guid: 5c3175bc94799064997e44ee09acaddc,
     type: 3}
+  <DisplayName>k__BackingField: 
+  <DisplayIcon>k__BackingField: {fileID: 0}
+  <DisplayColor>k__BackingField: {r: 0.8018868, g: 0.15508187, b: 0.790957, a: 0.7607843}
   <Cursor>k__BackingField: {fileID: 2800000, guid: 893cbd9567029ef438a26ce15c4ab38f,
     type: 3}
+  <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <OnPickupAudio>k__BackingField: {fileID: 0}

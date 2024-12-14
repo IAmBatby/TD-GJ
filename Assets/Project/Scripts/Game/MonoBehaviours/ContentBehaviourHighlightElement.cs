@@ -27,6 +27,8 @@ public class ContentBehaviourHighlightElement : MonoBehaviour
                 transform.position = GameManager.Player.ActiveCamera.WorldToScreenPoint(hit.point);
 
             contentBehaviourName.SetText(GameManager.Instance.HighlightedBehaviour.ContentData.DisplayName);
+            iconGame.sprite = GameManager.Instance.HighlightedBehaviour.ContentData.DisplayIcon;
+            backgroundImage.color = GameManager.Instance.HighlightedBehaviour.ContentData.DisplayColor;
         }
     }
 }

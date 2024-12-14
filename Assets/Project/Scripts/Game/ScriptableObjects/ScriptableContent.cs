@@ -11,6 +11,8 @@ public class ScriptableContent : ScriptableObject
 
     [field: Header("Optional References"), Space(15)]
     [field: SerializeField] public string DisplayName { get; private set; } = string.Empty;
+    [field: SerializeField] public Sprite DisplayIcon { get; private set; }
+    [field: SerializeField] public Color DisplayColor { get; private set; } = Color.black;
     [field: SerializeField] public Texture2D Cursor { get; private set; }
     [field: SerializeField] public bool Highlightable { get; private set; } = true;
     [field: SerializeField] public AudioPreset OnSpawnAudio { get; private set; }
