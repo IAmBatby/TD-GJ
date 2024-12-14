@@ -7,7 +7,7 @@ public class ShootPosition : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
 
-    public void UpdateShootRenderer(HealthController target)
+    public void UpdateShootRenderer(HurtableBehaviour target)
     {
         if (target != null)
         {
@@ -15,7 +15,7 @@ public class ShootPosition : MonoBehaviour
             lineRenderer.positionCount = 2;
 
             lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, target.LinkedBehaviour.transform.position);
+            lineRenderer.SetPosition(1, target.transform.position);
         }
         else
             lineRenderer.enabled = false;

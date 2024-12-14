@@ -12,8 +12,6 @@ public class HealthController : MonoBehaviour
 
     public int Health { get => currentHealth; set => ModifyHealth(value); }
 
-    private AudioPreset onHealthLostPreset;
-
     private AudioPlayer audioPlayer;
 
     public ExtendedEvent<(int, int)> OnHealthModified = new ExtendedEvent<(int, int)>();
@@ -27,12 +25,10 @@ public class HealthController : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.AllHealthControllers.Add(this);
+
         healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), null, Color.red);
         OnHealthModified.AddListener(RefreshUI);
     }
-
-    private void OnDisable() => GameManager.Instance?.AllHealthControllers.Remove(this);
 
     private void Awake()
     {

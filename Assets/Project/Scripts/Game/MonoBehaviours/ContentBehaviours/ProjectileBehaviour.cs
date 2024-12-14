@@ -37,7 +37,7 @@ public class ProjectileBehaviour : ContentBehaviour
     public void ForwardedTriggerEnter(Collider other)
     {
         if (piercedObjects.Contains(other.gameObject)) return;
-        HealthController health = other.transform.root.GetComponentInChildren<HealthController>();
+        HurtableBehaviour health = other.transform.root.GetComponentInChildren<HurtableBehaviour>();
         if (health != null)
         {
             AudioPlayer.PlayAudio(ProjectileData.OnCollisionAudio);

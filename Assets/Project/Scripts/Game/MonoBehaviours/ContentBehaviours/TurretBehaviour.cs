@@ -18,8 +18,8 @@ public class TurretBehaviour : ItemBehaviour
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShotSpeedAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue DamageAttribute { get; private set; }
-    [SerializeField] private List<HealthController> AllEnemiesInRange = new List<HealthController>();
-    [SerializeField] private List<HealthController> BlacklistedTargets = new List<HealthController>();
+    [SerializeField] private List<HurtableBehaviour> AllEnemiesInRange = new List<HurtableBehaviour>();
+    [SerializeField] private List<HurtableBehaviour> BlacklistedTargets = new List<HurtableBehaviour>();
 
     public TargetType SelectedTargetType { get; private set; }
 
@@ -30,7 +30,7 @@ public class TurretBehaviour : ItemBehaviour
 
     private Dictionary<ScriptableAttribute, ContentDisplayInfo> attributeDisplayInfoDict = new Dictionary<ScriptableAttribute, ContentDisplayInfo>();
 
-    private HealthController Target;
+    private HurtableBehaviour Target;
     private Timer shootCooldownTimer;
     private bool canShoot;
 
@@ -54,13 +54,13 @@ public class TurretBehaviour : ItemBehaviour
             AddContentDisplayInfo(newInfo);
         }
 
-        BlacklistTarget(GameManager.Player.HealthController);
+        BlacklistTarget(GameManager.Player);
 
     }
 
-    private void BlacklistTarget(HealthController hittable)
+    private void BlacklistTarget(HurtableBehaviour hurtable)
     {
-        BlacklistedTargets.Add(hittable);
+        BlacklistedTargets.Add(hurtable);
     }
 
     private void FixedUpdate()
@@ -72,7 +72,7 @@ public class TurretBehaviour : ItemBehaviour
     {
         if (IsBeingHeld) return;
 
-        HealthController previousTarget = Target;
+        HurtableBehaviour previousTarget = Target;
 
         UpdateTargets();
 
@@ -122,7 +122,7 @@ public class TurretBehaviour : ItemBehaviour
         */
 
         foreach (ShootPosition shootPosition in shootPositions)
-            Projectile.SpawnProjectile(shootPosition.transform.position, Target.LinkedBehaviour.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+            Projectile.SpawnProjectile(shootPosition.transform.position, Target.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
 
         didShoot = true;
 
@@ -151,47 +151,47 @@ public class TurretBehaviour : ItemBehaviour
     {
         AllEnemiesInRange.Clear();
 
-        HealthController furthestEnemy = null;
-        HealthController closestEnemy = null;
-        HealthController firstEnemy = null;
-        HealthController lastEnemy = null;
+        HurtableBehaviour furthestEnemy = null;
+        HurtableBehaviour closestEnemy = null;
+        HurtableBehaviour firstEnemy = null;
+        HurtableBehaviour lastEnemy = null;
 
         float furthestDistance = Mathf.NegativeInfinity;
         float closestDistance = Mathf.Infinity;
         float closestDestinationRemaining = Mathf.Infinity;
         float furthestDestinationRemaining = Mathf.Infinity;
 
-        foreach (HealthController hittable in GameManager.Instance.AllHealthControllers)
+        foreach (HurtableBehaviour hurtable in GameManager.Instance.AllHurtables)
         {
-            if (BlacklistedTargets.Contains(hittable)) continue;
-            if (hittable.Health == 0) continue;
-            float distance = Vector3.Distance(transform.position, hittable.transform.position);
+            if (BlacklistedTargets.Contains(hurtable)) continue;
+            if (hurtable.Health == 0) continue;
+            float distance = Vector3.Distance(transform.position, hurtable.transform.position);
             if (distance <= RangeAttribute.Value)
             {
-                AllEnemiesInRange.Add(hittable);
+                AllEnemiesInRange.Add(hurtable);
                 if (closestEnemy == null || distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestEnemy = hittable;
+                    closestEnemy = hurtable;
                 }
 
                 if (furthestEnemy == null || distance < furthestDistance)
                 {
                     furthestDistance = distance;
-                    closestEnemy = hittable;
+                    closestEnemy = hurtable;
                 }
 
-                if (hittable.LinkedBehaviour is EnemyBehaviour enemy)
+                if (hurtable is EnemyBehaviour enemy)
                 {
                     if (firstEnemy == null || enemy.RemainingDestinationDistance < closestDestinationRemaining)
                     {
-                        firstEnemy = hittable;
+                        firstEnemy = hurtable;
                         closestDestinationRemaining = enemy.RemainingDestinationDistance;
                     }
 
                     if (lastEnemy == null || enemy.RemainingDestinationDistance > furthestDestinationRemaining)
                     {
-                        lastEnemy = hittable;
+                        lastEnemy = hurtable;
                         furthestDestinationRemaining = enemy.RemainingDestinationDistance;
                     }
                 }
@@ -221,7 +221,7 @@ public class TurretBehaviour : ItemBehaviour
     {
         IterationToolkit.Utilities.DrawCircle(transform.position, RangeAttribute.Value, Color.yellow);
 
-        foreach (HealthController health in GameManager.Instance.AllHealthControllers)
+        foreach (HurtableBehaviour health in GameManager.Instance.AllHurtables)
         {
             float distance = Vector3.Distance(transform.position, health.transform.position);
             if (health == Target)

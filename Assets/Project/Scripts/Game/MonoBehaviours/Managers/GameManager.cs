@@ -90,7 +90,7 @@ public class GameManager : GlobalManager
 
     private Dictionary<float, List<ScriptableEnemy>> currentWaveSpawnDict;
 
-    public List<HealthController> AllHealthControllers = new List<HealthController>();
+    public List<HurtableBehaviour> AllHurtables = new List<HurtableBehaviour>();
 
 
     public ExtendedEvent OnGameStart = new ExtendedEvent();
@@ -415,6 +415,9 @@ public class GameManager : GlobalManager
 
         if (contentBehaviour is PlayerBehaviour playerBehaviour)
             Player = playerBehaviour;
+
+        if (contentBehaviour is HurtableBehaviour hurtableBehaviour)
+            Instance.AllHurtables.Add(hurtableBehaviour);
     }
 
     public static List<T> GetContentBehaviours<T>(ScriptableContent contentData) where T : ContentBehaviour
@@ -458,6 +461,9 @@ public class GameManager : GlobalManager
         }
         else
             Debug.LogError("Content attempted to unregister without being registered!");
+
+        if (contentBehaviour is HurtableBehaviour hurtableBehaviour)
+            Instance.AllHurtables.Remove(hurtableBehaviour);
 
         if (destroyOnUnregistration == true)
         {
