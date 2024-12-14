@@ -21,8 +21,6 @@ public class PlayerBehaviour : HurtableBehaviour
     [SerializeField] private Vector3 cameraRotation;
 
     [Space(20), Header("Audio")]
-    [SerializeField] private AudioSource movementAudioSource;
-    [SerializeField] private AudioSource interactAudioSource;
     [SerializeField] private AudioPreset movementPreset;
     [SerializeField] private AudioPreset damagePreset;
     [SerializeField] private AudioPreset pickupItemPreset;
@@ -105,10 +103,10 @@ public class PlayerBehaviour : HurtableBehaviour
                 if (Physics.Raycast(heldItemPosition.transform.position, new Vector3(heldItemPosition.position.x, -5000, heldItemPosition.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
                     DropItem(hit.point);
                 else
-                    AudioManager.PlayAudio(invalidDropItemPreset, interactAudioSource);
+                    AudioPlayer.PlayAudio(invalidDropItemPreset);
             }
             else
-                AudioManager.PlayAudio(failedInteractionPreset, interactAudioSource);
+                AudioPlayer.PlayAudio(failedInteractionPreset);
 
         }
     }
@@ -120,7 +118,7 @@ public class PlayerBehaviour : HurtableBehaviour
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
 
-        AudioManager.PlayAudio(pickupItemPreset, interactAudioSource);
+        AudioPlayer.PlayAudio(pickupItemPreset);
 
         item.Pickup();
         OnItemPickup.Invoke(item);
@@ -135,7 +133,7 @@ public class PlayerBehaviour : HurtableBehaviour
         ActiveItem.transform.position = position;
         ActiveItem.transform.rotation = Quaternion.identity;
 
-        AudioManager.PlayAudio(validDropItemPreset, interactAudioSource);
+        AudioPlayer.PlayAudio(validDropItemPreset);
 
         ActiveItem.Drop();
         OnItemDropped.Invoke(ActiveItem);
