@@ -21,7 +21,8 @@ public class UpgradeBehaviour : ItemBehaviour
         upgradeSpriteFront.sprite = Attribute.DisplayIcon;
         upgradeSpriteBack.sprite = Attribute.DisplayIcon;
 
-        GeneralDisplayInfo.DisplayText = Attribute.GetDisplayString();
+        char thing = DefaultValue > 0 ? '+' : '-';
+        GeneralDisplayInfo.DisplayText = Attribute.DisplayName + " (" + thing + DefaultValue + ")";
     }
 
     public void ForwardedTriggerEnter(Collider other)
