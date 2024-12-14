@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f982dc214d65f2449803a1b12f30a568, type: 3}
+  m_Name: Cannon_Ball_Projectile
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: 22a152887c768af4a91fd682cffefc7e,
+    type: 3}
+  <Cursor>k__BackingField: {fileID: 0}
+  <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 0
+  <IsPiercing>k__BackingField: 0
+  <LifeTime>k__BackingField: 5
+  <OnCollisionAudio>k__BackingField: {fileID: 0}

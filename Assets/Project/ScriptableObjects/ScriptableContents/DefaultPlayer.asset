@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d8d45c396b2ff439ad4419cb30096e, type: 3}
+  m_Name: DefaultPlayer
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 5378851380656647385, guid: d974ff1bc44989448b0ec2b2a42095b4,
+    type: 3}
+  <Cursor>k__BackingField: {fileID: 0}
+  <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 1
+  <Health>k__BackingField: 100
+  <OnHealthLostAudio>k__BackingField: {fileID: 0}
+  <OnHealthGainedAudio>k__BackingField: {fileID: 0}
