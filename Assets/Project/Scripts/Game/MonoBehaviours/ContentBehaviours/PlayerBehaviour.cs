@@ -148,9 +148,6 @@ public class PlayerBehaviour : HurtableBehaviour
         GameManager.Instance.EndGame(false);
     }
 
-
-
-
     private void LateUpdate()
     {
         if (GameManager.Instance.HasGameEnded) return;
@@ -174,8 +171,6 @@ public class PlayerBehaviour : HurtableBehaviour
         {
             ActiveItem.transform.localPosition = Vector3.zero;
         }
-
-        RefreshCursor();
     }
 
     private void SetRotation()
@@ -189,24 +184,6 @@ public class PlayerBehaviour : HurtableBehaviour
         fixedRotation.x = 0;
         fixedRotation.z = 0;
         transform.eulerAngles = fixedRotation;
-    }
-
-    public void RequestNewCursor(Texture2D newNewCursor)
-    {
-        if (newNewCursor == null) return;
-        newCursor = newNewCursor;
-        Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
-    }
-
-    private void RefreshCursor()
-    {
-        if (newCursor != null)
-        {
-            Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
-            newCursor = null;
-        }
-        else if (defaultCursorSprite != null)
-            Cursor.SetCursor(defaultCursorSprite, Vector2.zero, CursorMode.Auto);
     }
 
     private void SetPosition()

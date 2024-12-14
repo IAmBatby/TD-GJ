@@ -13,10 +13,15 @@ public class ContentBehaviour : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        GameManager.Player.RequestNewCursor(ContentData.Cursor);
+        GameManager.Instance.OnContentBehaviourMousedEnter(this);
         OnMouseoverToggle.Invoke(true);
     }
-    private void OnMouseExit() => OnMouseoverToggle.Invoke(false);
+
+    private void OnMouseExit()
+    {
+        GameManager.Instance.OnContentBehaviourMousedExit(this);
+        OnMouseoverToggle.Invoke(false);
+    }
 
     public void SetData(ScriptableContent content) => ContentData = content;
 

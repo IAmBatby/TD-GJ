@@ -19,4 +19,5 @@ MonoBehaviour:
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
   <LifeTime>k__BackingField: 5
-  <OnCollisionAudio>k__BackingField: {fileID: 0}
+  <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+    type: 2}

@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: 1f0590d540636724b940a2a49346cd26,
     type: 3}
-  <OnPickupAudioPreset>k__BackingField: {fileID: 0}
-  <OnDropAudioPreset>k__BackingField: {fileID: 11400000, guid: 9887d4254ad05664abbc434abac29a5e,
-    type: 2}
-  <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
   <Cursor>k__BackingField: {fileID: 2800000, guid: 26ceaacba488dc64c90f6d95df65a162,
     type: 3}
+  <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
+  <OnPickupAudio>k__BackingField: {fileID: 0}
+  <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
     type: 2}
@@ -41,11 +40,11 @@ MonoBehaviour:
       type: 2}
     <Value>k__BackingField: 1
   <TargetType>k__BackingField: 2
-  <OnShootAudioPreset>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
+  <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}
-  <OnNewTargetAudioPreset>k__BackingField: {fileID: 11400000, guid: fec0044161fef0f428fb304ccc162415,
+  <OnNewTargetAudio>k__BackingField: {fileID: 11400000, guid: fec0044161fef0f428fb304ccc162415,
     type: 2}
-  <OnCooldownEndedAudioPreset>k__BackingField: {fileID: 11400000, guid: a7be39c7b6b499840b50eb49c3171c41,
+  <OnCooldownEndedAudio>k__BackingField: {fileID: 11400000, guid: a7be39c7b6b499840b50eb49c3171c41,
     type: 2}
-  <OnUpgradeAudioPreset>k__BackingField: {fileID: 11400000, guid: a522841518167fa41947d64aadb42afe,
+  <OnUpgradeAudio>k__BackingField: {fileID: 11400000, guid: a522841518167fa41947d64aadb42afe,
     type: 2}

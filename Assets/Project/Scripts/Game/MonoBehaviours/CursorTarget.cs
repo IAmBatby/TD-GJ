@@ -8,6 +8,6 @@ public class CursorTarget : MonoBehaviour
 
     private void OnMouseOver()
     {
-        GameManager.Player.RequestNewCursor(CursorIcon);
+
     }
 }

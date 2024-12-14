@@ -16,7 +16,11 @@ public class GameManager : GlobalManager
 
     [SerializeField] private float globalSpawnEnemyCooldown;
 
+    [SerializeField] private Texture2D defaultCursor;
+    private Texture2D activeCursor;
+    private Texture2D lastSetCursor;
 
+    private ContentBehaviour highlightedBehaviour;
 
     [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
 
@@ -61,7 +65,6 @@ public class GameManager : GlobalManager
 
     private Dictionary<ScriptableContent, List<ContentBehaviour>> allRegisteredBehavioursDict = new Dictionary<ScriptableContent, List<ContentBehaviour>>();
 
-    public List<EnemyBehaviour> AllSpawnedEnemies = new List<EnemyBehaviour>();
     public List<IHittable> AllSpawnedHittables = new List<IHittable>();
 
     private List<EnemySpawnTarget> AllSpawnTargets;
@@ -131,8 +134,8 @@ public class GameManager : GlobalManager
 
     private void ResetGame()
     {
-        for (int i = 0; i < AllSpawnedEnemies.Count; i++)
-            RemoveEnemy(AllSpawnedEnemies[i]);
+        foreach (EnemyBehaviour enemy in GetContentBehaviours<EnemyBehaviour>())
+            UnregisterContentBehaviour(enemy, true);
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
         currentHealth = maxHealth;
@@ -145,7 +148,6 @@ public class GameManager : GlobalManager
         HasGameEnded = false;
         isFirstWave = true;
         RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
-        AllSpawnedEnemies = new List<EnemyBehaviour>();
         AllSpawnedHittables = new List<IHittable>();
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
@@ -248,6 +250,28 @@ public class GameManager : GlobalManager
     private void LateUpdate()
     {
         RefreshEnemyPriorities();
+        RefreshCursor();
+    }
+
+    private void RefreshCursor()
+    {
+        Texture2D newCursor = null;
+        if (highlightedBehaviour != null && highlightedBehaviour.ContentData.Cursor != null)
+            newCursor = highlightedBehaviour.ContentData.Cursor;
+        else
+            newCursor = defaultCursor;
+
+        Cursor.SetCursor(newCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void OnContentBehaviourMousedEnter(ContentBehaviour behaviour)
+    {
+        highlightedBehaviour = behaviour;
+    }
+
+    public void OnContentBehaviourMousedExit(ContentBehaviour behaviour)
+    {
+        highlightedBehaviour = null;
     }
 
     public void ModifyHealth(int newValue)
@@ -318,7 +342,6 @@ public class GameManager : GlobalManager
 
         if (spawnedEnemy.TryGetComponent(out IHittable hittable))
             AllSpawnedHittables.Add(hittable);
-        AllSpawnedEnemies.Add(spawnedEnemy);
 
         OnEnemySpawned.Invoke(spawnedEnemy);
 
@@ -326,7 +349,7 @@ public class GameManager : GlobalManager
 
     private void RefreshEnemyPriorities()
     {
-        List<EnemyBehaviour> sortedEnemies = AllSpawnedEnemies.OrderBy(e => e.RemainingDestinationDistance).Reverse().ToList();
+        List<EnemyBehaviour> sortedEnemies = GetContentBehaviours<EnemyBehaviour>().OrderBy(e => e.RemainingDestinationDistance).Reverse().ToList();
 
         foreach (EnemyBehaviour enemy in sortedEnemies)
             enemy.SetAvoidancePriority(sortedEnemies.IndexOf(enemy));
@@ -350,13 +373,9 @@ public class GameManager : GlobalManager
         }
 
         UnregisterContentBehaviour(enemy, true);
-        List<EnemyBehaviour> allActiveBehaviours = GetContentBehaviours<EnemyBehaviour>();
-        enemy.gameObject.SetActive(false);
         Instance.OnEnemyKilled.Invoke(enemy);
-        Instance.AllSpawnedEnemies.Remove(enemy);
-        GameObject.Destroy(enemy.gameObject);
 
-        if (Instance.AllSpawnedEnemies.Count == 0)
+        if (GetContentBehaviours<EnemyBehaviour>().Count == 0)
         {
             Instance.HaveWaveEnemiesBeenRemoved = true;
             Instance.CheckWaveStatus();
@@ -400,8 +419,8 @@ public class GameManager : GlobalManager
     {
         List<T> returnList = new List<T>();
         foreach (KeyValuePair<ScriptableContent, List<ContentBehaviour>> registeredLists in Instance.allRegisteredBehavioursDict)
-            if (registeredLists.Key.Prefab is T)
-                returnList.AddRange(registeredLists.Value as List<T>);
+            if (registeredLists.Value is List<T> listT)
+                returnList.AddRange(listT);
 
         return (returnList);
     }

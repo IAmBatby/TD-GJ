@@ -2114,6 +2114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalSpawnEnemyCooldown: 0.1
+  defaultCursor: {fileID: 2800000, guid: 26587469c75d80648a0351b85e11af86, type: 3}
   <DefaultLevel>k__BackingField: {fileID: 11400000, guid: 46b2598feb7ecbc46b89f5e7453461c8,
     type: 2}
   navMeshSurface: {fileID: 3420457079542688757}
@@ -2133,7 +2134,6 @@ MonoBehaviour:
     type: 2}
   ActiveWaves:
     allObjects: []
-  AllSpawnedEnemies: []
   RequestedEnemiesToSpawn: []
   maxHealth: 20
   AllHealthControllers: []
