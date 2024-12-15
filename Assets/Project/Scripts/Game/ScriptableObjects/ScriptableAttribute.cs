@@ -13,12 +13,12 @@ public abstract class ScriptableAttribute : ScriptableObject
 
     public abstract bool Compare(ScriptableAttribute attribute);
 
-    public string GetDisplayString()
+    public string GetSecondaryDisplayString()
     {
         if (this is ScriptableAttribute<float> floatAtr)
         {
-            char thing = floatAtr.DefaultValue > 0 ? '+' : '-';
-            return (DisplayName + " (" + thing + floatAtr.DefaultValue + ")");
+            char thing = floatAtr.GetAttributeValue() > 0 ? '+' : '-';
+            return (thing + floatAtr.GetAttributeValue().ToString());
         }
         else
             return (DisplayName);

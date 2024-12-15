@@ -42,16 +42,16 @@ public class TurretBaseBehaviour : ItemBehaviour
         canShoot = true;
         TurretData = ItemData as ScriptableTurret;
         Projectile = TurretData.Projectile;
-        FireRateAttribute.ApplyWithReference(TurretData.FireRateAttribute);
-        ShotSpeedAttribute.ApplyWithReference(TurretData.ShotSpeedAttribute);
-        RangeAttribute.ApplyWithReference(TurretData.RangeAttribute);
         DamageAttribute.ApplyWithReference(TurretData.DamageAttribute);
+        RangeAttribute.ApplyWithReference(TurretData.RangeAttribute);
+        ShotSpeedAttribute.ApplyWithReference(TurretData.ShotSpeedAttribute);
+        FireRateAttribute.ApplyWithReference(TurretData.FireRateAttribute);
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
         SelectedTargetType = TurretData.TargetType;
 
         foreach (ScriptableAttribute attribute in AllAttributes)
         {
-            ContentDisplayInfo newInfo = new ContentDisplayInfo(attribute.GetDisplayString(), attribute.DisplayIcon, attribute.DisplayColor);
+            ContentDisplayInfo newInfo = new ContentDisplayInfo(attribute.DisplayName, attribute.GetSecondaryDisplayString(), displayIcon: attribute.DisplayIcon, displayColor: attribute.DisplayColor);
             attributeDisplayInfoDict.Add(attribute, newInfo);
             AddContentDisplayInfo(newInfo);
         }
@@ -72,8 +72,9 @@ public class TurretBaseBehaviour : ItemBehaviour
 
         ActiveModule = newModule;
 
-        GeneralDisplayInfo.DisplayText = ActiveModule.ModuleData.GetDisplayName();
-        GeneralDisplayInfo.FillAmount = Mathf.InverseLerp(0f, TurretData.Modules.Count, TurretData.Modules.IndexOf(turretModule) + 1);
+        GeneralDisplayInfo.DisplayMode = PresentationType.Progress;
+        GeneralDisplayInfo.SetDisplayValues(ActiveModule.ModuleData.GetDisplayName());
+        GeneralDisplayInfo.SetProgressValues(TurretData.Modules.IndexOf(turretModule) + 1, TurretData.Modules.Count);
     }
 
     private void Update()
@@ -222,7 +223,7 @@ public class TurretBaseBehaviour : ItemBehaviour
     private void OnAttributeModified(ScriptableAttribute attributeModified, float modifierAdded)
     {
         if (attributeDisplayInfoDict.TryGetValue(attributeModified, out ContentDisplayInfo displayInfo))
-            displayInfo.DisplayText = attributeModified.GetDisplayString();
+            displayInfo.SetDisplayValues(attributeModified.DisplayName, attributeModified.GetSecondaryDisplayString());
         AudioPlayer.PlayAudio(TurretData.OnUpgradeAudio);
     }
 }

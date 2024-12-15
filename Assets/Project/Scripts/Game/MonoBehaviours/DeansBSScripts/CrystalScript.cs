@@ -7,7 +7,7 @@ public class CrystalScript : MonoBehaviour
     public List<ContentSpawner> listOfSpawners = new List<ContentSpawner>();
     public List<GameObject> listOfCrystals = new List<GameObject>();
 
-    public HealthController healthControl;
+    public HurtableBehaviour healthControl;
     public int DropThresholdPercent;
     public int spawnChance;
 
@@ -18,8 +18,8 @@ public class CrystalScript : MonoBehaviour
 
     public void DropCrystal()
     {
-        if (healthControl.Health == 0 || healthControl.Health == healthControl.maxHealth) return;
-        if(listOfCrystals.Count != 0 && (healthControl.Health/healthControl.maxHealth * 100) <= DropThresholdPercent)
+        if (healthControl.Health == 0 || healthControl.Health == healthControl.MaxHealth) return;
+        if(listOfCrystals.Count != 0 && (healthControl.Health/healthControl.MaxHealth * 100) <= DropThresholdPercent)
         {
             var crystal = listOfCrystals[0];
 

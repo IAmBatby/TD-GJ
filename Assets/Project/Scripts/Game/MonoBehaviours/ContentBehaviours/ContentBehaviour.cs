@@ -38,7 +38,7 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
         if (Rigidbody == null)
             Debug.LogError("Failed To Find Rigidbody!", transform);
 
-        GeneralDisplayInfo = new ContentDisplayInfo(ContentData.ContentName, ContentData.ContentIcon, ContentData.ContentColor);
+        GeneralDisplayInfo = CreateGeneralDisplayInfo();
         contentDisplayInfos.Add(GeneralDisplayInfo);
         OnSpawn();
     }
@@ -56,6 +56,9 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
         if (contentDisplayInfos.Contains(contentDisplayInfo))
             contentDisplayInfos.Remove(contentDisplayInfo);
     }
+
+    protected virtual ContentDisplayInfo CreateGeneralDisplayInfo() => new ContentDisplayInfo(ContentData.ContentName, displayIcon: ContentData.ContentIcon, displayColor: ContentData.ContentColor);
+
 
     public List<ContentDisplayInfo> GetDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
     public Texture2D GetCursor() => ContentData.Cursor;

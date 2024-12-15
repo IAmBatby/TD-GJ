@@ -79,7 +79,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         GameManager.UnregisterContentBehaviour(fakeItem, false);
 
         foreach (ContentDisplayInfo displayInfo in fakeItem.GetDisplayInfos())
-            displayInfos.Add(new ContentDisplayInfo(displayInfo.DisplayText, displayInfo.DisplayIcon, Color.yellow));
+            displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: Color.yellow));
     }
 
     public bool TryInteract()

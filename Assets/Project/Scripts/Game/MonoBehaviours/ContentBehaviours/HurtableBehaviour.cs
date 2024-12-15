@@ -23,7 +23,7 @@ public class HurtableBehaviour : ContentBehaviour, IHittable
         //GameManager.Instance.AllHealthControllers.Add(this); Will Need To Fix!!
         SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), null, Color.red);
+        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
         AddContentDisplayInfo(healthDisplayInfo);
         OnHealthModified.AddListener(RefreshDisplayInfo);
     }
@@ -60,7 +60,7 @@ public class HurtableBehaviour : ContentBehaviour, IHittable
 
     private void RefreshDisplayInfo()
     {
-        healthDisplayInfo.DisplayText = "HP: " + currentHealth.ToString();
-        healthDisplayInfo.FillAmount = Mathf.InverseLerp(0, MaxHealth, currentHealth);
+        healthDisplayInfo.SetDisplayValues("HP: " + currentHealth.ToString());
+        healthDisplayInfo.SetProgressValues(currentHealth, MaxHealth);
     }
 }
