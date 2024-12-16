@@ -93,11 +93,18 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         if (GameManager.Instance.Currency >= cost)
         {
             GameManager.ModifyCurrency(-cost);
-            fakeItemObject.SetActive(false);
             ContentBehaviour realContent = contentSpawner.Spawn(contentToSpawn);
             audioPlayer.PlayAudio(OnPurchaseAudio);
-            priceText.enabled = false;
-            hasBeenPurchased = true;
+            
+            if (turnsUntilRespawn == 0)
+                ResetShop();
+            else
+            {
+                fakeItemObject.SetActive(false);
+                priceText.enabled = false;
+                hasBeenPurchased = true;
+            }
+
 
             return (true);
         }
@@ -111,12 +118,17 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
             respawnTurnCount++;
             if (respawnTurnCount == turnsUntilRespawn)
             {
-                hasBeenPurchased = false;
-                fakeItemObject.SetActive(true);
-                priceText.enabled = true;
-                respawnTurnCount = 0;
+                ResetShop();
             }
         }
+    }
+
+    private void ResetShop()
+    {
+        hasBeenPurchased = false;
+        fakeItemObject.SetActive(true);
+        priceText.enabled = true;
+        respawnTurnCount = 0;
     }
 
     public bool IsHighlightable() => true;

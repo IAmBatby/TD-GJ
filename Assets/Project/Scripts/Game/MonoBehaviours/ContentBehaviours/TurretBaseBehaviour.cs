@@ -302,13 +302,14 @@ public class TurretBaseBehaviour : ItemBehaviour
         foreach (ShootPosition shotPos in ActiveModule.ShootPositions)
         {
             Vector3 size = new Vector3(0.3f, 0.3f, 0.3f);
-            Vector3 draggingPoint = shotPos.GetAccuracyPosition(Target.transform, 0f);
-            Vector3 rushingPoint = shotPos.GetAccuracyPosition(Target.transform, 1f);
+
+            Vector3 rushingPosition = Target.transform.position + (Target.transform.forward + new Vector3(5, 0, 0));
+            Vector3 draggingPosition = Target.transform.position + (-Target.transform.forward + new Vector3(-5, 0, 0));
             Vector3 realPoint = shotPos.GetAccuracyPosition(Target.transform, AccuracyAttribute.Value);
             Gizmos.DrawLine(transform.position, realPoint);
-            Gizmos.DrawWireCube(draggingPoint, size);
-            Gizmos.DrawWireCube(rushingPoint, size);
-            Gizmos.DrawLine(draggingPoint, rushingPoint);
+            Gizmos.DrawWireCube(rushingPosition, size);
+            Gizmos.DrawWireCube(draggingPosition, size);
+            Gizmos.DrawLine(rushingPosition, draggingPosition);
             Gizmos.color = Color.green;
             Gizmos.DrawCube(realPoint, size);
         }

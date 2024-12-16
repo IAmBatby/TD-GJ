@@ -7,6 +7,8 @@ public class ShootPosition : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
 
+    [SerializeField] private LayerMask enemyMask;
+
     public void UpdateShootRenderer(HurtableBehaviour target)
     {
         if (target != null)
@@ -26,13 +28,21 @@ public class ShootPosition : MonoBehaviour
 
     public Vector3 GetAccuracyPosition(Transform targetTransform, float accuracy)
     {
-        float offset = 2.5f; //hardcoded rn
+        float offset = Mathf.Lerp(5f, 0, accuracy); //Hardcoded rn
+        Vector3 rushingPosition = targetTransform.position + (targetTransform.forward + new Vector3(offset, 0, 0));
+        Vector3 draggingPosition = targetTransform.position + (-targetTransform.forward + new Vector3(-offset, 0, 0));
+        if (Physics.Raycast(transform.position, targetTransform.position, out RaycastHit hit, Mathf.Infinity, enemyMask))
+        {
+            rushingPosition = hit.point + (hit.point + new Vector3(offset, 0, 0));
+            draggingPosition = hit.point + (-hit.normal + new Vector3(-offset, 0, 0));
 
-        offset = Random.Range(0, accuracy);
+        }
 
-        Vector3 rushingPosition = targetTransform.position + (targetTransform.forward + new Vector3(offset,0,0));
-        Vector3 draggingPosition = targetTransform.position + (targetTransform.forward + new Vector3(-offset, 0, 0));
+        rushingPosition = Vector3.Lerp(rushingPosition, targetTransform.position, accuracy);
+        draggingPosition = Vector3.Lerp(draggingPosition, targetTransform.position, accuracy);
 
-        return (Vector3.Lerp(rushingPosition, draggingPosition, 0.5f));
+
+
+        return (Vector3.Lerp(rushingPosition, draggingPosition, Random.Range(Mathf.Lerp(0,0.5f,accuracy), Mathf.Lerp(1f,0.5f,accuracy))));
     }
 }

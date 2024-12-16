@@ -55,6 +55,8 @@ public class HurtableBehaviour : ContentBehaviour
         OnHealthModified.Invoke((previousHealth, currentHealth));
     }
 
+    public virtual bool CanDie() => true;
+
     private void RefreshDisplayInfo()
     {
         healthDisplayInfo.SetDisplayValues(currentHealth.ToString());
