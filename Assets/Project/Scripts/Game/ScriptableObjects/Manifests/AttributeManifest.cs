@@ -9,4 +9,5 @@ public class AttributeManifest : ScriptableObject
     [field: SerializeField] public ScriptableAttribute RangeAttribute {  get; private set; }
     [field: SerializeField] public ScriptableAttribute ShotSpeedAttribute { get; private set; }
     [field: SerializeField] public ScriptableAttribute FireRateAttribute { get; private set; }
+    [field: SerializeField] public ScriptableAttribute AccuracyAttribute { get; private set; }
 }

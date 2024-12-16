@@ -18,4 +18,21 @@ public class ShootPosition : MonoBehaviour
     }
 
     public void ToggleRenderer(bool value) => lineRenderer.enabled = value;
+
+    public void ShootAtTarget(ScriptableProjectile projectile, HurtableBehaviour target, int damage, float shotSpeed, float accuracy)
+    {
+        projectile.SpawnProjectile(transform.position, GetAccuracyPosition(target.transform, accuracy), shotSpeed, damage);
+    }
+
+    public Vector3 GetAccuracyPosition(Transform targetTransform, float accuracy)
+    {
+        float offset = 2.5f; //hardcoded rn
+
+        offset = Random.Range(0, accuracy);
+
+        Vector3 rushingPosition = targetTransform.position + (targetTransform.forward + new Vector3(offset,0,0));
+        Vector3 draggingPosition = targetTransform.position + (targetTransform.forward + new Vector3(-offset, 0, 0));
+
+        return (Vector3.Lerp(rushingPosition, draggingPosition, 0.5f));
+    }
 }

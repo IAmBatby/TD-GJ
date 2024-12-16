@@ -57,7 +57,7 @@ public class HurtableBehaviour : ContentBehaviour
 
     private void RefreshDisplayInfo()
     {
-        healthDisplayInfo.SetDisplayValues("HP: " + currentHealth.ToString());
+        healthDisplayInfo.SetDisplayValues(currentHealth.ToString());
         healthDisplayInfo.SetProgressValues(currentHealth, MaxHealth);
     }
 

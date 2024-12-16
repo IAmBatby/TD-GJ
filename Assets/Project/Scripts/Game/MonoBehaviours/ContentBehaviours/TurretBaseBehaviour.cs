@@ -19,6 +19,7 @@ public class TurretBaseBehaviour : ItemBehaviour
 
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue FireRateAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShotSpeedAttribute { get; private set; }
+    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue AccuracyAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
     [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue DamageAttribute { get; private set; }
 
@@ -50,8 +51,9 @@ public class TurretBaseBehaviour : ItemBehaviour
         RangeAttribute.ApplyWithNewReference(GlobalData.Attributes.RangeAttribute, TurretData.Range);
         ShotSpeedAttribute.ApplyWithNewReference(GlobalData.Attributes.ShotSpeedAttribute, TurretData.ShotSpeed);
         FireRateAttribute.ApplyWithNewReference(GlobalData.Attributes.FireRateAttribute, TurretData.FireRate);
+        AccuracyAttribute.ApplyWithNewReference(GlobalData.Attributes.AccuracyAttribute, TurretData.Accuracy);
 
-        AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
+        AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute, AccuracyAttribute.Attribute };
         SelectedTargetType = TurretData.TargetType;
 
         List<ContentDisplayInfo> atrInfos = new List<ContentDisplayInfo>();
@@ -127,7 +129,10 @@ public class TurretBaseBehaviour : ItemBehaviour
         if (Target == null || canShoot == false) return;
 
         foreach (ShootPosition shootPosition in ActiveModule.ShootPositions)
-            Projectile.SpawnProjectile(shootPosition.transform.position, Target.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+        {
+            shootPosition.ShootAtTarget(Projectile, Target, Mathf.RoundToInt(DamageAttribute.Value), ShotSpeedAttribute.Value, AccuracyAttribute.Value);
+            //Projectile.SpawnProjectile(shootPosition.transform.position, Target.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
+        }
 
         AudioPlayer.PlayAudio(TurretData.OnShootAudio);
         EnableCooldown();
@@ -286,5 +291,26 @@ public class TurretBaseBehaviour : ItemBehaviour
     {
         ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
         base.UnregisterBehaviour(destroyOnUnregistration);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        //Gizmos.matrix = transform.localToWorldMatrix;
+
+        if (Target == null) return;
+
+        foreach (ShootPosition shotPos in ActiveModule.ShootPositions)
+        {
+            Vector3 size = new Vector3(0.3f, 0.3f, 0.3f);
+            Vector3 draggingPoint = shotPos.GetAccuracyPosition(Target.transform, 0f);
+            Vector3 rushingPoint = shotPos.GetAccuracyPosition(Target.transform, 1f);
+            Vector3 realPoint = shotPos.GetAccuracyPosition(Target.transform, AccuracyAttribute.Value);
+            Gizmos.DrawLine(transform.position, realPoint);
+            Gizmos.DrawWireCube(draggingPoint, size);
+            Gizmos.DrawWireCube(rushingPoint, size);
+            Gizmos.DrawLine(draggingPoint, rushingPoint);
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(realPoint, size);
+        }
     }
 }

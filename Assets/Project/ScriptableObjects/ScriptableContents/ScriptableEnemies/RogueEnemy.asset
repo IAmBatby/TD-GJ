@@ -30,3 +30,6 @@ MonoBehaviour:
   <Damage>k__BackingField: 5
   <Speed>k__BackingField: 2
   <GoldDropRateMinMax>k__BackingField: {x: 5, y: 10}
+  <ItemDrop>k__BackingField: {fileID: 11400000, guid: 80869fa8342af7b42b2e43ad56ef80fd,
+    type: 2}
+  <ItemDropRate>k__BackingField: 81.5

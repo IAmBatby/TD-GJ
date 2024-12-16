@@ -61,6 +61,8 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
             contentDisplayListings.Remove(contentDisplayListing);
     }
 
+
+
     protected virtual ContentDisplayInfo CreateGeneralDisplayInfo() => new ContentDisplayInfo(ContentData.ContentName, displayIcon: ContentData.ContentIcon, displayColor: ContentData.ContentColor);
 
 

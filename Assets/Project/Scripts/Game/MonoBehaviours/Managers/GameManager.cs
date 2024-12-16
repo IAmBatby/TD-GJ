@@ -380,6 +380,15 @@ public class GameManager : GlobalManager
             return;
         }
 
+        if (enemy.Health == 0 && enemy.EnemyData.ItemDrop != null)
+        {
+            if (Random.Range(0,100) < enemy.EnemyData.ItemDropRate)
+            {
+                ItemBehaviour itemDrop = enemy.EnemyData.ItemDrop.SpawnPrefab() as ItemBehaviour;
+                itemDrop.transform.position = enemy.transform.position;
+            }
+        }
+
         UnregisterContentBehaviour(enemy, true);
         OnEnemyKilled.Invoke(enemy);
 

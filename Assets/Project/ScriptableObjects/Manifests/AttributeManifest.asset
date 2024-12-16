@@ -20,3 +20,5 @@ MonoBehaviour:
     type: 2}
   <FireRateAttribute>k__BackingField: {fileID: 11400000, guid: db71f904ea68728488ef6f6e6b202743,
     type: 2}
+  <AccuracyAttribute>k__BackingField: {fileID: 11400000, guid: bead1af4937125743af0310a0dc00aee,
+    type: 2}

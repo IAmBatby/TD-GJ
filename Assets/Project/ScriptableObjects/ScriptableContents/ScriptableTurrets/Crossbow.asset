@@ -36,6 +36,7 @@ MonoBehaviour:
   <Range>k__BackingField: 5
   <ShotSpeed>k__BackingField: 7
   <FireRate>k__BackingField: 0.9
+  <Accuracy>k__BackingField: 1
   <TargetType>k__BackingField: 2
   <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}
