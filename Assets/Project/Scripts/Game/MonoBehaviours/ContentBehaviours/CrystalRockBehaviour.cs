@@ -7,6 +7,7 @@ public class CrystalRockBehaviour : HurtableBehaviour
     [SerializeField] private List<ContentSpawner> randomSpawners = new List<ContentSpawner>();
     [SerializeField] private List<ItemBehaviour> spawnedCrystals = new List<ItemBehaviour>();
 
+
     //I think maybe you should actually animate the item spawner positions and spawn a crystal at the end of the animation
     //Instead of trying to animate the crystal itself
     [SerializeField] private Animator rockSpawnAnimator;
@@ -22,13 +23,21 @@ public class CrystalRockBehaviour : HurtableBehaviour
     //Damage taken, "release" spawned Crystal
     private void TryDropCrystal((int oldHealth, int newHealth) modifiedHealth)
     {
+        if (modifiedHealth.oldHealth >= modifiedHealth.newHealth) return;
+
 
     }
-
 
     //New wave, roll to spawn droppable Crystal
     private void TrySpawnCrystal()
     {
+        if (spawnedCrystals.Count >= randomSpawners.Count) return;
+
+        int temp = Random.Range(0, randomSpawners.Count);
+
+        //do animation
+
+        randomSpawners[temp].Spawn()
 
     }
 
