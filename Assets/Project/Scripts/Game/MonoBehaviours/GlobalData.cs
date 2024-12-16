@@ -21,6 +21,7 @@ public class GlobalData : MonoBehaviour
     [SerializeField] private AttributeManifest attributeManifest;
     [SerializeField] private LevelManifest levelManifest;
     [SerializeField] private IconManifest iconManifest;
+    [SerializeField] private SkinManifest skinManifest;
 
     [SerializeField] private GameObject systemsPrefab;
 
@@ -29,6 +30,7 @@ public class GlobalData : MonoBehaviour
     public static ColorManifest Colors => Instance.colorManifest;
     public static AttributeManifest Attributes => Instance.attributeManifest;
     public static IconManifest Icons => Instance.iconManifest;
+    public static SkinManifest Skins => Instance.skinManifest;
 
     private static Dictionary<string, ScriptableLevel> sceneLevelDict = new Dictionary<string, ScriptableLevel>();
 

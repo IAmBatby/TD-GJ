@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80d8d45c396b2ff439ad4419cb30096e, type: 3}
-  m_Name: DefaultPlayer
+  m_Name: DeanPlayer
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 5378851380656647385, guid: d974ff1bc44989448b0ec2b2a42095b4,
     type: 3}
-  <ContentName>k__BackingField: Glinda The Bad Bitch
+  <ContentName>k__BackingField: A Miner
   <ContentIcon>k__BackingField: {fileID: 21300000, guid: 75794b50a6625554f99e83189d854a3f,
     type: 3}
   <ContentColor>k__BackingField: {r: 0.087575644, g: 0.4528302, b: 0.16084062, a: 1}
@@ -26,3 +26,5 @@ MonoBehaviour:
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
+  <DefaultSkin>k__BackingField: {fileID: 11400000, guid: dfb85c86a1062c8499727d278f959253,
+    type: 2}

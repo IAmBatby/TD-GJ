@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482e134e43d3ab49bde4a05f1c8959a, type: 3}
+  m_Name: Knight
+  m_EditorClassIdentifier: 
+  <SkinPrefab>k__BackingField: {fileID: 1029974424311019379, guid: 968646bd33c7be74083400874f66f69c,
+    type: 3}

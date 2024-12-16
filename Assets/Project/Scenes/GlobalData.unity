@@ -156,6 +156,7 @@ MonoBehaviour:
   attributeManifest: {fileID: 11400000, guid: b866eb237e97bd1469128e5dd1b084ea, type: 2}
   levelManifest: {fileID: 11400000, guid: 8c84c1879dfd4314e8aab19774533b00, type: 2}
   iconManifest: {fileID: 11400000, guid: cb236ecaa7810284faf6572deff51119, type: 2}
+  skinManifest: {fileID: 11400000, guid: 77e4bbd89a519f441a568eafea306e59, type: 2}
   systemsPrefab: {fileID: 842840510426130536, guid: d848d6c313858f24b9be8e3f2504372c,
     type: 3}
 --- !u!4 &1318280755

@@ -1,6 +1,7 @@
 using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -12,7 +13,9 @@ public class PlayerBehaviour : HurtableBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private LayerMask lookMask;
     [SerializeField] private LayerMask dropMask;
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimatorController animatorController;
+    [SerializeField] private Transform skinParent;
+    private Animator activeAnimator;
     [SerializeField] private Texture2D defaultCursorSprite;
 
     [Space(20), Header("Camera")]
@@ -46,6 +49,11 @@ public class PlayerBehaviour : HurtableBehaviour
     {
         base.OnSpawn();
         InitializeCamera();
+
+        if (ContentData is ScriptablePlayer player)
+            SetSkin(player.DefaultSkin);
+
+        GameManager.OnNewWave.AddListener(SwitchRandomSkin);
     }
 
     private void InitializeCamera()
@@ -142,7 +150,8 @@ public class PlayerBehaviour : HurtableBehaviour
 
     protected override void OnDeath()
     {
-        animator.SetTrigger("Die");
+        if (activeAnimator != null)
+            activeAnimator.SetTrigger("Die");
         GameManager.Instance.EndGame(false);
     }
 
@@ -151,7 +160,8 @@ public class PlayerBehaviour : HurtableBehaviour
         if (GameManager.Instance.HasGameEnded) return;
         SetRotation();
 
-        animator.SetBool("isWalking", Rigidbody.velocity.magnitude > 1f);
+        if (activeAnimator != null)
+            activeAnimator.SetBool("isWalking", Rigidbody.velocity.magnitude > 1f);
     }
     private void FixedUpdate()
     {
@@ -169,6 +179,26 @@ public class PlayerBehaviour : HurtableBehaviour
         {
             ActiveItem.transform.localPosition = Vector3.zero;
         }
+    }
+
+    private void SwitchRandomSkin()
+    {
+        //ScriptableSkin randomSkin = GlobalData.Skins.Skins[Random.Range(0, GlobalData.Skins.Skins.Count)];
+        //SetSkin(randomSkin);
+    }
+
+    private void SetSkin(ScriptableSkin skin)
+    {
+        if (activeAnimator != null)
+        {
+            GameObject.Destroy(activeAnimator.gameObject);
+            activeAnimator = null;
+        }
+
+        GameObject newSkin = GameObject.Instantiate(skin.SkinPrefab, skinParent.transform);
+        newSkin.transform.position = Vector3.zero;
+        activeAnimator = newSkin.gameObject.AddComponent<Animator>();
+        activeAnimator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
     }
 
     private void SetRotation()
