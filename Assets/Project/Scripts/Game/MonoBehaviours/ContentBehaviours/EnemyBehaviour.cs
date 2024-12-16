@@ -1,8 +1,11 @@
 using IterationToolkit;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyBehaviour : HurtableBehaviour
 {
@@ -72,6 +75,14 @@ public class EnemyBehaviour : HurtableBehaviour
         GameManager.ModifyCurrency(Mathf.RoundToInt(Random.Range(EnemyData.GoldDropRateMinMax.x, EnemyData.GoldDropRateMinMax.y)));
         Agent.enabled = false;
         GameManager.RemoveEnemy(this);
+    }
+
+    private void ForwardedTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerBehaviour player))
+        {
+            player.ModifyHealth(EnemyData.Damage);
+        }
     }
 
     private void OnDrawGizmos()

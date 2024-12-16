@@ -111,7 +111,7 @@ public class PlayerBehaviour : HurtableBehaviour
         }
     }
 
-    private void PickupItem(ItemBehaviour item)
+    public void PickupItem(ItemBehaviour item)
     {
         Debug.Log("Picking Up: " + item.name);
         ActiveItem = item;

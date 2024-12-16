@@ -13,7 +13,7 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 
     private List<ContentDisplayListing> contentDisplayListings = new List<ContentDisplayListing>();
 
-    public bool IsHighlighted => GameManager.Instance.HighlightedObject != null && GameManager.Instance.HighlightedObject.Compare(gameObject);
+    public bool IsHighlighted { get; private set; }
 
     public ContentDisplayInfo GeneralDisplayInfo { get; private set; }
     public ContentDisplayListing GeneralDisplayListing { get; private set; }

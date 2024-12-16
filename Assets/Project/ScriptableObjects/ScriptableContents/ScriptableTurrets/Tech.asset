@@ -26,7 +26,7 @@ MonoBehaviour:
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1
-  <Projectile>k__BackingField: {fileID: 11400000, guid: cd406f24ac54a424eb43809b9ec43dec,
+  <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
     type: 2}
   <Modules>k__BackingField:
   - {fileID: 11400000, guid: 799bd6ee8a45b824997710265dee23ba, type: 2}
