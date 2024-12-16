@@ -26,7 +26,7 @@ public class CrystalRockBehaviour : HurtableBehaviour
     {
         if (numberOfCrystalsToSpawn <= 0) return;
 
-        for (int i = numberOfCrystalsToSpawn; i >= 0; i--)
+        for (int i = numberOfCrystalsToSpawn; i > 0; i--)
         {
             if (activeSpawners.Count >= randomSpawners.Count) break;
             int RandomNumber = Random.Range(0, randomSpawners.Count);
