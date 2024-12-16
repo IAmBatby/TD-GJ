@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class CrystalRockBehaviour : HurtableBehaviour
 {
+    [SerializeField] private List<ContentSpawner> randomSpawners = new List<ContentSpawner>();
+    [SerializeField] private List<ItemBehaviour> spawnedCrystals = new List<ItemBehaviour>();
+
+    //I think maybe you should actually animate the item spawner positions and spawn a crystal at the end of the animation
+    //Instead of trying to animate the crystal itself
+    [SerializeField] private Animator rockSpawnAnimator;
+
+    protected override void OnSpawn()
+    {
+        base.OnSpawn();
+
+        GameManager.OnNewWave.AddListener(TrySpawnCrystal);
+        OnHealthModified.AddListener(TryDropCrystal);
+    }
 
     //Damage taken, "release" spawned Crystal
-    private void DropCrystal()
+    private void TryDropCrystal((int oldHealth, int newHealth) modifiedHealth)
     {
 
     }
 
 
     //New wave, roll to spawn droppable Crystal
-    private void SpawnCrystal()
+    private void TrySpawnCrystal()
     {
 
     }

@@ -20,6 +20,12 @@ public class ProjectileBehaviour : ContentBehaviour
         base.OnSpawn();
         if (ContentData is ScriptableProjectile projData)
             ProjectileData = projData;
+
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.material.color = ProjectileData.ProjectileColor;
+            renderer.material.SetColor("_EmissionColor", ProjectileData.ProjectileColor);
+        }
     }
 
     public void ApplyProjectile(Vector3 newTarget, float newForce, int newDamage)

@@ -54,12 +54,18 @@ public class TurretBaseBehaviour : ItemBehaviour
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
         SelectedTargetType = TurretData.TargetType;
 
+        List<ContentDisplayInfo> atrInfos = new List<ContentDisplayInfo>();
         foreach (ScriptableAttribute attribute in AllAttributes)
         {
-            ContentDisplayInfo newInfo = new ContentDisplayInfo(attribute.DisplayName, attribute.GetSecondaryDisplayString(), displayIcon: attribute.DisplayIcon, displayColor: attribute.DisplayColor);
-            attributeDisplayInfoDict.Add(attribute, newInfo);
-            AddContentDisplayInfo(newInfo);
+            if (attribute is ScriptableFloatAttribute floatAtr)
+            {
+                ContentDisplayInfo newInfo = new ContentDisplayInfo(floatAtr.GetAttributeValue().ToString(), displayIcon: null, displayColor: attribute.DisplayColor);
+                newInfo.DisplayMode = DisplayType.Mini;
+                attributeDisplayInfoDict.Add(attribute, newInfo);
+                atrInfos.Add(newInfo);
+            }
         }
+        AddContentDisplayListing(new ContentDisplayListing(atrInfos));
 
         BlacklistTarget(GameManager.Player);
 
@@ -77,19 +83,20 @@ public class TurretBaseBehaviour : ItemBehaviour
 
         ActiveModule = newModule;
 
-        GeneralDisplayInfo.DisplayMode = PresentationType.Progress;
+        
+        GeneralDisplayInfo.PresentMode = PresentationType.Progress;
         GeneralDisplayInfo.SetDisplayValues(ActiveModule.ModuleData.GetDisplayName());
         GeneralDisplayInfo.SetProgressValues(TurretData.Modules.IndexOf(turretModule) + 1, TurretData.Modules.Count);
     }
 
     private void Update()
     {
+        UpdateRangePreview();
         if (IsBeingHeld == true || ActiveModule == null) return;
 
         HurtableBehaviour previousTarget = Target;
 
         UpdateTargets();
-        UpdateRangePreview();
 
         if (Target != null && previousTarget == null)
         {
@@ -102,7 +109,7 @@ public class TurretBaseBehaviour : ItemBehaviour
 
         foreach (ShootPosition shootPosition in ActiveModule.ShootPositions)
         {
-            shootPosition.ToggleRenderer(Target != null && IsHighlighted);
+            shootPosition.ToggleRenderer(Target != null && IsHighlighted && IsBeingHeld == false);
             shootPosition.UpdateShootRenderer(Target);
         }
 
@@ -243,10 +250,10 @@ public class TurretBaseBehaviour : ItemBehaviour
         List<Vector3> returnList = new List<Vector3>();
 
         foreach (Vector3 circlePos in FindCirclePoints(circlePoints, RangeAttribute.Value))
-            returnList.Add(transform.TransformPoint(circlePos));
+            returnList.Add(transform.position + circlePos);
         
 
-        rangePreviewLineRenderer.enabled = IsHighlighted && IsBeingHeld == false;
+        rangePreviewLineRenderer.enabled = IsHighlighted == true && IsBeingHeld == false;
         rangePreviewLineRenderer.positionCount = circlePoints;
         rangePreviewLineRenderer.SetPositions(returnList.ToArray());
     }

@@ -22,8 +22,9 @@ public class HurtableBehaviour : ContentBehaviour
 
         SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: GlobalData.Icons.Health, displayColor: Color.red);
-        AddContentDisplayInfo(healthDisplayInfo);
+        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
+        healthDisplayInfo.DisplayMode = DisplayType.Mini;
+        GeneralDisplayListing.AddContentDisplayInfo(healthDisplayInfo);
         OnHealthModified.AddListener(RefreshDisplayInfo);
     }
 

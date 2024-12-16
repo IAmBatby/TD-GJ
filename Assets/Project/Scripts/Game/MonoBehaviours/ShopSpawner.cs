@@ -81,10 +81,10 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         shopDisplayInfo = new ContentDisplayInfo("For Sale: " + fakeItem.ContentData.GetDisplayName(), "$" + cost.ToString(), GlobalData.Colors.Yellow, displayIcon: GlobalData.Icons.Currency);
         displayInfos = new List<ContentDisplayInfo>() { generalInfo, shopDisplayInfo };
 
-        List<ContentDisplayInfo> fakeInfos = fakeItem.GetDisplayInfos();
-        fakeInfos.RemoveAt(0); //To remove the item's name since we say it in our item name
-        foreach (ContentDisplayInfo displayInfo in fakeInfos)
-            displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: GlobalData.Colors.Yellow));
+        List<ContentDisplayListing> fakeListings = fakeItem.GetDisplayListings();
+        fakeListings.RemoveAt(0); //To remove the item's name since we say it in our item name
+        //foreach (ContentDisplayListing displayInfo in fakeListings)
+            //displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: GlobalData.Colors.Yellow));
     }
 
     public bool TryInteract()
@@ -123,4 +123,12 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     public Texture2D GetCursor() => null;
     public List<ContentDisplayInfo> GetDisplayInfos() => displayInfos;
     public bool Compare(GameObject go) => (go == gameObject);
+
+    public List<ContentDisplayListing> GetDisplayListings()
+    {
+        List<ContentDisplayListing> returnList = new List<ContentDisplayListing>();
+        foreach (ContentDisplayInfo contentDisplayInfo in displayInfos)
+            returnList.Add(new ContentDisplayListing(contentDisplayInfo));
+        return (returnList);
+    }
 }

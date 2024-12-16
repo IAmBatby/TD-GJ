@@ -13,6 +13,9 @@ public class HighlightInfoController : MonoBehaviour
 
     [SerializeField] private float yOffset = 35;
 
+    [SerializeField] private HighlightListingElement highlightListingElementPrefab;
+    [SerializeField] private List<HighlightListingElement> highlightListingElements = new List<HighlightListingElement>();
+
     private void Awake()
     {
         DisableInfo();
@@ -39,12 +42,13 @@ public class HighlightInfoController : MonoBehaviour
 
     private void DisableInfo()
     {
-        foreach (HighlightInfoElement element in highlightInfoElements)
-            element.DisableHighlightInfo();
+        foreach (HighlightListingElement element in highlightListingElements)
+            element.DisableHighlightListing();
     }
 
     private void EnableInfo()
     {
+        /*
         foreach (HighlightInfoElement element in highlightInfoElements)
             element.DisableHighlightInfo();
 
@@ -52,6 +56,15 @@ public class HighlightInfoController : MonoBehaviour
         for (int i = 0; i < infos.Count; i++)
             if (i < highlightInfoElements.Count)
                 highlightInfoElements[i].EnableHighlightInfo(infos[i]);
+        */
+
+        foreach (HighlightListingElement element in highlightListingElements)
+            element.DisableHighlightListing();
+
+        List<ContentDisplayListing> listings = trackingBehaviour.GetDisplayListings();
+        for (int i = 0; i < listings.Count; i++)
+            if (i < highlightListingElements.Count)
+                highlightListingElements[i].EnableHighlightListing(listings[i]);
 
     }
 }

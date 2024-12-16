@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using Color = UnityEngine.Color;
 
 public enum PresentationType { Standard, Progress, Percentage }
+public enum DisplayType { Full, Mini }
 public class ContentDisplayInfo
 {
     public Sprite DisplayIcon { get; set; }
     public Color DisplayColor { get; set; }
-    public PresentationType DisplayMode { get; set; } = PresentationType.Standard;
+    public PresentationType PresentMode { get; set; } = PresentationType.Standard;
+    public DisplayType DisplayMode { get; set; } = DisplayType.Full;
 
     public string PrimaryText { get; private set; }
     public string SecondaryText { get; private set; }
@@ -18,16 +17,20 @@ public class ContentDisplayInfo
     private float progressMaxValue;
     private float progressCurrentValue;
 
+    public Vector2 DisplayScale { get; set; }
+
     public ContentDisplayInfo(string primaryText, string secondaryText = null, Color displayColor = default, PresentationType displayMode = PresentationType.Standard, Sprite displayIcon = null)
     {
         SetDisplayValues(primaryText, secondaryText);
         DisplayColor = displayColor;
-        DisplayMode = displayMode;
+        PresentMode = displayMode;
         DisplayIcon = displayIcon;
 
         progressMinValue = 0f;
         progressMaxValue = 1f;
         progressCurrentValue = 1f;
+
+        DisplayScale = new Vector2(1f, 1f);
     }
 
     public void SetDisplayValues(string newPrimaryText = null, string newSecondaryText = null)
@@ -45,7 +48,7 @@ public class ContentDisplayInfo
 
     public string GetDisplayText()
     {
-        return (DisplayMode switch
+        return (PresentMode switch
         {
             PresentationType.Standard => string.IsNullOrEmpty(SecondaryText) ? PrimaryText : PrimaryText + " (" + SecondaryText + ")",
             PresentationType.Progress => string.IsNullOrEmpty(SecondaryText) ? PrimaryText : PrimaryText + " / " + SecondaryText,

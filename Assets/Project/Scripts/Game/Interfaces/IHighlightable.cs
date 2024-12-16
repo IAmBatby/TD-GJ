@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IHighlightable
 {
-    public List<ContentDisplayInfo> GetDisplayInfos();
+    public List<ContentDisplayListing> GetDisplayListings();
 
     public Texture2D GetCursor();
 

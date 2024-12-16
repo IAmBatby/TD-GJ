@@ -11,11 +11,12 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 
     public ExtendedEvent<bool> OnMouseoverToggle = new ExtendedEvent<bool>();
 
-    private List<ContentDisplayInfo> contentDisplayInfos = new List<ContentDisplayInfo>();
+    private List<ContentDisplayListing> contentDisplayListings = new List<ContentDisplayListing>();
 
     public bool IsHighlighted => GameManager.Instance.HighlightedObject != null && GameManager.Instance.HighlightedObject.Compare(gameObject);
 
     public ContentDisplayInfo GeneralDisplayInfo { get; private set; }
+    public ContentDisplayListing GeneralDisplayListing { get; private set; }
 
     private void OnMouseEnter()
     {
@@ -41,31 +42,33 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
             Debug.LogError("Failed To Find Rigidbody!", transform);
 
         GeneralDisplayInfo = CreateGeneralDisplayInfo();
-        contentDisplayInfos.Add(GeneralDisplayInfo);
+        GeneralDisplayListing = new ContentDisplayListing(GeneralDisplayInfo);
+        contentDisplayListings.Add(GeneralDisplayListing);
         OnSpawn();
     }
 
     protected virtual void OnSpawn() { }
 
-    public void AddContentDisplayInfo(ContentDisplayInfo contentDisplayInfo)
+    public void AddContentDisplayListing(ContentDisplayListing contentDisplayListing)
     {
-        if (!contentDisplayInfos.Contains(contentDisplayInfo))
-            contentDisplayInfos.Add(contentDisplayInfo);
+        if (!contentDisplayListings.Contains(contentDisplayListing))
+            contentDisplayListings.Add(contentDisplayListing);
     }
 
-    public void RemoveContentDisplayInfo(ContentDisplayInfo contentDisplayInfo)
+    public void RemoveContentDisplayListing(ContentDisplayListing contentDisplayListing)
     {
-        if (contentDisplayInfos.Contains(contentDisplayInfo))
-            contentDisplayInfos.Remove(contentDisplayInfo);
+        if (contentDisplayListings.Contains(contentDisplayListing))
+            contentDisplayListings.Remove(contentDisplayListing);
     }
 
     protected virtual ContentDisplayInfo CreateGeneralDisplayInfo() => new ContentDisplayInfo(ContentData.ContentName, displayIcon: ContentData.ContentIcon, displayColor: ContentData.ContentColor);
 
 
-    public List<ContentDisplayInfo> GetDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
+    public List<ContentDisplayListing> GetDisplayListings() => new List<ContentDisplayListing>(contentDisplayListings);
+
     public Texture2D GetCursor() => ContentData.Cursor;
     public bool IsHighlightable() => ContentData.Highlightable;
-    public bool Compare(GameObject go) => (go == gameObject);
+    public bool Compare(GameObject go) => (go != null && go == gameObject);
 
     public virtual void RegisterBehaviour() => ContentManager.RegisterBehaviour(this);
     public virtual void UnregisterBehaviour(bool destroyOnUnregistration) => ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
