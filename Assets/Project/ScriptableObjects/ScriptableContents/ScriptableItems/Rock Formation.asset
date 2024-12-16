@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bafd80c5a82e23439983b29d9048e7f, type: 3}
-  m_Name: CoinPickupItem
+  m_Script: {fileID: 11500000, guid: fd2a39d9337bf8e40b7fb4f4b68bf6a1, type: 3}
+  m_Name: Rock Formation
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 1129878079823453487, guid: 60b0490520a0a404996892870dc00356,
+  <Prefab>k__BackingField: {fileID: 1657740986348537836, guid: 4d05219a797577d42b52fdae8cfc49ea,
     type: 3}
   <ContentName>k__BackingField: 
   <ContentIcon>k__BackingField: {fileID: 0}
   <ContentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
-  <Highlightable>k__BackingField: 0
+  <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
-  <ShouldBeAnchoredToGround>k__BackingField: 0
-  <OnPickupAudio>k__BackingField: {fileID: 0}
-  <OnDropAudio>k__BackingField: {fileID: 0}
-  <CanBePickedUp>k__BackingField: 1
+  <ShouldBeAnchoredToGround>k__BackingField: 1
+  <Health>k__BackingField: 10
+  <OnHealthLostAudio>k__BackingField: {fileID: 0}
+  <OnHealthGainedAudio>k__BackingField: {fileID: 0}
