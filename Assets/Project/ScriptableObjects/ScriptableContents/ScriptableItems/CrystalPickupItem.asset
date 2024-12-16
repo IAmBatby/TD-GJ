@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 1950762312102575686, guid: ae44e1495e2d5c74f8e37e51dc5d29cf,
     type: 3}
-  <OnPickupAudioPreset>k__BackingField: {fileID: 0}
-  <OnDropAudioPreset>k__BackingField: {fileID: 0}
-  <OnSpawnAudioPreset>k__BackingField: {fileID: 0}
+  <ContentName>k__BackingField: Bring Me to a Turret!
+  <ContentIcon>k__BackingField: {fileID: 0}
+  <ContentColor>k__BackingField: {r: 0.954277, g: 0.44028127, b: 0.9622642, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
+  <Highlightable>k__BackingField: 1
+  <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
+  <OnPickupAudio>k__BackingField: {fileID: 0}
+  <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1129878079823453487}
   - component: {fileID: 5993934370028759845}
   - component: {fileID: 3089627288654264279}
+  - component: {fileID: -2734026149854537307}
   m_Layer: 0
   m_Name: CoinPrefab
   m_TagString: Untagged
@@ -91,12 +92,46 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0.15}
+--- !u!114 &-2734026149854537307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672372642169836847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b27e8efffa91de4eb96ce35149a43ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1129878079823453487}
+        m_TargetAssemblyTypeName: GoldDropBehaviour, Assembly-CSharp
+        m_MethodName: ForwardedTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  gizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &4894219948513267250
 PrefabInstance:
   m_ObjectHideFlags: 0
