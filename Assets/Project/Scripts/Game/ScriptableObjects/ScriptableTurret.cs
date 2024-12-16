@@ -9,12 +9,13 @@ public class ScriptableTurret : ScriptableItem
     [field: Header("Turret Values"), Space(15)]
     [field: SerializeField] public ScriptableProjectile Projectile { get; private set; }
     [field: SerializeField] public List<ScriptableTurretModule> Modules { get; private set; }
-    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue FireRateAttribute { get; private set; }
-    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue ShotSpeedAttribute { get; private set; }
-    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue RangeAttribute { get; private set; }
-    [field: SerializeField] public ScriptableFloatAttributeWithDefaultValue DamageAttribute { get; private set; }
-    [field: SerializeField] public TargetType TargetType { get; private set; }
 
+    [field: SerializeField] public float Damage { get; private set; }
+    [field: SerializeField] public float Range { get; private set; }
+    [field: SerializeField] public float ShotSpeed { get; private set; }
+    [field: SerializeField] public float FireRate { get; private set; }
+
+    [field: SerializeField] public TargetType TargetType { get; private set; }
 
     [field: Header("Turret Audio Values"), Space(15)]
     [field: SerializeField] public AudioPreset OnShootAudio { get; private set; }

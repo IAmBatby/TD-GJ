@@ -30,16 +30,12 @@ public class MainMenuManager : GlobalManager
         creditsMenu.gameObject.SetActive(false);
         InitializeLevelSelect();
         levelSelectMenu.gameObject.SetActive(false);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneUnloaded += OnSceneUnloaded;
+        GlobalData.OnLevelUnloaded.AddListener(OnLevelUnloaded);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
-    {
-        SceneManager.SetActiveScene(scene);
-    }
-
-    private void OnSceneUnloaded(Scene scene)
+    private void OnLevelUnloaded(ScriptableLevel level)
     {
         Timer newTimer = new Timer();
         newTimer.onTimerEnd.AddListener(ToggleMenuObjects);

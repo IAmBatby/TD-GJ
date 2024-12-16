@@ -68,7 +68,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 65
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -276,8 +276,6 @@ MonoBehaviour:
   translationAtRestCameraPos: {x: 1, y: 5.5, z: 0}
   translationOffsetCameraPos: {x: -0.08, y: 0, z: -3}
   cameraRotation: {x: 55, y: 0, z: 0}
-  movementAudioSource: {fileID: 0}
-  interactAudioSource: {fileID: 0}
   movementPreset: {fileID: 0}
   damagePreset: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559, type: 2}
   pickupItemPreset: {fileID: 11400000, guid: a9556d256022d6e4a83bdce932142665, type: 2}

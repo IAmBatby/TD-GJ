@@ -13,6 +13,8 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 
     private List<ContentDisplayInfo> contentDisplayInfos = new List<ContentDisplayInfo>();
 
+    public bool IsHighlighted => GameManager.Instance.HighlightedObject != null && GameManager.Instance.HighlightedObject.Compare(gameObject);
+
     public ContentDisplayInfo GeneralDisplayInfo { get; private set; }
 
     private void OnMouseEnter()
@@ -63,4 +65,8 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
     public List<ContentDisplayInfo> GetDisplayInfos() => new List<ContentDisplayInfo>(contentDisplayInfos);
     public Texture2D GetCursor() => ContentData.Cursor;
     public bool IsHighlightable() => ContentData.Highlightable;
+    public bool Compare(GameObject go) => (go == gameObject);
+
+    public virtual void RegisterBehaviour() => ContentManager.RegisterBehaviour(this);
+    public virtual void UnregisterBehaviour(bool destroyOnUnregistration) => ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
 }

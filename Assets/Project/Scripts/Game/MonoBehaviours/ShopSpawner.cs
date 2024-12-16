@@ -36,20 +36,19 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
 
     private void Awake()
     {
-        GameManager.Instance.OnWaveFinished.AddListener(OnWaveFinished);
+        GameManager.OnWaveFinished.AddListener(OnWaveFinished);
+        GameManager.OnGameManagerStart.AddListener(InitializeShop);
         audioPlayer = AudioPlayer.Create(this);
-        shopDisplayInfo = new ContentDisplayInfo("$" + cost.ToString(), null, Color.yellow);
-        displayInfos = new List<ContentDisplayInfo>() { shopDisplayInfo };
     }
 
-    private void Start()
+    private void InitializeShop()
     {
         ContentBehaviour fakeItem = contentSpawner.Spawn(contentToSpawn);
         if (fakeItem == null)
         {
             Debug.LogError("Failed To Spawn Content!");
             return;
-                
+
         }
         fakeItemObject = fakeItem.gameObject;
         fakeItemObject.transform.position = contentSpawner.transform.position;
@@ -78,8 +77,14 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
 
         GameManager.UnregisterContentBehaviour(fakeItem, false);
 
-        foreach (ContentDisplayInfo displayInfo in fakeItem.GetDisplayInfos())
-            displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: Color.yellow));
+        ContentDisplayInfo generalInfo = new ContentDisplayInfo("Item Shop", displayColor: GlobalData.Colors.Yellow);
+        shopDisplayInfo = new ContentDisplayInfo("For Sale: " + fakeItem.ContentData.GetDisplayName(), "$" + cost.ToString(), GlobalData.Colors.Yellow, displayIcon: GlobalData.Icons.Currency);
+        displayInfos = new List<ContentDisplayInfo>() { generalInfo, shopDisplayInfo };
+
+        List<ContentDisplayInfo> fakeInfos = fakeItem.GetDisplayInfos();
+        fakeInfos.RemoveAt(0); //To remove the item's name since we say it in our item name
+        foreach (ContentDisplayInfo displayInfo in fakeInfos)
+            displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: GlobalData.Colors.Yellow));
     }
 
     public bool TryInteract()
@@ -117,4 +122,5 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     public bool IsHighlightable() => true;
     public Texture2D GetCursor() => null;
     public List<ContentDisplayInfo> GetDisplayInfos() => displayInfos;
+    public bool Compare(GameObject go) => (go == gameObject);
 }

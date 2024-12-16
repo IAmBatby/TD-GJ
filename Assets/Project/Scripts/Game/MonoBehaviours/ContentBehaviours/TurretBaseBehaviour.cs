@@ -10,6 +10,8 @@ public class TurretBaseBehaviour : ItemBehaviour
     [SerializeField] private ContentSpawner moduleSpawner;
     [SerializeField] private Transform rotator;
     [SerializeField] private LayerMask shootMask;
+    [SerializeField] private MeshRenderer rangePreviewRenderer;
+    [SerializeField] private LineRenderer rangePreviewLineRenderer;
 
     [field: Header("Runtime Values (Don't Touch)"), Space(15)]
 
@@ -40,12 +42,15 @@ public class TurretBaseBehaviour : ItemBehaviour
     {
         base.OnSpawn();
         canShoot = true;
+        rangePreviewRenderer.enabled = false;
         TurretData = ItemData as ScriptableTurret;
         Projectile = TurretData.Projectile;
-        DamageAttribute.ApplyWithReference(TurretData.DamageAttribute);
-        RangeAttribute.ApplyWithReference(TurretData.RangeAttribute);
-        ShotSpeedAttribute.ApplyWithReference(TurretData.ShotSpeedAttribute);
-        FireRateAttribute.ApplyWithReference(TurretData.FireRateAttribute);
+
+        DamageAttribute.ApplyWithNewReference(GlobalData.Attributes.DamageAttribute, TurretData.Damage);
+        RangeAttribute.ApplyWithNewReference(GlobalData.Attributes.RangeAttribute, TurretData.Range);
+        ShotSpeedAttribute.ApplyWithNewReference(GlobalData.Attributes.ShotSpeedAttribute, TurretData.ShotSpeed);
+        FireRateAttribute.ApplyWithNewReference(GlobalData.Attributes.FireRateAttribute, TurretData.FireRate);
+
         AllAttributes = new List<ScriptableAttribute>() { FireRateAttribute.Attribute, ShotSpeedAttribute.Attribute, RangeAttribute.Attribute, DamageAttribute.Attribute };
         SelectedTargetType = TurretData.TargetType;
 
@@ -84,6 +89,7 @@ public class TurretBaseBehaviour : ItemBehaviour
         HurtableBehaviour previousTarget = Target;
 
         UpdateTargets();
+        UpdateRangePreview();
 
         if (Target != null && previousTarget == null)
         {
@@ -95,7 +101,10 @@ public class TurretBaseBehaviour : ItemBehaviour
             AudioPlayer.PlayAudio(TurretData.OnNewTargetAudio);
 
         foreach (ShootPosition shootPosition in ActiveModule.ShootPositions)
+        {
+            shootPosition.ToggleRenderer(Target != null && IsHighlighted);
             shootPosition.UpdateShootRenderer(Target);
+        }
 
 
         if (Target != null)
@@ -146,7 +155,7 @@ public class TurretBaseBehaviour : ItemBehaviour
         float closestDestinationRemaining = Mathf.Infinity;
         float furthestDestinationRemaining = Mathf.Infinity;
 
-        foreach (HurtableBehaviour hurtable in GameManager.Instance.AllHurtables)
+        foreach (HurtableBehaviour hurtable in ContentManager.GetBehaviours<HurtableBehaviour>())
         {
             if (BlacklistedTargets.Contains(hurtable)) continue;
             if (hurtable.Health == 0) continue;
@@ -225,5 +234,50 @@ public class TurretBaseBehaviour : ItemBehaviour
         if (attributeDisplayInfoDict.TryGetValue(attributeModified, out ContentDisplayInfo displayInfo))
             displayInfo.SetDisplayValues(attributeModified.DisplayName, attributeModified.GetSecondaryDisplayString());
         AudioPlayer.PlayAudio(TurretData.OnUpgradeAudio);
+    }
+
+    private void UpdateRangePreview()
+    {
+        int circlePoints = 64;
+
+        List<Vector3> returnList = new List<Vector3>();
+
+        foreach (Vector3 circlePos in FindCirclePoints(circlePoints, RangeAttribute.Value))
+            returnList.Add(transform.TransformPoint(circlePos));
+        
+
+        rangePreviewLineRenderer.enabled = IsHighlighted && IsBeingHeld == false;
+        rangePreviewLineRenderer.positionCount = circlePoints;
+        rangePreviewLineRenderer.SetPositions(returnList.ToArray());
+    }
+
+    static Vector3[] FindCirclePoints(int pointCount = 64, float radius = 1f)
+    {
+        Vector3[] points = new Vector3[pointCount];
+        Vector3 current = Vector3.up;
+        Quaternion rot = Quaternion.Euler(0.0f, 0.0f, 360.0f / pointCount);
+        for (int i = 0; i < pointCount; i++)
+        {
+            points[i] = current;
+            current = rot * current;
+        }
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            points[i] = new Vector3(points[i].x * radius, points[i].z * radius, points[i].y * radius);
+        }
+
+        return points;
+    }
+
+    public override void RegisterBehaviour()
+    {
+        ContentManager.RegisterBehaviour(this);
+        base.RegisterBehaviour();
+    }
+    public override void UnregisterBehaviour(bool destroyOnUnregistration)
+    {
+        ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
+        base.UnregisterBehaviour(destroyOnUnregistration);
     }
 }

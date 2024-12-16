@@ -11,13 +11,11 @@ public class ShootPosition : MonoBehaviour
     {
         if (target != null)
         {
-            lineRenderer.enabled = true;
             lineRenderer.positionCount = 2;
-
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, target.transform.position);
         }
-        else
-            lineRenderer.enabled = false;
     }
+
+    public void ToggleRenderer(bool value) => lineRenderer.enabled = value;
 }

@@ -24,7 +24,7 @@ public class GameManager : GlobalManager
 
     public IHighlightable HighlightedObject { get; private set; }
 
-    [field: SerializeField] public ScriptableLevel DefaultLevel { get; private set; }
+    public ScriptableLevel Level => GlobalData.ActiveLevel;
 
     [SerializeField] private NavMeshSurface navMeshSurface;
     [SerializeField] private Light directionalLight;
@@ -67,8 +67,6 @@ public class GameManager : GlobalManager
 
     private Dictionary<ScriptableContent, List<ContentBehaviour>> allRegisteredBehavioursDict = new Dictionary<ScriptableContent, List<ContentBehaviour>>();
 
-    public List<IHittable> AllSpawnedHittables = new List<IHittable>();
-
     private List<EnemySpawnTarget> AllSpawnTargets;
     private List<EnemyPathTarget> AllPathTargets;
 
@@ -90,23 +88,21 @@ public class GameManager : GlobalManager
 
     private Dictionary<float, List<ScriptableEnemy>> currentWaveSpawnDict;
 
-    public List<HurtableBehaviour> AllHurtables = new List<HurtableBehaviour>();
-
-
-    public ExtendedEvent OnGameStart = new ExtendedEvent();
-    public ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
-
-    public ExtendedEvent<EnemyBehaviour> OnEnemySpawned = new ExtendedEvent<EnemyBehaviour>();
-    public ExtendedEvent OnNewWave = new ExtendedEvent<EnemyBehaviour>();
-    public ExtendedEvent OnWaveFinished = new ExtendedEvent();
-    public ExtendedEvent OnIntermissionStart = new ExtendedEvent();
-    public ExtendedEvent<EnemyBehaviour> OnEnemyKilled = new ExtendedEvent<EnemyBehaviour>();
-
-    public ExtendedEvent<IHighlightable> OnHighlightChanged = new ExtendedEvent<IHighlightable>();
+    public static ExtendedEvent OnGameManagerEnable = new ExtendedEvent();
+    public static ExtendedEvent OnGameManagerAwake = new ExtendedEvent();
+    public static ExtendedEvent OnGameManagerStart = new ExtendedEvent();
+    public static ExtendedEvent OnGameStart = new ExtendedEvent();
+    public static ExtendedEvent<bool> OnGameEnd = new ExtendedEvent<bool>();
+    public static ExtendedEvent<EnemyBehaviour> OnEnemySpawned = new ExtendedEvent<EnemyBehaviour>();
+    public static ExtendedEvent OnNewWave = new ExtendedEvent<EnemyBehaviour>();
+    public static ExtendedEvent OnWaveFinished = new ExtendedEvent();
+    public static ExtendedEvent OnIntermissionStart = new ExtendedEvent();
+    public static ExtendedEvent<EnemyBehaviour> OnEnemyKilled = new ExtendedEvent<EnemyBehaviour>();
+    public static ExtendedEvent<IHighlightable> OnHighlightChanged = new ExtendedEvent<IHighlightable>();
 
 
     private Timer intermissionTimer;
-    public float IntermissionLength => DefaultLevel.IntermissionStandardTime + (DefaultLevel.IntermissionWaveMultiplier * ActiveWaves.ActiveSelection.WaveLength);
+    public float IntermissionLength => Level.IntermissionStandardTime + (Level.IntermissionWaveMultiplier * ActiveWaves.ActiveSelection.WaveLength);
     public float IntermissionProgress
     {
         get
@@ -124,26 +120,32 @@ public class GameManager : GlobalManager
     [field: SerializeField] public bool HasGameEnded { get; private set; }
 
     private bool isFirstWave;
+
     protected override void Awake()
     {
         base.Awake();
         Player = GameObject.FindObjectOfType<PlayerBehaviour>();
+
     }
 
     private void Start()
     {
         ResetGame();
-        StartNewLevel(DefaultLevel);
+        StartNewLevel(Level);
+
+        OnGameManagerEnable.Invoke();
+        OnGameManagerAwake.Invoke();
+        OnGameManagerStart.Invoke();
     }
 
     private void ResetGame()
     {
-        foreach (EnemyBehaviour enemy in GetContentBehaviours<EnemyBehaviour>())
+        foreach (EnemyBehaviour enemy in ContentManager.GetBehaviours<EnemyBehaviour>())
             UnregisterContentBehaviour(enemy, true);
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
         currentHealth = maxHealth;
-        currentCurrency = DefaultLevel.StartingCurrency;
+        currentCurrency = Level.StartingCurrency;
         currentWaveSpawnDict = null;
         enemySpawnTimer = null;
         ActiveWaveTimer = null;
@@ -152,11 +154,10 @@ public class GameManager : GlobalManager
         HasGameEnded = false;
         isFirstWave = true;
         RequestedEnemiesToSpawn = new List<ScriptableEnemy>();
-        AllSpawnedHittables = new List<IHittable>();
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
-        CurrentLevel = ScriptableObject.Instantiate(DefaultLevel);
-        ActiveWaves = new SelectableCollection<WaveInfo>(DefaultLevel.Waves);
+        CurrentLevel = ScriptableObject.Instantiate(Level);
+        ActiveWaves = new SelectableCollection<WaveInfo>(Level.Waves);
         UIManager.Instance.InitializeUI();
     }
 
@@ -245,7 +246,7 @@ public class GameManager : GlobalManager
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.UnloadSceneAsync(DefaultLevel.SceneName);
+            SceneManager.UnloadSceneAsync(Level.SceneName);
             //ResetGame();
             //StartNewLevel(DefaultLevel);
         }
@@ -350,16 +351,13 @@ public class GameManager : GlobalManager
         enemySpawnTimer.onTimerEnd.AddListener(OnEnemySpawnCooldownFinished);
         enemySpawnTimer.StartTimer(this, globalSpawnEnemyCooldown);
 
-        if (spawnedEnemy.TryGetComponent(out IHittable hittable))
-            AllSpawnedHittables.Add(hittable);
-
         OnEnemySpawned.Invoke(spawnedEnemy);
 
     }
 
     private void RefreshEnemyPriorities()
     {
-        List<EnemyBehaviour> sortedEnemies = GetContentBehaviours<EnemyBehaviour>().OrderBy(e => e.RemainingDestinationDistance).Reverse().ToList();
+        List<EnemyBehaviour> sortedEnemies = ContentManager.GetBehaviours<EnemyBehaviour>().OrderBy(e => e.RemainingDestinationDistance).Reverse().ToList();
 
         foreach (EnemyBehaviour enemy in sortedEnemies)
             enemy.SetAvoidancePriority(sortedEnemies.IndexOf(enemy));
@@ -383,9 +381,9 @@ public class GameManager : GlobalManager
         }
 
         UnregisterContentBehaviour(enemy, true);
-        Instance.OnEnemyKilled.Invoke(enemy);
+        OnEnemyKilled.Invoke(enemy);
 
-        if (GetContentBehaviours<EnemyBehaviour>().Count == 0)
+        if (ContentManager.GetBehaviours<EnemyBehaviour>().Count == 0)
         {
             Instance.HaveWaveEnemiesBeenRemoved = true;
             Instance.CheckWaveStatus();
@@ -394,82 +392,13 @@ public class GameManager : GlobalManager
 
     public static void RegisterNewContentBehaviour(ContentBehaviour contentBehaviour)
     {
-        if (contentBehaviour == null || contentBehaviour.ContentData == null)
-        {
-            Debug.LogError("Content failed to register!");
-            return;
-        }
-
-        if (Instance.allRegisteredBehavioursDict.TryGetValue(contentBehaviour.ContentData, out List<ContentBehaviour> behaviours))
-        {
-            if (behaviours.Contains(contentBehaviour))
-            {
-                Debug.LogError("Content attempted to register itself while already being registered!");
-                return;       
-            }
-            else
-                behaviours.Add(contentBehaviour);
-        }
-        else
-            Instance.allRegisteredBehavioursDict.Add(contentBehaviour.ContentData, new List<ContentBehaviour> { contentBehaviour });
-
-        if (contentBehaviour is PlayerBehaviour playerBehaviour)
-            Player = playerBehaviour;
-
-        if (contentBehaviour is HurtableBehaviour hurtableBehaviour)
-            Instance.AllHurtables.Add(hurtableBehaviour);
-    }
-
-    public static List<T> GetContentBehaviours<T>(ScriptableContent contentData) where T : ContentBehaviour
-    {
-        if (Instance.allRegisteredBehavioursDict.TryGetValue(contentData, out List<ContentBehaviour> behaviours))
-            return (behaviours as List<T>);
-        else
-            return (new List<T>());         
-    }
-
-    public static List<T> GetContentBehaviours<T>() where T : ContentBehaviour
-    {
-        List<T> returnList = new List<T>();
-        foreach (KeyValuePair<ScriptableContent, List<ContentBehaviour>> registeredLists in Instance.allRegisteredBehavioursDict)
-            if (registeredLists.Value.First() is T)
-                foreach (ContentBehaviour behaviour in registeredLists.Value)
-                    returnList.Add(behaviour as T);
-
-        return (returnList);
+        contentBehaviour.RegisterBehaviour();
+        if (contentBehaviour is PlayerBehaviour player)
+            Player = player;
     }
 
     public static void UnregisterContentBehaviour(ContentBehaviour contentBehaviour, bool destroyOnUnregistration)
     {
-        if (contentBehaviour == null || contentBehaviour.ContentData == null)
-        {
-            Debug.LogError("Content failed to unregister!");
-            return;
-        }
-
-        if (Instance.allRegisteredBehavioursDict.TryGetValue(contentBehaviour.ContentData, out List<ContentBehaviour> behaviours))
-        {
-            if (behaviours.Contains(contentBehaviour))
-            {
-                if (behaviours.Count == 1)
-                    Instance.allRegisteredBehavioursDict.Remove(contentBehaviour.ContentData);
-                else
-                    behaviours.Remove(contentBehaviour);
-            }
-            else
-                Debug.LogError("Content attempted to unregister without being registered!");
-        }
-        else
-            Debug.LogError("Content attempted to unregister without being registered!");
-
-        if (contentBehaviour is HurtableBehaviour hurtableBehaviour)
-            Instance.AllHurtables.Remove(hurtableBehaviour);
-
-        if (destroyOnUnregistration == true)
-        {
-            contentBehaviour.enabled = false;
-            contentBehaviour.gameObject.SetActive(false);
-            GameObject.Destroy(contentBehaviour.gameObject);
-        }
+        contentBehaviour.UnregisterBehaviour(destroyOnUnregistration);
     }
 }

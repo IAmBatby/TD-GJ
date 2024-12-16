@@ -11,11 +11,13 @@ public class GlobalEvents : MonoBehaviour
     public UnityEvent<ItemBehaviour> OnItemPickup;
     public UnityEvent<ItemBehaviour> OnItemDropped;
 
-    private void Awake()
+    private void OnEnable() => GameManager.OnGameManagerStart.AddListener(Initialize);
+
+    private void Initialize()
     {
-        GameManager.Instance.OnNewWave.AddListener(OnNewWave.Invoke);
-        GameManager.Instance.OnEnemySpawned.AddListener(OnEnemySpawned.Invoke);
-        GameManager.Instance.OnEnemyKilled.AddListener(OnEnemyKilled.Invoke);
+        GameManager.OnNewWave.AddListener(OnNewWave.Invoke);
+        GameManager.OnEnemySpawned.AddListener(OnEnemySpawned.Invoke);
+        GameManager.OnEnemyKilled.AddListener(OnEnemyKilled.Invoke);
         GameManager.Player.OnItemPickup.AddListener(OnItemPickup.Invoke);
         GameManager.Player.OnItemDropped.AddListener(OnItemDropped.Invoke);
     }

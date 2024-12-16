@@ -32,4 +32,15 @@ public class ItemBehaviour : ContentBehaviour
     protected virtual void OnPickup() { }
 
     protected virtual void OnDrop() { }
+
+    public override void RegisterBehaviour()
+    {
+        ContentManager.RegisterBehaviour(this);
+        base.RegisterBehaviour();
+    }
+    public override void UnregisterBehaviour(bool destroyOnUnregistration)
+    {
+        ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
+        base.UnregisterBehaviour(destroyOnUnregistration);
+    }
 }

@@ -23,5 +23,15 @@ public class ScriptableFloatAttributeWithDefaultValue
         Value = reference.Value;
         Attribute = newAttribute;
     }
+
+    public void ApplyWithNewReference(ScriptableAttribute atr, float newValue)
+    {
+        if (atr is ScriptableFloatAttribute floatAtr)
+        {
+            ScriptableFloatAttribute newAttribute = ScriptableFloatAttribute.Create(floatAtr, newValue);
+            Value = newValue;
+            Attribute = newAttribute;
+        }
+    }
 }
 

@@ -15,7 +15,8 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 5730771416135672806, guid: f271cf25cf5763b4896634d29b55bb1a,
     type: 3}
   <ContentName>k__BackingField: Cannon
-  <ContentIcon>k__BackingField: {fileID: 0}
+  <ContentIcon>k__BackingField: {fileID: 21300000, guid: e2b41684da00db440a315cee0231705f,
+    type: 3}
   <ContentColor>k__BackingField: {r: 0.7735849, g: 0.567141, b: 0.14960839, a: 1}
   <Cursor>k__BackingField: {fileID: 2800000, guid: 26ceaacba488dc64c90f6d95df65a162,
     type: 3}
@@ -31,22 +32,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: abf84a85cbcd7954f8909d1d24f32370, type: 2}
   - {fileID: 11400000, guid: bf1f4f80b955ee744857e7092647bdf3, type: 2}
   - {fileID: 11400000, guid: 8b5028deaf0e30543bdc1dff88785f0f, type: 2}
-  <FireRateAttribute>k__BackingField:
-    <Attribute>k__BackingField: {fileID: 11400000, guid: db71f904ea68728488ef6f6e6b202743,
-      type: 2}
-    <Value>k__BackingField: 5
-  <ShotSpeedAttribute>k__BackingField:
-    <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
-      type: 2}
-    <Value>k__BackingField: 4
-  <RangeAttribute>k__BackingField:
-    <Attribute>k__BackingField: {fileID: 11400000, guid: 3b4ab2b8237af3741b41f7f67a777cf0,
-      type: 2}
-    <Value>k__BackingField: 5
-  <DamageAttribute>k__BackingField:
-    <Attribute>k__BackingField: {fileID: 11400000, guid: dcaa910e90ba3c54a8bf18632107766e,
-      type: 2}
-    <Value>k__BackingField: 10
+  <Damage>k__BackingField: 5
+  <Range>k__BackingField: 5
+  <ShotSpeed>k__BackingField: 100
+  <FireRate>k__BackingField: 0
   <TargetType>k__BackingField: 2
   <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}

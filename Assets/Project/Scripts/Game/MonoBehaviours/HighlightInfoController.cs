@@ -16,7 +16,7 @@ public class HighlightInfoController : MonoBehaviour
     private void Awake()
     {
         DisableInfo();
-        GameManager.Instance.OnHighlightChanged.AddListener(OnHighlightChanged);
+        GameManager.OnHighlightChanged.AddListener(OnHighlightChanged);
     }
 
     private void OnHighlightChanged(IHighlightable contentBehaviour)

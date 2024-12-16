@@ -1,7 +1,7 @@
 using IterationToolkit;
 using UnityEngine;
 
-public class HurtableBehaviour : ContentBehaviour, IHittable
+public class HurtableBehaviour : ContentBehaviour
 {
     public ScriptableHurtable HurtableData { get; private set; }
 
@@ -20,10 +20,9 @@ public class HurtableBehaviour : ContentBehaviour, IHittable
         if (ContentData is ScriptableHurtable hurtableData)
             HurtableData = hurtableData;
 
-        //GameManager.Instance.AllHealthControllers.Add(this); Will Need To Fix!!
         SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
+        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: GlobalData.Icons.Health, displayColor: Color.red);
         AddContentDisplayInfo(healthDisplayInfo);
         OnHealthModified.AddListener(RefreshDisplayInfo);
     }
@@ -35,9 +34,6 @@ public class HurtableBehaviour : ContentBehaviour, IHittable
     }
 
     protected virtual void OnDeath() { }
-
-    public void RecieveHit(int value) => ModifyHealth(value);
-    public Transform GetTransform() => transform;
 
     public void SetMaxHealth(int newMaxHealth) => MaxHealth = newMaxHealth;
     public void SetCurrentHealth(int newCurrentHealth) => ModifyHealth(-currentHealth + newCurrentHealth);
@@ -62,5 +58,16 @@ public class HurtableBehaviour : ContentBehaviour, IHittable
     {
         healthDisplayInfo.SetDisplayValues("HP: " + currentHealth.ToString());
         healthDisplayInfo.SetProgressValues(currentHealth, MaxHealth);
+    }
+
+    public override void RegisterBehaviour()
+    {
+        ContentManager.RegisterBehaviour(this);
+        base.RegisterBehaviour();
+    }
+    public override void UnregisterBehaviour(bool destroyOnUnregistration)
+    {
+        ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
+        base.UnregisterBehaviour(destroyOnUnregistration);
     }
 }

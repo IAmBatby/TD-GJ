@@ -1,3 +1,4 @@
+using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,21 +12,21 @@ public class ContentSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        if (DefaultSpawnMode == SpawnMode.OnEnable)
-            Spawn(DefaultContent);
+        ExtendedEvent defaultSpawnEvent = DefaultSpawnMode switch
+        {
+            SpawnMode.OnEnable => GameManager.OnGameManagerEnable,
+            SpawnMode.Awake => GameManager.OnGameManagerAwake,
+            SpawnMode.Start => GameManager.OnGameManagerStart,
+            SpawnMode.None => null,
+            _ => null,
+        };
+
+        if (defaultSpawnEvent == null ) return;
+
+        defaultSpawnEvent.AddListener(Spawn);
     }
 
-    private void Awake()
-    {
-        if (DefaultSpawnMode == SpawnMode.Awake)
-            Spawn(DefaultContent);
-    }
-
-    private void Start()
-    {
-        if (DefaultSpawnMode == SpawnMode.Start)
-            Spawn(DefaultContent);
-    }
+    private void Spawn() => Spawn(DefaultContent);
 
     public ContentBehaviour Spawn(ScriptableContent content = null)
     {

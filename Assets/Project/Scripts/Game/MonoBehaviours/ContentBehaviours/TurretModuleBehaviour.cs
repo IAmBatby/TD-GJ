@@ -15,4 +15,15 @@ public class TurretModuleBehaviour : ContentBehaviour
         if (ContentData is ScriptableTurretModule moduleData)
             ModuleData = moduleData;
     }
+
+    public override void RegisterBehaviour()
+    {
+        ContentManager.RegisterBehaviour(this);
+        base.RegisterBehaviour();
+    }
+    public override void UnregisterBehaviour(bool destroyOnUnregistration)
+    {
+        ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
+        base.UnregisterBehaviour(destroyOnUnregistration);
+    }
 }

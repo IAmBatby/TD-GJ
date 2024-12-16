@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/DeanScene.unity
     guid: e91cad18060a957409874d2dc0810bf1
+  - enabled: 1
+    path: Assets/Project/Scenes/GlobalData.unity
+    guid: 74dc8debf1537114cb3a63d73db0317d
   m_configObjects: {}

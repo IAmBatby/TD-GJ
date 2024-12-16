@@ -22,11 +22,11 @@ public class UIManager : GlobalManager
 
     public void InitializeUI()
     {
-        GameManager.Instance.OnGameStart.RemoveListener(ResetText);
-        GameManager.Instance.OnGameEnd.RemoveListener(OnGameEnd);
+        GameManager.OnGameStart.RemoveListener(ResetText);
+        GameManager.OnGameEnd.RemoveListener(OnGameEnd);
         ResetText();
-        GameManager.Instance.OnGameStart.AddListener(ResetText);
-        GameManager.Instance.OnGameEnd.AddListener(OnGameEnd);
+        GameManager.OnGameStart.AddListener(ResetText);
+        GameManager.OnGameEnd.AddListener(OnGameEnd);
     }
 
     private void Update()

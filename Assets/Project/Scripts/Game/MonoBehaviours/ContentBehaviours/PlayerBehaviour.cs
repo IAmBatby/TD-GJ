@@ -192,4 +192,15 @@ public class PlayerBehaviour : HurtableBehaviour
 
         Rigidbody.velocity = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
     }
+
+    public override void RegisterBehaviour()
+    {
+        ContentManager.RegisterBehaviour(this);
+        base.RegisterBehaviour();
+    }
+    public override void UnregisterBehaviour(bool destroyOnUnregistration)
+    {
+        ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
+        base.UnregisterBehaviour(destroyOnUnregistration);
+    }
 }
