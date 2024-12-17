@@ -24,12 +24,15 @@ MonoBehaviour:
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <Health>k__BackingField: 5
+  <HealthWaveScale>k__BackingField: 50
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 1
+  <SpeedWaveScale>k__BackingField: 20
   <Speed>k__BackingField: 0.8
   <GoldDropRateMinMax>k__BackingField: {x: 8, y: 12}
+  <GoldDropRateWaveScale>k__BackingField: 0
   <ItemDrop>k__BackingField: {fileID: 11400000, guid: 80869fa8342af7b42b2e43ad56ef80fd,
     type: 2}
   <ItemDropRate>k__BackingField: 50
