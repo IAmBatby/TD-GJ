@@ -189,6 +189,20 @@ public class GameManager : GlobalManager
         }
     }
 
+    private void SkipWave()
+    {
+        TryProgressToNextWave();
+    }
+
+    private void SkipAllWaves()
+    {
+        Debug.Log("Skipping All Waves");
+        while (HasGameEnded == false)
+        {
+            SkipWave();
+        }
+    }
+
     private void StartNextWave()
     {
         Debug.Log("Starting Wave #" + ActiveWaves.ActiveIndex);
@@ -234,6 +248,8 @@ public class GameManager : GlobalManager
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+            SkipAllWaves();
         if (currentWaveSpawnDict != null && currentWaveSpawnDict.Count > 0)
         {
             float time = currentWaveSpawnDict.First().Key;

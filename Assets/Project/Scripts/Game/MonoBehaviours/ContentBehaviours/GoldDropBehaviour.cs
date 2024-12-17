@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GoldDropBehaviour : ItemBehaviour
 {
-    public int currencyValue;
+    private int currencyValue;
 
 
     protected override void OnSpawn()
     {
         base.OnSpawn();
+        if (ContentData is ScriptableCurrency currencyData)
+        {
+            float randomGold = Random.Range(currencyData.CurrencyAmount.x, currencyData.CurrencyAmount.y);
+            currencyValue = Mathf.RoundToInt(Utilities.GetScaledValue(randomGold, currencyData.CurrencyWaveScale, GameManager.Instance.CurrentWaveCount));
+        }
         GameManager.OnNewWave.AddListener(DestroyCoin);
     }
     public void ForwardedTriggerEnter(Collider other)
