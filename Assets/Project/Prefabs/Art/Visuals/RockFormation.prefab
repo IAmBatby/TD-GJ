@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 2902232270032356060}
   - component: {fileID: 1657740986348537836}
   - component: {fileID: 3124981685659648788}
-  - component: {fileID: 1208684518977105684}
+  - component: {fileID: 3076449907582460836}
   m_Layer: 6
   m_Name: RockFormation
   m_TagString: Untagged
@@ -257,8 +257,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1208684518977105684
-BoxCollider:
+--- !u!64 &3076449907582460836
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -275,9 +275,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.5090039, z: 1}
-  m_Center: {x: 0, y: 0.24549806, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7470801420732517906, guid: 164814187560f024c814eb49b5b990ac, type: 3}
 --- !u!1 &6052092910610364215
 GameObject:
   m_ObjectHideFlags: 0
