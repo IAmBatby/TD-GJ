@@ -2,6 +2,7 @@ using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public enum TargetType { Closest, Furthest, First, Last }
@@ -99,6 +100,16 @@ public class TurretBaseBehaviour : ItemBehaviour
         GeneralDisplayInfo.SetProgressValues(TurretData.Modules.IndexOf(turretModule) + 1, TurretData.Modules.Count);
     }
 
+    public bool TryUpgradeTurretModule()
+    {
+        if (ActiveModule.ModuleData == TurretData.Modules.Last()) return false;
+
+        int i = TurretData.Modules.IndexOf(ActiveModule.ModuleData);
+
+        SetNewModule(TurretData.Modules[i + 1]);
+
+        return true;
+    }
     private void Update()
     {
         UpdateRangePreview();
