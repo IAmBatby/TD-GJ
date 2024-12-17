@@ -107,12 +107,12 @@ public class TurretBaseBehaviour : ItemBehaviour
         HurtableBehaviour previousTarget = Target;
 
         UpdateTargets();
-
+        /*
         if (Target != null && previousTarget == null)
         {
             shootCooldownTimer = null;
             canShoot = true;
-        }
+        }*/
 
         if (Target != null && Target != previousTarget)
             AudioPlayer.PlayAudio(TurretData.OnNewTargetAudio);
