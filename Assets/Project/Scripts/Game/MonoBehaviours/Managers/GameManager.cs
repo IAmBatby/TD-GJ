@@ -146,7 +146,7 @@ public class GameManager : GlobalManager
             UnregisterContentBehaviour(enemy, true);
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
-        currentHealth = maxHealth;
+        currentHealth = Level.StartingHealth;
         currentCurrency = Level.StartingCurrency;
         currentWaveSpawnDict = null;
         enemySpawnTimer = null;
