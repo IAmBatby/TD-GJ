@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6ca0d10f2b399478a2bf546364a1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Renderers>k__BackingField: []
   <ShootPositions>k__BackingField:
   - {fileID: 5918954515978400556}
 --- !u!54 &4335130039325131477
@@ -143,6 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 2822749358730480857}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!120 &2822749358730480857
 LineRenderer:
   serializedVersion: 2
@@ -325,10 +329,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7351939200701891598, guid: 8308b2ec67c154645b36406fc927faa2,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4019234525060620036, guid: 8308b2ec67c154645b36406fc927faa2,
+        type: 3}
     - target: {fileID: -3868710468543803471, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3868710468543803471, guid: 8308b2ec67c154645b36406fc927faa2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8308b2ec67c154645b36406fc927faa2,
         type: 3}
