@@ -40,6 +40,10 @@ public class TurretBaseBehaviour : ItemBehaviour
     private Timer shootCooldownTimer;
     private bool canShoot;
 
+    public Vector3 aimOffset;
+
+    public Vector3 AimPosition => (transform.position + aimOffset);
+
     protected override void OnSpawn()
     {
         base.OnSpawn();
@@ -47,6 +51,7 @@ public class TurretBaseBehaviour : ItemBehaviour
         rangePreviewRenderer.enabled = false;
         TurretData = ItemData as ScriptableTurret;
         Projectile = TurretData.Projectile;
+        aimOffset = TurretData.AimOffset;
 
         DamageAttribute.ApplyWithNewReference(GlobalData.Attributes.DamageAttribute, TurretData.Damage);
         RangeAttribute.ApplyWithNewReference(GlobalData.Attributes.RangeAttribute, TurretData.Range);
@@ -186,11 +191,13 @@ public class TurretBaseBehaviour : ItemBehaviour
         float closestDestinationRemaining = Mathf.Infinity;
         float furthestDestinationRemaining = Mathf.Infinity;
 
+
+
         foreach (HurtableBehaviour hurtable in ContentManager.GetBehaviours<HurtableBehaviour>())
         {
             if (BlacklistedTargets.Contains(hurtable)) continue;
             if (hurtable.Health == 0) continue;
-            float distance = Vector3.Distance(transform.position, hurtable.transform.position);
+            float distance = Vector3.Distance(AimPosition, hurtable.transform.position);
             if (distance <= RangeAttribute.Value)
             {
                 AllEnemiesInRange.Add(hurtable);
@@ -274,7 +281,7 @@ public class TurretBaseBehaviour : ItemBehaviour
         List<Vector3> returnList = new List<Vector3>();
 
         foreach (Vector3 circlePos in FindCirclePoints(circlePoints, RangeAttribute.Value))
-            returnList.Add(transform.position + circlePos);
+            returnList.Add(AimPosition + circlePos);
         
 
         rangePreviewLineRenderer.enabled = IsHighlighted == true && IsBeingHeld == false;

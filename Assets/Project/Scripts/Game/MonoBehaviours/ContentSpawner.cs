@@ -47,4 +47,11 @@ public class ContentSpawner : MonoBehaviour
 
         return (newContent);
     }
+
+    private List<MeshFilter> allRenderers = new List<MeshFilter>();
+    private void OnDrawGizmos()
+    {
+        if (DefaultContent == null || DefaultContent.Prefab == null) return;
+        Utilities.DrawPrefabPreview(transform, DefaultContent.Prefab.gameObject, Color.white, Color.yellow, ref allRenderers);
+    }
 }

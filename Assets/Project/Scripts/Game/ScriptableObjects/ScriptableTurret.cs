@@ -16,6 +16,7 @@ public class ScriptableTurret : ScriptableItem
     [field: SerializeField] public float FireRate { get; private set; }
     [field: SerializeField, Range(0f,1f)] public float Accuracy { get; private set; }
 
+    [field: SerializeField] public Vector3 AimOffset { get; private set; }
     [field: SerializeField] public TargetType TargetType { get; private set; }
 
     [field: Header("Turret Audio Values"), Space(15)]
