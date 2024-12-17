@@ -25,5 +25,5 @@ MonoBehaviour:
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 0
-  <CurrencyAmount>k__BackingField: {x: 5, y: 10}
-  <CurrencyWaveScale>k__BackingField: 0
+  <CurrencyAmount>k__BackingField: {x: 8, y: 12}
+  <CurrencyWaveScale>k__BackingField: 50

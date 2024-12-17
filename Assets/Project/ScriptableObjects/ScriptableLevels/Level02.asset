@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Crystal Caverns
   <SceneName>k__BackingField: DeanScene
-  <IntermissionStandardTime>k__BackingField: 5
+  <IntermissionStandardTime>k__BackingField: 20
   <IntermissionWaveMultiplier>k__BackingField: 0.25
   <StartingCurrency>k__BackingField: 50
   <StartingHealth>k__BackingField: 50
@@ -37,8 +37,6 @@ MonoBehaviour:
       <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: a8cd7c1f226e4754682412528a7a3216,
         type: 2}
       <AmountToSpawn>k__BackingField: 1
-  - <WaveLength>k__BackingField: 600
-    <EnemySpawnInfos>k__BackingField: []
   - <WaveLength>k__BackingField: 30
     <EnemySpawnInfos>k__BackingField:
     - <TimeToStart>k__BackingField: 1
@@ -65,3 +63,5 @@ MonoBehaviour:
       <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: a8cd7c1f226e4754682412528a7a3216,
         type: 2}
       <AmountToSpawn>k__BackingField: 1
+  - <WaveLength>k__BackingField: 600
+    <EnemySpawnInfos>k__BackingField: []

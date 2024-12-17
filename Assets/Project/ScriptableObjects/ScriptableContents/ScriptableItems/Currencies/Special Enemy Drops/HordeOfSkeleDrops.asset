@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de58ce9fad7dfc44493e78970338f3dc, type: 3}
-  m_Name: HighCurrency
+  m_Name: HordeOfSkeleDrops
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 1129878079823453487, guid: 60b0490520a0a404996892870dc00356,
     type: 3}
@@ -25,5 +25,5 @@ MonoBehaviour:
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 0
-  <CurrencyAmount>k__BackingField: {x: 20, y: 30}
-  <CurrencyWaveScale>k__BackingField: 50
+  <CurrencyAmount>k__BackingField: {x: 25, y: 25}
+  <CurrencyWaveScale>k__BackingField: 0
