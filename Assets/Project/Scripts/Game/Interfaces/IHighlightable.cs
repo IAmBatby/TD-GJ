@@ -8,7 +8,13 @@ public interface IHighlightable
 
     public Texture2D GetCursor();
 
+    public Color GetColor();
+
+    public MaterialController GetMaterialController();
+
     public bool IsHighlightable();
 
     public bool Compare(GameObject go);
+
+    public List<Renderer> GetRenderers();
 }

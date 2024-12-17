@@ -81,9 +81,17 @@ public class TurretBaseBehaviour : ItemBehaviour
         newModule.transform.position = moduleSpawner.transform.position;
 
         if (ActiveModule != null)
+        {
+            foreach (Renderer renderer in ActiveModule.Renderers)
+                MaterialController.RemoveRenderer(renderer);
             GameManager.UnregisterContentBehaviour(ActiveModule, true);
+        }
+
 
         ActiveModule = newModule;
+
+        foreach (Renderer renderer in ActiveModule.Renderers)
+            MaterialController.AddNewRenderer(renderer);
 
         
         GeneralDisplayInfo.PresentMode = PresentationType.Progress;
@@ -281,6 +289,9 @@ public class TurretBaseBehaviour : ItemBehaviour
 
         return points;
     }
+
+    public override List<Renderer> GetRenderers() => Renderers.Concat(ActiveModule.Renderers).ToList();
+
 
     public override void RegisterBehaviour()
     {

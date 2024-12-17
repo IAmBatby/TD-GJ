@@ -22,6 +22,8 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     [SerializeField, Range(0f,1f)] private float itemModelScaleMultiplier;
     [SerializeField] private Vector3 itemModelRotation;
 
+    private MaterialController materialController;
+
     AudioPlayer audioPlayer;
     private GameObject fakeItemObject;
     private bool hasBeenPurchased;
@@ -29,6 +31,8 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
 
     private ContentDisplayInfo shopDisplayInfo;
     private List<ContentDisplayInfo> displayInfos;
+
+    private ContentBehaviour realItemSpawn;
 
     private void OnMouseEnter() => GameManager.Instance.OnContentBehaviourMousedEnter(this);
     private void OnMouseExit() => GameManager.Instance.OnContentBehaviourMousedExit(this);
@@ -39,6 +43,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         GameManager.OnWaveFinished.AddListener(OnWaveFinished);
         GameManager.OnGameManagerStart.AddListener(InitializeShop);
         audioPlayer = AudioPlayer.Create(this);
+        materialController = new MaterialController();
     }
 
     private void InitializeShop()
@@ -83,8 +88,12 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
 
         List<ContentDisplayListing> fakeListings = fakeItem.GetDisplayListings();
         fakeListings.RemoveAt(0); //To remove the item's name since we say it in our item name
-        //foreach (ContentDisplayListing displayInfo in fakeListings)
-            //displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: GlobalData.Colors.Yellow));
+                                  //foreach (ContentDisplayListing displayInfo in fakeListings)
+                                  //displayInfos.Add(new ContentDisplayInfo(displayInfo.PrimaryText, displayIcon: displayInfo.DisplayIcon, displayColor: GlobalData.Colors.Yellow));
+
+
+
+        GameObject.Destroy(fakeItem);
     }
 
     public bool TryInteract()
@@ -93,17 +102,12 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         if (GameManager.Instance.Currency >= cost)
         {
             GameManager.ModifyCurrency(-cost);
-            ContentBehaviour realContent = contentSpawner.Spawn(contentToSpawn);
+            realItemSpawn = contentSpawner.Spawn(contentToSpawn);
             audioPlayer.PlayAudio(OnPurchaseAudio);
-            
-            if (turnsUntilRespawn == 0)
-                ResetShop();
-            else
-            {
-                fakeItemObject.SetActive(false);
-                priceText.enabled = false;
-                hasBeenPurchased = true;
-            }
+            fakeItemObject.SetActive(false);
+            priceText.enabled = false;
+            hasBeenPurchased = true;
+            GameManager.Player.OnItemPickup.AddListener(OnPlayerPickup);
 
 
             return (true);
@@ -111,9 +115,19 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         return (false);
     }
 
+    private void OnPlayerPickup(ItemBehaviour item)
+    {
+        if (item == realItemSpawn)
+        {
+            if (turnsUntilRespawn == 0)
+                ResetShop();
+            GameManager.Player.OnItemPickup.RemoveListener(OnPlayerPickup);
+        }
+    }
+
     private void OnWaveFinished()
     {
-        if (hasBeenPurchased)
+        if (hasBeenPurchased && realItemSpawn)
         {
             respawnTurnCount++;
             if (respawnTurnCount == turnsUntilRespawn)
@@ -129,12 +143,16 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         fakeItemObject.SetActive(true);
         priceText.enabled = true;
         respawnTurnCount = 0;
+        realItemSpawn = null;
     }
 
     public bool IsHighlightable() => true;
     public Texture2D GetCursor() => null;
     public List<ContentDisplayInfo> GetDisplayInfos() => displayInfos;
     public bool Compare(GameObject go) => (go == gameObject);
+    public List<Renderer> GetRenderers() => new List<Renderer>();
+    public Color GetColor() => Color.white;
+    public MaterialController GetMaterialController() => materialController;
 
     public List<ContentDisplayListing> GetDisplayListings()
     {

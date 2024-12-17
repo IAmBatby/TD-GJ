@@ -23,6 +23,7 @@ public class GameManager : GlobalManager
     private Texture2D lastSetCursor;
 
     public IHighlightable HighlightedObject { get; private set; }
+    public MaterialCache highlightCache;
 
     public ScriptableLevel Level => GlobalData.ActiveLevel;
 
@@ -39,6 +40,7 @@ public class GameManager : GlobalManager
     [SerializeField] private AudioPreset onDamageTakenPreset;
     [SerializeField] private AudioPreset ambiencePreset;
     [SerializeField] private AudioPreset onCurrencyGainedPreset;
+    [SerializeField] private Material previewSelectMaterial;
 
     [SerializeField] private SelectableCollection<WaveInfo> ActiveWaves;
 
@@ -274,7 +276,20 @@ public class GameManager : GlobalManager
         IHighlightable previousBehaviour = HighlightedObject;
         HighlightedObject = behaviour;
         if (previousBehaviour != HighlightedObject)
+        {
             OnHighlightChanged.Invoke(HighlightedObject);
+            /*
+            if (previousBehaviour != null)
+                highlightCache.RevertRenderers();
+            if (HighlightedObject != null && HighlightedObject.IsHighlightable())
+                highlightCache = new MaterialCache(HighlightedObject.GetRenderers(), previewSelectMaterial, HighlightedObject.GetColor());
+            */
+            if (previousBehaviour != null)
+                previousBehaviour.GetMaterialController().ResetRenderers();
+            if (HighlightedObject != null && HighlightedObject.IsHighlightable())
+                HighlightedObject.GetMaterialController().ApplyMaterial(previewSelectMaterial, HighlightedObject.GetColor());
+        }
+
     }
 
     public void OnContentBehaviourMousedExit(IHighlightable behaviour)
@@ -282,7 +297,15 @@ public class GameManager : GlobalManager
         IHighlightable previousBehaviour = HighlightedObject;
         HighlightedObject = null;
         if (previousBehaviour != HighlightedObject)
+        {
             OnHighlightChanged.Invoke(HighlightedObject);
+            /*
+            if (previousBehaviour != null)
+                highlightCache.RevertRenderers();
+            */
+            if (previousBehaviour != null)
+                previousBehaviour.GetMaterialController().ResetRenderers();
+        }
     }
 
     public void ModifyHealth(int newValue)

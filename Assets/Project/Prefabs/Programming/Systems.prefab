@@ -568,7 +568,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.1
   m_MinRegionArea: 0.91
   m_NavMeshData: {fileID: 23800000, guid: c73df2260b9e19242bd23216d2c4bc2d, type: 2}
   m_BuildHeightMesh: 0
@@ -2131,6 +2131,8 @@ MonoBehaviour:
     type: 2}
   ambiencePreset: {fileID: 11400000, guid: d89248d2837fffc49b2530f065333f0a, type: 2}
   onCurrencyGainedPreset: {fileID: 11400000, guid: 227242146edec8541bcda9703853d4c8,
+    type: 2}
+  previewSelectMaterial: {fileID: 2100000, guid: 257ed267e7becc94db7efe5820a563cd,
     type: 2}
   ActiveWaves:
     allObjects: []
