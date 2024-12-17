@@ -27,12 +27,12 @@ MonoBehaviour:
     <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <Health>k__BackingField: 5
-  <HealthWaveScale>k__BackingField: 50
+  <HealthWaveScale>k__BackingField: 20
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 1
-  <SpeedWaveScale>k__BackingField: 20
+  <SpeedWaveScale>k__BackingField: 10
   <Speed>k__BackingField: 0.75
   <ItemDrop>k__BackingField: {fileID: 11400000, guid: 1b79231096356b149ad08f378f2efd4f,
     type: 2}

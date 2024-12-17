@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a0e123000ac7cd438a84e4f86d6b113, type: 3}
-  m_Name: RogueEnemy
+  m_Name: BulletSpongeEnemyVariant
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: cbd70b2ba16274440806c32016d34750,
+  <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: 3ba4d5dbfe784e94caa744c18a287bc0,
     type: 3}
-  <ContentName>k__BackingField: Rogue
+  <ContentName>k__BackingField: BulletSponge
   <ContentIcon>k__BackingField: {fileID: 21300000, guid: 32d6210007b0dd34caa4c2ec60f46394,
     type: 3}
   <ContentColor>k__BackingField: {r: 0.5283019, g: 0.50853115, b: 0.27661088, a: 1}
@@ -23,14 +23,14 @@ MonoBehaviour:
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
-  <Health>k__BackingField: 3
-  <HealthWaveScale>k__BackingField: 30
+  <Health>k__BackingField: 150
+  <HealthWaveScale>k__BackingField: 0
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 1
-  <SpeedWaveScale>k__BackingField: 15
-  <Speed>k__BackingField: 1
-  <ItemDrop>k__BackingField: {fileID: 11400000, guid: 35916313a0ad46e45a76e0a646f0b0e4,
+  <SpeedWaveScale>k__BackingField: 0
+  <Speed>k__BackingField: 0.75
+  <ItemDrop>k__BackingField: {fileID: 11400000, guid: d4f049cf6dcf08040b514ff7bb77a288,
     type: 2}
   <ItemDropRate>k__BackingField: 100
