@@ -12,8 +12,9 @@ public class ScriptableProjectile : ScriptableContent
     [field: SerializeField] public float ImpactExplosionRadius { get; private set; }
     [field: SerializeField] public Color ProjectileColor { get; private set; }
 
-    [field: Header("Projectile Audio Values"), Space(15)]
+    [field: Header("Projectile Visual Values"), Space(15)]
     [field: SerializeField] public AudioPreset OnCollisionAudio { get; private set; }
+    [field: SerializeField] public ParticlePreset OnCollisionParticle { get; private set; }
 
 
     public ProjectileBehaviour SpawnProjectile(Vector3 spawnPosition, Vector3 targetPosition, float force, int newDamage)

@@ -55,13 +55,19 @@ public class PlayerBehaviour : HurtableBehaviour
 
         GameManager.OnNewWave.AddListener(SwitchRandomSkin);
         OnHealthModified.AddListener(FlashHealth);
+        GameManager.OnNewWave.AddListener(FlashOnNewWave);
+    }
+
+    private void FlashOnNewWave()
+    {
+        //MaterialController.ApplyMaterial(new Material(GlobalData.Instance.PreviewMaterial), Color.magenta, 1f);
     }
 
     private void FlashHealth((int oldHealth, int newHealth) health)
     {
         if (health.oldHealth >= health.newHealth) return;
 
-        //MaterialController.
+        //MaterialController.ApplyMaterial(GlobalData.Instance.PreviewMaterial, Color.red, 0.25f);
     }
 
     private void InitializeCamera()
@@ -119,10 +125,10 @@ public class PlayerBehaviour : HurtableBehaviour
                 if (Physics.Raycast(heldItemPosition.transform.position, new Vector3(heldItemPosition.position.x, -5000, heldItemPosition.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
                     DropItem(hit.point);
                 else
-                    AudioPlayer.PlayAudio(invalidDropItemPreset);
+                    ReactionPlayer.Audio.PlayAudio(invalidDropItemPreset);
             }
             else
-                AudioPlayer.PlayAudio(failedInteractionPreset);
+                ReactionPlayer.Audio.PlayAudio(failedInteractionPreset);
 
         }
     }
@@ -134,7 +140,7 @@ public class PlayerBehaviour : HurtableBehaviour
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
 
-        AudioPlayer.PlayAudio(pickupItemPreset);
+        ReactionPlayer.Audio.PlayAudio(pickupItemPreset);
 
         item.Pickup();
         OnItemPickup.Invoke(item);
@@ -149,7 +155,7 @@ public class PlayerBehaviour : HurtableBehaviour
         ActiveItem.transform.position = position;
         ActiveItem.transform.rotation = Quaternion.identity;
 
-        AudioPlayer.PlayAudio(validDropItemPreset);
+        ReactionPlayer.Audio.PlayAudio(validDropItemPreset);
 
         ActiveItem.Drop();
         OnItemDropped.Invoke(ActiveItem);
