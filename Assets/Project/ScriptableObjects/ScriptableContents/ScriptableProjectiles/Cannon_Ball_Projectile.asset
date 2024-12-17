@@ -23,6 +23,7 @@ MonoBehaviour:
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
   <LifeTime>k__BackingField: 5
+  <ImpactExplosionRadius>k__BackingField: 0
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
   <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
