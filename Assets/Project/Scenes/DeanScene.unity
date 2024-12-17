@@ -106023,7 +106023,7 @@ PrefabInstance:
         type: 3}
       propertyPath: contentToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: 5feafa1e360a07e4ab805d603fd557b2,
+      objectReference: {fileID: 11400000, guid: 0c6332dd03a17864594880c2fd679ab4,
         type: 2}
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}

@@ -26,17 +26,17 @@ MonoBehaviour:
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1
-  <Projectile>k__BackingField: {fileID: 11400000, guid: e02327595e3ff62488c626ff9d4fa3f7,
+  <Projectile>k__BackingField: {fileID: 11400000, guid: b4210c0ff6cc1aa44b00d79ac196610e,
     type: 2}
   <Modules>k__BackingField:
   - {fileID: 11400000, guid: 799bd6ee8a45b824997710265dee23ba, type: 2}
   - {fileID: 11400000, guid: 225936a290fbd8f449fda55bacae7d9a, type: 2}
   - {fileID: 11400000, guid: f487f97d76ea5bf429d08ef693c05de3, type: 2}
-  <Damage>k__BackingField: 5
-  <Range>k__BackingField: 5
-  <ShotSpeed>k__BackingField: 7
-  <FireRate>k__BackingField: 0.9
-  <Accuracy>k__BackingField: 0
+  <Damage>k__BackingField: 1
+  <Range>k__BackingField: 10
+  <ShotSpeed>k__BackingField: 10
+  <FireRate>k__BackingField: 0.1
+  <Accuracy>k__BackingField: 1
   <TargetType>k__BackingField: 2
   <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}
