@@ -6803,6 +6803,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 311947444}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &317885898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317885900}
+  - component: {fileID: 317885899}
+  m_Layer: 0
+  m_Name: TurretSpawner (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317885899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317885898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270709a30adf61a448007c82228099df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DefaultContent>k__BackingField: {fileID: 11400000, guid: 8d2feddf699adb145b31d7702795fa01,
+    type: 2}
+  DefaultSpawnMode: 1
+  dropMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!4 &317885900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317885898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3900001, y: 0.751, z: 3.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &320433381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10482,6 +10532,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 483240939}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &483383157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483383159}
+  - component: {fileID: 483383158}
+  m_Layer: 0
+  m_Name: TurretSpawner (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &483383158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483383157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270709a30adf61a448007c82228099df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DefaultContent>k__BackingField: {fileID: 11400000, guid: 8d2feddf699adb145b31d7702795fa01,
+    type: 2}
+  DefaultSpawnMode: 1
+  dropMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!4 &483383159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483383157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6099999, y: 0.751, z: 2.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &486329321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47801,6 +47901,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2012460755}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2014618006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014618008}
+  - component: {fileID: 2014618007}
+  m_Layer: 0
+  m_Name: TurretSpawner (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2014618007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014618006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270709a30adf61a448007c82228099df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DefaultContent>k__BackingField: {fileID: 11400000, guid: 8d2feddf699adb145b31d7702795fa01,
+    type: 2}
+  DefaultSpawnMode: 1
+  dropMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!4 &2014618008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014618006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.39, y: 0.751, z: 3.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2018573943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51387,6 +51537,9 @@ SceneRoots:
   - {fileID: 1244248671}
   - {fileID: 857845444}
   - {fileID: 325881324}
+  - {fileID: 317885900}
+  - {fileID: 2014618008}
+  - {fileID: 483383159}
   - {fileID: 1358002431}
   - {fileID: 177591200}
   - {fileID: 1274257336}
