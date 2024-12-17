@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: 3ba4d5dbfe784e94caa744c18a287bc0,
     type: 3}
-  <ContentName>k__BackingField: Skeleton
+  <ContentName>k__BackingField: Brawler
   <ContentIcon>k__BackingField: {fileID: 21300000, guid: 32d6210007b0dd34caa4c2ec60f46394,
     type: 3}
   <ContentColor>k__BackingField: {r: 0.5283019, g: 0.50853115, b: 0.27661088, a: 1}
@@ -23,13 +23,13 @@ MonoBehaviour:
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
-  <Health>k__BackingField: 1
+  <Health>k__BackingField: 8
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
-  <Damage>k__BackingField: 10
-  <Speed>k__BackingField: 0.5
-  <GoldDropRateMinMax>k__BackingField: {x: 5, y: 10}
+  <Damage>k__BackingField: 1
+  <Speed>k__BackingField: 0.75
+  <GoldDropRateMinMax>k__BackingField: {x: 15, y: 30}
   <ItemDrop>k__BackingField: {fileID: 11400000, guid: 80869fa8342af7b42b2e43ad56ef80fd,
     type: 2}
-  <ItemDropRate>k__BackingField: 81.5
+  <ItemDropRate>k__BackingField: 100

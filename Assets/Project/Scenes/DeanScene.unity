@@ -2272,13 +2272,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 899703971}
+  - {fileID: 157847482}
+  - {fileID: 1843405302}
   - {fileID: 2006589742}
+  - {fileID: 1291973840}
   - {fileID: 613137237}
   - {fileID: 551270541}
   - {fileID: 1664760273}
-  - {fileID: 1843405302}
-  - {fileID: 157847482}
-  - {fileID: 899703971}
   m_Father: {fileID: 351328273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &59211056 stripped
@@ -39275,6 +39276,96 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 708533929}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &709413015
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 54020644}
+    m_Modifications:
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: itemToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: ff1e5da439dcf9a4a9b0e6bb6ad49023,
+        type: 2}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: contentToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: c227f3c69deb147409f225d84ba4915b,
+        type: 2}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: itemModelScaleMultiplier
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.137
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.93700004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071071
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071065
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573089417333378027, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
+      propertyPath: m_Name
+      value: AccuracyAttributeSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8342e410f98dd3489c83e34c025b255, type: 3}
 --- !u!1001 &709568609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47674,6 +47765,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
       propertyPath: itemToSpawn
       value: 
       objectReference: {fileID: 11400000, guid: 53692e6d5d2b4b1448407ae40b1ba603,
@@ -47682,7 +47778,7 @@ PrefabInstance:
         type: 3}
       propertyPath: contentToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: b0e93a273bd6dc348aa90664542ab456,
+      objectReference: {fileID: 11400000, guid: ff1e5da439dcf9a4a9b0e6bb6ad49023,
         type: 2}
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
@@ -47742,7 +47838,7 @@ PrefabInstance:
     - target: {fileID: 5573089417333378027, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
       propertyPath: m_Name
-      value: ShopSpawner (2)
+      value: FireRateAttributeSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62517,6 +62613,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalGoldSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8442904243289699131, guid: 1ac6109624c78b343b7da1c78bd65096,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8587100609088423220, guid: 1ac6109624c78b343b7da1c78bd65096,
         type: 3}
       propertyPath: <Item>k__BackingField
@@ -68215,6 +68316,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1291497732}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1291973840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3479116215531374637, guid: b8342e410f98dd3489c83e34c025b255,
+    type: 3}
+  m_PrefabInstance: {fileID: 709413015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1293556901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 880ca90d95e5c1a4b9b3aeaca6b88a17,
@@ -69751,6 +69858,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
       propertyPath: itemToSpawn
       value: 
       objectReference: {fileID: 11400000, guid: 53692e6d5d2b4b1448407ae40b1ba603,
@@ -69759,7 +69871,7 @@ PrefabInstance:
         type: 3}
       propertyPath: contentToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: 7c050e9c3c469b64da4b26178f505d71,
+      objectReference: {fileID: 11400000, guid: 53692e6d5d2b4b1448407ae40b1ba603,
         type: 2}
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
@@ -69819,7 +69931,7 @@ PrefabInstance:
     - target: {fileID: 5573089417333378027, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
       propertyPath: m_Name
-      value: ShopSpawner (3)
+      value: ProjectileSpeedAttributeSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91250,7 +91362,7 @@ PrefabInstance:
     - target: {fileID: 7942363046779864761, guid: 4067d86ea3b80ca44b81b8b173c21e68,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7942363046779864761, guid: 4067d86ea3b80ca44b81b8b173c21e68,
         type: 3}
@@ -98685,6 +98797,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
       propertyPath: itemToSpawn
       value: 
       objectReference: {fileID: 11400000, guid: b0e93a273bd6dc348aa90664542ab456,
@@ -98753,7 +98870,7 @@ PrefabInstance:
     - target: {fileID: 5573089417333378027, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
       propertyPath: m_Name
-      value: ShopSpawner (1)
+      value: DamageAttributeSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -107554,6 +107671,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 226505180556438204, guid: b8342e410f98dd3489c83e34c025b255,
+        type: 3}
       propertyPath: itemToSpawn
       value: 
       objectReference: {fileID: 11400000, guid: ff1e5da439dcf9a4a9b0e6bb6ad49023,
@@ -107622,7 +107744,7 @@ PrefabInstance:
     - target: {fileID: 5573089417333378027, guid: b8342e410f98dd3489c83e34c025b255,
         type: 3}
       propertyPath: m_Name
-      value: ShopSpawner
+      value: RangeAttributeSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
