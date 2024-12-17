@@ -45,4 +45,6 @@ public class ShootPosition : MonoBehaviour
 
         return (Vector3.Lerp(rushingPosition, draggingPosition, Random.Range(Mathf.Lerp(0,0.5f,accuracy), Mathf.Lerp(1f,0.5f,accuracy))));
     }
+
+   
 }
