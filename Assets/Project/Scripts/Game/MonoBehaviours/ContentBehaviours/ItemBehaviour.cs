@@ -18,14 +18,14 @@ public class ItemBehaviour : ContentBehaviour
     public void Pickup()
     {
         IsBeingHeld = true;
-        ReactionPlayer.Audio.PlayAudio(ItemData.OnPickupAudio);
+        ReactionPlayer.Play(ItemData.OnPickupAudio);
         OnPickup();
     }
 
     public void Drop()
     {
         IsBeingHeld = false;
-        ReactionPlayer.Audio.PlayAudio(ItemData.OnDropAudio);
+        ReactionPlayer.Play(ItemData.OnDropAudio);
         OnDrop();
     }
 

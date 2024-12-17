@@ -23,4 +23,8 @@ public class ScriptableTurret : ScriptableItem
     [field: SerializeField] public AudioPreset OnNewTargetAudio { get; private set; }
     [field: SerializeField] public AudioPreset OnCooldownEndedAudio { get; private set; }
     [field: SerializeField] public AudioPreset OnUpgradeAudio { get; private set; }
+    [field: SerializeField] public ReactionInfo OnShootReaction { get; private set; }
+    [field: SerializeField] public ReactionInfo OnNewTargetReaction { get; private set; }
+    [field: SerializeField] public ReactionInfo OnCooldownEndedReaction { get; private set; }
+    [field: SerializeField] public ReactionInfo OnUpgradedReaction { get; private set; }
 }

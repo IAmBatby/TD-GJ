@@ -22,6 +22,9 @@ MonoBehaviour:
     type: 3}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <Health>k__BackingField: 5
   <HealthWaveScale>k__BackingField: 20

@@ -42,7 +42,7 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
     public void Initialize()
     {
         ReactionPlayer = ReactionPlayer.Create(this);
-        ReactionPlayer.Audio.PlayAudio(ContentData.OnSpawnAudio);
+        ReactionPlayer.Play(ContentData.OnSpawnReaction);
 
         Rigidbody = GetComponent<Rigidbody>();
         if (Rigidbody == null)

@@ -79,10 +79,7 @@ public class ProjectileBehaviour : ContentBehaviour
             behaviour.ModifyHealth(-damage);
 
 
-        ReactionPlayer.Audio.PlayAudio(ProjectileData.OnCollisionAudio);
-        ReactionPlayer.Particles.PlayParticle(ProjectileData.OnCollisionParticle);
-        //Debug.Log("Particle Played!", transform);
-        //Debug.Break();
+        ReactionPlayer.Play(ProjectileData.OnImpactReaction);
 
         if (ProjectileData.IsPiercing)
         {
