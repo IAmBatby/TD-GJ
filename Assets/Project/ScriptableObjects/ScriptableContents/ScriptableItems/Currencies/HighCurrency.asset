@@ -9,18 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bafd80c5a82e23439983b29d9048e7f, type: 3}
-  m_Name: CoinPickupItem
+  m_Script: {fileID: 11500000, guid: de58ce9fad7dfc44493e78970338f3dc, type: 3}
+  m_Name: HighCurrency
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 1129878079823453487, guid: 60b0490520a0a404996892870dc00356,
     type: 3}
-  <ContentName>k__BackingField: 
-  <ContentIcon>k__BackingField: {fileID: 0}
-  <ContentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+  <ContentName>k__BackingField: Coin
+  <ContentIcon>k__BackingField: {fileID: 21300000, guid: e536de6966e06994e9487ae39a3ad76e,
+    type: 3}
+  <ContentColor>k__BackingField: {r: 1, g: 0.82385063, b: 0, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
-  <Highlightable>k__BackingField: 0
+  <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
-  <CanBePickedUp>k__BackingField: 1
+  <CanBePickedUp>k__BackingField: 0
+  <CurrencyAmount>k__BackingField: {x: 15, y: 20}
+  <CurrencyWaveScale>k__BackingField: 0

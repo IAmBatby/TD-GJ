@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de58ce9fad7dfc44493e78970338f3dc, type: 3}
+  m_Name: RegularCurrency
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 1129878079823453487, guid: 60b0490520a0a404996892870dc00356,
+    type: 3}
+  <ContentName>k__BackingField: Coin
+  <ContentIcon>k__BackingField: {fileID: 21300000, guid: e536de6966e06994e9487ae39a3ad76e,
+    type: 3}
+  <ContentColor>k__BackingField: {r: 1, g: 0.82385063, b: 0, a: 1}
+  <Cursor>k__BackingField: {fileID: 0}
+  <Highlightable>k__BackingField: 1
+  <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <ShouldBeAnchoredToGround>k__BackingField: 0
+  <OnPickupAudio>k__BackingField: {fileID: 0}
+  <OnDropAudio>k__BackingField: {fileID: 0}
+  <CanBePickedUp>k__BackingField: 0
+  <CurrencyAmount>k__BackingField: {x: 5, y: 10}
+  <CurrencyWaveScale>k__BackingField: 0

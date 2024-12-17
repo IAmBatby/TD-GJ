@@ -17,6 +17,7 @@ MonoBehaviour:
   <IntermissionStandardTime>k__BackingField: 10
   <IntermissionWaveMultiplier>k__BackingField: 0.8
   <StartingCurrency>k__BackingField: 50
+  <StartingHealth>k__BackingField: 0
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 5
     <EnemySpawnInfos>k__BackingField:

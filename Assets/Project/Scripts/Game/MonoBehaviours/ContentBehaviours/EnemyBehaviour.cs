@@ -72,7 +72,6 @@ public class EnemyBehaviour : HurtableBehaviour
 
     protected override void OnDeath()
     {
-        GameManager.ModifyCurrency(Mathf.RoundToInt(Random.Range(EnemyData.GoldDropRateMinMax.x, EnemyData.GoldDropRateMinMax.y)));
         Agent.enabled = false;
         GameManager.RemoveEnemy(this);
     }
