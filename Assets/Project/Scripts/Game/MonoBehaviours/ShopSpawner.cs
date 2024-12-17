@@ -146,6 +146,13 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
         realItemSpawn = null;
     }
 
+    private List<MeshFilter> allRenderers = new List<MeshFilter>();
+    private void OnDrawGizmos()
+    {
+        if (contentToSpawn == null || contentToSpawn.Prefab == null) return;
+        Utilities.DrawPrefabPreview(contentSpawner.transform, contentToSpawn.Prefab.gameObject, Color.white, Color.yellow, ref allRenderers);
+    }
+
     public bool IsHighlightable() => true;
     public Texture2D GetCursor() => null;
     public List<ContentDisplayInfo> GetDisplayInfos() => displayInfos;
