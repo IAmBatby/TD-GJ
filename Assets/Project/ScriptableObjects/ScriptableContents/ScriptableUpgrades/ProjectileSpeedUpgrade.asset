@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 985584291496466747, guid: 5c3175bc94799064997e44ee09acaddc,
     type: 3}
-  <ContentName>k__BackingField: Shoot Speed
+  <ContentName>k__BackingField: Projectile Speed
   <ContentIcon>k__BackingField: {fileID: 21300000, guid: 841e2e4fba56a0347b0a6dadcc277ceb,
     type: 3}
   <ContentColor>k__BackingField: {r: 0.745283, g: 0.14413491, b: 0.687544, a: 1}

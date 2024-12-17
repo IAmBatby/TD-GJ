@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f982dc214d65f2449803a1b12f30a568, type: 3}
-  m_Name: Catapult_Ball_Projectile
+  m_Name: Catapult_Rock_Projectile
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: cb7cf46b5159acb4cacc8979fe5dad18,
     type: 3}
@@ -22,7 +22,7 @@ MonoBehaviour:
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
-  <LifeTime>k__BackingField: 5
+  <LifeTime>k__BackingField: 2
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
   <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
