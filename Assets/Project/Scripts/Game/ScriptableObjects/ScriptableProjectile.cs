@@ -15,6 +15,7 @@ public class ScriptableProjectile : ScriptableContent
     [field: Header("Projectile Visual Values"), Space(15)]
     [field: SerializeField] public AudioPreset OnCollisionAudio { get; private set; }
     [field: SerializeField] public ParticlePreset OnCollisionParticle { get; private set; }
+    [field: SerializeField] public ReactionInfo OnImpactReaction { get; private set; }
 
 
     public ProjectileBehaviour SpawnProjectile(Vector3 spawnPosition, Vector3 targetPosition, float force, int newDamage)

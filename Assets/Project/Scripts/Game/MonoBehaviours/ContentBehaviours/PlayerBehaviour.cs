@@ -125,10 +125,10 @@ public class PlayerBehaviour : HurtableBehaviour
                 if (Physics.Raycast(heldItemPosition.transform.position, new Vector3(heldItemPosition.position.x, -5000, heldItemPosition.position.z), out RaycastHit hit, Mathf.Infinity, dropMask))
                     DropItem(hit.point);
                 else
-                    ReactionPlayer.Audio.PlayAudio(invalidDropItemPreset);
+                    ReactionPlayer.Play(invalidDropItemPreset);
             }
             else
-                ReactionPlayer.Audio.PlayAudio(failedInteractionPreset);
+                ReactionPlayer.Play(failedInteractionPreset);
 
         }
     }
@@ -140,7 +140,7 @@ public class PlayerBehaviour : HurtableBehaviour
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
 
-        ReactionPlayer.Audio.PlayAudio(pickupItemPreset);
+        ReactionPlayer.Play(pickupItemPreset);
 
         item.Pickup();
         OnItemPickup.Invoke(item);
@@ -155,7 +155,7 @@ public class PlayerBehaviour : HurtableBehaviour
         ActiveItem.transform.position = position;
         ActiveItem.transform.rotation = Quaternion.identity;
 
-        ReactionPlayer.Audio.PlayAudio(validDropItemPreset);
+        ReactionPlayer.Play(validDropItemPreset);
 
         ActiveItem.Drop();
         OnItemDropped.Invoke(ActiveItem);
