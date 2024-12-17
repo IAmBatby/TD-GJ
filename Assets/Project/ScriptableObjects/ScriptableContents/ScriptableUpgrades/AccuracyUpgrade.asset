@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93358c88e6a7ffc44a113f73fb5aebfb, type: 3}
-  m_Name: ShotSpeedUpgrade
+  m_Name: AccuracyUpgrade
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 985584291496466747, guid: 5c3175bc94799064997e44ee09acaddc,
     type: 3}
-  <ContentName>k__BackingField: Shoot Speed
-  <ContentIcon>k__BackingField: {fileID: 21300000, guid: 841e2e4fba56a0347b0a6dadcc277ceb,
+  <ContentName>k__BackingField: Accuracy
+  <ContentIcon>k__BackingField: {fileID: 21300000, guid: cdc57ac776b894c4c847d7e36d6ca9f3,
     type: 3}
-  <ContentColor>k__BackingField: {r: 0.745283, g: 0.14413491, b: 0.687544, a: 1}
+  <ContentColor>k__BackingField: {r: 0.32079923, g: 0.8396226, b: 0.6837788, a: 1}
   <Cursor>k__BackingField: {fileID: 2800000, guid: 893cbd9567029ef438a26ce15c4ab38f,
     type: 3}
   <Highlightable>k__BackingField: 1
@@ -26,6 +26,6 @@ MonoBehaviour:
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1
-  <Attribute>k__BackingField: {fileID: 11400000, guid: fce42ae92addcb3439bd7bd4e3a64f70,
+  <Attribute>k__BackingField: {fileID: 11400000, guid: bead1af4937125743af0310a0dc00aee,
     type: 2}
-  <ModifierValue>k__BackingField: 4
+  <ModifierValue>k__BackingField: 0.1

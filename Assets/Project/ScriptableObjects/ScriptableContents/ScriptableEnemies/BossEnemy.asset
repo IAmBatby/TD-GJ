@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a0e123000ac7cd438a84e4f86d6b113, type: 3}
-  m_Name: DefaultEnemy 1
+  m_Name: BossEnemy
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: 2294eb57aa6d0054d8b0d24c1a85e2d4,
+  <Prefab>k__BackingField: {fileID: 3306550451389735796, guid: 3ba4d5dbfe784e94caa744c18a287bc0,
     type: 3}
   <ContentName>k__BackingField: Skeleton
   <ContentIcon>k__BackingField: {fileID: 21300000, guid: 32d6210007b0dd34caa4c2ec60f46394,
@@ -27,8 +27,8 @@ MonoBehaviour:
   <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
     type: 2}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
-  <Damage>k__BackingField: 5
-  <Speed>k__BackingField: 2
+  <Damage>k__BackingField: 10
+  <Speed>k__BackingField: 0.75
   <GoldDropRateMinMax>k__BackingField: {x: 5, y: 10}
   <ItemDrop>k__BackingField: {fileID: 11400000, guid: 80869fa8342af7b42b2e43ad56ef80fd,
     type: 2}

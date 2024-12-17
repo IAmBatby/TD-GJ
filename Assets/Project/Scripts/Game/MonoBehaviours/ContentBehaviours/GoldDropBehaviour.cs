@@ -6,6 +6,12 @@ public class GoldDropBehaviour : ItemBehaviour
 {
     public int currencyValue;
 
+
+    protected override void OnSpawn()
+    {
+        base.OnSpawn();
+        GameManager.OnNewWave.AddListener(DestroyCoin);
+    }
     public void ForwardedTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out PlayerBehaviour player))
@@ -21,6 +27,11 @@ public class GoldDropBehaviour : ItemBehaviour
         }
     }
 
+    public void DestroyCoin()
+    {
+        GameManager.OnNewWave.RemoveListener(DestroyCoin);
+        GameManager.UnregisterContentBehaviour(this, true);
+    }
     public override void RegisterBehaviour()
     {
         ContentManager.RegisterBehaviour(this);
