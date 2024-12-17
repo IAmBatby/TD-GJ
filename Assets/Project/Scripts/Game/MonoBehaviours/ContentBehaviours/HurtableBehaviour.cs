@@ -57,7 +57,7 @@ public class HurtableBehaviour : ContentBehaviour
             Die();
 
         if (currentHealth != previousHealth)
-            AudioPlayer.PlayAudio(currentHealth > previousHealth ? HurtableData.OnHealthGainedAudio : HurtableData.OnHealthLostAudio);
+            ReactionPlayer.Audio.PlayAudio(currentHealth > previousHealth ? HurtableData.OnHealthGainedAudio : HurtableData.OnHealthLostAudio);
 
         OnHealthModified.Invoke((previousHealth, currentHealth));
     }

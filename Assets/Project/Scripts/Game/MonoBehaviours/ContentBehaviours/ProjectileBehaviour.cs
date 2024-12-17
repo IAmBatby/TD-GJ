@@ -1,6 +1,7 @@
 using IterationToolkit;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ProjectileBehaviour : ContentBehaviour
@@ -78,7 +79,11 @@ public class ProjectileBehaviour : ContentBehaviour
             behaviour.ModifyHealth(-damage);
 
 
-        AudioPlayer.PlayAudio(ProjectileData.OnCollisionAudio);
+        ReactionPlayer.Audio.PlayAudio(ProjectileData.OnCollisionAudio);
+        ReactionPlayer.Particles.PlayParticle(ProjectileData.OnCollisionParticle);
+        //Debug.Log("Particle Played!", transform);
+        //Debug.Break();
+
         if (ProjectileData.IsPiercing)
         {
             foreach (Collider hit in hits)
@@ -92,6 +97,7 @@ public class ProjectileBehaviour : ContentBehaviour
     public void Despawn()
     {
         if (hasDespawned) return;
+        ReactionPlayer.Particles.DetatchParticles();
         GameManager.UnregisterContentBehaviour(this, true);
         hasDespawned = true;
     }

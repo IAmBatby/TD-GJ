@@ -7,7 +7,9 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 {
     public ScriptableContent ContentData { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
-    public AudioPlayer AudioPlayer { get; private set; }
+    //public AudioPlayer AudioPlayer { get; private set; }
+    //public ParticlePlayer ParticlePlayer { get; private set; }
+    public ReactionPlayer ReactionPlayer { get; private set; }
     [field: SerializeField] public List<Renderer> Renderers { get; private set; } = new List<Renderer>();
 
     protected MaterialController MaterialController { get; private set; }
@@ -39,8 +41,8 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 
     public void Initialize()
     {
-        AudioPlayer = AudioPlayer.Create(this);
-        AudioPlayer.PlayAudio(ContentData.OnSpawnAudio);
+        ReactionPlayer = ReactionPlayer.Create(this);
+        ReactionPlayer.Audio.PlayAudio(ContentData.OnSpawnAudio);
 
         Rigidbody = GetComponent<Rigidbody>();
         if (Rigidbody == null)
