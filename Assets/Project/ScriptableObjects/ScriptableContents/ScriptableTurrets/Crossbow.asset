@@ -32,11 +32,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1cd68a7b340bee04da0b948fb3d3bd26, type: 2}
   - {fileID: 11400000, guid: abab61e443d440e48b393e57c36e9345, type: 2}
   - {fileID: 11400000, guid: 2d16a12c408ecd94cbb3d6dd965475cb, type: 2}
-  <Damage>k__BackingField: 6
-  <Range>k__BackingField: 3.5
-  <ShotSpeed>k__BackingField: 10
-  <FireRate>k__BackingField: 3
-  <Accuracy>k__BackingField: 0.5
+  <Damage>k__BackingField: 3
+  <Range>k__BackingField: 2.5
+  <ShotSpeed>k__BackingField: 5
+  <FireRate>k__BackingField: 4
+  <Accuracy>k__BackingField: 0.3
   <TargetType>k__BackingField: 2
   <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}

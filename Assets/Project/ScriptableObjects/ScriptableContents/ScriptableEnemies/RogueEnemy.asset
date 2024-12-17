@@ -30,7 +30,7 @@ MonoBehaviour:
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 1
   <SpeedWaveScale>k__BackingField: 20
-  <Speed>k__BackingField: 0.75
+  <Speed>k__BackingField: 1
   <ItemDrop>k__BackingField: {fileID: 11400000, guid: 35916313a0ad46e45a76e0a646f0b0e4,
     type: 2}
   <ItemDropRate>k__BackingField: 75
