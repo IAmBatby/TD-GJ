@@ -22,9 +22,18 @@ MonoBehaviour:
     type: 3}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
+  <OnPickupReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnDropReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 11400000, guid: 600b89a098ffab846af690294ffe20b7,
     type: 2}
@@ -37,6 +46,7 @@ MonoBehaviour:
   <ShotSpeed>k__BackingField: 3
   <FireRate>k__BackingField: 7.5
   <Accuracy>k__BackingField: 0.1
+  <AimOffset>k__BackingField: {x: 0, y: 0, z: 0}
   <TargetType>k__BackingField: 2
   <OnShootAudio>k__BackingField: {fileID: 11400000, guid: 71781ce4d0f311f41928cfbd6ffe0da2,
     type: 2}
@@ -46,3 +56,15 @@ MonoBehaviour:
     type: 2}
   <OnUpgradeAudio>k__BackingField: {fileID: 11400000, guid: a522841518167fa41947d64aadb42afe,
     type: 2}
+  <OnShootReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnNewTargetReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnCooldownEndedReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnUpgradedReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
