@@ -54,6 +54,14 @@ public class PlayerBehaviour : HurtableBehaviour
             SetSkin(player.DefaultSkin);
 
         GameManager.OnNewWave.AddListener(SwitchRandomSkin);
+        OnHealthModified.AddListener(FlashHealth);
+    }
+
+    private void FlashHealth((int oldHealth, int newHealth) health)
+    {
+        if (health.oldHealth >= health.newHealth) return;
+
+        //MaterialController.
     }
 
     private void InitializeCamera()

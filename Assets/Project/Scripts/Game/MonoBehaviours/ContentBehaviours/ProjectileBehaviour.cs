@@ -10,6 +10,8 @@ public class ProjectileBehaviour : ContentBehaviour
     private Timer killTimer;
     private List<GameObject> piercedObjects = new List<GameObject>();
 
+    [SerializeField] private LayerMask hitMask;
+
     private Vector3 targetPosition;
     private float force;
     private int damage;
@@ -45,19 +47,45 @@ public class ProjectileBehaviour : ContentBehaviour
         if (piercedObjects.Contains(other.gameObject)) return;
         HurtableBehaviour health = other.transform.root.GetComponentInChildren<HurtableBehaviour>();
         if (health != null)
-        {
-            AudioPlayer.PlayAudio(ProjectileData.OnCollisionAudio);
             health.ModifyHealth(-damage);
-            if (ProjectileData.IsPiercing)
-                piercedObjects.Add(other.gameObject);
-            else
-                Despawn();
-        }
+        if (ProjectileData.IsPiercing)
+            piercedObjects.Add(other.gameObject);
+
+        Explode();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy")) //Bad
+            Explode();
+    }
+
+    public virtual void Explode()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, ProjectileData.ImpactExplosionRadius, hitMask, QueryTriggerInteraction.Collide);
+        List<HurtableBehaviour> behaviours = new List<HurtableBehaviour>();
+        foreach (Collider hit in hits)
+        {
+            if (piercedObjects.Contains(hit.transform.gameObject)) continue;
+            foreach (HurtableBehaviour behaviour in hit.transform.gameObject.GetComponentsInChildren<HurtableBehaviour>())
+                if (!behaviours.Contains(behaviour))
+                    behaviours.Add(behaviour);
+        }
+
+        Debug.Log("Cannonball Exploding! Radius Is: " + ProjectileData.ImpactExplosionRadius + ", Hit: #" + behaviours.Count + "Hurtables");
+
+        foreach (HurtableBehaviour behaviour in  behaviours)
+            behaviour.ModifyHealth(-damage);
+
+
+        AudioPlayer.PlayAudio(ProjectileData.OnCollisionAudio);
+        if (ProjectileData.IsPiercing)
+        {
+            foreach (Collider hit in hits)
+                if (!piercedObjects.Contains(hit.transform.gameObject))
+                    piercedObjects.Add(hit.transform.gameObject);
+        }
+        else
             Despawn();
     }
 

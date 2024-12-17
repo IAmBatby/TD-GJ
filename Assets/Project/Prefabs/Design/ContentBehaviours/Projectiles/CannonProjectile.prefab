@@ -50,6 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Renderers>k__BackingField: []
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!54 &235411518407534152
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -40,6 +40,8 @@ public class GlobalData : MonoBehaviour
 
     public static string startingScene;
 
+    [field: SerializeField] public Material PreviewMaterial { get; private set; }
+
     public static ExtendedEvent<ScriptableLevel> OnLevelUnloaded = new ExtendedEvent<ScriptableLevel>();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
