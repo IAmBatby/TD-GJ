@@ -131,7 +131,7 @@ public class TurretBaseBehaviour : ItemBehaviour
         }*/
 
         if (Target != null && Target != previousTarget)
-            ReactionPlayer.Play(TurretData.OnNewTargetAudio);
+            ReactionPlayer.Play(TurretData.OnNewTargetReaction);
 
         foreach (ShootPosition shootPosition in ActiveModule.ShootPositions)
         {
@@ -158,7 +158,7 @@ public class TurretBaseBehaviour : ItemBehaviour
             //Projectile.SpawnProjectile(shootPosition.transform.position, Target.transform.position, ShotSpeedAttribute.Value, Mathf.RoundToInt(DamageAttribute.Value));
         }
 
-        ReactionPlayer.Play(TurretData.OnShootAudio);
+        ReactionPlayer.Play(TurretData.OnShootReaction);
         EnableCooldown();
     }
 
@@ -173,7 +173,7 @@ public class TurretBaseBehaviour : ItemBehaviour
 
     private void DisableCooldown()
     {
-        ReactionPlayer.Play(TurretData.OnCooldownEndedAudio);
+        ReactionPlayer.Play(TurretData.OnCooldownEndedReaction);
         canShoot = true;
     }
 
@@ -271,7 +271,7 @@ public class TurretBaseBehaviour : ItemBehaviour
     {
         if (attributeDisplayInfoDict.TryGetValue(attributeModified, out ContentDisplayInfo displayInfo))
             displayInfo.SetDisplayValues(attributeModified.DisplayName, attributeModified.GetSecondaryDisplayString());
-        ReactionPlayer.Play(TurretData.OnUpgradeAudio);
+        ReactionPlayer.Play(TurretData.OnUpgradedReaction);
     }
 
     private void UpdateRangePreview()

@@ -21,11 +21,20 @@ MonoBehaviour:
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <Health>k__BackingField: 100
   <HealthWaveScale>k__BackingField: 100
-  <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
-    type: 2}
+  <OnHealthLostAudio>k__BackingField: {fileID: 0}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
+  <OnHealthLostReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+      type: 2}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnHealthGainedReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <DefaultSkin>k__BackingField: {fileID: 11400000, guid: dfb85c86a1062c8499727d278f959253,
     type: 2}

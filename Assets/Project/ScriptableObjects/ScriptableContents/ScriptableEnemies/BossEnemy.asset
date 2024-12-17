@@ -22,12 +22,21 @@ MonoBehaviour:
     type: 3}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <Health>k__BackingField: 100
   <HealthWaveScale>k__BackingField: 0
-  <OnHealthLostAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
-    type: 2}
+  <OnHealthLostAudio>k__BackingField: {fileID: 0}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}
+  <OnHealthLostReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+      type: 2}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnHealthGainedReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 10
   <SpeedWaveScale>k__BackingField: 0
   <Speed>k__BackingField: 0.75

@@ -28,10 +28,10 @@ MonoBehaviour:
   <LifeTime>k__BackingField: 1
   <ImpactExplosionRadius>k__BackingField: 0
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
-  <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
-    type: 2}
+  <OnCollisionAudio>k__BackingField: {fileID: 0}
   <OnCollisionParticle>k__BackingField: {fileID: 0}
   <OnImpactReaction>k__BackingField:
-    <AudioPreset>k__BackingField: {fileID: 0}
+    <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+      type: 2}
     <ParticlePreset>k__BackingField: {fileID: 11400000, guid: d5551c26a1e3aad43844e32f63897e94,
       type: 2}

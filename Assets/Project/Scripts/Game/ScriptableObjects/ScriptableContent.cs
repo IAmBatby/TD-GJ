@@ -15,7 +15,6 @@ public class ScriptableContent : ScriptableObject
     [field: SerializeField] public Color ContentColor { get; protected set; } = Color.black;
     [field: SerializeField] public Texture2D Cursor { get; private set; }
     [field: SerializeField] public bool Highlightable { get; private set; } = true;
-    [field: SerializeField] public AudioPreset OnSpawnAudio { get; private set; }
     [field: SerializeField] public ReactionInfo OnSpawnReaction { get; private set; }
 
     [field: Header("Content Values"), Space(15)]

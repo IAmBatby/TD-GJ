@@ -19,11 +19,7 @@ public class ScriptableTurret : ScriptableItem
     [field: SerializeField] public Vector3 AimOffset { get; private set; }
     [field: SerializeField] public TargetType TargetType { get; private set; }
 
-    [field: Header("Turret Audio Values"), Space(15)]
-    [field: SerializeField] public AudioPreset OnShootAudio { get; private set; }
-    [field: SerializeField] public AudioPreset OnNewTargetAudio { get; private set; }
-    [field: SerializeField] public AudioPreset OnCooldownEndedAudio { get; private set; }
-    [field: SerializeField] public AudioPreset OnUpgradeAudio { get; private set; }
+    [field: Header("Turret Visual Values"), Space(15)]
     [field: SerializeField] public ReactionInfo OnShootReaction { get; private set; }
     [field: SerializeField] public ReactionInfo OnNewTargetReaction { get; private set; }
     [field: SerializeField] public ReactionInfo OnCooldownEndedReaction { get; private set; }
