@@ -28,4 +28,4 @@ MonoBehaviour:
   <CanBePickedUp>k__BackingField: 1
   <Attribute>k__BackingField: {fileID: 11400000, guid: 3b4ab2b8237af3741b41f7f67a777cf0,
     type: 2}
-  <ModifierValue>k__BackingField: 2
+  <ModifierValue>k__BackingField: 1

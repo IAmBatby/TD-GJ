@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 1657740986348537836, guid: 4d05219a797577d42b52fdae8cfc49ea,
     type: 3}
-  <ContentName>k__BackingField: 
+  <ContentName>k__BackingField: Upgrade Crystal
   <ContentIcon>k__BackingField: {fileID: 0}
-  <ContentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+  <ContentColor>k__BackingField: {r: 0.4528302, g: 0.0021359965, b: 0.37203476, a: 0.4392157}
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
-  <Health>k__BackingField: 10
+  <Health>k__BackingField: 20
+  <HealthWaveScale>k__BackingField: 20
   <OnHealthLostAudio>k__BackingField: {fileID: 0}
   <OnHealthGainedAudio>k__BackingField: {fileID: 0}

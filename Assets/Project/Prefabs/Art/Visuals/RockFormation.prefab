@@ -228,7 +228,7 @@ MonoBehaviour:
   activeSpawners: []
   spawnedCrystals: []
   numberOfCrystalsToSpawn: 1
-  PercentChanceToSpawn: 50
+  PercentChanceToSpawn: 10
   rockSpawnAnimator: {fileID: 0}
 --- !u!54 &3124981685659648788
 Rigidbody:

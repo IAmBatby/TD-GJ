@@ -210,7 +210,6 @@ public class PlayerBehaviour : HurtableBehaviour
         }
 
         GameObject newSkin = GameObject.Instantiate(skin.SkinPrefab, skinParent.transform);
-        newSkin.transform.position = Vector3.zero;
         activeAnimator = newSkin.gameObject.AddComponent<Animator>();
         activeAnimator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
     }
