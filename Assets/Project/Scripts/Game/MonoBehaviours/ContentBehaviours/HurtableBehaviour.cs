@@ -20,18 +20,25 @@ public class HurtableBehaviour : ContentBehaviour
         if (ContentData is ScriptableHurtable hurtableData)
             HurtableData = hurtableData;
 
-        SetMaxHealth(HurtableData.Health);
+        RefreshMaxHealth();
+        //SetMaxHealth(HurtableData.Health);
         ResetHealth();
         healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
         healthDisplayInfo.DisplayMode = DisplayType.Mini;
         GeneralDisplayListing.AddContentDisplayInfo(healthDisplayInfo);
         OnHealthModified.AddListener(RefreshDisplayInfo);
+        GameManager.OnNewWave.AddListener(RefreshMaxHealth);
     }
 
     public void Die()
     {
         OnHurtableDeath.Invoke();
         OnDeath();
+    }
+
+    private void RefreshMaxHealth()
+    {
+        SetMaxHealth(Mathf.RoundToInt(Utilities.GetScaledValue(HurtableData.Health, HurtableData.HealthWaveScale, GameManager.Instance.CurrentWaveCount)));
     }
 
     protected virtual void OnDeath() { }

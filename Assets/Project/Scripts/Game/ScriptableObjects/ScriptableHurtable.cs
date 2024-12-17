@@ -8,6 +8,7 @@ public class ScriptableHurtable : ScriptableContent
 {
     [field: Header("Hurtable Values"), Space(15)]
     [field: SerializeField] public int Health { get; private set; }
+    [field: SerializeField, Range(0f,100f)] public float HealthWaveScale { get; private set; }
 
     [field: Header("Hurtable Audio Values"), Space(15)]
     [field: SerializeField] public AudioPreset OnHealthLostAudio { get; private set; }

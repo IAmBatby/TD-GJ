@@ -32,7 +32,11 @@ public class ContentManager : GlobalManager
 
     public static void UnregisterBehaviour<T>(T behaviour, bool destroyOnUnregistration) where T: ContentBehaviour
     {
-
+        if (behaviour == null)
+        {
+            Debug.LogWarning("Tried to unregister null behaviour!");
+            return;
+        }
         Instance.fullBehaviourList.Remove(behaviour);
         foreach (ContentCollection contentCollection in Instance.contentCollections)
             if (contentCollection is ContentCollection<T> castedCollection)
