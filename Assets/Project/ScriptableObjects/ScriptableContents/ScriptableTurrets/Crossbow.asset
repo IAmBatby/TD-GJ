@@ -32,7 +32,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1cd68a7b340bee04da0b948fb3d3bd26, type: 2}
   - {fileID: 11400000, guid: abab61e443d440e48b393e57c36e9345, type: 2}
   - {fileID: 11400000, guid: 2d16a12c408ecd94cbb3d6dd965475cb, type: 2}
-  <Damage>k__BackingField: 8
+  <Damage>k__BackingField: 12
   <Range>k__BackingField: 6
   <ShotSpeed>k__BackingField: 7
   <FireRate>k__BackingField: 3
