@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Crystal Caverns
   <SceneName>k__BackingField: DeanScene
-  <IntermissionStandardTime>k__BackingField: 0
-  <IntermissionWaveMultiplier>k__BackingField: 0
+  <IntermissionStandardTime>k__BackingField: 10
+  <IntermissionWaveMultiplier>k__BackingField: 0.5
   <StartingCurrency>k__BackingField: 50
+  <StartingHealth>k__BackingField: 0
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 20
     <EnemySpawnInfos>k__BackingField:

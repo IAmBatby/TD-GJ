@@ -9,6 +9,7 @@ public class CrystalRockBehaviour : HurtableBehaviour
     [SerializeField] private List<ItemBehaviour> spawnedCrystals = new List<ItemBehaviour>();
 
     [SerializeField] private int numberOfCrystalsToSpawn;
+    [SerializeField] private int PercentChanceToSpawn;
     //I think maybe you should actually animate the item spawner positions and spawn a crystal at the end of the animation
     //Instead of trying to animate the crystal itself
     [SerializeField] private Animator rockSpawnAnimator;
@@ -29,12 +30,18 @@ public class CrystalRockBehaviour : HurtableBehaviour
         for (int i = numberOfCrystalsToSpawn; i > 0; i--)
         {
             if (activeSpawners.Count >= randomSpawners.Count) break;
+
+            int RandomChance = Random.Range(1, 100);
+            Debug.Log("Rolled " + RandomChance.ToString() + "/ 100, Succeed Threshold: " + PercentChanceToSpawn.ToString() + "/100");
+            if (RandomChance < PercentChanceToSpawn) return;
+
             int RandomNumber = Random.Range(0, randomSpawners.Count);
 
             ContentSpawner randomSpawner = randomSpawners[RandomNumber];
             randomSpawner.gameObject.SetActive(true); //fake crystal under this game object
 
             activeSpawners.Add(randomSpawner);
+
         }
 
         if(activeSpawners.Count != 0)

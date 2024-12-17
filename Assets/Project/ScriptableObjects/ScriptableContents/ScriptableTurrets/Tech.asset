@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 225936a290fbd8f449fda55bacae7d9a, type: 2}
   - {fileID: 11400000, guid: f487f97d76ea5bf429d08ef693c05de3, type: 2}
   <Damage>k__BackingField: 1
-  <Range>k__BackingField: 10
+  <Range>k__BackingField: 3
   <ShotSpeed>k__BackingField: 10
   <FireRate>k__BackingField: 0.1
   <Accuracy>k__BackingField: 1

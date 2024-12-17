@@ -220,13 +220,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a17966a857db3841a883c5e8d6af9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Renderers>k__BackingField: []
   randomSpawners:
   - {fileID: 5795115302939911837}
   - {fileID: 950110348495028707}
   - {fileID: 8920780126635406057}
   activeSpawners: []
   spawnedCrystals: []
-  numberOfCrystalsToSpawn: 2
+  numberOfCrystalsToSpawn: 1
+  PercentChanceToSpawn: 50
   rockSpawnAnimator: {fileID: 0}
 --- !u!54 &3124981685659648788
 Rigidbody:

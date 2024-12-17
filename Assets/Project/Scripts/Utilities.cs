@@ -6,6 +6,7 @@ public static class Utilities
 {
     public static float GetScaledValue(float value, float scaleRate, int waveCount)
     {
-        return (value + (waveCount + (scaleRate / 100)));
+        //Debug.Log("Setting New Value to: " + (value + (waveCount * (scaleRate * value / 100))));
+        return (value + (waveCount * (scaleRate * value / 100)));
     }
 }
