@@ -265,7 +265,7 @@ MonoBehaviour:
   <ActiveCamera>k__BackingField: {fileID: 3851695459415568309}
   interactKey: 101
   heldItemPosition: {fileID: 6114177652663965045}
-  moveSpeed: 5
+  moveSpeed: 6
   lookMask:
     serializedVersion: 2
     m_Bits: 979
