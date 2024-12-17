@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b43b788520156439b45a7af491803c, type: 3}
   m_Name: TechMKIII
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 6642089300533839571, guid: d97227b0a0c177849a31069d9a30d8a9,
+  <Prefab>k__BackingField: {fileID: 4448072583795533177, guid: d97227b0a0c177849a31069d9a30d8a9,
     type: 3}
   <ContentName>k__BackingField: Crossbow MK1
   <ContentIcon>k__BackingField: {fileID: 0}

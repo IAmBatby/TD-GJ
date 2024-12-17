@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f982dc214d65f2449803a1b12f30a568, type: 3}
-  m_Name: Crossbow_Bolt_Projectile
+  m_Name: Tech_Bullet_Projectile
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: 7ce79a3a2612f594e9bb52302837b744,
+  <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: d5fb4cd07c8f2ed4c8cbd1ec0f8408f0,
     type: 3}
   <ContentName>k__BackingField: 
   <ContentIcon>k__BackingField: {fileID: 0}
@@ -21,7 +21,7 @@ MonoBehaviour:
   <Highlightable>k__BackingField: 0
   <OnSpawnAudio>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
-  <IsPiercing>k__BackingField: 1
+  <IsPiercing>k__BackingField: 0
   <LifeTime>k__BackingField: 5
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
   <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
