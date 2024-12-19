@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 6313422005304250296, guid: 22a152887c768af4a91fd682cffefc7e,
     type: 3}
-  <ContentName>k__BackingField: 
+  <ContentName>k__BackingField: Projectile
   <ContentIcon>k__BackingField: {fileID: 0}
-  <ContentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+  <ContentColor>k__BackingField: {r: 0.0018080696, g: 0.2924528, b: 0, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 0
-  <OnSpawnAudio>k__BackingField: {fileID: 0}
   <OnSpawnReaction>k__BackingField:
     <AudioPreset>k__BackingField: {fileID: 0}
     <ParticlePreset>k__BackingField: {fileID: 0}
@@ -28,8 +27,6 @@ MonoBehaviour:
   <LifeTime>k__BackingField: 5
   <ImpactExplosionRadius>k__BackingField: 0
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
-  <OnCollisionAudio>k__BackingField: {fileID: 0}
-  <OnCollisionParticle>k__BackingField: {fileID: 0}
   <OnImpactReaction>k__BackingField:
     <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
       type: 2}

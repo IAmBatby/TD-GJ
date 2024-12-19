@@ -16,6 +16,7 @@ public struct LogCollection
     public Logger Behaviours { get; private set; }
     public Logger Wave { get; private set; }
     public Logger Enemies { get; private set; }
+    public Logger Player { get; private set; }
 
     public LogCollection(int maxLines = 0)
     {
@@ -23,6 +24,7 @@ public struct LogCollection
         Behaviours = DynamicConsole.AddLogger("Behaviours");
         Wave = DynamicConsole.AddLogger("Wave");
         Enemies = DynamicConsole.AddLogger("Enemies");
+        Player = DynamicConsole.AddLogger("Player");
     }
 }
 
@@ -102,6 +104,7 @@ public class GameManager : GlobalManager
     public static bool IsInActiveWave => Instance.currentWaveTimer != null;
 
     private bool isConsoleEnabled;
+    private bool isFirstWave;
 
     ////////// Game Events //////////
 
@@ -149,6 +152,7 @@ public class GameManager : GlobalManager
         currentCurrency = Level.StartingCurrency;
         currentWaveTimer = null;
         intermissionTimer = null;
+        isFirstWave = true;
         ActiveWaves = new SelectableCollection<ScriptableWave>(Level.WaveManifest.Waves);
         UIManager.Instance.InitializeUI();
     }
@@ -171,9 +175,15 @@ public class GameManager : GlobalManager
         }
         else
         {
-            if (CurrentWaveCount > 0)
+            if (isFirstWave == true)
+                isFirstWave = false;
+            else
                 ActiveWaves.SelectForward();
-            StartNextWave();
+
+            if (CurrentWave.IsValidWave() == false)
+                TryProgressToNextWave();
+            else
+                StartNextWave();
         }
     }
 

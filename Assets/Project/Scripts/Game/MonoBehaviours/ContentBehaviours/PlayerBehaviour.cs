@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
+using static UnityEditor.Progress;
+using Logger = IterationToolkit.Logger;
 
 public class PlayerBehaviour : HurtableBehaviour
 {
@@ -31,6 +33,8 @@ public class PlayerBehaviour : HurtableBehaviour
     [SerializeField] private AudioPreset invalidDropItemPreset;
     [SerializeField] private AudioPreset failedInteractionPreset;
 
+    public Logger Log => GameManager.Logs.Player;
+
 
     private PositionConstraint positionConstraint;
 
@@ -55,7 +59,14 @@ public class PlayerBehaviour : HurtableBehaviour
 
         GameManager.OnNewWave.AddListener(SwitchRandomSkin);
         OnHealthModified.AddListener(FlashHealth);
+        OnHealthModified.AddListener(LogDamage);
         GameManager.OnNewWave.AddListener(FlashOnNewWave);
+    }
+
+    private void LogDamage((int, int) health)
+    {
+        if (health.Item2 < health.Item1)
+        Log.LogInfo("Took: " + (health.Item1 - health.Item2) + " Damage!", Color.red);
     }
 
     private void FlashOnNewWave()
@@ -135,7 +146,7 @@ public class PlayerBehaviour : HurtableBehaviour
 
     public void PickupItem(ItemBehaviour item)
     {
-        Debug.Log("Picking Up: " + item.name);
+        Log.LogInfo("Picked Up: " + item.ContentData.GetDisplayName(), item.ContentData.GetDisplayColor());
         ActiveItem = item;
         item.transform.SetParent(heldItemPosition, true);
         item.transform.localPosition = Vector3.zero;
@@ -149,7 +160,7 @@ public class PlayerBehaviour : HurtableBehaviour
     public void DropItem(Vector3 position)
     {
         if (ActiveItem == null) return;
-        Debug.Log("Dropping: " + ActiveItem.name);
+        Log.LogInfo("Dropped: " + ActiveItem.ContentData.GetDisplayName(), ActiveItem.ContentData.GetDisplayColor());
 
         ActiveItem.transform.SetParent(null);
         ActiveItem.transform.position = position;
