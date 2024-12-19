@@ -38,9 +38,7 @@ public class ProjectileBehaviour : ContentBehaviour
         force = newForce;
         Rigidbody.AddForce((targetPosition - transform.position).normalized * force, ForceMode.Impulse);
         transform.LookAt(targetPosition);
-        killTimer = new Timer();
-        killTimer.onTimerEnd.AddListener(Despawn);
-        killTimer.StartTimer(this, ProjectileData.LifeTime);
+        killTimer = new Timer(this, ProjectileData.LifeTime, Despawn);
     }
 
     public void ForwardedTriggerEnter(Collider other)

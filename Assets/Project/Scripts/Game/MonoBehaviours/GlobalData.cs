@@ -44,9 +44,12 @@ public class GlobalData : MonoBehaviour
 
     public static ExtendedEvent<ScriptableLevel> OnLevelUnloaded = new ExtendedEvent<ScriptableLevel>();
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     private static void LoadGlobalDataScene()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         Debug.Log("GlobalData Initializing, Active Scene Is: " + SceneManager.GetActiveScene().name);
         startingScene = SceneManager.GetActiveScene().name;

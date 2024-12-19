@@ -99,7 +99,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     public bool TryInteract()
     {
         if (hasBeenPurchased) return (false);
-        if (GameManager.Instance.Currency >= cost)
+        if (GameManager.Currency >= cost)
         {
             GameManager.ModifyCurrency(-cost);
             realItemSpawn = contentSpawner.Spawn(contentToSpawn);
@@ -150,7 +150,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     private void OnDrawGizmos()
     {
         if (contentToSpawn == null || contentToSpawn.Prefab == null) return;
-        Utilities.DrawPrefabPreview(contentSpawner.transform, contentToSpawn.Prefab.gameObject, Color.white, Color.yellow, ref allRenderers);
+        Utilities.DrawPrefabPreview(contentSpawner.transform, contentToSpawn.Prefab.gameObject, contentToSpawn.GetDisplayColor(), Color.yellow, ref allRenderers);
     }
 
     public bool IsHighlightable() => true;

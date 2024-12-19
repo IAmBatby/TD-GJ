@@ -18,6 +18,8 @@ MonoBehaviour:
   <IntermissionWaveMultiplier>k__BackingField: 0.5
   <StartingCurrency>k__BackingField: 50
   <StartingHealth>k__BackingField: 20
+  <WaveManifest>k__BackingField: {fileID: 11400000, guid: 45596981cd1fbf44092dd10c1ba5c455,
+    type: 2}
   <Waves>k__BackingField:
   - <WaveLength>k__BackingField: 30
     <EnemySpawnInfos>k__BackingField:

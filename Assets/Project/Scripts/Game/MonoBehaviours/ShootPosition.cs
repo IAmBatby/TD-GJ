@@ -5,9 +5,15 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ShootPosition : MonoBehaviour
 {
+    private enum ShootDirectionMode { Target, Forward }
+    [SerializeField] private ShootDirectionMode shootMode;
     [SerializeField] private LineRenderer lineRenderer;
-
     [SerializeField] private LayerMask enemyMask;
+
+    private void OnEnable()
+    {
+        lineRenderer.enabled = false;
+    }
 
     public void UpdateShootRenderer(HurtableBehaviour target)
     {
@@ -23,7 +29,12 @@ public class ShootPosition : MonoBehaviour
 
     public void ShootAtTarget(ScriptableProjectile projectile, HurtableBehaviour target, int damage, float shotSpeed, float accuracy)
     {
-        projectile.SpawnProjectile(transform.position, GetAccuracyPosition(target.transform, accuracy), shotSpeed, damage);
+        Vector3 targetPos;
+        if (shootMode == ShootDirectionMode.Target)
+            targetPos = GetAccuracyPosition(target.transform, accuracy);
+        else
+            targetPos = transform.position + transform.forward;
+        projectile.SpawnProjectile(transform.position, targetPos, shotSpeed, damage);
     }
 
     public Vector3 GetAccuracyPosition(Transform targetTransform, float accuracy)
@@ -46,5 +57,24 @@ public class ShootPosition : MonoBehaviour
         return (Vector3.Lerp(rushingPosition, draggingPosition, Random.Range(Mathf.Lerp(0,0.5f,accuracy), Mathf.Lerp(1f,0.5f,accuracy))));
     }
 
-   
+
+    private void OnDrawGizmos()
+    {
+        if (lineRenderer != null && GlobalData.Instance == null) //hack to see if were not playing
+        {
+            IterationToolkit.Utilities.DrawLabel(transform.position + new Vector3(0, 0, 5), "FakeTarget", Color.red);
+            if (shootMode == ShootDirectionMode.Target)
+            {
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, transform.position + new Vector3(0, 0, 5));
+            }
+            else if (shootMode == ShootDirectionMode.Forward)
+            {
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, transform.position + (transform.forward * 5));
+            }
+        }
+    }
 }

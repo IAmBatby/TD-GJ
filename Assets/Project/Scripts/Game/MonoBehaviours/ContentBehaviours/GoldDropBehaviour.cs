@@ -13,7 +13,7 @@ public class GoldDropBehaviour : ItemBehaviour
         if (ContentData is ScriptableCurrency currencyData)
         {
             float randomGold = Random.Range(currencyData.CurrencyAmount.x, currencyData.CurrencyAmount.y);
-            currencyValue = Mathf.RoundToInt(Utilities.GetScaledValue(randomGold, currencyData.CurrencyWaveScale, GameManager.Instance.CurrentWaveCount));
+            currencyValue = Mathf.RoundToInt(Utilities.GetScaledValue(randomGold, currencyData.CurrencyWaveScale, GameManager.CurrentWaveCount));
         }
         GameManager.OnNewWave.AddListener(DestroyCoin);
     }

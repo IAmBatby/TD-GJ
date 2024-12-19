@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f471cfa76839b8848815d3eb389f449d, type: 3}
+  m_Name: WaveManifest
+  m_EditorClassIdentifier: 
+  <Waves>k__BackingField:
+  - {fileID: 11400000, guid: 0312f9f21e644ed41beca5fa15da5b9d, type: 2}
+  - {fileID: 11400000, guid: 0ed4c5ad9e6d8854688cc82837162eee, type: 2}
+  - {fileID: 11400000, guid: 3980e50596eca0445bc1f6f2fefd4477, type: 2}
+  - {fileID: 11400000, guid: 854fb7e1fc8e6834b93f9320664c9d6f, type: 2}
+  - {fileID: 11400000, guid: 654bb0f894b71bd45bbc0e9cde6ee462, type: 2}
+  - {fileID: 11400000, guid: 23cc497b98c6b4242ae108faa2a8c63e, type: 2}
+  - {fileID: 11400000, guid: 1c24ffe679d8c2d46a4f99ade519b3ee, type: 2}
+  - {fileID: 11400000, guid: 8c3f5de09a5b5ca408f73ee087575b16, type: 2}
+  - {fileID: 11400000, guid: ce00e3638f4143340bbac921d9e729dc, type: 2}
+  - {fileID: 11400000, guid: d413c99cea7dec94cb6681ccc908204b, type: 2}
+  - {fileID: 11400000, guid: c2f529137a61f1149aaca9650bf77de7, type: 2}
+  - {fileID: 11400000, guid: b9a00a2d34057f64187466fc11b64489, type: 2}
+  - {fileID: 11400000, guid: ba9fa0e9748325f4fb54abd35d497d90, type: 2}
+  - {fileID: 11400000, guid: 4b102101b2c4cf74ebde091053a20247, type: 2}
+  - {fileID: 11400000, guid: 9571c5c540e68b0418e75e41f58bbb84, type: 2}
+  - {fileID: 11400000, guid: ab301347cd3a4384aaffde76335f4f0d, type: 2}
+  - {fileID: 11400000, guid: 252cfea6e3adbe44688ad35f5f005e25, type: 2}
+  - {fileID: 11400000, guid: d73ccae79c85e3e48b003123cee75a4c, type: 2}
+  - {fileID: 11400000, guid: 3e45c0f306b3812489a01061af388545, type: 2}
+  - {fileID: 11400000, guid: 883ec875129ebd14695b488e02d537ba, type: 2}
+  - {fileID: 11400000, guid: ef30066910d4cce40bdb136403590951, type: 2}
+  - {fileID: 11400000, guid: cb1eaf72aeb5bbf4e98a9ff31adc98e4, type: 2}
+  - {fileID: 11400000, guid: 7cd6e02d01a1f374f955b7ca3a5182c5, type: 2}
+  - {fileID: 11400000, guid: 22bf9c7109eedaa428eec60ea39b2cc3, type: 2}
+  - {fileID: 11400000, guid: f1e442cbebd586148a175419b78e78ee, type: 2}
+  renameScriptableWaves: 0

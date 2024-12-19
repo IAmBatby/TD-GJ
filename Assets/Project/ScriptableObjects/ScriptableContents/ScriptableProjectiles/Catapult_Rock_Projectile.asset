@@ -20,10 +20,17 @@ MonoBehaviour:
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 0
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
   <LifeTime>k__BackingField: 1
   <ImpactExplosionRadius>k__BackingField: 1.5
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
-  <OnCollisionAudio>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
-    type: 2}
+  <OnCollisionAudio>k__BackingField: {fileID: 0}
+  <OnCollisionParticle>k__BackingField: {fileID: 0}
+  <OnImpactReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
+      type: 2}
+    <ParticlePreset>k__BackingField: {fileID: 0}

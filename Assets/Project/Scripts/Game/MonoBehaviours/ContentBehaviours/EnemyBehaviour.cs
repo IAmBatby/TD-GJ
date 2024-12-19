@@ -37,7 +37,7 @@ public class EnemyBehaviour : HurtableBehaviour
         if (ContentData is ScriptableEnemy enemyData)
             EnemyData = enemyData;
         if (EnemyData.Speed != 0)
-            Agent.speed = Utilities.GetScaledValue(EnemyData.Speed, EnemyData.SpeedWaveScale, GameManager.Instance.CurrentWaveCount);
+            Agent.speed = Utilities.GetScaledValue(EnemyData.Speed, EnemyData.SpeedWaveScale, GameManager.CurrentWaveCount);
     }
 
     public void RecieveNewTarget(EnemyPathTarget newTarget)

@@ -21,9 +21,19 @@ MonoBehaviour:
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 1
   <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <OnPickupAudio>k__BackingField: {fileID: 0}
   <OnDropAudio>k__BackingField: {fileID: 0}
+  <OnPickupReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 11400000, guid: f1b81949556014646a8d841b191d6f1d,
+      type: 2}
+    <ParticlePreset>k__BackingField: {fileID: 0}
+  <OnDropReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <CanBePickedUp>k__BackingField: 0
   <CurrencyAmount>k__BackingField: {x: 25, y: 40}
   <CurrencyWaveScale>k__BackingField: 50

@@ -35,12 +35,7 @@ public class MainMenuManager : GlobalManager
         GlobalData.OnLevelUnloaded.AddListener(OnLevelUnloaded);
     }
 
-    private void OnLevelUnloaded(ScriptableLevel level)
-    {
-        Timer newTimer = new Timer();
-        newTimer.onTimerEnd.AddListener(ToggleMenuObjects);
-        newTimer.StartTimer(this, 0.01f);
-    }
+    private void OnLevelUnloaded(ScriptableLevel level) => new Timer(this, 0.01f, ToggleMenuObjects);
 
     private void ToggleMenuObjects()
     {

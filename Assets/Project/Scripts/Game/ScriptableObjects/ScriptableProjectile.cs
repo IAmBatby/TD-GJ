@@ -13,8 +13,6 @@ public class ScriptableProjectile : ScriptableContent
     [field: SerializeField] public Color ProjectileColor { get; private set; }
 
     [field: Header("Projectile Visual Values"), Space(15)]
-    [field: SerializeField] public AudioPreset OnCollisionAudio { get; private set; }
-    [field: SerializeField] public ParticlePreset OnCollisionParticle { get; private set; }
     [field: SerializeField] public ReactionInfo OnImpactReaction { get; private set; }
 
 

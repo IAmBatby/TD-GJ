@@ -6,7 +6,7 @@ public class EnemyPathTarget : MonoBehaviour
 {
     public void ForwardedTriggerEnter(Collider other)
     {
-        Debug.Log("Forward Enter: " + other.gameObject.name);
+        //Debug.Log("Forward Enter: " + other.gameObject.name);
         if (other.TryGetComponent(out EnemyBehaviour enemy))
         {
             GameManager.EnemyReachedTarget(enemy);

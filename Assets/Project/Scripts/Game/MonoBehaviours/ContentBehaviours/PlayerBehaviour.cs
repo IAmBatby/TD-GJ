@@ -86,7 +86,7 @@ public class PlayerBehaviour : HurtableBehaviour
 
     public void ForwardedTriggerEnter(Collider other)
     {
-        Debug.Log("Forwarded Enter: " + other);
+        //Debug.Log("Forwarded Enter: " + other);
         if (ActiveItem == null && other.TryGetComponent(out ItemBehaviour item))
         {
             if (item.ItemData != null && item.ItemData.CanBePickedUp)
@@ -112,7 +112,7 @@ public class PlayerBehaviour : HurtableBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.HasGameEnded) return;
+        if (GameManager.IsLevelActive == false) return;
         if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
         {
             if (mostRecentInteractableInRange != null)
@@ -166,12 +166,12 @@ public class PlayerBehaviour : HurtableBehaviour
     {
         if (activeAnimator != null)
             activeAnimator.SetTrigger("Die");
-        GameManager.Instance.EndGame(false);
+        GameManager.Instance.EndGame();
     }
 
     private void LateUpdate()
     {
-        if (GameManager.Instance.HasGameEnded) return;
+        if (GameManager.IsLevelActive == false) return;
         SetRotation();
 
         if (activeAnimator != null)
@@ -179,7 +179,7 @@ public class PlayerBehaviour : HurtableBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.HasGameEnded)
+        if (GameManager.IsLevelActive == false)
         {
             Rigidbody.velocity = Vector3.zero;
             return;
@@ -190,9 +190,7 @@ public class PlayerBehaviour : HurtableBehaviour
         SetPosition();
 
         if (ActiveItem != null)
-        {
             ActiveItem.transform.localPosition = Vector3.zero;
-        }
     }
 
     private void SwitchRandomSkin()

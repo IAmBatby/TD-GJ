@@ -52,6 +52,6 @@ public class ContentSpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (DefaultContent == null || DefaultContent.Prefab == null) return;
-        Utilities.DrawPrefabPreview(transform, DefaultContent.Prefab.gameObject, Color.white, Color.yellow, ref allRenderers);
+        Utilities.DrawPrefabPreview(transform, DefaultContent.Prefab.gameObject, DefaultContent.GetDisplayColor(), Color.yellow, ref allRenderers);
     }
 }
