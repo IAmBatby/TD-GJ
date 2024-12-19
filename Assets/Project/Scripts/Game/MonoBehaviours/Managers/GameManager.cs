@@ -8,6 +8,24 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using Logger = IterationToolkit.Logger;
+
+public struct LogCollection
+{
+    public Logger Main { get; private set; }
+    public Logger Behaviours { get; private set; }
+    public Logger Wave { get; private set; }
+    public Logger Enemies { get; private set; }
+
+    public LogCollection(int maxLines = 0)
+    {
+        Main = DynamicConsole.AddLogger("Main");
+        Behaviours = DynamicConsole.AddLogger("Behaviours");
+        Wave = DynamicConsole.AddLogger("Wave");
+        Enemies = DynamicConsole.AddLogger("Enemies");
+    }
+}
+
 
 public class GameManager : GlobalManager
 {
@@ -16,6 +34,9 @@ public class GameManager : GlobalManager
     public static PlayerBehaviour Player { get; private set; }
     public ScriptableLevel Level => GlobalData.ActiveLevel;
     [SerializeField] private Texture2D defaultCursor;
+
+    private LogCollection logs;
+    public static LogCollection Logs => Instance.logs;
 
     ////////// Serialized Component References //////////
 
@@ -80,6 +101,8 @@ public class GameManager : GlobalManager
     public static bool IsLevelLost => Health > 0 && Player?.Health > 0 ? true : false;
     public static bool IsInActiveWave => Instance.currentWaveTimer != null;
 
+    private bool isConsoleEnabled;
+
     ////////// Game Events //////////
 
     public static ExtendedEvent OnGameManagerEnable = new ExtendedEvent();
@@ -100,6 +123,7 @@ public class GameManager : GlobalManager
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
         OnHighlightChanged.AddListener(RefreshCursor);
+        logs = new LogCollection(10);
     }
 
     private void Start()
@@ -135,6 +159,7 @@ public class GameManager : GlobalManager
         OnGameStart.Invoke();
         AudioManager.PlayAudio(ambiencePreset, ambienceSource);
         AudioManager.PlayAudio(onGameStartPreset, primarySource);
+        Logs.Main.LogInfo(("Starting Level: " + Level.DisplayName).ToBold());
         StartIntermission();
     }
 
@@ -161,7 +186,6 @@ public class GameManager : GlobalManager
 
     private void StartNextWave()
     {
-        Debug.Log("Starting Wave #" + ActiveWaves.ActiveIndex);
 
         currentWaveTimer = new Timer(this, Level.WaveManifest.GetWaveLength(CurrentWaveCount));
 
@@ -170,10 +194,15 @@ public class GameManager : GlobalManager
             activeSpawnRequests.Add(new Timer<ScriptableEnemy>(this, spawnRequest.Item2, spawnRequest.Item1, SpawnNewEnemy, RemoveLastRequest));
 
         AudioManager.PlayAudio(onWaveStartPreset, primarySource);
+        Logs.Wave.LogInfo("Started Wave #" + CurrentWaveCount);
         OnNewWave.Invoke();
     }
 
-    private void RemoveLastRequest(ScriptableEnemy _) => activeSpawnRequests.RemoveAt(0);
+    private void RemoveLastRequest(ScriptableEnemy _)
+    {
+        if (activeSpawnRequests.Count > 0)
+            activeSpawnRequests.RemoveAt(0);
+    }
 
     private void CheckWaveStatus()
     {
@@ -191,6 +220,7 @@ public class GameManager : GlobalManager
         currentWaveTimer = null;
         intermissionTimer = new Timer(this, CurrentWave.IntermissionTimeLength, TryProgressToNextWave);
         OnIntermissionStart.Invoke();
+        Logs.Wave.LogInfo("Started Intermission #" + CurrentWaveCount);
     }
 
     private void Update()
@@ -200,6 +230,14 @@ public class GameManager : GlobalManager
 
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.UnloadSceneAsync(Level.SceneName);
+
+        if (Input.GetKeyDown(KeyCode.C))
+            isConsoleEnabled = !isConsoleEnabled;
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+            DynamicConsole.ToggleForward();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            DynamicConsole.ToggleBackward();
     }
 
     private void RefreshCursor(IHighlightable highlightable)
@@ -265,6 +303,7 @@ public class GameManager : GlobalManager
 
     public static void EnemyReachedTarget(EnemyBehaviour enemy)
     {
+        Logs.Enemies.LogInfo("Enemy: " + enemy.ContentData.GetDisplayName() + " Reached End Target", Color.red);
         AudioManager.PlayAudio(Instance.onDamageTakenPreset, Instance.primarySource);
         Instance.ModifyHealth(-enemy.EnemyData.Damage);
         RemoveEnemy(enemy);
@@ -278,7 +317,7 @@ public class GameManager : GlobalManager
         EnemyBehaviour spawnedEnemy = enemy.SpawnPrefab() as EnemyBehaviour;
         spawnedEnemy.transform.position = randomSpawn.transform.position;
         spawnedEnemy.RecieveNewTarget(randomTarget);
-
+        Logs.Enemies.LogInfo("Spawned New Enemy: " + enemy.GetDisplayName(), Color.yellow);
         OnEnemySpawned.Invoke(spawnedEnemy);
     }
 
@@ -306,6 +345,7 @@ public class GameManager : GlobalManager
 
     public static void RegisterNewContentBehaviour(ContentBehaviour contentBehaviour)
     {
+        Logs.Behaviours.LogInfo("Registered New Content: " + contentBehaviour.ContentData.GetDisplayName().ToBold(), contentBehaviour.ContentData.GetDisplayColor());
         contentBehaviour.RegisterBehaviour();
         if (contentBehaviour is PlayerBehaviour player)
             Player = player;
@@ -313,6 +353,14 @@ public class GameManager : GlobalManager
 
     public static void UnregisterContentBehaviour(ContentBehaviour contentBehaviour, bool destroyOnUnregistration)
     {
+        Logs.Behaviours.LogInfo("Unregistered New Content: " + contentBehaviour.ContentData.GetDisplayName().ToBold(), contentBehaviour.ContentData.GetDisplayColor());
         contentBehaviour.UnregisterBehaviour(destroyOnUnregistration);
+    }
+
+    private void OnGUI()
+    {
+        //DynamicConsole.RenderConsole();
+        if (isConsoleEnabled)
+            DynamicConsole.RenderConsole();
     }
 }

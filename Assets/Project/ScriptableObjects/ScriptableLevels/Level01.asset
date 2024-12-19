@@ -14,74 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Mundane Mineshafts
   <SceneName>k__BackingField: JacksonDecorScene
-  <IntermissionStandardTime>k__BackingField: 10
-  <IntermissionWaveMultiplier>k__BackingField: 0.8
   <StartingCurrency>k__BackingField: 50
-  <StartingHealth>k__BackingField: 0
-  <Waves>k__BackingField:
-  - <WaveLength>k__BackingField: 5
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
-  - <WaveLength>k__BackingField: 12
-    <EnemySpawnInfos>k__BackingField:
-    - <TimeToStart>k__BackingField: 0
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 5
-    - <TimeToStart>k__BackingField: 7
-      <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
-        type: 2}
-      <AmountToSpawn>k__BackingField: 20
+  <StartingHealth>k__BackingField: 50
+  <WaveManifest>k__BackingField: {fileID: 11400000, guid: 45596981cd1fbf44092dd10c1ba5c455,
+    type: 2}
