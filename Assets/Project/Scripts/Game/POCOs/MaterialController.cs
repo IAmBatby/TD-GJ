@@ -54,11 +54,7 @@ public class MaterialController
         }
 
         if (revertTime > 0f)
-        {
-            revertTimer = new Timer();
-            revertTimer.onTimerEnd.AddListener(ResetRenderers);
-            revertTimer.StartTimer(GlobalData.Instance, revertTime);
-        }
+            revertTimer = new Timer(GlobalData.Instance, revertTime, ResetRenderers);
     }
 
     public void ResetRenderers()

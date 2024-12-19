@@ -166,9 +166,7 @@ public class TurretBaseBehaviour : ItemBehaviour
     {
         if (FireRateAttribute.Value <= 0f) return;
         canShoot = false;
-        shootCooldownTimer = new Timer();
-        shootCooldownTimer.onTimerEnd.AddListener(DisableCooldown);
-        shootCooldownTimer.StartTimer(this, FireRateAttribute.Value);
+        shootCooldownTimer = new Timer(this, FireRateAttribute.Value, DisableCooldown);
     }
 
     private void DisableCooldown()

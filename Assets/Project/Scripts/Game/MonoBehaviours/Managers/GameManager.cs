@@ -65,8 +65,7 @@ public class GameManager : GlobalManager
     private List<EnemySpawnTarget> AllSpawnTargets;
     private List<EnemyPathTarget> AllPathTargets;
 
-    private List<ScriptableEnemy> activeSpawnRequests = new List<ScriptableEnemy>();
-    private List<Timer> activeSpawnTimers = new List<Timer>();
+    private List<Timer<ScriptableEnemy>> activeSpawnRequests = new List<Timer<ScriptableEnemy>>();
 
     ////////// IHighlightable Management //////////
 
@@ -80,9 +79,6 @@ public class GameManager : GlobalManager
     public static bool IsLevelActive => Instance.currentWaveTimer != null || Instance.intermissionTimer != null ? true : false;
     public static bool IsLevelLost => Health > 0 && Player?.Health > 0 ? true : false;
     public static bool IsInActiveWave => Instance.currentWaveTimer != null;
-    //[field: SerializeField] public bool IsInIntermission { get; private set; }
-    //[field: SerializeField] public bool HasWaveTimeFinished { get; private set; }
-    //[field: SerializeField] public bool HasGameEnded { get; private set; }
 
     ////////// Game Events //////////
 
@@ -120,9 +116,9 @@ public class GameManager : GlobalManager
     {
         foreach (EnemyBehaviour enemy in ContentManager.GetBehaviours<EnemyBehaviour>())
             UnregisterContentBehaviour(enemy, true);
-        foreach (Timer activeSpawnTimer in activeSpawnTimers)
+        foreach (Timer<ScriptableEnemy> activeSpawnTimer in activeSpawnRequests)
             activeSpawnTimer.TryStopTimer();
-        activeSpawnTimers.Clear();
+        activeSpawnRequests.Clear();
         Time.timeScale = 1.0f;
         ChangeGameState(GameState.Playing);
         currentHealth = Level.StartingHealth;
@@ -167,31 +163,17 @@ public class GameManager : GlobalManager
     {
         Debug.Log("Starting Wave #" + ActiveWaves.ActiveIndex);
 
-        currentWaveTimer = new Timer();
-        currentWaveTimer.StartTimer(this, Level.WaveManifest.GetWaveLength(CurrentWaveCount));
+        currentWaveTimer = new Timer(this, Level.WaveManifest.GetWaveLength(CurrentWaveCount));
 
-        activeSpawnRequests = new List<ScriptableEnemy>();
+        activeSpawnRequests.Clear();
         foreach ((ScriptableEnemy, float) spawnRequest in CurrentWave.GetEnemySpawnManifest())
-        {
-            activeSpawnRequests.Add(spawnRequest.Item1);
-            Timer spawnTimer = new Timer();
-            spawnTimer.onTimerEnd.AddListener(SpawnNextEnemy);
-            spawnTimer.StartTimer(this, spawnRequest.Item2);
-            activeSpawnTimers.Add(spawnTimer);
-        }
+            activeSpawnRequests.Add(new Timer<ScriptableEnemy>(this, spawnRequest.Item2, spawnRequest.Item1, SpawnNewEnemy, RemoveLastRequest));
 
         AudioManager.PlayAudio(onWaveStartPreset, primarySource);
         OnNewWave.Invoke();
     }
 
-    private void SpawnNextEnemy()
-    {
-        if (activeSpawnRequests.Count > 0)
-        {
-            SpawnNewEnemy(activeSpawnRequests.First());
-            activeSpawnRequests.RemoveAt(0);
-        }
-    }
+    private void RemoveLastRequest(ScriptableEnemy _) => activeSpawnRequests.RemoveAt(0);
 
     private void CheckWaveStatus()
     {
@@ -207,9 +189,7 @@ public class GameManager : GlobalManager
     private void StartIntermission()
     {
         currentWaveTimer = null;
-        intermissionTimer = new Timer();
-        intermissionTimer.onTimerEnd.AddListener(TryProgressToNextWave);
-        intermissionTimer.StartTimer(this, CurrentWave.IntermissionTimeLength);
+        intermissionTimer = new Timer(this, CurrentWave.IntermissionTimeLength, TryProgressToNextWave);
         OnIntermissionStart.Invoke();
     }
 
