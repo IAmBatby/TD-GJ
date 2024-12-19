@@ -16,4 +16,6 @@ public class ScriptableUpgrade : ScriptableItem
     }
 
     public override Sprite GetDisplayIcon() => Attribute.DisplayIcon;
+
+    public override string GetCategoryName() => "Upgrade";
 }

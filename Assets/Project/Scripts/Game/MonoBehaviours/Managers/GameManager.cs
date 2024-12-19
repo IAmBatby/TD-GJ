@@ -104,6 +104,7 @@ public class GameManager : GlobalManager
     public static bool IsInActiveWave => Instance.currentWaveTimer != null;
 
     private bool isConsoleEnabled;
+    private bool isCheatEnabled;
     private bool isFirstWave;
 
     ////////// Game Events //////////
@@ -126,6 +127,7 @@ public class GameManager : GlobalManager
         AllSpawnTargets = GameObject.FindObjectsOfType<EnemySpawnTarget>().ToList();
         AllPathTargets = GameObject.FindObjectsOfType<EnemyPathTarget>().ToList();
         OnHighlightChanged.AddListener(RefreshCursor);
+
         logs = new LogCollection(10);
     }
 
@@ -141,6 +143,7 @@ public class GameManager : GlobalManager
 
     private void ResetGame()
     {
+        CheatManager.ClearCheats();
         foreach (EnemyBehaviour enemy in ContentManager.GetBehaviours<EnemyBehaviour>())
             UnregisterContentBehaviour(enemy, true);
         foreach (Timer<ScriptableEnemy> activeSpawnTimer in activeSpawnRequests)
@@ -245,9 +248,18 @@ public class GameManager : GlobalManager
             isConsoleEnabled = !isConsoleEnabled;
 
         if (Input.GetKeyDown(KeyCode.Tab))
+        {
             DynamicConsole.ToggleForward();
+            CheatManager.ToggleCheatCategoryForward();
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
             DynamicConsole.ToggleBackward();
+            CheatManager.ToggleCheatCategoryBackward();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+            isCheatEnabled = !isCheatEnabled;
     }
 
     private void RefreshCursor(IHighlightable highlightable)
@@ -372,5 +384,7 @@ public class GameManager : GlobalManager
         //DynamicConsole.RenderConsole();
         if (isConsoleEnabled)
             DynamicConsole.RenderConsole();
+        if (isCheatEnabled)
+            CheatManager.RenderCheats();
     }
 }

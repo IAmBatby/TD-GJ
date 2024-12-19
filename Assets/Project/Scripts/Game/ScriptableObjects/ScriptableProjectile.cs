@@ -24,4 +24,6 @@ public class ScriptableProjectile : ScriptableContent
 
         return (newProjectile);
     }
+
+    public override string GetCategoryName() => "Projectile";
 }

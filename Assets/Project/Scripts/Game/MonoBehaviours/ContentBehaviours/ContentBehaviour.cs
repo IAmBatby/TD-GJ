@@ -94,7 +94,11 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
     public Color GetColor() => ContentData.GetDisplayColor();
     public MaterialController GetMaterialController() => MaterialController;
 
-    public virtual void RegisterBehaviour() => ContentManager.RegisterBehaviour(this);
+    public virtual void RegisterBehaviour()
+    {
+        CheatManager.RegisterCheat(ScriptableContent.SpawnPrefab, ContentData, "Spawning: " + ContentData.GetCategoryName());
+        ContentManager.RegisterBehaviour(this);
+    }
     public virtual void UnregisterBehaviour(bool destroyOnUnregistration)
     {
         GameManager.OnHighlightChanged.RemoveListener(HighlightObject);

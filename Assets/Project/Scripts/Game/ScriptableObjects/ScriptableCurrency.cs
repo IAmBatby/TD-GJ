@@ -6,5 +6,7 @@ using UnityEngine;
 public class ScriptableCurrency : ScriptableItem
 {
     [field: SerializeField] public Vector2 CurrencyAmount { get; private set; }
-    [field: SerializeField, Range(0f,100f)] public float CurrencyWaveScale { get; private set; }    
+    [field: SerializeField, Range(0f,100f)] public float CurrencyWaveScale { get; private set; }
+
+    public override string GetCategoryName() => "Currency";
 }

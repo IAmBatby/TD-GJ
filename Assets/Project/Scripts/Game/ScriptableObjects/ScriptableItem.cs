@@ -10,4 +10,6 @@ public class ScriptableItem : ScriptableContent
     [field: SerializeField] public ReactionInfo OnPickupReaction { get; private set; }
     [field: SerializeField] public ReactionInfo OnDropReaction { get; private set; }
     [field: SerializeField] public bool CanBePickedUp { get; private set; } //Might replace with a bool function later
+
+    public override string GetCategoryName() => "Item";
 }

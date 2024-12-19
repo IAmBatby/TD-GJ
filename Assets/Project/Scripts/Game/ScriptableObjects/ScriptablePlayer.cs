@@ -6,4 +6,6 @@ using UnityEngine;
 public class ScriptablePlayer : ScriptableHurtable
 {
     [field: SerializeField] public ScriptableSkin DefaultSkin { get; private set; }
+
+    public override string GetCategoryName() => "Player";
 }

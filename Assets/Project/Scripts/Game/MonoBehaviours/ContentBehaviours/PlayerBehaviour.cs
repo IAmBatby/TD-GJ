@@ -61,12 +61,15 @@ public class PlayerBehaviour : HurtableBehaviour
         OnHealthModified.AddListener(FlashHealth);
         OnHealthModified.AddListener(LogDamage);
         GameManager.OnNewWave.AddListener(FlashOnNewWave);
+        CheatManager.RegisterCheat(ResetHealth, "Player");
     }
 
     private void LogDamage((int, int) health)
     {
         if (health.Item2 < health.Item1)
-        Log.LogInfo("Took: " + (health.Item1 - health.Item2) + " Damage!", Color.red);
+            Log.LogInfo("Took " + (health.Item2 - health.Item2) + " Damage!", Color.red);
+        else
+            Log.LogInfo("Healed " + (health.Item2 - health.Item2) + " Damage!", Color.green);
     }
 
     private void FlashOnNewWave()

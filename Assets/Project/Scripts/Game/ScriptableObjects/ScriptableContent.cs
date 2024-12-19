@@ -29,11 +29,18 @@ public class ScriptableContent : ScriptableObject
         return (SpawnPrefabSetup(spawnedBehaviour));
     }
 
+    public static void SpawnPrefab(ScriptableContent content)
+    {
+        content.SpawnPrefab().transform.position = GameManager.Player.transform.position + GameManager.Player.transform.forward;
+    }
+
+
     protected virtual ContentBehaviour SpawnPrefabSetup(ContentBehaviour newBehaviour)
     {
         return (newBehaviour);
     }
 
+    public virtual string GetCategoryName() => "Content";
     public virtual string GetDisplayName() => ContentName;
     public virtual Sprite GetDisplayIcon() => ContentIcon;
     public virtual Color GetDisplayColor() => ContentColor;

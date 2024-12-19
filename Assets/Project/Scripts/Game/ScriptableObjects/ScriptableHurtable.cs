@@ -13,4 +13,6 @@ public class ScriptableHurtable : ScriptableContent
     [field: Header("Hurtable Visual Values"), Space(15)]
     [field: SerializeField] public ReactionInfo OnHealthLostReaction { get; private set; }
     [field: SerializeField] public ReactionInfo OnHealthGainedReaction { get; private set; }
+
+    public override string GetCategoryName() => "Hurtable";
 }

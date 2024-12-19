@@ -35,6 +35,7 @@ public class ItemBehaviour : ContentBehaviour
 
     public override void RegisterBehaviour()
     {
+        CheatManager.RegisterCheat(ScriptableContent.SpawnPrefab, ContentData, "Spawning");
         ContentManager.RegisterBehaviour(this);
         base.RegisterBehaviour();
     }
