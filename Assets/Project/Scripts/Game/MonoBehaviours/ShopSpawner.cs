@@ -99,7 +99,7 @@ public class ShopSpawner : MonoBehaviour, IInteractable, IHighlightable
     public bool TryInteract()
     {
         if (hasBeenPurchased) return (false);
-        if (GameManager.Instance.Currency >= cost)
+        if (GameManager.Currency >= cost)
         {
             GameManager.ModifyCurrency(-cost);
             realItemSpawn = contentSpawner.Spawn(contentToSpawn);

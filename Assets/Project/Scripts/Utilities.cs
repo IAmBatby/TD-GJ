@@ -10,6 +10,11 @@ public static class Utilities
         return (value + (waveCount * (scaleRate * value / 100)));
     }
 
+    public static Vector2 GetScaledValue(Vector2 value, float scaleRate, int waveCount)
+    {
+        return new Vector2(GetScaledValue(value.x, scaleRate, waveCount), GetScaledValue(value.y, scaleRate, waveCount));
+    }
+
     public static void DrawPrefabPreview(Transform context, GameObject prefab, Color primary, Color secondary, ref List<MeshFilter> filters)
     {
         Matrix4x4 prevMatrix = Gizmos.matrix;

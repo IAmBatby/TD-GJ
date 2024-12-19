@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04978b50677f5d347a04266473a6573b, type: 3}
+  m_Name: ScriptableWave #0
+  m_EditorClassIdentifier: 
+  <IntermissionTimeLength>k__BackingField: 5
+  <WaveSpawnInfos>k__BackingField:
+  - <TimeToSpawn>k__BackingField: 1
+    <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+      type: 2}
+    <AmountToSpawn>k__BackingField: 3
+    <IntervalBetweenSpawns>k__BackingField: 0.5
+  - <TimeToSpawn>k__BackingField: 8
+    <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+      type: 2}
+    <AmountToSpawn>k__BackingField: 3
+    <IntervalBetweenSpawns>k__BackingField: 0.5
+  - <TimeToSpawn>k__BackingField: 15
+    <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 32e79f42cf507bc48b1b3b71be3a9c17,
+      type: 2}
+    <AmountToSpawn>k__BackingField: 4
+    <IntervalBetweenSpawns>k__BackingField: 0.5
+  - <TimeToSpawn>k__BackingField: 25
+    <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: a8cd7c1f226e4754682412528a7a3216,
+      type: 2}
+    <AmountToSpawn>k__BackingField: 1
+    <IntervalBetweenSpawns>k__BackingField: 0.5
+  - <TimeToSpawn>k__BackingField: 30
+    <EnemyToSpawn>k__BackingField: {fileID: 0}
+    <AmountToSpawn>k__BackingField: 0
+    <IntervalBetweenSpawns>k__BackingField: 0
+  fakeWaveIndex: 8

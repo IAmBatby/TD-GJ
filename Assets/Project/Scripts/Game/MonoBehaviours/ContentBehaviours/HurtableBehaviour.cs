@@ -38,7 +38,7 @@ public class HurtableBehaviour : ContentBehaviour
 
     private void RefreshMaxHealth()
     {
-        SetMaxHealth(Mathf.RoundToInt(Utilities.GetScaledValue(HurtableData.Health, HurtableData.HealthWaveScale, GameManager.Instance.CurrentWaveCount)));
+        SetMaxHealth(Mathf.RoundToInt(Utilities.GetScaledValue(HurtableData.Health, HurtableData.HealthWaveScale, GameManager.CurrentWaveCount)));
     }
 
     protected virtual void OnDeath() { }

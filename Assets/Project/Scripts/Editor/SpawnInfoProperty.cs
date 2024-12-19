@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+/*
 [CustomPropertyDrawer(typeof(SpawnInfo))]
 public class SpawnInfoProperty : PropertyDrawer
 {
@@ -37,3 +37,4 @@ public class SpawnInfoProperty : PropertyDrawer
         return (null);
     }
 }
+*/
