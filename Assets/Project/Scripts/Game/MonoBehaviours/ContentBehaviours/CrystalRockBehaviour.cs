@@ -56,7 +56,7 @@ public class CrystalRockBehaviour : HurtableBehaviour
             ResetHealth();
     }
 
-    protected override void TryActivateSpawner()
+    protected override void OnDeath()
     {
         List<RockSpawnInfo> activeRocks = rockSpawnInfos.Where(r => r.CurrentState == RockSpawnInfo.SpawnState.Active).ToList();
         if (activeRocks.Count == 0) return;

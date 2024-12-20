@@ -186,7 +186,7 @@ public class PlayerBehaviour : HurtableBehaviour
         ActiveItem = null;
     }
 
-    protected override void TryActivateSpawner()
+    protected override void OnDeath()
     {
         if (activeAnimator != null)
             activeAnimator.SetTrigger("Die");
