@@ -34,7 +34,8 @@ public class GameManager : GlobalManager
     ////////// Singleton / Global References //////////
     public static new GameManager Instance => SingletonManager.GetSingleton<GameManager>(typeof(GameManager));
     public static PlayerBehaviour Player { get; private set; }
-    public ScriptableLevel Level => GlobalData.ActiveLevel;
+    public static ScriptableLevel Level => GlobalData.ActiveLevel;
+    public static WaveManifest WaveManifest => Level.WaveManifest;
     [SerializeField] private Texture2D defaultCursor;
 
     private LogCollection logs;
@@ -60,7 +61,7 @@ public class GameManager : GlobalManager
 
     ////////// ScriptableWave Collection //////////
     [SerializeField] private SelectableCollection<ScriptableWave> ActiveWaves;
-    public static ScriptableWave CurrentWave => Instance.Level.WaveManifest.Waves[CurrentWaveCount];
+    public static ScriptableWave CurrentWave => Level.WaveManifest.Waves[CurrentWaveCount];
     public static int CurrentWaveCount => Instance.ActiveWaves.ActiveIndex;
     public static int TotalWaveCount => Instance.ActiveWaves.Collection.Count;
 
@@ -327,7 +328,7 @@ public class GameManager : GlobalManager
     {
         Logs.Enemies.LogInfo("Enemy: " + enemy.ContentData.GetDisplayName() + " Reached End Target", Color.red);
         AudioManager.PlayAudio(Instance.onDamageTakenPreset, Instance.primarySource);
-        Instance.ModifyHealth(-enemy.EnemyData.Damage);
+        Instance.ModifyHealth(-enemy.Health);
         RemoveEnemy(enemy);
     }
 

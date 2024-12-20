@@ -33,11 +33,11 @@ public class EnemyBehaviour : HurtableBehaviour
 
     protected override void OnSpawn()
     {
-        base.OnSpawn();
         if (ContentData is ScriptableEnemy enemyData)
             EnemyData = enemyData;
+        base.OnSpawn();
         if (EnemyData.Speed != 0)
-            Agent.speed = Utilities.GetScaledValue(EnemyData.Speed, EnemyData.SpeedWaveScale, GameManager.CurrentWaveCount);
+            Agent.speed = GameManager.WaveManifest.GetAdditiveSpeed(EnemyData.Speed, GameManager.CurrentWaveCount);
     }
 
     public void RecieveNewTarget(EnemyPathTarget newTarget)

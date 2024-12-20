@@ -10,6 +10,10 @@ public class ScriptableWave : ScriptableObject
     [field: SerializeField] public List<SpawnInfo> WaveSpawnInfos { get; private set; } = new List<SpawnInfo>();
     [SerializeField] public int fakeWaveIndex = 1;
 
+    [field: SerializeField] public int AdditiveHealth { get; private set; }
+    [field: SerializeField] public float AdditiveSpeed {  get; private set; }
+    [field: SerializeField] public float AdditiveGold { get; private set; }
+
     public List<(ScriptableEnemy, float)> GetEnemySpawnManifest()
     {
         List<(ScriptableEnemy, float)> returnList = new List<(ScriptableEnemy, float)>();

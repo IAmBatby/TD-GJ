@@ -13,4 +13,6 @@ public class ScriptableLevel : ScriptableObject
     [field: SerializeField] public int StartingHealth { get; private set; }
 
     [field: SerializeField] public WaveManifest WaveManifest { get; private set; }
+
+
 }
