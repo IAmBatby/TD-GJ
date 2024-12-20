@@ -25,5 +25,7 @@ public class ScriptableTurret : ScriptableItem
     [field: SerializeField] public ReactionInfo OnCooldownEndedReaction { get; private set; }
     [field: SerializeField] public ReactionInfo OnUpgradedReaction { get; private set; }
 
+    [field: SerializeField] public float DeploymentShootCooldown { get; private set; }
+
     public override string GetCategoryName() => "Turret Base";
 }
