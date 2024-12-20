@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6205942538553275994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -498,22 +498,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 8878751893212707827}
-  primaryInfo:
-    Parent: {fileID: 8861838048274329724}
-    DisplayText: {fileID: 1433403740449831923}
-    BackgroundImage: {fileID: 6928602122283425317}
-    FillImage: {fileID: 6286714642567443446}
-    IconImage: {fileID: 4020977463031199119}
-    ProgressMeterParent: {fileID: 1282933068758264221}
-    defaultRectSize: {x: 0, y: 0}
-  secondaryInfo:
+  fullForm:
     Parent: {fileID: 0}
     DisplayText: {fileID: 0}
     BackgroundImage: {fileID: 0}
     FillImage: {fileID: 0}
     IconImage: {fileID: 0}
     ProgressMeterParent: {fileID: 0}
-    defaultRectSize: {x: 0, y: 0}
+    <RectSize>k__BackingField: {x: 0, y: 0}
+  compressedForm:
+    Parent: {fileID: 0}
+    DisplayText: {fileID: 0}
+    BackgroundImage: {fileID: 0}
+    FillImage: {fileID: 0}
+    IconImage: {fileID: 0}
+    ProgressMeterParent: {fileID: 0}
+    <RectSize>k__BackingField: {x: 0, y: 0}
 --- !u!1 &4850927332874242518
 GameObject:
   m_ObjectHideFlags: 0

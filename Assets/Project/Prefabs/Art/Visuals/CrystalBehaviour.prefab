@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 1950762312102575686}
   - component: {fileID: -2340502419759205697}
   - component: {fileID: -3215491622398910695}
-  - component: {fileID: -2211002171800756904}
-  - component: {fileID: 5958200154980973400}
-  - component: {fileID: 4994865115286838038}
+  - component: {fileID: 8462233243276599817}
   m_Layer: 0
   m_Name: CrystalBehaviour
   m_TagString: Untagged
@@ -50,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0597b4a204a131e43bcdaed7bc20afef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Renderers>k__BackingField: []
   <IsBeingHeld>k__BackingField: 0
 --- !u!108 &-2340502419759205697
 Light:
@@ -137,28 +134,7 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!65 &-2211002171800756904
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7019365507824964223}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.25, z: 0}
---- !u!54 &5958200154980973400
+--- !u!54 &8462233243276599817
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,40 +161,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4994865115286838038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7019365507824964223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b27e8efffa91de4eb96ce35149a43ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTriggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1950762312102575686}
-        m_TargetAssemblyTypeName: CrystalBehaviour, Assembly-CSharp
-        m_MethodName: ForwardedTriggerEnter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onTriggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-  gizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1060096776467292612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,6 +242,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3269510868830034418}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3963c505dcf18024e835de7b2c4bf301,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4362800464393950912}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3963c505dcf18024e835de7b2c4bf301,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2683597004348325906}
   m_SourcePrefab: {fileID: 100100000, guid: 3963c505dcf18024e835de7b2c4bf301, type: 3}
 --- !u!1 &177700557410245781 stripped
 GameObject:
@@ -329,6 +279,61 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5274372922660067846, guid: 3963c505dcf18024e835de7b2c4bf301, type: 3}
+--- !u!65 &4362800464393950912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177700557410245781}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &2683597004348325906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177700557410245781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b27e8efffa91de4eb96ce35149a43ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1950762312102575686}
+        m_TargetAssemblyTypeName: CrystalBehaviour, Assembly-CSharp
+        m_MethodName: ForwardedTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  gizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &665548800900974127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3963c505dcf18024e835de7b2c4bf301,

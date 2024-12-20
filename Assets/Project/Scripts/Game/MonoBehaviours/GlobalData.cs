@@ -40,7 +40,8 @@ public class GlobalData : MonoBehaviour
 
     public static string startingScene;
 
-    [field: SerializeField] public Material PreviewMaterial { get; private set; }
+    [SerializeField] private Material previewMaterial;
+    public Material PreviewMaterial { get; private set; }
 
     public static ExtendedEvent<ScriptableLevel> OnLevelUnloaded = new ExtendedEvent<ScriptableLevel>();
 
@@ -76,6 +77,7 @@ public class GlobalData : MonoBehaviour
     private static void OnGlobalSceneLoaded(Scene scene)
     {
         DontDestroyOnLoad(Instance.gameObject);
+        Instance.PreviewMaterial = new Material(Instance.previewMaterial);
         sceneLevelDict = Levels.GetLevelSceneDict();
         OnSceneLoaded(SceneManager.GetSceneByName(startingScene), LoadSceneMode.Additive);
         UnloadGlobalDataScene(scene);

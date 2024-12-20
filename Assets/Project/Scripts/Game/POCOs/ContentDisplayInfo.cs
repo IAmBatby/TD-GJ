@@ -1,5 +1,4 @@
 using UnityEngine;
-using Color = UnityEngine.Color;
 
 public enum PresentationType { Standard, Progress, Percentage }
 public enum DisplayType { Full, Mini }

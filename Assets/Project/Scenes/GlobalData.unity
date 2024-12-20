@@ -159,8 +159,7 @@ MonoBehaviour:
   skinManifest: {fileID: 11400000, guid: 77e4bbd89a519f441a568eafea306e59, type: 2}
   systemsPrefab: {fileID: 842840510426130536, guid: d848d6c313858f24b9be8e3f2504372c,
     type: 3}
-  <PreviewMaterial>k__BackingField: {fileID: 2100000, guid: 257ed267e7becc94db7efe5820a563cd,
-    type: 2}
+  previewMaterial: {fileID: 2100000, guid: 257ed267e7becc94db7efe5820a563cd, type: 2}
 --- !u!4 &1318280755
 Transform:
   m_ObjectHideFlags: 0

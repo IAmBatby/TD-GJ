@@ -106,14 +106,24 @@ public class PlayerBehaviour : HurtableBehaviour
     public void ForwardedTriggerEnter(Collider other)
     {
         //Debug.Log("Forwarded Enter: " + other);
-        if (ActiveItem == null && other.TryGetComponent(out ItemBehaviour item))
+        if (ActiveItem == null)
         {
+            ItemBehaviour item = null;
+            if (other.TryGetComponent(out ItemBehaviour directItem))
+                item = directItem;
+            else if (other.transform.root.TryGetComponent(out ItemBehaviour rootItem))
+                item = rootItem;
+            if (item != null)
             if (item.ItemData != null && item.ItemData.CanBePickedUp)
+            {
                 mostRecentItemInRange = item;
+                Log.LogInfo("Item In Range: " + item.ContentData.GetDisplayName(), item.ItemData.GetDisplayColor());
+            }
         }
 
         if (other.TryGetComponent(out IInteractable interactable))
         {
+            Log.LogInfo("Item In Range: " + interactable.ToString(), Color.gray);
             mostRecentInteractableInRange = interactable;
         }
     }
