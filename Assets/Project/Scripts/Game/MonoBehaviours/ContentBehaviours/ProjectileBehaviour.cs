@@ -46,7 +46,7 @@ public class ProjectileBehaviour : ContentBehaviour
         if (piercedObjects.Contains(other.gameObject)) return;
         HurtableBehaviour health = other.transform.root.GetComponentInChildren<HurtableBehaviour>();
         if (health != null)
-            health.ModifyHealth(-damage);
+            health.ReceiveHit(ProjectileData.KnockbackForce,-damage,Rigidbody.velocity);
         if (ProjectileData.IsPiercing)
             piercedObjects.Add(other.gameObject);
 
@@ -74,7 +74,7 @@ public class ProjectileBehaviour : ContentBehaviour
         Debug.Log("Cannonball Exploding! Radius Is: " + ProjectileData.ImpactExplosionRadius + ", Hit: #" + behaviours.Count + "Hurtables");
 
         foreach (HurtableBehaviour behaviour in  behaviours)
-            behaviour.ModifyHealth(-damage);
+            behaviour.ReceiveHit(ProjectileData.KnockbackForce, -damage, Rigidbody.velocity);
 
 
         ReactionPlayer.Play(ProjectileData.OnImpactReaction);

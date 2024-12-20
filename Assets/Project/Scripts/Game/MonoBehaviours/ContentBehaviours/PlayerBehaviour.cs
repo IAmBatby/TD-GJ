@@ -49,6 +49,9 @@ public class PlayerBehaviour : HurtableBehaviour
     public ExtendedEvent<ItemBehaviour> OnItemPickup = new ExtendedEvent<ItemBehaviour>();
     public ExtendedEvent<ItemBehaviour> OnItemDropped = new ExtendedEvent<ItemBehaviour>();
 
+    [SerializeField] private bool canMove;
+    [SerializeField] private float lockoutDuration;
+    [SerializeField] private Timer movementLockTimer;
     protected override void OnSpawn()
     {
         base.OnSpawn();
@@ -62,6 +65,8 @@ public class PlayerBehaviour : HurtableBehaviour
         OnHealthModified.AddListener(LogDamage);
         GameManager.OnNewWave.AddListener(FlashOnNewWave);
         CheatManager.RegisterCheat(ResetHealth, "Player");
+
+        canMove = true;
     }
 
     private void LogDamage((int, int) health)
@@ -185,7 +190,6 @@ public class PlayerBehaviour : HurtableBehaviour
         OnItemDropped.Invoke(ActiveItem);
         ActiveItem = null;
     }
-
     protected override void OnDeath()
     {
         if (activeAnimator != null)
@@ -198,7 +202,7 @@ public class PlayerBehaviour : HurtableBehaviour
         if (GameManager.IsLevelActive == false) return;
         SetRotation();
 
-        if (activeAnimator != null)
+        if (activeAnimator != null && canMove)
             activeAnimator.SetBool("isWalking", Rigidbody.velocity.magnitude > 1f);
     }
     private void FixedUpdate()
@@ -211,7 +215,8 @@ public class PlayerBehaviour : HurtableBehaviour
         positionConstraint.translationAtRest = translationAtRestCameraPos;
         positionConstraint.translationOffset = translationOffsetCameraPos;
 
-        SetPosition();
+        if(canMove)
+            SetPosition();
 
         if (ActiveItem != null)
             ActiveItem.transform.localPosition = Vector3.zero;
@@ -256,6 +261,18 @@ public class PlayerBehaviour : HurtableBehaviour
         moveInput.Normalize();
 
         Rigidbody.velocity = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
+    }
+
+    protected override void OnReceivedHit()
+    {
+        activeAnimator.SetTrigger("Hit");
+        canMove = false;
+        movementLockTimer = new Timer(this, lockoutDuration, ResetMovement);
+    }
+
+    public void ResetMovement()
+    {
+        canMove = true;
     }
 
     public override void RegisterBehaviour()

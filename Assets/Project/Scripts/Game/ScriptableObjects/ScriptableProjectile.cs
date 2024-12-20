@@ -8,6 +8,7 @@ public class ScriptableProjectile : ScriptableContent
 {
     [field: Header("Projectile Values"), Space(15)]
     [field: SerializeField] public bool IsPiercing { get; private set; }
+    [field: SerializeField] public int KnockbackForce { get; private set; }
     [field: SerializeField] public float LifeTime { get; private set; }
     [field: SerializeField] public float ImpactExplosionRadius { get; private set; }
     [field: SerializeField] public Color ProjectileColor { get; private set; }
