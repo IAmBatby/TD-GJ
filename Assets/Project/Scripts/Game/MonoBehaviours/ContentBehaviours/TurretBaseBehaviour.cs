@@ -146,9 +146,16 @@ public class TurretBaseBehaviour : ItemBehaviour
 
 
         if (Target != null)
+        {
             transform.LookAt(Target.transform.position);
+            ActiveModule.transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0, 0);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        }
         else
+        {
             transform.rotation = Quaternion.identity;
+            ActiveModule.transform.rotation = Quaternion.identity;
+        }
 
         Shoot();
     }
@@ -171,7 +178,7 @@ public class TurretBaseBehaviour : ItemBehaviour
     {
         if (CooldownLength <= 0f) return;
         canShoot = false;
-        //shootCooldownTimer.TryStopTimer();
+        shootCooldownTimer.TryStopTimer();
         shootCooldownTimer = new Timer(this, FireRateAttribute.Value, DisableCooldown);
     }
 

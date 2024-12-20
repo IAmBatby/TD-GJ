@@ -25,6 +25,7 @@ MonoBehaviour:
       type: 2}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
+  <KnockbackForce>k__BackingField: 2
   <LifeTime>k__BackingField: 3
   <ImpactExplosionRadius>k__BackingField: 0
   <ProjectileColor>k__BackingField: {r: 0.09019607, g: 0.7921561, b: 1, a: 0.18431373}

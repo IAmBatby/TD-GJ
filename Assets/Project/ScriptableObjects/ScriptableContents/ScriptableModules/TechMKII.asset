@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 4413928233358274691, guid: 9af1e8084efce2b499d7e0d8c9c1c7b4,
     type: 3}
-  <ContentName>k__BackingField: Crossbow MK1
+  <ContentName>k__BackingField: Tech MKII
   <ContentIcon>k__BackingField: {fileID: 0}
   <ContentColor>k__BackingField: {r: 0.9716981, g: 0.8291659, b: 0.2979263, a: 1}
   <Cursor>k__BackingField: {fileID: 0}
   <Highlightable>k__BackingField: 0
-  <OnSpawnAudio>k__BackingField: {fileID: 0}
+  <OnSpawnReaction>k__BackingField:
+    <AudioPreset>k__BackingField: {fileID: 0}
+    <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0

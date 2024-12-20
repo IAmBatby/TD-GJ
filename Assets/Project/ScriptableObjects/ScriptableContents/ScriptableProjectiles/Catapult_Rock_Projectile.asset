@@ -24,6 +24,7 @@ MonoBehaviour:
     <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 0
   <IsPiercing>k__BackingField: 0
+  <KnockbackForce>k__BackingField: 30
   <LifeTime>k__BackingField: 1
   <ImpactExplosionRadius>k__BackingField: 1.5
   <ProjectileColor>k__BackingField: {r: 1, g: 0.94519216, b: 0.08962262, a: 0.18431373}
