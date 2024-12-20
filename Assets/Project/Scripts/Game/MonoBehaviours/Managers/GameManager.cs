@@ -18,6 +18,7 @@ public struct LogCollection
     public Logger Enemies { get; private set; }
     public Logger Player { get; private set; }
     public Logger Highlighting { get; private set; }
+    public Logger Highlighted { get; private set; }
 
     public LogCollection(int maxLines = 0)
     {
@@ -27,6 +28,7 @@ public struct LogCollection
         Enemies = DynamicConsole.AddLogger("Enemies");
         Player = DynamicConsole.AddLogger("Player");
         Highlighting = DynamicConsole.AddLogger("Highlighting");
+        Highlighted = DynamicConsole.AddLogger("Highlighted");
     }
 }
 

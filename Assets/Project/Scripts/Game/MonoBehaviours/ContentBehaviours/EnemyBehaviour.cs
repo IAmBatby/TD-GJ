@@ -70,7 +70,7 @@ public class EnemyBehaviour : HurtableBehaviour
         Agent.avoidancePriority = newValue;
     }
 
-    protected override void OnDeath()
+    protected override void TryActivateSpawner()
     {
         Agent.enabled = false;
         GameManager.RemoveEnemy(this);

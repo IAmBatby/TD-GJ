@@ -8,6 +8,8 @@ public class CrystalRockBehaviour : HurtableBehaviour
     [SerializeField] private List<ContentSpawner> randomSpawners = new List<ContentSpawner>();
     [SerializeField] private List<ContentSpawner> activeSpawners = new List<ContentSpawner>();
     [SerializeField] private List<ItemBehaviour> spawnedCrystals = new List<ItemBehaviour>();
+    
+    private List<RockSpawnInfo> rockSpawnInfos = new List<RockSpawnInfo>();
     private List<ContentDisplayInfo> fakeCrystalInfos = new List<ContentDisplayInfo>();
     private ContentDisplayListing fakeCrystalListing;
 
@@ -22,106 +24,49 @@ public class CrystalRockBehaviour : HurtableBehaviour
     protected override void OnSpawn()
     {
         base.OnSpawn();
-
-        foreach (ContentSpawner spawner in randomSpawners)
-            spawner.SetContent(mineralToSpawn);
-
-        GameManager.OnNewWave.AddListener(TrySpawnCrystal);
-        OnHealthModified.AddListener(OnDamgeTaken);
-        ModifyHealth(-MaxHealth);
-        InitializeHighlightInfo();
-    }
-
-    private void InitializeHighlightInfo()
-    {
+        fakeCrystalListing = new ContentDisplayListing();
+        AddContentDisplayListing(fakeCrystalListing);
         foreach (ContentSpawner spawner in randomSpawners)
         {
-            ContentDisplayInfo info = mineralToSpawn.CreateGeneralDisplayInfo();
-            info.DisplayMode = DisplayType.Mini;
-            info.DisplayColor = GeneralDisplayInfo.DisplayColor;
-            info.SetDisplayValues(string.Empty);
-            info.PresentMode = PresentationType.Percentage;
-            fakeCrystalInfos.Add(info);
+            spawner.SetContent(mineralToSpawn);
+            rockSpawnInfos.Add(new RockSpawnInfo(this, spawner, fakeCrystalListing));
         }
-        fakeCrystalListing = new ContentDisplayListing(fakeCrystalInfos);
-        AddContentDisplayListing(fakeCrystalListing);
-        foreach (ContentDisplayInfo info in fakeCrystalInfos)
-            fakeCrystalListing.RemoveContentDisplayInfo(info);
 
-        //GeneralDisplayListing.RemoveContentDisplayInfo(HealthDisplayInfo);
+        GameManager.OnNewWave.AddListener(TryEnableSpawner);
+        ModifyHealth(-MaxHealth);
     }
 
     //New wave, roll to spawn droppable Crystal
-    private void TrySpawnCrystal()
+    private void TryEnableSpawner()
     {
         if (numberOfCrystalsToSpawn <= 0) return;
 
         for (int i = numberOfCrystalsToSpawn; i > 0; i--)
         {
-            if (activeSpawners.Count >= randomSpawners.Count) break;
-
+            List<RockSpawnInfo> inactiveRocks = rockSpawnInfos.Where(r => r.CurrentState == RockSpawnInfo.SpawnState.Inactive).ToList();
+            if (inactiveRocks.Count == 0) return;
             int RandomChance = Random.Range(1, 100);
             Debug.Log("Rolled " + RandomChance.ToString() + "/ 100, Succeed Threshold: " + PercentChanceToSpawn.ToString() + "/100");
             if (RandomChance < PercentChanceToSpawn) return;
-
-            int RandomNumber = Random.Range(0, randomSpawners.Count);
-
-            ContentSpawner randomSpawner = randomSpawners[RandomNumber];
-            randomSpawner.gameObject.SetActive(true); //fake crystal under this game object
-
-            activeSpawners.Add(randomSpawner);
-
-            //fakeCrystalInfos[activeSpawners.Count - 1].DisplayColor = Color.grey;
-            fakeCrystalInfos[activeSpawners.Count - 1].SetProgressValues(0, 100);
-            fakeCrystalListing.AddContentDisplayInfo(fakeCrystalInfos[activeSpawners.Count - 1]);
-
+            inactiveRocks[Random.Range(0, inactiveRocks.Count)].Activate();
         }
 
-        if(activeSpawners.Count != 0)
-        ResetHealth();
+        List<RockSpawnInfo> activeRocks = rockSpawnInfos.Where(r => r.CurrentState == RockSpawnInfo.SpawnState.Active).ToList();
+        if (activeRocks.Count == 1)
+            ResetHealth();
     }
 
-    private void OnDamgeTaken((int, int) health)
+    protected override void TryActivateSpawner()
     {
-        if (health.Item1 <= health.Item2) return;
-        if (activeSpawners.Count == 0) return;
-        ContentDisplayInfo nextCrystalInfo = fakeCrystalInfos[activeSpawners.Count - 1];
-        nextCrystalInfo.SetProgressValues(Health, 0, MaxHealth);
+        List<RockSpawnInfo> activeRocks = rockSpawnInfos.Where(r => r.CurrentState == RockSpawnInfo.SpawnState.Active).ToList();
+        if (activeRocks.Count == 0) return;
+        activeRocks[Random.Range(0, activeRocks.Count)].Spawn();
     }
 
-    protected override void OnDeath()
+    public void OnSpawnedCrystalRemoved()
     {
-        if(activeSpawners.Count == 0) return;
-        int RandomNumber = Random.Range(0, activeSpawners.Count);
-        ContentSpawner randomSpawner = activeSpawners[RandomNumber];
-
-        //do animation
-
-        ContentBehaviour spawnedCrystal = randomSpawner.Spawn();
-        if (spawnedCrystal is ItemBehaviour crystalBehaviour)
-        {
-            spawnedCrystals.Add(crystalBehaviour);
-            crystalBehaviour.HighlightingDisabled = true;
-            crystalBehaviour.OverrideCollisions(true);
-            crystalBehaviour.OnItemPickup.AddListener(OnSpawnedCrystalRemoved);
-            crystalBehaviour.OnDespawn.AddListener(OnSpawnedCrystalRemoved);
-        }
-        fakeCrystalInfos[0].DisplayColor = mineralToSpawn.GetDisplayColor();
-
-        randomSpawner.gameObject.SetActive(false);
-    }
-
-    private void OnSpawnedCrystalRemoved()
-    {
-        fakeCrystalListing.RemoveContentDisplayInfo(fakeCrystalInfos[activeSpawners.Count - 1]);
-        activeSpawners.Remove(activeSpawners.First());
-        ItemBehaviour crystal = spawnedCrystals.First();
-        spawnedCrystals.Remove(crystal);
-        //crystal.HighlightingDisabled = false;
-        crystal.OverrideCollisions(false);
-        crystal.OnDespawn.RemoveListener(OnSpawnedCrystalRemoved);
-        crystal.OnItemPickup.RemoveListener(OnSpawnedCrystalRemoved);
-        if (activeSpawners.Count != 0)
+        List<RockSpawnInfo> activeRocks = rockSpawnInfos.Where(r => r.CurrentState == RockSpawnInfo.SpawnState.Active).ToList();
+        if (activeRocks.Count > 0)
             ResetHealth();
     }
 
@@ -134,5 +79,61 @@ public class CrystalRockBehaviour : HurtableBehaviour
     {
         ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
         base.UnregisterBehaviour(destroyOnUnregistration);
+    }
+}
+
+public class RockSpawnInfo
+{
+    public CrystalRockBehaviour rockSpawner;
+    public ContentSpawner contentSpawner;
+    public ItemBehaviour spawnedCrystal;
+    public ContentDisplayInfo info;
+    public ContentDisplayListing listing;
+    public enum SpawnState { Inactive, Active, Spawned }
+    public SpawnState CurrentState { get; private set; }
+
+    public RockSpawnInfo(CrystalRockBehaviour newRockSpawner, ContentSpawner newSpawner, ContentDisplayListing newListing)
+    {
+        contentSpawner = newSpawner;
+        listing = newListing;
+        info = contentSpawner.DefaultContent.CreateGeneralDisplayInfo();
+        rockSpawner = newRockSpawner;
+        info.DisplayMode = DisplayType.Mini;
+        info.DisplayColor = contentSpawner.DefaultContent.GetDisplayColor();
+        info.SetDisplayValues(string.Empty);
+        info.PresentMode = PresentationType.Percentage;
+    }
+
+    public void Activate()
+    {
+        CurrentState = SpawnState.Active;
+        info.DisplayColor = Color.grey;
+        listing.AddContentDisplayInfo(info);
+        contentSpawner.gameObject.SetActive(true);
+    }
+
+    public void Spawn()
+    {
+        CurrentState = SpawnState.Spawned;
+        ContentBehaviour behaviour = contentSpawner.Spawn();
+        if (behaviour is ItemBehaviour item)
+            spawnedCrystal = item;
+
+        spawnedCrystal.OnItemPickup.AddListener(Deactivate);
+        spawnedCrystal.OnDespawn.AddListener(Deactivate);
+        spawnedCrystal.OverrideCollisions(true, false, true);
+        info.DisplayColor = spawnedCrystal.ItemData.GetDisplayColor();
+        contentSpawner.gameObject.SetActive(false);
+    }
+
+    private void Deactivate()
+    {
+        CurrentState = SpawnState.Inactive;
+        spawnedCrystal.OnItemPickup.RemoveListener(Deactivate);
+        spawnedCrystal.OnDespawn.RemoveListener(Deactivate);
+        spawnedCrystal.OverrideCollisions(false);
+        listing.RemoveContentDisplayInfo(info);
+        rockSpawner.OnSpawnedCrystalRemoved();
+        spawnedCrystal = null;
     }
 }

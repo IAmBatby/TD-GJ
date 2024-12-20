@@ -33,7 +33,7 @@ public class HurtableBehaviour : ContentBehaviour
     public void Die()
     {
         OnHurtableDeath.Invoke();
-        OnDeath();
+        TryActivateSpawner();
     }
 
     protected void RefreshMaxHealth()
@@ -41,7 +41,7 @@ public class HurtableBehaviour : ContentBehaviour
         SetMaxHealth(GameManager.WaveManifest.GetAdditiveHealth(HurtableData.Health, GameManager.CurrentWaveCount));
     }
 
-    protected virtual void OnDeath() { }
+    protected virtual void TryActivateSpawner() { }
 
     public void SetMaxHealth(int newMaxHealth) => MaxHealth = newMaxHealth;
     public void SetCurrentHealth(int newCurrentHealth) => ModifyHealth(-currentHealth + newCurrentHealth);

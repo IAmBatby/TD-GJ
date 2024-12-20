@@ -98,12 +98,13 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
             IsHighlighted = false;
     }
 
-    public void OverrideCollisions(bool enableOverride, bool overrideValue = false)
+    public void OverrideCollisions(bool enableOverride, bool overrideValue = false, bool onlyTriggers = false)
     {
         if (enableOverride == true)
         {
             foreach (Collider collider in Colliders)
-                collider.enabled = overrideValue;
+                if (onlyTriggers == false || (onlyTriggers == true && collider.isTrigger))
+                    collider.enabled = overrideValue;
         }
         else
         {
