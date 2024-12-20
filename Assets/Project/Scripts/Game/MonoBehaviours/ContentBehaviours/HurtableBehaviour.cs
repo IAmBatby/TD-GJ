@@ -47,6 +47,20 @@ public class HurtableBehaviour : ContentBehaviour
     public void SetCurrentHealth(int newCurrentHealth) => ModifyHealth(-currentHealth + newCurrentHealth);
     public void ResetHealth() => ModifyHealth(-currentHealth + MaxHealth);
 
+    public void ReceiveHit(int knockbackForce, int value, Vector3 velocity)
+    {
+        OnReceivedHit();
+
+        Vector3 newVel = new Vector3(velocity.x, Rigidbody.velocity.y, velocity.z);
+
+        Rigidbody.AddForce((newVel * knockbackForce * -value) / 10, ForceMode.VelocityChange);
+
+        ModifyHealth(value);
+    }
+    protected virtual void OnReceivedHit()
+    {
+
+    }
     public void ModifyHealth(int value)
     {
         int previousHealth = currentHealth;

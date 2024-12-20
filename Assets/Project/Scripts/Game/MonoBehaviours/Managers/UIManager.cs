@@ -12,7 +12,7 @@ public class UIManager : GlobalManager
     [SerializeField] private TextMeshProUGUI currentWaveHeaderText;
     [SerializeField] private TextMeshProUGUI currentWaveText;
     [SerializeField] private TextMeshProUGUI waveProgressTimeText;
-    [SerializeField] private TextMeshProUGUI currentHealthText;
+    [SerializeField] private TextMeshProUGUI currentLevelHealthText;
     [SerializeField] private TextMeshProUGUI currentGoldText;
 
     [SerializeField] private Image waveProgressFillImage;
@@ -20,6 +20,8 @@ public class UIManager : GlobalManager
     [SerializeField] private TextMeshProUGUI gameEndText;
     [SerializeField] private Image gameEndBackgroundImage;
 
+    [SerializeField] private TextMeshProUGUI currentPlayerHealthText;
+    [SerializeField] private Image currentPlayerHealthFillImage;
     public void InitializeUI()
     {
         GameManager.OnGameStart.RemoveListener(ResetText);
@@ -46,8 +48,12 @@ public class UIManager : GlobalManager
             waveProgressFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.IntermissionLength, GameManager.IntermissionProgress);
             currentWaveText.SetText("Intermission");
         }     
-        currentHealthText.SetText(GameManager.Health.ToString());
+        currentLevelHealthText.SetText(GameManager.Health.ToString());
         currentGoldText.SetText(GameManager.Currency.ToString());
+
+        currentPlayerHealthFillImage.color = Color.red;
+        currentPlayerHealthFillImage.fillAmount = Mathf.InverseLerp(0, GameManager.Player.MaxHealth, GameManager.Player.Health);
+        currentPlayerHealthText.SetText(GameManager.Player.Health.ToString());
     }
 
     private void ResetText()
@@ -56,8 +62,9 @@ public class UIManager : GlobalManager
         gameEndText.enabled = false;
         currentWaveText.SetText(string.Empty);
         waveProgressTimeText.SetText(string.Empty);
-        currentHealthText.SetText(string.Empty);
+        currentLevelHealthText.SetText(string.Empty);
         currentGoldText.SetText(string.Empty);
+        currentPlayerHealthText.SetText(string.Empty);
     }
 
     private void OnGameEnd(bool didWin)

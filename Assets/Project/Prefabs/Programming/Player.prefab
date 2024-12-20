@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aecfafc5dc3a63488152b00f4e9bf5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Renderers>k__BackingField: []
   <ActiveCamera>k__BackingField: {fileID: 3851695459415568309}
   interactKey: 101
   heldItemPosition: {fileID: 6114177652663965045}
@@ -289,6 +288,14 @@ MonoBehaviour:
     type: 2}
   mostRecentItemInRange: {fileID: 0}
   <ActiveItem>k__BackingField: {fileID: 0}
+  canMove: 0
+  lockoutDuration: 0.5
+  movementLockTimer:
+    lastResumedTime: 0
+    lastPausedTime: 0
+    startTime: 0
+    currentTimerLength: 0
+    cachedTime: 0
 --- !u!54 &683504834950327329
 Rigidbody:
   m_ObjectHideFlags: 0
