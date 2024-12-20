@@ -44,6 +44,11 @@ public class TurretBaseBehaviour : ItemBehaviour
 
     public Vector3 AimPosition => (transform.position + aimOffset);
 
+    protected override void OnDrop()
+    {
+        base.OnDrop();
+        EnableCooldown(TurretData.DeploymentShootCooldown);
+    }
     protected override void OnSpawn()
     {
         base.OnSpawn();
@@ -159,12 +164,12 @@ public class TurretBaseBehaviour : ItemBehaviour
         }
 
         ReactionPlayer.Play(TurretData.OnShootReaction);
-        EnableCooldown();
+        EnableCooldown(FireRateAttribute.Value);
     }
 
-    private void EnableCooldown()
+    private void EnableCooldown(float CooldownLength)
     {
-        if (FireRateAttribute.Value <= 0f) return;
+        if (CooldownLength <= 0f) return;
         canShoot = false;
         shootCooldownTimer = new Timer(this, FireRateAttribute.Value, DisableCooldown);
     }
