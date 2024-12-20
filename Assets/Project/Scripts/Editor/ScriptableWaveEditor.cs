@@ -14,6 +14,9 @@ public class SpawnInfoListProperty : Editor
     Rect previousSize;
     private bool useScaling;
     private SerializedProperty intermissionTimeLengthProp;
+    private SerializedProperty additiveHealthProp;
+    private SerializedProperty additiveSpeedProp;
+    private SerializedProperty additiveGoldProp;
 
     private void OnEnable()
     {
@@ -23,6 +26,10 @@ public class SpawnInfoListProperty : Editor
         reorderableList = new ReorderableList(serializedObject, EditorUtilities.Seek(serializedObject.GetIterator(), nameof(ScriptableWave.WaveSpawnInfos)), true, true, true, true);
         reorderableList.drawElementCallback = DrawSpawnInfoColumn;
         reorderableList.drawHeaderCallback = DrawHeader;
+
+        additiveGoldProp = EditorUtilities.Seek(serializedObject, nameof(ScriptableWave.AdditiveGold));
+        additiveHealthProp = EditorUtilities.Seek(serializedObject, nameof(ScriptableWave.AdditiveHealth));
+        additiveSpeedProp = EditorUtilities.Seek(serializedObject, nameof(ScriptableWave.AdditiveSpeed));
     }
 
     public override void OnInspectorGUI()
@@ -33,6 +40,18 @@ public class SpawnInfoListProperty : Editor
         EditorGUILayout.Space(10);
         EditorGUILayout.EndVertical();
         reorderableList.DoLayoutList();
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Additive Health: ", GUILayout.Width(90));
+        EditorGUILayout.PropertyField(additiveHealthProp, GUIContent.none, GUILayout.Width(30));
+        EditorGUILayout.Space(5, false);
+        EditorGUILayout.LabelField("Additive Gold: ", GUILayout.Width(85));
+        EditorGUILayout.PropertyField(additiveGoldProp, GUIContent.none, GUILayout.Width(30));
+        EditorGUILayout.Space(5, false);
+        EditorGUILayout.LabelField("Additive Speed: ", GUILayout.Width(90));
+        EditorGUILayout.PropertyField(additiveSpeedProp, GUIContent.none, GUILayout.Width(30));
+
+        EditorGUILayout.EndHorizontal();
         EditorUtilities.DrawSpawnInfoStatistics(wave, ref useScaling, ref simulatedWaveIndex, true);
         serializedObject.ApplyModifiedProperties();
     }

@@ -16,6 +16,41 @@ public class WaveManifest : ScriptableObject
 
     public float GetWaveLength(ScriptableWave wave) => wave.GetFinalTime();
 
+    public int GetAdditiveHealth(int value, int waveIndex)
+    {
+        int returnValue = value;
+
+        if (waveIndex < Waves.Count)
+            for (int i = 0; i < waveIndex + 1; i++)
+                returnValue += Waves[i].AdditiveHealth;
+
+        return (returnValue);
+    }
+
+    public float GetAdditiveSpeed(float value, int waveIndex)
+    {
+        float returnValue = value;
+
+        if (waveIndex < Waves.Count)
+            for (int i = 0; i < waveIndex + 1; i++)
+                returnValue += Waves[i].AdditiveSpeed;
+
+        return (returnValue);
+    }
+
+    public Vector2 GetAdditiveGold(Vector2 value, int waveIndex)
+    {
+        Vector2 returnValue = value;
+
+        if (waveIndex < Waves.Count)
+            for (int i = 0; i < waveIndex + 1; i++)
+                returnValue = new Vector2(returnValue.x + Waves[i].AdditiveGold, returnValue.y + Waves[i].AdditiveGold);
+
+        return (returnValue);
+    }
+
+
+
 #if UNITY_EDITOR
     private void OnValidate()
     {

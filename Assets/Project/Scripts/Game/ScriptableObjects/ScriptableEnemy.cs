@@ -12,4 +12,6 @@ public class ScriptableEnemy : ScriptableHurtable
     [field: SerializeField] public float Speed { get; private set; }
     [field: SerializeField] public ScriptableItem ItemDrop { get; private set; }
     [field: SerializeField, Range(0,100)] public float ItemDropRate { get; private set; }
+
+    public override string GetCategoryName() => "Enemy";
 }
