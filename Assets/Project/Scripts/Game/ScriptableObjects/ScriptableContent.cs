@@ -40,6 +40,7 @@ public class ScriptableContent : ScriptableObject
         return (newBehaviour);
     }
 
+    public virtual ContentDisplayInfo CreateGeneralDisplayInfo() => new ContentDisplayInfo(ContentName, displayIcon: ContentIcon, displayColor: ContentColor);
     public virtual string GetCategoryName() => "Content";
     public virtual string GetDisplayName() => ContentName;
     public virtual Sprite GetDisplayIcon() => ContentIcon;

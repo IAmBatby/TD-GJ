@@ -5,12 +5,19 @@ using UnityEngine;
 public class GoldDropBehaviour : ItemBehaviour
 {
     private ScriptableCurrency CurrencyData;
+    private int currency;
 
     protected override void OnSpawn()
     {
         base.OnSpawn();
         if (ContentData is ScriptableCurrency currencyData)
             CurrencyData = currencyData;
+        Vector2 scaledAmount = GameManager.WaveManifest.GetAdditiveGold(CurrencyData.CurrencyAmount, GameManager.CurrentWaveCount);
+        currency = Mathf.RoundToInt(Random.Range(scaledAmount.x, scaledAmount.y));
+        GeneralDisplayInfo.DisplayMode = DisplayType.Mini;
+        GeneralDisplayInfo.SetDisplayValues(string.Empty);
+        //GeneralDisplayInfo.SetDisplayValues("$" + currency.ToString());
+        //GeneralDisplayInfo.DisplayIcon = null;
         GameManager.OnNewWave.AddListener(DestroyCoin);
     }
     public void ForwardedTriggerEnter(Collider other)
@@ -21,8 +28,6 @@ public class GoldDropBehaviour : ItemBehaviour
             {
                 player.PickupItem(this);
                 player.DropItem(Vector3.zero);
-                Vector2 scaledAmount = GameManager.WaveManifest.GetAdditiveGold(CurrencyData.CurrencyAmount, GameManager.CurrentWaveCount);
-                int currency = Mathf.RoundToInt(Random.Range(scaledAmount.x, scaledAmount.y));    
                 GameManager.ModifyCurrency(currency);
                 GameManager.UnregisterContentBehaviour(this, true);
             }

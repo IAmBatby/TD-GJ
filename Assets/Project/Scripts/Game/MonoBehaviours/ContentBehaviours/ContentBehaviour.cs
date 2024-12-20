@@ -10,13 +10,19 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
     //public AudioPlayer AudioPlayer { get; private set; }
     //public ParticlePlayer ParticlePlayer { get; private set; }
     public ReactionPlayer ReactionPlayer { get; private set; }
-    [field: SerializeField] public List<Renderer> Renderers { get; private set; } = new List<Renderer>();
+    public List<Renderer> Renderers { get; private set; } = new List<Renderer>();
+    public List<Collider> Colliders { get; private set; } = new List<Collider>();
+    private Dictionary<Collider, bool> initialColliderActivityStates = new Dictionary<Collider, bool>();
 
     protected MaterialController MaterialController { get; private set; }
 
     public ExtendedEvent<bool> OnMouseoverToggle = new ExtendedEvent<bool>();
 
+    public ExtendedEvent OnDespawn { get; private set; } = new ExtendedEvent();
+
     private List<ContentDisplayListing> contentDisplayListings = new List<ContentDisplayListing>();
+
+    public bool HighlightingDisabled { get; set; }
 
     public bool IsHighlighted { get; set; }
 
@@ -37,6 +43,11 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
         OnMouseoverToggle.Invoke(false);
     }
 
+    private void OnMouseOver()
+    {
+        GameManager.Instance.OnContentBehaviourMousedOver(this);
+    }
+
     public void SetData(ScriptableContent content) => ContentData = content;
 
     public void Initialize()
@@ -50,9 +61,14 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
 
         foreach (Renderer renderer in gameObject.GetComponentsInChildren<Renderer>())
             Renderers.Add(renderer);
+        foreach (Collider collider in gameObject.GetComponentsInChildren<Collider>())
+        {
+            Colliders.Add(collider);
+            initialColliderActivityStates.Add(collider, collider.enabled);
+        }
         MaterialController = new MaterialController(Renderers);
 
-        GeneralDisplayInfo = CreateGeneralDisplayInfo();
+        GeneralDisplayInfo = GetGeneralDisplayInfo();
         GeneralDisplayListing = new ContentDisplayListing(GeneralDisplayInfo);
         contentDisplayListings.Add(GeneralDisplayListing);
         OnSpawn();
@@ -82,13 +98,28 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
             IsHighlighted = false;
     }
 
-    protected virtual ContentDisplayInfo CreateGeneralDisplayInfo() => new ContentDisplayInfo(ContentData.ContentName, displayIcon: ContentData.ContentIcon, displayColor: ContentData.ContentColor);
+    public void OverrideCollisions(bool enableOverride, bool overrideValue = false)
+    {
+        if (enableOverride == true)
+        {
+            foreach (Collider collider in Colliders)
+                collider.enabled = overrideValue;
+        }
+        else
+        {
+            foreach (KeyValuePair<Collider, bool> kvp in initialColliderActivityStates)
+                kvp.Key.enabled = kvp.Value;
+        }
+
+    }
+
+    protected virtual ContentDisplayInfo GetGeneralDisplayInfo() => ContentData.CreateGeneralDisplayInfo();
 
 
     public List<ContentDisplayListing> GetDisplayListings() => new List<ContentDisplayListing>(contentDisplayListings);
 
     public Texture2D GetCursor() => ContentData.Cursor;
-    public bool IsHighlightable() => ContentData.Highlightable;
+    public bool IsHighlightable() => HighlightingDisabled ? false : ContentData.Highlightable;
     public bool Compare(GameObject go) => (go != null && go == gameObject);
     public virtual List<Renderer> GetRenderers() => Renderers;
     public Color GetColor() => ContentData.GetDisplayColor();
@@ -101,6 +132,7 @@ public class ContentBehaviour : MonoBehaviour, IHighlightable
     }
     public virtual void UnregisterBehaviour(bool destroyOnUnregistration)
     {
+        OnDespawn.Invoke();
         GameManager.OnHighlightChanged.RemoveListener(HighlightObject);
         ContentManager.UnregisterBehaviour(this, destroyOnUnregistration);
     }

@@ -14,20 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 1657740986348537836, guid: 4d05219a797577d42b52fdae8cfc49ea,
     type: 3}
-  <ContentName>k__BackingField: Upgrade Crystal
-  <ContentIcon>k__BackingField: {fileID: 0}
+  <ContentName>k__BackingField: Ore Deposit
+  <ContentIcon>k__BackingField: {fileID: 21300000, guid: 3eda2a27545414c439de9aa051f515ff,
+    type: 3}
   <ContentColor>k__BackingField: {r: 0.4528302, g: 0.0021359965, b: 0.37203476, a: 0.4392157}
-  <Cursor>k__BackingField: {fileID: 0}
+  <Cursor>k__BackingField: {fileID: 2800000, guid: 5be3e9103e3a85245a35e80491293af4,
+    type: 3}
   <Highlightable>k__BackingField: 1
-  <OnSpawnAudio>k__BackingField: {fileID: 0}
   <OnSpawnReaction>k__BackingField:
     <AudioPreset>k__BackingField: {fileID: 0}
     <ParticlePreset>k__BackingField: {fileID: 0}
   <ShouldBeAnchoredToGround>k__BackingField: 1
   <Health>k__BackingField: 20
   <HealthWaveScale>k__BackingField: 20
-  <OnHealthLostAudio>k__BackingField: {fileID: 0}
-  <OnHealthGainedAudio>k__BackingField: {fileID: 0}
   <OnHealthLostReaction>k__BackingField:
     <AudioPreset>k__BackingField: {fileID: 11400000, guid: 6cecd83ad74794144a4cd669400a4559,
       type: 2}

@@ -14,7 +14,7 @@ public class ContentDisplayListing
 
     public ContentDisplayListing(List<ContentDisplayInfo> contentDisplayInfos)
     {
-        this.contentDisplayInfos = contentDisplayInfos;
+        this.contentDisplayInfos = new List<ContentDisplayInfo>(contentDisplayInfos);
     }
 
     public void AddContentDisplayInfo(ContentDisplayInfo contentDisplayInfo) => contentDisplayInfos.Add(contentDisplayInfo);

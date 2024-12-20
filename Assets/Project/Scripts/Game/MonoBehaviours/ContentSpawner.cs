@@ -28,6 +28,8 @@ public class ContentSpawner : MonoBehaviour
 
     private void Spawn() => Spawn(DefaultContent);
 
+    public void SetContent(ScriptableContent newDefault) => DefaultContent = newDefault;
+
     public ContentBehaviour Spawn(ScriptableContent content = null)
     {
         if (content == null)
