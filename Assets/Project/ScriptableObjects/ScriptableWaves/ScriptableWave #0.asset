@@ -39,3 +39,6 @@ MonoBehaviour:
     <AmountToSpawn>k__BackingField: 0
     <IntervalBetweenSpawns>k__BackingField: 0
   fakeWaveIndex: 8
+  <AdditiveHealth>k__BackingField: 0
+  <AdditiveSpeed>k__BackingField: 0
+  <AdditiveGold>k__BackingField: 0

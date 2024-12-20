@@ -11,7 +11,6 @@ public class ContentDisplayInfo
     public DisplayType DisplayMode { get; set; } = DisplayType.Full;
 
     public string PrimaryText { get; private set; }
-    public string SecondaryText { get; private set; }
 
     private float progressMinValue;
     private float progressMaxValue;
@@ -21,7 +20,7 @@ public class ContentDisplayInfo
 
     public ContentDisplayInfo(string primaryText, string secondaryText = null, Color displayColor = default, PresentationType displayMode = PresentationType.Standard, Sprite displayIcon = null)
     {
-        SetDisplayValues(primaryText, secondaryText);
+        SetDisplayValues(primaryText);
         DisplayColor = displayColor;
         PresentMode = displayMode;
         DisplayIcon = displayIcon;
@@ -33,10 +32,9 @@ public class ContentDisplayInfo
         DisplayScale = new Vector2(1f, 1f);
     }
 
-    public void SetDisplayValues(string newPrimaryText = null, string newSecondaryText = null)
+    public void SetDisplayValues(string newPrimaryText = null)
     {
         PrimaryText = newPrimaryText != null ? newPrimaryText : string.Empty;
-        SecondaryText = newSecondaryText != null ? newSecondaryText : string.Empty;
     }
 
     public void SetProgressValues(float newCurrentValue, float newMaxValue, float newMinValue = 0f)
@@ -50,8 +48,8 @@ public class ContentDisplayInfo
     {
         return (PresentMode switch
         {
-            PresentationType.Standard => string.IsNullOrEmpty(SecondaryText) ? PrimaryText : PrimaryText + " (" + SecondaryText + ")",
-            PresentationType.Progress => string.IsNullOrEmpty(SecondaryText) ? PrimaryText : PrimaryText + " / " + SecondaryText,
+            PresentationType.Standard => PrimaryText,
+            PresentationType.Progress => progressCurrentValue.ToString("F2") + " / " + progressMaxValue.ToString("F2"),
             PresentationType.Percentage => PrimaryText + "%",
             _ => string.Empty
         });

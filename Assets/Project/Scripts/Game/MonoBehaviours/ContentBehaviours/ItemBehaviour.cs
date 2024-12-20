@@ -9,6 +9,9 @@ public class ItemBehaviour : ContentBehaviour
 
     public ScriptableItem ItemData { get; private set; }
 
+    public ExtendedEvent OnItemPickup { get; private set; } = new ExtendedEvent();
+    public ExtendedEvent OnItemDropped { get; private set; } = new ExtendedEvent();
+
     protected override void OnSpawn()
     {
         if (ContentData is ScriptableItem item)
@@ -19,6 +22,7 @@ public class ItemBehaviour : ContentBehaviour
     {
         IsBeingHeld = true;
         ReactionPlayer.Play(ItemData.OnPickupReaction);
+        OnItemPickup.Invoke();
         OnPickup();
     }
 
@@ -26,6 +30,7 @@ public class ItemBehaviour : ContentBehaviour
     {
         IsBeingHeld = false;
         ReactionPlayer.Play(ItemData.OnDropReaction);
+        OnItemPickup.Invoke();
         OnDrop();
     }
 

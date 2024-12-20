@@ -230,6 +230,7 @@ MonoBehaviour:
   numberOfCrystalsToSpawn: 1
   PercentChanceToSpawn: 5
   rockSpawnAnimator: {fileID: 0}
+  mineralToSpawn: {fileID: 11400000, guid: 5221710fe1934cb4f9276671c54b89fd, type: 2}
 --- !u!54 &3124981685659648788
 Rigidbody:
   m_ObjectHideFlags: 0

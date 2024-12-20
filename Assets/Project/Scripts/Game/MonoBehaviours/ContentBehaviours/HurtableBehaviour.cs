@@ -12,7 +12,7 @@ public class HurtableBehaviour : ContentBehaviour
     public ExtendedEvent<(int, int)> OnHealthModified = new ExtendedEvent<(int, int)>();
     public ExtendedEvent OnHurtableDeath = new ExtendedEvent<(int, int)>();
 
-    private ContentDisplayInfo healthDisplayInfo;
+    protected ContentDisplayInfo HealthDisplayInfo { get; private set; }    
 
     protected override void OnSpawn()
     {
@@ -23,9 +23,9 @@ public class HurtableBehaviour : ContentBehaviour
         RefreshMaxHealth();
         //SetMaxHealth(HurtableData.Health);
         ResetHealth();
-        healthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
-        healthDisplayInfo.DisplayMode = DisplayType.Mini;
-        GeneralDisplayListing.AddContentDisplayInfo(healthDisplayInfo);
+        HealthDisplayInfo = new ContentDisplayInfo(currentHealth.ToString(), displayMode: PresentationType.Progress, displayIcon: null, displayColor: Color.red);
+        HealthDisplayInfo.DisplayMode = DisplayType.Mini;
+        GeneralDisplayListing.AddContentDisplayInfo(HealthDisplayInfo);
         OnHealthModified.AddListener(RefreshDisplayInfo);
         GameManager.OnNewWave.AddListener(RefreshMaxHealth);
     }
@@ -53,21 +53,21 @@ public class HurtableBehaviour : ContentBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth + value, 0, MaxHealth);
 
-        if (currentHealth == 0)
-            Die();
-
         if (currentHealth != previousHealth)
             ReactionPlayer.Play(currentHealth > previousHealth ? HurtableData.OnHealthGainedReaction : HurtableData.OnHealthLostReaction);
 
         OnHealthModified.Invoke((previousHealth, currentHealth));
+
+        if (currentHealth == 0)
+            Die();
     }
 
     public virtual bool CanDie() => true;
 
     private void RefreshDisplayInfo()
     {
-        healthDisplayInfo.SetDisplayValues(currentHealth.ToString());
-        healthDisplayInfo.SetProgressValues(currentHealth, MaxHealth);
+        HealthDisplayInfo.SetDisplayValues(currentHealth.ToString());
+        HealthDisplayInfo.SetProgressValues(currentHealth, MaxHealth);
     }
 
     public override void RegisterBehaviour()

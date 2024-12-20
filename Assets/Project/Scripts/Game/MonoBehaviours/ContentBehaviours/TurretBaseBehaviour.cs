@@ -273,7 +273,7 @@ public class TurretBaseBehaviour : ItemBehaviour
     private void OnAttributeModified(ScriptableAttribute attributeModified, float modifierAdded)
     {
         if (attributeDisplayInfoDict.TryGetValue(attributeModified, out ContentDisplayInfo displayInfo))
-            displayInfo.SetDisplayValues(attributeModified.DisplayName, attributeModified.GetSecondaryDisplayString());
+            displayInfo.SetDisplayValues(attributeModified.GetSecondaryDisplayString());
         ReactionPlayer.Play(TurretData.OnUpgradedReaction);
     }
 
@@ -312,7 +312,6 @@ public class TurretBaseBehaviour : ItemBehaviour
     }
 
     public override List<Renderer> GetRenderers() => Renderers.Concat(ActiveModule.Renderers).ToList();
-
 
     public override void RegisterBehaviour()
     {

@@ -17,6 +17,7 @@ public struct LogCollection
     public Logger Wave { get; private set; }
     public Logger Enemies { get; private set; }
     public Logger Player { get; private set; }
+    public Logger Highlighting { get; private set; }
 
     public LogCollection(int maxLines = 0)
     {
@@ -25,6 +26,7 @@ public struct LogCollection
         Wave = DynamicConsole.AddLogger("Wave");
         Enemies = DynamicConsole.AddLogger("Enemies");
         Player = DynamicConsole.AddLogger("Player");
+        Highlighting = DynamicConsole.AddLogger("Highlighting");
     }
 }
 
@@ -97,6 +99,8 @@ public class GameManager : GlobalManager
     private Texture2D lastSetCursor;
     public static IHighlightable HighlightedObject { get; private set; }
     private MaterialCache highlightCache;
+    private List<IHighlightable> mouseOverFrameCache = new List<IHighlightable>();
+    private static IHighlightable mostRecentHightlightableMouseOver;
 
     ////////// Bools //////////
 
@@ -270,6 +274,8 @@ public class GameManager : GlobalManager
 
     public void OnContentBehaviourMousedEnter(IHighlightable behaviour)
     {
+        Logs.Highlighting.LogInfo("Mouse Enter: " + behaviour.ToString() + "(Highlightable: " + behaviour.IsHighlightable() + ")");
+        if (behaviour.IsHighlightable() == false) return;
         IHighlightable previousBehaviour = HighlightedObject;
         HighlightedObject = behaviour;
         if (previousBehaviour != HighlightedObject)
@@ -293,6 +299,15 @@ public class GameManager : GlobalManager
             if (previousBehaviour != null)
                 previousBehaviour.GetMaterialController().ResetRenderers();
         }
+    }
+
+    public void OnContentBehaviourMousedOver(IHighlightable behaviour)
+    {
+        if (behaviour.IsHighlightable() == false) return;
+        IHighlightable previousRecent = mostRecentHightlightableMouseOver;
+        mostRecentHightlightableMouseOver = behaviour;
+        if (previousRecent != mostRecentHightlightableMouseOver)
+            Logs.Highlighting.LogInfo("Recent Over Changed: " + behaviour.ToString());
     }
 
     public void ModifyHealth(int newValue)

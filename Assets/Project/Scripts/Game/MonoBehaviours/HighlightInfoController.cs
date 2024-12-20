@@ -48,16 +48,6 @@ public class HighlightInfoController : MonoBehaviour
 
     private void EnableInfo()
     {
-        /*
-        foreach (HighlightInfoElement element in highlightInfoElements)
-            element.DisableHighlightInfo();
-
-        List<ContentDisplayInfo> infos = trackingBehaviour.GetDisplayInfos();
-        for (int i = 0; i < infos.Count; i++)
-            if (i < highlightInfoElements.Count)
-                highlightInfoElements[i].EnableHighlightInfo(infos[i]);
-        */
-
         foreach (HighlightListingElement element in highlightListingElements)
             element.DisableHighlightListing();
 
@@ -65,6 +55,5 @@ public class HighlightInfoController : MonoBehaviour
         for (int i = 0; i < listings.Count; i++)
             if (i < highlightListingElements.Count)
                 highlightListingElements[i].EnableHighlightListing(listings[i]);
-
     }
 }
