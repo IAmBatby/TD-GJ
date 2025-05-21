@@ -1,4 +1,5 @@
 using IterationToolkit;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class HurtableBehaviour : ContentBehaviour
@@ -53,10 +54,15 @@ public class HurtableBehaviour : ContentBehaviour
 
         Vector3 newVel = new Vector3(velocity.x, Rigidbody.velocity.y, velocity.z);
 
-        Rigidbody.AddForce((newVel * knockbackForce * -value) / 10, ForceMode.VelocityChange);
+        Vector3 force = (newVel * knockbackForce * -value) / 10;
+
+        Rigidbody.AddForce(OnBeforeHitForceApplied(force), ForceMode.VelocityChange);
 
         ModifyHealth(value);
     }
+
+    protected virtual Vector3 OnBeforeHitForceApplied(Vector3 forceToBeHitWith) => forceToBeHitWith;
+
     protected virtual void OnReceivedHit()
     {
 

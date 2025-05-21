@@ -268,6 +268,11 @@ public class PlayerBehaviour : HurtableBehaviour
         Rigidbody.velocity = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
     }
 
+    protected override Vector3 OnBeforeHitForceApplied(Vector3 forceToBeHitWith)
+    {
+        return (new Vector3(forceToBeHitWith.x, 0, forceToBeHitWith.z));
+    }
+
     protected override void OnReceivedHit()
     {
         activeAnimator.SetTrigger("Hit");

@@ -5,9 +5,9 @@
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.textmeshpro": ""
+        "com.unity.textmeshpro": "3.0.6"
       },
-      "hash": "7594d592956acd082ff8cf4947b589eb4db729ea"
+      "hash": "f07dc9d2a139bca7a2533a1336fb6a2aa6670bc4"
     },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
