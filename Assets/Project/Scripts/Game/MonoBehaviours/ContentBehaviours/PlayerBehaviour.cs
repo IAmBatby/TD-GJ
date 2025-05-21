@@ -178,6 +178,11 @@ public class PlayerBehaviour : HurtableBehaviour
     public void DropItem(Vector3 position)
     {
         if (ActiveItem == null) return;
+        if (ActiveItem.ContentData == null)
+        {
+            Debug.LogError(ActiveItem.name + " has missing contentdata!", ActiveItem);
+            return;
+        }
         Log.LogInfo("Dropped: " + ActiveItem.ContentData.GetDisplayName(), ActiveItem.ContentData.GetDisplayColor());
 
         ActiveItem.transform.SetParent(null);
